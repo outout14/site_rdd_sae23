@@ -40,10 +40,10 @@ if (APP_ENV == 'development') {
 }
 
 // Set the template directory
-$smarty->setTemplateDir(__DIR__ . '/../../app/views/');
-$smarty->setCompileDir(__DIR__ . '/../../app/views/templates_c/');
-$smarty->setCacheDir(__DIR__ . '/../../app/views/cache/');
-$smarty->setConfigDir(__DIR__ . '/../../app/views/configs/');
+$smarty->setTemplateDir(__DIR__ . '/../../app/Views/');
+$smarty->setCompileDir(__DIR__ . '/../../app/Views/templates_c/');
+$smarty->setCacheDir(__DIR__ . '/../../app/Views/cache/');
+$smarty->setConfigDir(__DIR__ . '/../../app/Views/configs/');
 
 // connexionMiddleware.php is used to check if the user is logged in or not.
 require_once __DIR__ . '/connexionMiddleware.php';

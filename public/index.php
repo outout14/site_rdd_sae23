@@ -25,7 +25,7 @@ if(isset($_GET["path"]) and !empty($_GET["path"])) {
 }
 
 $controller = ucfirst($controller) . "Controller";
-$controllerFile = __DIR__ . "/../app/controllers/" . $controller . ".php";
+$controllerFile = __DIR__ . "/../app/Controllers/" . $controller . ".php";
 
 if(file_exists($controllerFile)) {
     include $controllerFile;

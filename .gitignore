@@ -5,3 +5,5 @@ composer.lock
 config/config.php
 
 app/Views/templates_c/
+
+.htaccess
