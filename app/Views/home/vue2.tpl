@@ -1,4 +1,4 @@
 {include file="./header.tpl"}
-<h1>Hello, world!</h1>
-<a href="./vue2">Vue2</a>
+<h1>Vue2!</h1>
+<a href="./">Accueil</a>
 {include file="./footer.tpl"}

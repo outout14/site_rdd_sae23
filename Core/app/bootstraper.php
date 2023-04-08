@@ -18,8 +18,8 @@ require_once(__DIR__ . '/../../vendor/smarty/smarty/libs/Smarty.class.php');
 $smarty = new Smarty();
 
 // Fix md5 issue with Smarty : https://stackoverflow.com/questions/10000000/smarty-security-error-modifier-md5-is-not-allowed
-$smarty->security_settings['MODIFIER_FUNCS'][] = 'md5';
 $smarty->assign('APP_URL', APP_URL);
+
 // Start the MySQL connection
 // $mysqlConnector = new mysqlConnector();
 // $mysqlConnection = $mysqlConnector->connect();
@@ -44,3 +44,6 @@ $smarty->setTemplateDir(__DIR__ . '/../../app/views/');
 $smarty->setCompileDir(__DIR__ . '/../../app/views/templates_c/');
 $smarty->setCacheDir(__DIR__ . '/../../app/views/cache/');
 $smarty->setConfigDir(__DIR__ . '/../../app/views/configs/');
+
+// connexionMiddleware.php is used to check if the user is logged in or not.
+require_once __DIR__ . '/connexionMiddleware.php';

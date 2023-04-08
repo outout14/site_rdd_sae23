@@ -11,10 +11,17 @@ class HomeController {
   /**
    * Display the home page.
    */
-  public function index(): void
+  public function home(): void
   {
     global $smarty;
 
     $smarty->display('home/index.tpl');
+  }
+
+  public function vue2(): void
+  {
+    global $smarty;
+
+    $smarty->display('home/vue2.tpl');
   }
 }

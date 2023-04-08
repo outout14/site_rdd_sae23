@@ -1,30 +1,27 @@
 <?php
 
-// OLD method to get the URI (before using .htaccess)
-//$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-//$uri = substr($uri, strlen(APP_URL));
-
+require_once __DIR__ . "/../Core/app/bootstraper.php";
 
 if(isset($_GET["path"]) and !empty($_GET["path"])) {
 
-    $path = $_GET["path"];
-    $path = explode("/", $path);
-    $path = array_filter($path);
-    $path = array_values($path);
+    $uri = $_SERVER['REQUEST_URI'];
+    $uri = parse_url($uri, PHP_URL_PATH);
+    $uri = substr($uri, strlen(APP_URL));
+    $path = array_values(array_filter(explode("/", $uri)));
+
 
     $controller = $path[0];
-
-    if(isset($path[1]) and !empty($path[1])) {
-        $method = $path[1];
-        $params = array_slice($path, 2);
-    } else {
-        $method = "index";
-        $params = array_slice($path, 1);
+    $method = isset($path[1]) ? $path[1] : "";
+    if (empty($method)) {
+      $method = "home";
+      if (substr($uri, -1) !== '/') {
+        header("Location: " . APP_URL . $uri . "/");
+        exit();
+      }
     }
+    $params = array_slice($path, 2);
 } else {
-    $controller = "home";
-    $method = "index";
-    $params = array();
+    header("Location: " . APP_URL . "/home/");
 }
 
 $controller = ucfirst($controller) . "Controller";
@@ -36,7 +33,8 @@ if(file_exists($controllerFile)) {
     if(method_exists($controller, $method)) {
         call_user_func_array(array($controller, $method), $params);
     } else {
-        echo "404 - method not found";
+        echo "404 - method not found - $method in $controllerFile<br/>";
+        print_r($path);
     }
 } else {
     echo "404 - controller not found - $controllerFile";
