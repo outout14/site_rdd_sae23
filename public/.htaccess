@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /site_rdd_sae23/public/index.php?path=$1 [NC,L,QSA]
+</IfModule>
+
+ErrorDocument 404 /site_rdd_sae23/public/index.php?path=error
+ErrorDocument 403 /site_rdd_sae23/public/index.php?path=error
+ErrorDocument 500 /site_rdd_sae23/public/index.php?path=error
+
