@@ -22,6 +22,7 @@ class mysqlConnector {
   private string $database;
   private int $port;
   private string $charset;
+  private mysqli $connection;
 
 
   public function __construct() {

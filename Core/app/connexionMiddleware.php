@@ -6,17 +6,20 @@
   If so it returns the user object.
   If not it returns null.
 */
-function getLogin(): ?object
+
+require_once __DIR__ . '/../../app/Models/user.php';
+
+function getLoginUser(): ?User
 {
   return $_SESSION['user'] ?? null;
 }
 
 /*
-  checkLogin() : void
+  checkLoggedIn() : void
   This method checks if the user is logged in.
   If not it redirects the user to the login page.
 */
-function checkLogin(): void
+function checkLoggedIn(): void
 {
   if (!isset($_SESSION['user'])) {
     header('Location: ' . APP_URL . '/login');
@@ -25,12 +28,12 @@ function checkLogin(): void
 }
 
 /*
- checkAdmin() : ?object
+ checkUserAdmin() : ?User
   This method checks if the user is logged in and if the user is an admin.
   If so it returns the user object.
   If not it returns null.
 */
-function checkAdmin(): ?object
+function checkUserAdmin(): ?User
 {
   if (isset($_SESSION['user']) && $_SESSION['user']->role == 'admin') {
     return $_SESSION['user'];

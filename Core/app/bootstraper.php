@@ -47,3 +47,6 @@ $smarty->setConfigDir(__DIR__ . '/../../app/Views/configs/');
 
 // connexionMiddleware.php is used to check if the user is logged in or not.
 require_once __DIR__ . '/connexionMiddleware.php';
+
+// notificationManager.php is used to manage the notifications.
+require_once __DIR__ . '/notificationManager.php';
