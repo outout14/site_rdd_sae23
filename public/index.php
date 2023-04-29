@@ -40,5 +40,3 @@ if(file_exists($controllerFile)) {
 } else {
     echo "404 - controller not found - $controllerFile";
 }
-
-
