@@ -1,3 +1,5 @@
+console.log("JAVAQSCRIPT loaded")
+
 ///////////////////////////////////////////// FORMS ///////////////////////////////////////////////////////// 
 
 // Affichage du mot de passe dans le input ( icone d'oeil )
@@ -18,10 +20,10 @@ if(passwordInputIcons != null) {
     
             if (input.type == "text") {
                 input.type = "password"
-                icon.src = "./images/svg/eyeslash.svg"
+                icon.src = "/images/svg/eyeslash.svg"
             } else {
                 input.type = "text"
-                icon.src = "./images/svg/eye.svg"
+                icon.src = "/images/svg/eye.svg"
             }
         })
     })
@@ -175,18 +177,11 @@ function connectionError(type="undefined") {
     container.classList.toggle("tada")
 }
 
-/////////////////////////////// Inscription /////////////////////////////////////
+/////////////////////////////// INSCRIPTION /////////////////////////////////////
 
 // Si on est sur la page de inscription, alors tout ce code est chargé
 if(document.getElementById("inscription-container") != null){
-    // Variables pour le scroll
-    var inscriptionScrollable = document.getElementById("inscription-scrollable")
-    const inscriptionScrollableHeight = inscriptionScrollable.offsetHeight
-
-    // Traitement du premier select ( etudiant / prof / ancien eleve / autre )
-
-    // Fonction du premier bouton "Continuer" dans le formulaire, permet de adapter le formulaire selon le statut choisi ( etudiant, prof, etc.. )
-    const statusSelect = document.getElementById("inscription-select")
+    console.log("check")
 
     function firstContinue() {
         let div_email = document.getElementById("change-help-email")
@@ -223,7 +218,7 @@ if(document.getElementById("inscription-container") != null){
         inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight)
     }
 
-    function error(number, text) {
+    function inscriptionError(number, text) {
         // Affichage d'erreur
         // Prend en parametres un int number ( entre 0 et 1 ), qui correspond à la partie du formulaire où on se trouve)
         // 0 -> Premiere partie ( nom, prenom, etc... ) | 1 -> Deuxieme partie ( checkbox, mots de passe, etc... )
@@ -292,15 +287,25 @@ if(document.getElementById("inscription-container") != null){
         
         // Si l'eleve n'est pas en alternance, on ne lui propose pas de choisir la ville    
         if(document.getElementById("input-promotion").value == "2AFI") {
-            checkMap.style.display = "none"
+            div_checkMap.style.display = "none"
         }
     }
 
-    function submit() {
-        let city = document.getElementById("input-city")
-        let password = document.getElementById("input-password")
-        let confirm_password = document.getElementById("input-confirm_password")
-    }
+function submit() {
+    let city = document.getElementById("input-city")
+    let password = document.getElementById("input-password")
+    let confirm_password = document.getElementById("input-confirm_password")
+}
+
+
+    // Variables pour le scroll
+    var inscriptionScrollable = document.getElementById("inscription-scrollable")
+    const inscriptionScrollableHeight = inscriptionScrollable.offsetHeight
+
+    // Traitement du premier select ( etudiant / prof / ancien eleve / autre )
+
+    // Fonction du premier bouton "Continuer" dans le formulaire, permet de adapter le formulaire selon le statut choisi ( etudiant, prof, etc.. )
+    const statusSelect = document.getElementById("inscription-select")
 
     // Permet de refresh la page
     const refreshButtons = document.querySelectorAll(".go-up-btn")
@@ -351,7 +356,7 @@ if(document.getElementById("inscription-container") != null){
     // Verification si le checkbox carte est activé. Si oui, le input de ville s'active
 
     const MapVisibilityCheck = document.getElementById("MapVisibilityCheck")
-    const MapTownInput = document.getElementById("MapTownInput")
+    const MapTownInput = document.getElementById("input-city")
 
     MapVisibilityCheck.addEventListener("change", () => {
         if (MapVisibilityCheck.checked) {

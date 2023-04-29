@@ -12,7 +12,9 @@
             
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="container-fluid">
-                    <form action="ERROR" method="POST" class="connection-form">
+                    <form action="/site_rdd_sae23/app/Views/auth/test.php" method="POST" class="connection-form">
+                    <input type="hidden" name="actionType" value="login">
+                    
                         <!-- Informations / Erreurs  -->
                         <div class="row d-flex justify-content-center align-items-center mb-5 gap-3" id="connection-error-container">
                             <div class="col-12 d-flex justify-content-center align-items-center my-2 my-lg-0">
@@ -30,14 +32,14 @@
     
                         <!-- Login -->
                         <div class="row d-flex justify-content-center align-items-center my-3 px-3 px-lg-5">
-                            <input autocomplete="email" required type="email" class="form-control ps-2 py-1" placeholder="Adresse mail" name="ERROR" id="ERROR">
+                            <input autocomplete="email" required type="email" class="form-control ps-2 py-1" placeholder="Adresse mail" name="email">
                         </div>
     
                         <!-- Mot de passe -->
                         <div class="row d-flex justify-content-center align-items-center my-3 px-3 px-lg-5">
                             <div class="col-12 position-relative">
                                 <img src="{$APP_URL}/assets/images/svg/eyeslash.svg" alt="show-password" class="password-input-icon">
-                                <input type="password" class="form-control ps-2 py-1 password-input" placeholder="Mot de passe" name="ERROR" id="input-password">
+                                <input type="password" class="form-control ps-2 py-1 password-input" placeholder="Mot de passe" name="password">
                             </div>
                             <div class="col-12 justify-content-end">
                                 <!-- Mot de passe oublié? -->
@@ -49,12 +51,12 @@
     
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 my-3">
-                            <input type="button" class="button rounded-3 bg-blue text-white fw-bold py-2 px-3" name="ERROR" value="Se connecter" onclick="connectionError('login')">
+                            <input type="submit" class="button rounded-3 bg-blue text-white fw-bold py-2 px-3" name="submit" value="Se connecter">
                         </div>
     
                         <!-- Renvoi vers inscription -->
                         <div class="row d-flex justify-content-center align-items-center">
-                            <p class="text-center">Vous n'avez pas de compte? <a class="text-blue">Inscrivez-vous.</a></p>
+                            <p class="text-center">Vous n'avez pas de compte? <a href="{$APP_URL}/home/inscription/" class="text-blue">Inscrivez-vous.</a></p>
                         </div>
                     </form>
                 </div> 
@@ -64,7 +66,8 @@
 
             <div class="d-flex flex-column justify-content-center align-items-center h-100">
                 <div class="container-fluid" id="password-reinitialise">
-                    <form action="ERROR" method="POST" class="connection-form">
+                    <form action="/site_rdd_sae23/app/Views/auth/test.php" method="POST" class="connection-form">
+                    <input type="hidden" name="actionType" value="forgotPassword">
 
                         <div class="row justify-content-end mt-3 mx-5">    
                             <button class="btn btn-close" onclick="closeModal()"></button>
@@ -88,13 +91,13 @@
                         <!-- Login -->
                         <div class="row d-flex justify-content-center align-items-center my-3 px-3 px-lg-5">
                             <div class="col-12">
-                                <input autocomplete="email" required type="email" class="form-control ps-2 py-1" placeholder="Adresse mail" name="ERROR" id="ERROR">
+                                <input autocomplete="email" required type="email" class="form-control ps-2 py-1" placeholder="Adresse mail" name="email">
                             </div>
                         </div>
     
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 mt-3">
-                            <input type="submit" class="button rounded-3 bg-blue text-white fw-bold py-2 px-3" name="ERROR" value="Envoyer">
+                            <input type="submit" class="button rounded-3 bg-blue text-white fw-bold py-2 px-3" name="submit" value="Envoyer">
                         </div>
 
                         <div class="row text-center my-5">

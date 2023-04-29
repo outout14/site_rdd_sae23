@@ -17,6 +17,14 @@ class HomeController {
     $smarty->display('home/index.tpl');
   }
 
+  // Inscription page
+
+  public function inscription(): void
+  {
+    global $smarty;
+    $smarty->display('home/inscription.tpl');
+  }
+
   public function vue2(): void
   {
     global $smarty;

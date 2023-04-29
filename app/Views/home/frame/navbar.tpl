@@ -2,9 +2,9 @@
 <header class="d-flex justify-content-between align-items-center fixed-top mt-3 px-5">
 
     <div class="d-flex justify-content-center align-content-center gap-4">
-        <a href="" class="header-link header-link-active"><span class="ubuntu">Accueil</span></a>
+        <a href="{$APP_URL}/home/" class="header-link header-link-active"><span class="ubuntu">Accueil</span></a>
         <a href="" class="header-link"><span class="ubuntu">Organisation</span></a>
-        <a href="" class="header-link"><span class="ubuntu">Inscription</span></a>
+        <a href="{$APP_URL}/home/inscription/" class="header-link"><span class="ubuntu">Inscription</span></a>
         <a href="" class="header-link"><span class="ubuntu">Gallerie</span></a>
         <a href="" class="header-link"><span class="ubuntu">Livre d'or</span></a>
         <a href="" class="header-link"><span class="ubuntu">Administration</span></a>
