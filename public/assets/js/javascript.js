@@ -1,5 +1,3 @@
-console.log("JAVAQSCRIPT loaded")
-
 ///////////////////////////////////////////// FORMS ///////////////////////////////////////////////////////// 
 
 // Affichage du mot de passe dans le input ( icone d'oeil )
@@ -393,3 +391,19 @@ function submit() {
 }
 
 
+/////////////////////////////////// HEADER //////////////////////////////
+
+const navbar = document.querySelector("header")
+const navbarToggler = document.getElementById("navbar-toggler")
+
+navbarToggler.addEventListener("click", () => {
+    navbar.classList.toggle("toggle")
+
+    if(navbar.classList.contains("toggle")) {
+        console.log("hello")
+        navbar.style.backgroundColor = "var(--dark)";
+    } else {
+        console.log("another hello")
+        navbar.style.backgroundColor = "transparent";
+    }
+})

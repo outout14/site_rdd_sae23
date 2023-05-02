@@ -1,17 +1,51 @@
 <!-- Header -->
-<header class="d-flex justify-content-between align-items-center fixed-top mt-3 px-5">
+<header class="fixed-top d-flex justify-content-between align-items-center py-1 px-4 mt-2 mt-lg-3">
 
-    <div class="d-flex justify-content-center align-content-center gap-4">
-        <a href="{$APP_URL}/home/" class="header-link header-link-active"><span class="ubuntu">Accueil</span></a>
-        <a href="" class="header-link"><span class="ubuntu">Organisation</span></a>
-        <a href="{$APP_URL}/home/inscription/" class="header-link"><span class="ubuntu">Inscription</span></a>
-        <a href="" class="header-link"><span class="ubuntu">Gallerie</span></a>
-        <a href="" class="header-link"><span class="ubuntu">Livre d'or</span></a>
-        <a href="" class="header-link"><span class="ubuntu">Administration</span></a>
-    </div>
+    <nav class="navbar navbar-expand-lg shadow-0">
+        <div class="container-fluid">
 
-    <!-- Bouton de connexion / Espace personnel -->
-    <div class="d-flex justify-content-center align-items-center" id="header-button-wrapper">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+                id="navbar-toggler">
+                
+                <i class="bi bi-list text-white fa-2x"></i>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mt-3 mt-lg-0">
+
+                    <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
+                        <a class="nav-link" href="#"><span class="header-link ubuntu">Accueil</span></a>
+                    </li>
+
+                    <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
+                        <a class="nav-link" href="#"><span class="header-link ubuntu">Organisation</span></a>
+                    </li>
+
+                    <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
+                        <a class="nav-link" href="#"><span class="header-link ubuntu">Inscription</span></a>
+                    </li>
+
+                    <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
+                        <a class="nav-link" href="#"><span class="header-link ubuntu">Gallerie</span></a>
+                    </li>
+
+                    <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
+                        <a class="nav-link" href="#"><span class="header-link ubuntu">Livre d'or</span></a>
+                    </li>
+
+                    <li class="nav-item mb-2 mt-1 my-lg-0 mx-2 mx-lg-3">
+                        <a class="nav-link" href="#"><span class="header-link ubuntu">Administration</span></a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-center" id="header-button-wrapper">
         <div id="header-dropdown-wrapper">
             <button class="button bg-bonewhite text-dark fw-bold p-2 px-lg-3 py-lg-2 d-flex justify-content-center align-items-center" onclick="openModal()" id="header-profile-button">
                 <span class="me-0 me-lg-2 phone-d-none">Ziuzin Nikita</span>
@@ -25,12 +59,9 @@
                 </button>
                 <button class="header-dropdown-element mt-3 mb-2" onclick="console.log('check')">
                     <span class="text-dark me-0 me-lg-2 phone-d-none">Déconnexion</span>
-                    <div>
-                        <i class="bi bi-power text-dark"></i>
-                    </div>
+                    <i class="bi bi-power text-dark"></i>
                 </button>
             </div>
-
-        </button>
+        </div>
     </div>
 </header>
