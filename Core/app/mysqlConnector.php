@@ -22,7 +22,6 @@ class mysqlConnector {
   private string $database;
   private int $port;
   private string $charset;
-  private mysqli $connection;
 
 
   public function __construct() {
@@ -35,14 +34,14 @@ class mysqlConnector {
   }
 
   public function connect() {
-    $this->connection = new mysqli($this->host, $this->user, $this->password, $this->database, $this->port);
+    $connection = new mysqli($this->host, $this->user, $this->password, $this->database, $this->port);
 
-    if ($this->connection->connect_error) {
-      die('Connection failed: ' . $this->connection->connect_error);
+    if ($connection->connect_error) {
+      die('Connection failed: ' . $connection->connect_error);
     }
 
-    $this->connection->set_charset($this->charset);
+    $connection->set_charset($this->charset);
 
-    return $this->connection;
+    return $connection;
   }
 }

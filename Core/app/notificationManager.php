@@ -46,6 +46,38 @@ class NotificationManager
         );
         break;
       }
+      case 'login_required':
+      {
+        $notification = array(
+          'type' => 'danger',
+          'message' => 'Vous devez être connecté pour accéder à cette page.'
+        );
+        break;
+      }
+      case 'logout_success':
+      {
+        $notification = array(
+          'type' => 'success',
+          'message' => 'Vous avez bien été déconnecté.'
+        );
+        break;
+      }
+      case 'confirm_success' :
+      {
+        $notification = array(
+          'type' => 'success',
+          'message' => 'Votre compte a bien été confirmé.'
+        );
+        break;
+      }
+      case 'already_confirmed' :
+      {
+        $notification = array(
+          'type' => 'danger',
+          'message' => 'Votre compte a déjà été confirmé.'
+        );
+        break;
+      }
       default :
       {
         $notification = array(
