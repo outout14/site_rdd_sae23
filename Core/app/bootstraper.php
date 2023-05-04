@@ -2,14 +2,20 @@
 
 // This file is used to initialize the application by starting the smarty engine and the database connection.
 
+// connexionMiddleware.php is used to check if the user is logged in or not.
+require_once __DIR__ . '/connexionMiddleware.php';
+
 // Start the session
 session_start();
 
 // Load the config file
 require_once(__DIR__ . '/../../config/config.php');
 
+// Load utils
+require_once(__DIR__ . '/utils.php');
+
 // Load the Smarty engine
-require_once(__DIR__ . '/../../vendor/smarty/smarty/libs/Smarty.class.php');
+require_once(__DIR__ . '/../../vendor/autoload.php');
 
 // Load the MySQL connector
 // require_once(__DIR__ . '/mysqlConnector.php');
@@ -45,8 +51,9 @@ $smarty->setCompileDir(__DIR__ . '/../../app/Views/templates_c/');
 $smarty->setCacheDir(__DIR__ . '/../../app/Views/cache/');
 $smarty->setConfigDir(__DIR__ . '/../../app/Views/configs/');
 
-// connexionMiddleware.php is used to check if the user is logged in or not.
-require_once __DIR__ . '/connexionMiddleware.php';
-
 // notificationManager.php is used to manage the notifications.
 require_once __DIR__ . '/notificationManager.php';
+
+// mailManager.php is used to manage the mails.
+require_once __DIR__ . '/mailManager.php';
+$mailManager = new MailManager();

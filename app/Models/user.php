@@ -5,6 +5,7 @@
 */
 
 require_once __DIR__ . '/../../Core/app/mysqlConnector.php';
+require_once __DIR__ . '/resetToken.php';
 
 $mysqlConnector = new mysqlConnector();
 $mysqlConnection = $mysqlConnector->connect();
@@ -17,12 +18,12 @@ class User {
   private string $password;
   public string $phone_number;
   public string $city;
-  public bool $display_on_map;
-  public bool $confirmed;
+  public int $display_on_map;
+  public int $confirmed;
   public string $status;
   public string $role;
 
-  public function __construct($id = null, $lastname = null, $firstname = null, $email = null, $password = null, $phone_number = null, $city = null, $display_on_map = false, $confirmed = false, $status = "student", $role = "user") {
+  public function __construct($id = 0, $lastname = "", $firstname = "", $email = "", $password = "", $phone_number = "", $city = "", $display_on_map = 0, $confirmed = 0, $status = "student", $role = "user") {
     $this->id = $id;
     $this->lastname = $lastname;
     $this->firstname = $firstname;
@@ -35,7 +36,7 @@ class User {
     $this->status = $status;
     $this->role = $role;
   }
-  public function create(): void{
+  private function create(): void{
     /* INSERT INTO DATABASE */
     global $mysqlConnection;
     $query = "INSERT INTO users (lastname, firstname, email, password, phone_number, city, display_on_map, confirmed, status, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -48,12 +49,22 @@ class User {
     $stmt->close();
   }
 
-  public function get($id): bool {
+  public function get($identifier): bool {
     /* GET USER FROM DATABASE */
     global $mysqlConnection;
-    $query = "SELECT * FROM users WHERE id = ?";
-    $stmt = $mysqlConnection->prepare($query);
-    $stmt->bind_param("i", $id);
+
+    if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+      // Get user by email
+      $query = "SELECT * FROM users WHERE email = ?";
+      $stmt = $mysqlConnection->prepare($query);
+      $stmt->bind_param("s", $identifier);
+    } else {
+      // Get user by id
+      $query = "SELECT * FROM users WHERE id = ?";
+      $stmt = $mysqlConnection->prepare($query);
+      $stmt->bind_param("i", $identifier);
+    }
+
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
@@ -64,26 +75,16 @@ class User {
     }
 
     // Assign result to properties
-    $this->id = $response['id'];
-    $this->lastname = $response['lastname'];
-    $this->firstname = $response['firstname'];
-    $this->email = $response['email'];
-    $this->password = $response['password'];
-    $this->phone_number = $response['phone_number'];
-    $this->city = $response['city'];
-    $this->display_on_map = $response['display_on_map'];
-    $this->confirmed = $response['confirmed'];
-    $this->status = $response['status'];
-    $this->role = $response['role'];
+    $this->assignSQLdata($response);
     return true;
   }
 
-  public function updatePassword($id, $password): void {
+  public function updatePassword($password): void {
     /* UPDATE PASSWORD IN DATABASE */
     global $mysqlConnection;
     $query = "UPDATE users SET password = ? WHERE id = ?";
     $stmt = $mysqlConnection->prepare($query);
-    $stmt->bind_param("si", $password, $id);
+    $stmt->bind_param("si", $password, $this->id);
     $stmt->execute();
     $stmt->close();
   }
@@ -108,15 +109,20 @@ class User {
     $stmt->close();
   }
 
-  public function confirm($id): void {
+  public function confirmEmail(): void {
     /* CONFIRM USER IN DATABASE */
     global $mysqlConnection;
     $query = "UPDATE users SET confirmed = ? WHERE id = ?";
     $stmt = $mysqlConnection->prepare($query);
-    $var1 = "true";
-    $stmt->bind_param("si", $var1, $id);
+    $var1 = 1;
+    $stmt->bind_param("si", $var1, $this->id);
     $stmt->execute();
     $stmt->close();
+  }
+
+  public function isConfirmed(): bool {
+    /* CHECK IF USER IS CONFIRMED */
+    return $this->confirmed == 1;
   }
 
   public function verifyPassword($password): bool {
@@ -124,7 +130,7 @@ class User {
     return password_verify($password, $this->password);
   }
 
-  public static function getAllUsers(): array {
+  public static function getAll(): array {
     global $mysqlConnection;
     $query = "SELECT * FROM users";
     $stmt = $mysqlConnection->prepare($query);
@@ -139,36 +145,65 @@ class User {
     return $users;
   }
 
-  public function checkEmailCompliance($email): bool {
-    if($this->status == "student") {
-      if(!preg_match("\b[A-Za-z0-9._%+-]+@etudiant\.univ-rennes1\.fr\b", $email)) {
-        return false;
+  function assignSQLdata($response){
+    $this->id = $response['id'];
+    $this->lastname = $response['lastname'];
+    $this->firstname = $response['firstname'];
+    $this->email = $response['email'];
+    $this->password = $response['password'];
+    $this->phone_number = $response['phone_number'];
+    $this->city = $response['city'];
+    $this->display_on_map = $response['display_on_map'];
+    $this->confirmed = $response['confirmed'];
+    $this->status = $response['status'];
+    $this->role = $response['role'];
+  }
+
+  function clearPasswordField(){
+    $this->password = "";
+  }
+
+  public function sendConfirmationEmail(){
+    global $mailManager;
+    //Encrypt email to send it as a token
+    $encryptedEmailToken = base64_encode(htmlentities(openssl_encrypt($this->email, "AES-128-ECB", MAIL_ENCRYPTION_TOKEN)));
+    $encryptedEmailURL = "http://" . $_SERVER['SERVER_NAME'] . APP_URL . "/auth/confirmEmail/" . $encryptedEmailToken;
+    $mailManager->sendMail($this->email, "Confirmation de votre compte", "verifyMail.tpl", ["user" => $this, "encryptedEmailURL" => $encryptedEmailURL]);
+  }
+
+  public function sendResetPasswordEmail(){
+    global $mailManager;
+    $resetToken = resetToken::generateToken($this->id);
+    $encryptedEmailURL = "http://" . $_SERVER['SERVER_NAME'] . APP_URL . "/auth/forgotPassword/" . $resetToken;
+    $mailManager->sendMail($this->email, "Réinitialisation de votre mot de passe", "resetPassword.tpl", ["user" => $this, "encryptedEmailURL" => $encryptedEmailURL]);
+  }
+
+  public static function register($lastname, $firstname, $email, $password, $phone_number, $city, $display_on_map, $confirmed, $status="student", $role="user"): User | string {
+    /* CHECK EMAIL & STATUS */
+    if($status == "student" || $status == "teacher"){
+      $validEmails = [
+        "student" => "@gnous.eu",
+        "teacher" => "@univ-rennes1.fr",
+      ];
+      if(!str_ends_with($email, $validEmails["student"]) && !str_ends_with($email, $validEmails["teacher"])){
+        return "Si vous êtes un étudiant, votre email doit se terminer par " . $validEmails["student"] . ". Si vous êtes un enseignant, votre email doit se terminer par " . $validEmails["teacher"];
+      } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "Email invalide";
       }
     }
-    return true;
+
+    if(str_starts_with($phone_number, "+33")){
+      $phone_number = "0" . substr($phone_number, 3);
+    }
+    if((strlen($phone_number) != 10) or (!is_numeric($phone_number))){
+      return "Numéro de téléphone invalide";
+    }
+    /* REGISTER USER */
+    $user = new User(0, $lastname, $firstname, $email, $password, $phone_number, $city, $display_on_map, 0, $status, $role);
+    $user->create();
+    return $user;
   }
 }
 
 
-function migrate(): void {
-  /*
-    Create the users table
-  */
-  global $mysqlConnection;
-  $query = "CREATE TABLE users (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    lastname VARCHAR(30) NOT NULL,
-    firstname VARCHAR(30) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(10) NOT NULL,
-    city VARCHAR(30) NOT NULL,
-    display_on_map BOOLEAN NOT NULL DEFAULT false,
-    confirmed BOOLEAN NOT NULL DEFAULT false,
-    status VARCHAR(30) NOT NULL DEFAULT 'student',
-    role VARCHAR(30) NOT NULL DEFAULT 'user'
-  )";
-  $stmt = $mysqlConnection->prepare($query);
-  $stmt->execute();
-  $stmt->close();
-}
+

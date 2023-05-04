@@ -3,16 +3,7 @@
 // Load the bootstrap file
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 
-/*
- * redirectIfNotAuthorized : void
- */
-function redirectIfNotAuthorized(): void
-{
-  if (!checkUserAdmin()) {
-    header('Location: ' . APP_URL . '/login');
-    exit();
-  }
-}
+connexionMiddleware::shouldBeAdmin();
 
 /*
  * smartyPassDefaultVariables : void
@@ -20,8 +11,9 @@ function redirectIfNotAuthorized(): void
  */
 function smartyPassDefaultVariables($menu, $currentPage): void {
   global $smarty;
-  $smarty->assign('menu', $menu);
+  $smarty->assign('menu', Utils::GenerateMenu('admin', $menu));
   $smarty->assign('currentPage', $currentPage);
+  $smarty->assign('sessionUser', connexionMiddleware::getLoginUser());
 }
 
 /*
@@ -43,8 +35,6 @@ class AdminController
    */
   public function home(): void
   {
-    //redirectIfNotAuthorized();
-
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Accueil');
     $smarty->display('admin/index.tpl');
@@ -52,8 +42,6 @@ class AdminController
 
   public function users(): void
   {
-    //redirectIfNotAuthorized();
-
     if(isset($_POST)) {
       if (isset($_POST['action'])) {
         if ($_POST['action'] == 'addUser') {
@@ -61,8 +49,8 @@ class AdminController
           $_POST['confirmed'] = isset($_POST['confirmed']) && $_POST['confirmed'] === 'on' ? 1 : 0;
           if(!isset($_POST['status'])) $_POST['status'] = "student";
           if(!isset($_POST['role'])) $_POST['role'] = 'user';
-          $user = new User($_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
-          $user->create();
+          $user = new User();
+          $user->register( $_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
           header('Location: ' . APP_URL . '/admin/users?notification=userAdded');
         }
       }
@@ -70,7 +58,7 @@ class AdminController
 
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Utilisateurs');
-    $smarty->assign('users', User::getAllUsers());
+    $smarty->assign('users', User::getAll());
     $smarty->display('admin/users.tpl');
   }
 
@@ -111,5 +99,9 @@ class AdminController
 
     $user->delete($userID);
     header('Location: ' . APP_URL . '/admin/users?notification=userDeleted');
+  }
+
+  public function mail(){
+    require_once __DIR__ . '/../../Core/app/mail.php';
   }
 }

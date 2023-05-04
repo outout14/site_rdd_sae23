@@ -15,13 +15,15 @@ if(isset($_GET["path"]) and !empty($_GET["path"])) {
     if (empty($method)) {
       $method = "home";
       if (substr($uri, -1) !== '/') {
-        header("Location: " . APP_URL . $uri . "/");
+        // Redirect while keeping GET parameters
+        header("Location: " . APP_URL . $uri . "/" . "?". $_SERVER['QUERY_STRING']);
         exit();
       }
     }
     $params = array_slice($path, 2);
 } else {
-    header("Location: " . APP_URL . "/home/");
+    header("Location: " . APP_URL . "/home/" . "?". $_SERVER['QUERY_STRING']);
+    exit();
 }
 
 $controller = ucfirst($controller) . "Controller";
