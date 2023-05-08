@@ -9,7 +9,7 @@
         <div id="organisator-wrapper-fade"></div>
 
         <div id="organisator-animation-wrapper">
-            {$organisators}
+            {$creators}
         </div>
     </div>
 

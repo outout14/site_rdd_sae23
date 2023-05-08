@@ -13,10 +13,7 @@
             <!-- Texte d'introduction -->
             <div class="row flex-center">
                 <p class="general-info-text text-bonewhite text-justify" id="organisation-text-introduction">
-                    La remise des diplomes, organisée tous les ans par l'IUT est  maintenant devenue
-                    une tradition du BUT R&T de Saint-Malo. Ce sont les derniers moment que nos BUT2 
-                    et les BUT3 passeront à nos côtés, ce qui rend cet évènement particulierement important.
-                    Elle se déroulera le 7 juillet 2023 à partir de 16h, à Langloray-sur-Rance, 28 rue des Sources, 22490
+                    {$organisation.introduction}
                 </p>
             </div>
             
@@ -34,15 +31,14 @@
                                 <i class="bi bi-mortarboard text-dark fa-5x rounded-circle bg-bonewhite p-4 mb-2 timeline-icon"></i>
                                 
                                 <p class="general-info-text text-bonewhite text-justify" id="organisation-text-timeline-time-1">
-                                    16h00
+                                    {$organisation.timeline_time_1}
                                 </p>
                             </div>
 
                             <div class="separation-bar-sm bg-bonewhite my-4 phone-d-none"></div>
                             
                             <p class="general-info-text-small text-bonewhite text-justify" id="organisation-text-timeline-description-1">
-                                Journée de remise des diplômes avec les sponsors qui delivrent les diplomes aux étudiants. 
-                                Membres de la famille conviées à célébrer la journée.
+                                {$organisation.timeline_description_1}
                             </p>
                         </article>
 
@@ -51,14 +47,14 @@
                                 <i class="bi bi-cup-straw text-dark fa-5x rounded-circle bg-bonewhite p-4 mb-2 timeline-icon"></i>
 
                                 <p class="general-info-text text-bonewhite text-justify" id="organisation-text-timeline-time-1">
-                                    19h00
+                                    {$organisation.timeline_time_2}
                                 </p>
                             </div>
 
                             <div class="separation-bar-sm bg-bonewhite my-4 phone-d-none"></div>
                             
                             <p class="general-info-text-small text-bonewhite text-justify" id="organisation-text-timeline-description-1">
-                                Apéritif dinatoire avec les anciens élèves et les professeurs ainsi que les sponsors présents.
+                                {$organisation.timeline_description_2}
                             </p>
                         </article>
 
@@ -67,14 +63,14 @@
                                 <i class="bi bi-disc text-dark fa-5x rounded-circle bg-bonewhite p-4 mb-2 timeline-icon"></i>
                                 
                                 <p class="general-info-text text-bonewhite text-justify" id="organisation-text-timeline-time-1">
-                                    21h00
+                                    {$organisation.timeline_time_3}
                                 </p>
                             </div>
 
                             <div class="separation-bar-sm bg-bonewhite my-4 phone-d-none"></div>
                             
                             <p class="general-info-text-small text-bonewhite text-justify" id="organisation-text-timeline-description-1">
-                                Soirée pour célébrer la remise des diplomes de nos BUT2 et de nos Licences pro. ( uniquement pour les élèves et les professeurs ).
+                                {$organisation.timeline_description_3}
                             </p>
                         </article>
 
@@ -90,7 +86,7 @@
                 <!-- Adresse -->
                 <div class="col-12">
                     <p class="general-info-text text-bonewhite fw-bold text-center" id="organisation-text-address">
-                        <i class="bi bi-pin-angle me-3"></i>Langloray-sur-Rance, 29 rue des Sources, 22490    
+                        <i class="bi bi-pin-angle me-3"></i>{$organisation.address}
                     </p>
                 </div>
             </div>
@@ -107,18 +103,15 @@
                 <!-- Informations -->
                 <div class="col-12 col-lg-6 px-lg-5 my-3 my-lg-5">
                     <p class="general-info-text text-bonewhite text-justify" id="organisation-text-address-complement-1">
-                        Situé à seulement 20 minutes en voiture, la salle de Langloray-sur-Rance
-                        est l'endroit parfait pour la cérémonie.    
+                        {$organisation.complement_1} 
                     </p>
 
                     <p class="general-info-text text-bonewhite text-justify my-2" id="organisation-text-address-complement-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic ipsa, explicabo, sunt totam vero similique 
-                        optio ducimus aut fugiat earum asperiores? Ducimus eveniet commodi iusto optio blanditiis inventore placeat 
+                        {$organisation.complement_2}
                     </p>
 
                     <p class="general-info-text text-bonewhite text-justify" id="organisation-text-address-complement-3">
-                        Un grand espace est prévu pour l'installation des tentes, afin de ne pas prendre 
-                        des risques au volant après quelques verres d'alcool.
+                        {$organisation.complement_3}
                     </p>
                 </div>
             </div>

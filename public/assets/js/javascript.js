@@ -41,7 +41,7 @@ function typeNew(oldTypeIt, newTypeIt, content) {
 
 // Compte à rebours
 
-const countdownDate = new Date("Jul 7, 2023 19:00:00").getTime();
+let countdownDate = new Date("Jul 7 2023 19:00:00").getTime();
 const countdownDay = document.getElementById("countdown-days");
 const countdownHour = document.getElementById("countdown-hours");
 const countdownMinute =  document.getElementById("countdown-minutes");
@@ -409,7 +409,7 @@ navbarToggler.addEventListener("click", () => {
     navbar.classList.toggle("toggle")
 
     if(navbar.classList.contains("toggle")) {
-        navbar.style.backgroundColor = "var(--blue)";
+        navbar.style.backgroundColor = "var(--orange)";
     } else {
         navbar.style.backgroundColor = "transparent";
     }

@@ -12,7 +12,7 @@ function getData($path) {
   return json_decode(file_get_contents($path), true);
 }
 
-function addOrganisator($name, $surname, $role, $link) {
+function addCreator($name, $surname, $role, $link) {
   $path = APP_URL . "/assets/images/creators/creator_" . strtolower($name) . ".png";
 
   $template = <<<TEMPL
@@ -34,12 +34,12 @@ function addOrganisator($name, $surname, $role, $link) {
   return $template;
 }
 
-function getOrganisators() {
+function getCreators() {
   $organisators = getData(__DIR__ . '/../Data/organisators.json');
   $result = array();
 
   foreach(array_keys($organisators) as $organisator) {
-      array_push($result, addOrganisator($organisators[$organisator]["firstname"],$organisators[$organisator]["lastname"],$organisators[$organisator]["task"],$organisators[$organisator]["link"]));
+      array_push($result, addCreator($organisators[$organisator]["firstname"],$organisators[$organisator]["lastname"],$organisators[$organisator]["task"],$organisators[$organisator]["link"]));
   }
 
   $result = implode("",$result);
@@ -70,6 +70,10 @@ function getSponsors() {
   return implode("",$result);
 }
 
+function getOrganisation() {
+  return getData(__DIR__ . '/../Data/organisation.json');
+}
+
 class HomeController {
   /**
    * Display the home page.
@@ -78,11 +82,14 @@ class HomeController {
   {
     global $smarty;
     
-    $organisators = getOrganisators();
-    $smarty->assign('organisators',$organisators);
+    $creators = getCreators();
+    $smarty->assign('creators',$creators);
 
     $sponsors = getSponsors();
     $smarty->assign('sponsors',$sponsors);
+
+    $info_organisation = getOrganisation();
+    $smarty->assign('organisation',$info_organisation);
 
     $smarty->display('home/index.tpl');
   }

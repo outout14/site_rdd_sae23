@@ -854,7 +854,7 @@ header {
 }
 
 #header-background-scroll {
-    background-color: var(--blue);
+    background-color: var(--orange);
 
     position: absolute;
     inset: 0;
