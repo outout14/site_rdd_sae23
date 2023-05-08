@@ -14,11 +14,15 @@
     <!-- Page d'accueil -->
     {include file="./frame/home.tpl"}
 
-    <!-- Questions -->
-    {include file="./frame/questions.tpl"}
+    <!-- Organisation -->
+    {include file="./frame/organisation.tpl"}
 
     <!-- Organisateurs -->
     {include file="./frame/creators.tpl"}
+
+    <!-- Questions -->
+    {include file="./frame/questions.tpl"}
+
 
 </body>
 </html>

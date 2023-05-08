@@ -1,17 +1,18 @@
 <!-- Page d'accueil -->
-<section id="startpage-container">
+<main id="startpage-container">
         
     <div id="startpage-box">
         
         <!-- Titre -->
-        <div class="d-flex justify-content-center align-items-center flex-column" id="startpage-title">
+        <div class="flex-center flex-column" id="startpage-title">
             <p class="startpage-title">GENERATION R&T</p>
             <p class="startpage-title">REMISE DES DIPLÔMES</p>
             <p class="startpage-title" id="rdd-date">7 juillet 2023. 19h00</p>
         </div>
 
         <!-- Compte à rebours -->
-        <div class="d-flex justify-content-center align-items-center my-5 px-3 px-lg-5 py-3" id="startpage-countdown-box">
+
+        <div class="flex-center my-5 px-3 px-lg-5 py-3" id="startpage-countdown-box">
             <div class="container-fluid">
                 <div class="row justify-content-between">
 
@@ -47,19 +48,20 @@
                     <div class="col-12 d-flex justify-content-center justify-content-lg-start col-lg-3 mt-3 mt-lg-0">
                         <button class="button rounded-pill bg-bonewhite text-blue fw-bold px-3 py-2">
                             <span class="me-2 fw-bold">S'inscrire</span>
-                            <img src="{$APP_URL}/assets/images/svg/arrow.svg">
+                            <img src="{$APP_URL}/assets/images/svg/arrow.svg"></img>
                         </button>
                     </div>
 
-                    
                 </div>
             </div>
         </div>
 
     </div>
 
-    <div class="d-flex justify-content-center align-items-center" id="startpage-arrow-box">
-        <img src="{$APP_URL}/assets/images/svg/downarrow.svg" alt="down-arrow" id="startpage-arrow">
+    <div class="flex-center" id="startpage-arrow-box">
+        <a href="#organisation-container">
+            <img src="{$APP_URL}/assets/images/svg/downarrow.svg" alt="down-arrow" id="startpage-arrow">
+        </a>
     </div>
     
-</section>
+</main>

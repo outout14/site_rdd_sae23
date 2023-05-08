@@ -1,0 +1,50 @@
+{
+    "Nikita": {
+        "firstname": "Nikita",
+        "lastname": "Ziuzin",
+        "task": "Design, Front-End",
+        "link": "lien souhaité"
+    },
+    "Mael": {
+        "firstname": "Mael",
+        "lastname": "Gramain",
+        "task": "Back-end",
+        "link": "lien souhaité"
+    },
+    "Lisa": {
+        "firstname": "Lisa",
+        "lastname": "Cazoulat",
+        "task": "Design, Front-End",
+        "link": "lien souhaité"
+    },
+    "Alexis": {
+        "firstname": "Alexis",
+        "lastname": "Teffene",
+        "task": "Back-end",
+        "link": "lien souhaité"
+    },
+    "Manon": {
+        "firstname": "Manon",
+        "lastname": "Favrel",
+        "task": "Recherche de la salle",
+        "link": "lien souhaité"
+    },
+    "Tatiana": {
+        "firstname": "Tatiana",
+        "lastname": "Martin des Champs",
+        "task": "Recherche de la salle",
+        "link": "lien souhaité"
+    },
+    "Hugo": {
+        "firstname": "Hugo",
+        "lastname": "Blot",
+        "task": "jsp frr",
+        "link": "lien souhaité"
+    },
+    "Capucine": {
+        "firstname": "Capucine",
+        "lastname": "Duchatelet",
+        "task": "jsp frr",
+        "link": "lien souhaité"
+    }
+}

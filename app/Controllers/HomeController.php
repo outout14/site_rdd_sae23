@@ -7,6 +7,69 @@ require_once(__DIR__ . '/../Models/user.php');
  * HomeController
  * This file is used to handle the home page.
  */
+
+function getData($path) {
+  return json_decode(file_get_contents($path), true);
+}
+
+function addOrganisator($name, $surname, $role, $link) {
+  $path = APP_URL . "/assets/images/creators/creator_" . strtolower($name) . ".png";
+
+  $template = <<<TEMPL
+      <div class="organisator-wrapper">
+          <div class="avatar-lg">
+              <a href="$link">
+                  <img src="$path" alt="$name" class="avatar-img">
+              </a>
+          </div>
+
+          <div class="organisator-description mt-1">
+              <p class="text-center fw-bold">$name $surname</p>
+              <div class="separation-bar-sm m-auto bg-dark"></div>
+              <p class="text-center fw-bold">$role</p>
+          </div>
+      </div>
+      TEMPL;
+
+  return $template;
+}
+
+function getOrganisators() {
+  $organisators = getData(__DIR__ . '/../Data/organisators.json');
+  $result = array();
+
+  foreach(array_keys($organisators) as $organisator) {
+      array_push($result, addOrganisator($organisators[$organisator]["firstname"],$organisators[$organisator]["lastname"],$organisators[$organisator]["task"],$organisators[$organisator]["link"]));
+  }
+
+  $result = implode("",$result);
+
+  return $result.$result;
+}
+
+function addSponsor($name, $link) {
+  $path = APP_URL . "/assets/images/sponsors/" . strtolower($name) . ".png";
+
+  $template = <<<TEMPL
+      <div class="col d-flex justify-content-center align-items-center">
+          <a href="$link"><img src="$path" alt="$name" class="sponsor-img"></a>
+      </div>
+      TEMPL;
+
+  return $template;
+}
+
+function getSponsors() {
+  $sponsors = getData(__DIR__ . '/../Data/sponsors.json');
+  $result = array();
+
+  foreach(array_keys($sponsors) as $sponsor) {
+      array_push($result, addSponsor($sponsors[$sponsor]["name"],$sponsors[$sponsor]["link"]));
+  }
+
+  return implode("",$result);
+}
+
 class HomeController {
   /**
    * Display the home page.
@@ -14,6 +77,13 @@ class HomeController {
   public function home(): void
   {
     global $smarty;
+    
+    $organisators = getOrganisators();
+    $smarty->assign('organisators',$organisators);
+
+    $sponsors = getSponsors();
+    $smarty->assign('sponsors',$sponsors);
+
     $smarty->display('home/index.tpl');
   }
 
