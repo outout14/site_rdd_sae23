@@ -1,4 +1,3 @@
-<!-- Header -->
 <header class="fixed-top d-flex justify-content-between align-items-center py-2 px-4">
 
     <div id="header-background-scroll"></div>
@@ -15,25 +14,20 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mt-3 mt-lg-0">
                     <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
-                        <a class="nav-link" href="#"><span class="link ubuntu">Accueil</span></a>
+                        <a class="nav-link" href="{$APP_URL}/home/"><span class="link ubuntu">Accueil</span></a>
                     </li>
-
                     <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
-                        <a class="nav-link" href="#organisation-container"><span class="link ubuntu">Organisation</span></a>
+                        <a class="nav-link" href="#organisation-container-link"><span class="link ubuntu">Organisation</span></a>
                     </li>
-
                     <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
-                        <a class="nav-link" href="./inscription.html"><span class="link ubuntu">Inscription</span></a>
+                        <a class="nav-link" href="{$APP_URL}/home/inscription"><span class="link ubuntu">Inscription</span></a>
                     </li>
-
                     <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
-                        <a class="nav-link" href="./gallery.html"><span class="link ubuntu">Gallerie</span></a>
+                        <a class="nav-link" href="{$APP_URL}/home/gallerie"><span class="link ubuntu">Gallerie</span></a>
                     </li>
-
                     <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
-                        <a class="nav-link" href="#"><span class="link ubuntu">Livre d'or</span></a>
+                        <a class="nav-link" href="{$APP_URL}/home/goldbook"><span class="link ubuntu">Livre d'or</span></a>
                     </li>
-
                     <li class="nav-item mb-2 mt-1 my-lg-0 mx-2 mx-lg-3">
                         <a class="nav-link" href="#"><span class="link ubuntu">Administration</span></a>
                     </li>

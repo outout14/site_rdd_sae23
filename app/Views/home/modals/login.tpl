@@ -19,7 +19,7 @@
                         <div class="row flex-center mb-5 gap-3" id="connection-error-container">
                             <div class="col-12 flex-center my-2 my-lg-0">
                                 <div class="avatar-sm">
-                                    <img src="./images/creators/creator_hello.png" alt="creator_hello" class="avatar-img" id="connection-error-img">
+                                    <img src="{$APP_URL}/assets/images/creators/creator_hello.png" alt="creator_hello" class="avatar-img" id="connection-error-img">
                                 </div>
                             </div>
                             <div class="col-12 text-center px-0 px-lg-5 flex-center flex-column">
@@ -38,7 +38,7 @@
                         <!-- Mot de passe -->
                         <div class="row flex-center my-3 px-3 px-lg-5">
                             <div class="col-12 position-relative">
-                                <img src="./images/svg/eyeslash.svg" alt="show-password" class="password-input-icon">
+                                <img src="{$APP_URL}/assets/images/svg/password-hidden.svg" class="password-input-icon">
                                 <input type="password" class="form-control ps-2 py-1 password-input" placeholder="Mot de passe" name="ERROR" id="input-password">
                             </div>
                             <div class="col-12 justify-content-end">
@@ -77,7 +77,7 @@
                         <div class="row flex-center mt-3 mb-5 gap-3">
                             <div class="col-12 col-lg-3 flex-center my-2 my-lg-0">
                                 <div class="avatar-sm">
-                                    <img src="./images/creators/creator_info.png" alt="creator_hello" class="avatar-img">
+                                    <img src="{$APP_URL}/assets/images/creators/creator_info.png" alt="creator_hello" class="avatar-img">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">

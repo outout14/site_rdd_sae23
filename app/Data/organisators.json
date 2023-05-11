@@ -29,21 +29,9 @@
         "task": "Recherche de la salle",
         "link": "www.google.com"
     },
-    "Tatiana": {
-        "firstname": "Tatiana",
-        "lastname": "Martin desbois",
-        "task": "Recherche de la salle",
-        "link": "www.google.com"
-    },
     "Hugo": {
         "firstname": "Hugo",
         "lastname": "Blot",
-        "task": "jsp frr",
-        "link": "www.google.com"
-    },
-    "Capucine": {
-        "firstname": "Capucine",
-        "lastname": "Duchatelet",
         "task": "jsp frr",
         "link": "www.google.com"
     }

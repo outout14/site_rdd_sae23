@@ -18,10 +18,10 @@ if(passwordInputIcons != null) {
     
             if (input.type == "text") {
                 input.type = "password";
-                icon.src = "/images/svg/eyeslash.svg";
+                icon.src = "{$APP_URL}/assets/images/svg/password-hidden.svg";
             } else {
                 input.type = "text";
-                icon.src = "/images/svg/eye.svg";
+                icon.src = "{$APP_URL}/assets/images/svg/password-show.svg";
             }
         })
     })
@@ -415,16 +415,16 @@ navbarToggler.addEventListener("click", () => {
     }
 })
 
-if(document.documentElement.scrollHeight == window.innerHeight) {
+window.addEventListener("scroll", () => {
+    if(window.scrollY > 200) {
+        headerBackground.style.height = "100%";
+    } else {
+        headerBackground.style.height = "0%";
+    }
+})
+
+if(window.scrollY > 200) {
     headerBackground.style.height = "100%";
-} else {
-    window.addEventListener("scroll", () => {
-        if(window.scrollY > 200) {
-            headerBackground.style.height = "100%";
-        } else {
-            headerBackground.style.height = "0%";
-        }
-    })
 }
 
 ////////////////////// GALLERIE /////////////////////////////
@@ -442,7 +442,6 @@ function titleAnimation(identifier) {
         }, i*75)
     }   
 }
-
 
 const gallery = document.getElementById("gallery")
 

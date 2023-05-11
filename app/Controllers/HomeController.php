@@ -88,9 +88,10 @@ class HomeController {
     $sponsors = getSponsors();
     $smarty->assign('sponsors',$sponsors);
 
-    $info_organisation = getOrganisation();
-    $smarty->assign('organisation',$info_organisation);
+    $organisation = getOrganisation();
+    $smarty->assign('organisation',$organisation);
 
+    $smarty->assign('pagename',"Génération R&T");
     $smarty->display('home/index.tpl');
   }
 
@@ -99,7 +100,17 @@ class HomeController {
   public function inscription(): void
   {
     global $smarty;
+
+    $smarty->assign('pagename',"Inscription");
     $smarty->display('home/inscription.tpl');
+  }
+
+  public function gallerie(): void
+  {
+    global $smarty;
+
+    $smarty->assign('pagename',"Gallerie");
+    $smarty->display('home/gallerie.tpl');
   }
 
   public function vue2(): void

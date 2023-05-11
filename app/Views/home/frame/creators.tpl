@@ -1,11 +1,12 @@
-<!-- Organisateurs et sponsors -->
-<section id="footer-container">
+<section class="flex-center flex-column bg-bonewhite" id="staff-container">
+
+    <!-- <img class="wave" src="{$APP_URL}/assets/images/background/wave-creators-top.svg" alt="wave"> -->
+
     <!-- Titre -->
-    <h1 class="title-2 mt-3 fw-bold">Organisateurs et sponsors</h1>
+    <h1 class="text-title">Organisateurs et sponsors</h1>
 
     <!-- Organisateurs -->
-    <div class="mt-lg-3" id="organisator-container">
-
+    <div id="organisator-container">
         <div id="organisator-wrapper-fade"></div>
 
         <div id="organisator-animation-wrapper">
@@ -22,4 +23,8 @@
             {$sponsors}
         </div>
     </div>
+
+    <!-- <img class="wave" src="{$APP_URL}/assets/images/background/wave-creators-bottom.svg" alt="wave"> -->
+
+
 </section>
