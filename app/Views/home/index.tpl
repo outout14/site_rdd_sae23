@@ -23,6 +23,8 @@
     <!-- Questions -->
     {include file="./frame/questions.tpl"}
 
+    <!-- Notifications -->
+    {include file="../utils/notifications.tpl"}
 
 </body>
 </html>

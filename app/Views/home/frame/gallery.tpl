@@ -24,35 +24,35 @@
 
         <div id="gallery">
             <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/person1.png" alt="">
+                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
             </div>
 
             <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/person2.png" alt="">
+                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
             </div>
 
             <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/person3.png" alt="">
+                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
             </div>
 
             <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/person4.png" alt="">
+                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
             </div>
 
             <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/person5.png" alt="">
+                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
             </div>
 
             <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/person6.png" alt="">
+                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
             </div>
             
             <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/person7.png" alt="">
+                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
             </div>
 
             <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/person10.png" alt="">
+                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
             </div>
         </div>
 

@@ -81,6 +81,8 @@ class HomeController {
   public function home(): void
   {
     global $smarty;
+
+    $smarty->assign('notification',"Vous avez un nouveau message!");
     
     $creators = getCreators();
     $smarty->assign('creators',$creators);
@@ -100,6 +102,8 @@ class HomeController {
   public function inscription(): void
   {
     global $smarty;
+
+    $smarty->assign('notification',"Vous avez un nouveau message!");
 
     $smarty->assign('pagename',"Inscription");
     $smarty->display('home/inscription.tpl');

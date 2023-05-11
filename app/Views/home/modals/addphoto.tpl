@@ -8,7 +8,7 @@
             
             <!-- Fermer -->
             <div class="fixed-top d-flex justify-content-end my-4 mx-5"> 
-                <button class="button hover-pointer" onclick="closeModal('gallery-upload-modal')">
+                <button class="button hover-pointer bg-transparent" onclick="closeModal('gallery-upload-modal')">
                     <i class="bi bi-x fa-2x text-dark"></i>
                 </button>
             </div>
@@ -23,7 +23,7 @@
 
                     <input type="file" class="button" name="photo" id="input-file">
 
-                    <p class="inscription-info-text my-2 text-center" id="gallery-input-info-text">Chaque photo proposée est soumise à une vérification avant d'apparaître dans la gallerie.</p>
+                    <p class="inscription-info-text my-2 text-center" id="gallery-input-info-text">Chaque photo proposée est soumise à une vérification par les administrateurs avant d'être visible.</p>
 
                 </form>
             </div>

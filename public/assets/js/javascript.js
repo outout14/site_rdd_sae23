@@ -473,3 +473,27 @@ if(phone && timelineIcons != null) {
         icon.classList.toggle("fa-2x");
     })
 }
+
+// NOTIFICATIONS
+
+const notification = document.getElementById("notification-wrapper");
+const closeNotificationButton = document.getElementById("closeNotificationButton");
+
+function closeNotification() {
+    notification.style.transform = "translateY(-50px)";
+    notification.style.opacity = "0";
+    setTimeout( () => {notification.style.display = "none"}, 500);
+}
+
+function openNotification() {
+    notification.style.transform = "translateY(0)";
+    notification.style.opacity = "1";
+}
+
+closeNotificationButton.addEventListener("click", () => {
+    closeNotification()
+})
+
+openNotification();
+
+

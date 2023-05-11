@@ -77,7 +77,7 @@
                         <div class="row flex-center mt-3 mb-5 gap-3">
                             <div class="col-12 col-lg-3 flex-center my-2 my-lg-0">
                                 <div class="avatar-sm">
-                                    <img src="{$APP_URL}/assets/images/creators/creator_info.png" alt="creator_hello" class="avatar-img">
+                                    <img src="{$APP_URL}/assets/images/creators/creator_info.png" alt="creator_info" class="avatar-img">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
