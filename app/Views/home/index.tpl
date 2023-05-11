@@ -4,7 +4,7 @@
 {include file="./frame/head.tpl"}
 
 <body>
-    
+
     <!-- Modal connexion -->
     {include file="./forms/signin.tpl"}
 
@@ -20,5 +20,6 @@
     <!-- Organisateurs -->
     {include file="./frame/creators.tpl"}
 
+    <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
 </body>
 </html>

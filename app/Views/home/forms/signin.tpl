@@ -12,7 +12,7 @@
             
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="container-fluid">
-                    <form action="/site_rdd_sae23/app/Views/auth/test.php" method="POST" class="connection-form">
+                    <form action="{$APP_URL}/auth/login" method="POST" class="connection-form" id="login-form">
                     <input type="hidden" name="actionType" value="login">
                     
                         <!-- Informations / Erreurs  -->
@@ -51,7 +51,7 @@
     
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 my-3">
-                            <input type="submit" class="button rounded-3 bg-blue text-white fw-bold py-2 px-3" name="submit" value="Se connecter">
+                          <button class="button rounded-3 bg-blue text-white fw-bold py-2 px-3">Se connecter</button>
                         </div>
     
                         <!-- Renvoi vers inscription -->
@@ -66,7 +66,7 @@
 
             <div class="d-flex flex-column justify-content-center align-items-center h-100">
                 <div class="container-fluid" id="password-reinitialise">
-                    <form action="/site_rdd_sae23/app/Views/auth/test.php" method="POST" class="connection-form">
+                    <form action="{$APP_URL}/auth/forgotPassword" method="POST" class="connection-form" id="forgot-password-form">
                     <input type="hidden" name="actionType" value="forgotPassword">
 
                         <div class="row justify-content-end mt-3 mx-5">    
@@ -80,6 +80,13 @@
                                     <img src="{$APP_URL}/assets/images/creators/creator_info.png" alt="creator_hello" class="avatar-img">
                                 </div>
                             </div>
+                          <!-- MESSAGE D'ERREUR A CHANGER -->
+                          <div class="col-12 text-center px-0 px-lg-5 d-flex justify-content-center align-items-center flex-column" id="forgot-password-error-container">
+                            <p class="fw-bolder general-info-text my-2" id="forgot-password-typeit"></p>
+                            <p class="fw-bolder general-info-text my-2 text-blue" id="forgot-password-error-typeit"></p>
+                            <p class="fw-bolder form-text" id="forgot-password-error-text"></p>
+
+                          </div>
                             <div class="col-12 col-lg-6">
                                 <p class="px-3 px-lg-0 text-justify">
                                     Si un compte est associé à cette adresse mail, vous allez recevoir un mail de recuperation afin de
@@ -87,7 +94,7 @@
                                 </p>
                             </div>
                         </div>
-    
+
                         <!-- Login -->
                         <div class="row d-flex justify-content-center align-items-center my-3 px-3 px-lg-5">
                             <div class="col-12">
@@ -97,7 +104,7 @@
     
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 mt-3">
-                            <input type="submit" class="button rounded-3 bg-blue text-white fw-bold py-2 px-3" name="submit" value="Envoyer">
+                          <button class="button rounded-3 bg-blue text-white fw-bold py-2 px-3">Envoyer</button>
                         </div>
 
                         <div class="row text-center my-5">

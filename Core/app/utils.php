@@ -20,4 +20,15 @@ class Utils{
     }
     return true;
   }
+
+  /*
+   * SmartyGeneralValues : void
+   * This function is used to pass default variables to the smarty engine.
+   */
+    public static function SmartyGeneralValues($prefix, $menu, $currentPage): void {
+        global $smarty;
+        $smarty->assign('menu', Utils::GenerateMenu($prefix, $menu));
+        $smarty->assign('currentPage', $currentPage);
+        $smarty->assign('sessionUser', connexionMiddleware::getLoginUser());
+    }
 }

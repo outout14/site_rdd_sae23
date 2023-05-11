@@ -54,6 +54,14 @@ class NotificationManager
         );
         break;
       }
+      case 'login_success':
+      {
+        $notification = array(
+          'type' => 'success',
+          'message' => 'Vous avez bien été connecté.'
+        );
+        break;
+      }
       case 'logout_success':
       {
         $notification = array(
@@ -75,6 +83,14 @@ class NotificationManager
         $notification = array(
           'type' => 'danger',
           'message' => 'Votre compte a déjà été confirmé.'
+        );
+        break;
+      }
+      case 'password_mail_sent' :
+      {
+        $notification = array(
+          'type' => 'success',
+          'message' => 'Un email vous a été envoyé pour réinitialiser votre mot de passe.'
         );
         break;
       }

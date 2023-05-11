@@ -25,7 +25,7 @@
         <!-- Content -->
         <div class="container-fluid h-100 overflow-hidden" id="inscription-scrollable">
             <!-- !!!!!!!!!!!!!!!!!! DEBUT FORMULAIRE !!!!!!!!!!!!!!!!!!!!!! -->
-            <form action="/site_rdd_sae23/app/Views/auth/test.php" method="POST" class="h-100"> 
+            <form action="{$APP_URL}/auth/register" method="POST" class="h-100">
             <input type="hidden" name="actionType" value="register">
 
                 <!-- Etudiant / Professeur / Ancien eleve / Autre -->
@@ -188,7 +188,7 @@
                         <!-- Input entreprise pour les alternants, anciens eleves, autres  -->
                         <div class="row mt-1 mt-lg-0" id="change-input-entreprise">
                             <div class="col-12">
-                                <input disabled type="text" class="form-control ps-2 py-1" placeholder="Entreprise" name="entreprise" id="input-entreprise">
+                                <input disabled type="text" class="form-control ps-2 py-1" placeholder="Entreprise" name="company" id="input-entreprise">
                             </div>
                             <div class="col-12">
                                 <div class="form-text text-justify px-2" id="change-help-entreprise">
