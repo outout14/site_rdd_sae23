@@ -10,15 +10,15 @@
       <ul class="navbar-nav me-auto">
           {foreach from=$menu key=$key item=$item}
             <li class="nav-item">
-                {if $item == $currentPage}
-                  <a class="nav-link active" aria-current="page" href="{$key}">{$item}</a>
+                {if $item.name == $currentPage}
+                  <a class="nav-link active" href="{$item.url}">{$item.name}</a>
                 {else}
-                  <a class="nav-link" href="{$key}">{$item}</a>
+                  <a class="nav-link" href="{$item.url}">{$item.name}</a>
                 {/if}
             </li>
           {/foreach}
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="{$APP_URL}/auth/logout">Logout</a>
         </li>
       </ul>
     </div>

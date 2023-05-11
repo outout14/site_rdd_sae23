@@ -3,24 +3,35 @@
 // Load the bootstrap file
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 require_once(__DIR__ . '/../Models/user.php');
+
 /*
  * HomeController
  * This file is used to handle the home page.
  */
 class HomeController {
+  private array $menu = [
+    'home' => 'Accueil',
+    'organisation' => 'Organisation',
+    'register' => 'Inscription',
+    'galerie' => 'Galerie',
+    'livre-or' => 'Livre d\'or',
+  ];
   /**
    * Display the home page.
    */
   public function home(): void
   {
     global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Accueil');
     $smarty->display('home/index.tpl');
   }
 
-  public function vue2(): void
+  // Inscription page
+
+  public function register(): void
   {
     global $smarty;
-    $utilisateur = new User(1, 'Doe', 'John', 'john@doe.fr', 'password', '0606060606', 'Paris', 'true');
-    $smarty->display('home/vue2.tpl');
+    Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
+    $smarty->display('home/inscription.tpl');
   }
 }
