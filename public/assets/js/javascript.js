@@ -1,8 +1,9 @@
+const $APP_URL = "/site_rdd_sae23/public";
+const phone = window.innerWidth < 1000;
 ///////////////////////////////////////////// FORMS ///////////////////////////////////////////////////////// 
 
 // Affichage du mot de passe dans le input ( icone d'oeil )
 
-const phone = window.innerWidth < 1000;
 const passwordInputIcons = document.querySelectorAll(".password-input-icon");
 
 if(passwordInputIcons != null) {
@@ -18,25 +19,13 @@ if(passwordInputIcons != null) {
     
             if (input.type == "text") {
                 input.type = "password";
-                icon.src = "{$APP_URL}/assets/images/svg/password-hidden.svg";
+                icon.src = `${$APP_URL}/assets/images/svg/password-hidden.svg`;
             } else {
                 input.type = "text";
-                icon.src = "{$APP_URL}/assets/images/svg/password-show.svg";
+                icon.src = `${$APP_URL}/assets/images/svg/password-show.svg`;
             }
         })
     })
-}
-
-// Prend en paremetres un objet de type TypeIt et un string avec le nouveau contenu à afficher dans le typeit
-function typeNew(oldTypeIt, newTypeIt, content) {
-    oldTypeIt.style.display = "none";
-    newTypeIt.style.display = "block";
-    
-    const connectionTypeIt = new TypeIt(newTypeIt, {
-        strings: content,
-        speed: 100,
-        waitUntilVisible: true,
-    }).go();
 }
 
 // Compte à rebours
@@ -138,53 +127,6 @@ function connectionScroll(direction) {
     }
 }
 
-// TypeIt
-var connectionTypeIt;
-if(document.getElementById("connection-typeit") != null ) {
-    connectionTypeIt = new TypeIt("#connection-typeit", {
-        strings: "Content de vous revoir!",
-        speed: 100,
-        waitUntilVisible: true,
-    }).go();
-}
-
-// Affichage d'erreur lors de la validation du formulaire, prend en parametre un string 
-// qui doit être égal à "login" ou "password", selon le type d'erreur. Si rien n'est donné en paramètre,
-// affiche un texte d'erreur par défaut
-// Disable pour remettre le formualaire à zero ( utilisé dans closeModal() )
-
-var isError = false
-
-function connectionError(type="undefined") {
-    let container = document.getElementById("connection-error-container");
-    let avatar = document.getElementById("connection-error-img");
-    let defaultTypeIt = document.getElementById("connection-typeit");
-    let errorTypeIt = document.getElementById("connection-error-typeit");
-    let errorText = document.getElementById("connection-error-text");
-
-    
-    if(type === "login") {
-        errorText.innerText = "Il me semble que je ne connais pas ce login. Êtes-vous sûr que vous avez utilisé la bonne adresse mail?";
-    } else if(type === "password") {
-        errorText.innerText = "Vous vous êtes trompés de mot de passe. Reessayez.";
-    } else if(type === "disable") {
-        if(isError) {
-            typeNew(errorTypeIt,defaultTypeIt, "Content de vous revoir!");
-            avatar.src = "../images/creators/creator_hello.png";
-            container.classList.toggle("tada");
-            errorText.innerText = "";
-        } 
-        return
-    } else {
-        errorText.innerText = "Une erreur se produite lors de votre connexion. Veillez reessayer plus tard.";
-    }
-    
-    isError = true;
-    typeNew(defaultTypeIt,errorTypeIt, "Erreur! À l'ed! À l'ed");
-    avatar.src = "../images/creators/creator_error.png";
-    container.classList.toggle("tada");
-}
-
 /////////////////////////////// INSCRIPTION /////////////////////////////////////
 
 // Si on est sur la page de inscription, alors tout ce code est chargé
@@ -222,31 +164,6 @@ if(document.getElementById("inscription-container") != null){
 
         // Permet de scroll
         inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight)
-    }
-
-    function inscriptionError(number, text) {
-        // Affichage d'erreur
-        // Prend en parametres un int number ( entre 0 et 1 ), qui correspond à la partie du formulaire où on se trouve)
-        // 0 -> Premiere partie ( nom, prenom, etc... ) | 1 -> Deuxieme partie ( checkbox, mots de passe, etc... )
-        // Prend en parametre un str text qui correspond au texte d'erreur
-        
-        let avatars = document.querySelectorAll(".error-avatar");
-        let textBoxes = document.querySelectorAll(".error-text");
-        
-        avatars[number].parentElement.parentElement.classList.add("data-mdb-toggle='animation'");
-        avatars[number].parentElement.parentElement.classList.add("data-mdb-animation-start='onHover'");
-        avatars[number].parentElement.parentElement.classList.add("data-mdb-animation-reset='true'");
-        avatars[number].parentElement.parentElement.classList.add("data-mdb-animation='tada'");
-        
-        avatars[number].style.borderColor = "var(--orange-bg)";
-        avatars[number].children[0].src = "./images/creator_error.png";
-        
-        // Texte TypeIT
-        textBoxes[number].children[0].innerText = "Oops! Erreur!";
-        textBoxes[number].children[0].classList.add("error-font");
-        
-        // Texte d'erreur
-        textBoxes[number].children[1].innerText = "Je crois que vous avez fait une erreur lors de l'inscription. Revoyez les champs entourés en orange afin de finir votre inscription.";
     }
 
     // Fonction du deuxieme bouton "Continuer" dans le formulaire, permet de s'assurer que tout a été bien rentré ( puis scroll vers
@@ -293,15 +210,15 @@ if(document.getElementById("inscription-container") != null){
         
         // Si l'eleve n'est pas en alternance, on ne lui propose pas de choisir la ville    
         if(document.getElementById("input-promotion").value == "2AFI") {
-            div_checkMap.style.display = "none";
+            document.getElementById("change-check-map").style.display = "none";
         }
     }
 
-function submit() {
-    let city = document.getElementById("input-city");
-    let password = document.getElementById("input-password");
-    let confirm_password = document.getElementById("input-confirm_password");
-}
+    function submit() {
+        let city = document.getElementById("input-city");
+        let password = document.getElementById("input-password");
+        let confirm_password = document.getElementById("input-confirm_password");
+    }
 
 
     // Variables pour le scroll
@@ -313,54 +230,20 @@ function submit() {
     // Fonction du premier bouton "Continuer" dans le formulaire, permet de adapter le formulaire selon le statut choisi ( etudiant, prof, etc.. )
     const statusSelect = document.getElementById("inscription-select");
 
-    // Permet de refresh la page
-    const refreshButtons = document.querySelectorAll(".go-up-btn");
-
-    refreshButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            // inscriptionScrollable.scrollBy(0,-scrollableHeight)
-            location.reload();
-        })
-    })
-
-    // TypeIT "Hello World!", "Parfait!" dans le formulaire d'inscription
-
-    new TypeIt("#inscription-typeit-1", {
-        strings: "Hello world!",
-        speed: 100,
-        waitUntilVisible: true,
-    }).go();
-
-    new TypeIt("#inscription-typeit-2", {
-        strings: "Parfait! Continuons.",
-        speed: 100,
-        waitUntilVisible: true,
-    }).go();
-
-    new TypeIt("#inscription-typeit-3", {
-        strings: "Une dernière étape!",
-        speed: 100,
-        waitUntilVisible: true,
-    }).go();
-
     // Verification si le checkbox parents est activé. Si oui, le select du nombre de parents s'active
     // et le texte d'aide apparait.
     const parentsCheck = document.getElementById("parentsCheck")
     const parentsSelectCounts = document.getElementById("parentsSelect")
-    const parentsHelpText = document.getElementById("parentsHelp")
 
     parentsCheck.addEventListener("change", () => {
         if (parentsCheck.checked) {
             parentsSelectCounts.disabled = false;
-            parentsHelpText.style.opacity = "1";
         } else {
             parentsSelectCounts.disabled = true;
-            parentsHelpText.style.opacity = "0";        
         }
     })
 
     // Verification si le checkbox carte est activé. Si oui, le input de ville s'active
-
     const MapVisibilityCheck = document.getElementById("MapVisibilityCheck")
     const MapTownInput = document.getElementById("input-city")
 
@@ -372,8 +255,7 @@ function submit() {
         }
     })
 
-    // Vérificiation si l'élève est en alternance ou pas, sinon le input 'entreprise'
-
+    // Vérificiation si l'élève est en alternance ou pas, sinon le input 'entreprise' est desactivé
     const promotionSelect = document.getElementById("input-promotion")
     const inputEntreprise = document.getElementById("input-entreprise")
 
@@ -387,18 +269,20 @@ function submit() {
 
     // Code pour téléphone -> Changement des options du select de promotion
     // On passe de Licence Professionnelle à LP pour gagner de l'espace
+    // Et changements des labels des checks
 
     if (phone) {
-        let possibleOptions = ["BUT R&T 2 FI", "BUT R&T 2 FA", "LP CART", "LP RIMS", "LP TSSR"]
-        let options = promotionSelect.children
+        let possibleOptions = ["BUT R&T 2 FI", "BUT R&T 2 FA", "LP CART", "LP RIMS", "LP TSSR"];
+        let options = promotionSelect.children;
 
         for(i = 0; i < options.length; i++) {
-            options[i].text = possibleOptions[i]
+            options[i].text = possibleOptions[i];
         }
+
+        document.getElementById("label-ListVisibilityCheck").innerHTML = "Apparaître dans la listes des participants";
+        document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
     }
 }
-
-
 /////////////////////////////////// HEADER //////////////////////////////
 
 const navbar = document.querySelector("header")
@@ -407,9 +291,8 @@ const headerBackground = document.getElementById("header-background-scroll")
 
 navbarToggler.addEventListener("click", () => {
     navbar.classList.toggle("toggle")
-
     if(navbar.classList.contains("toggle")) {
-        navbar.style.backgroundColor = "var(--orange)";
+        navbar.style.backgroundColor = "var(--blue)";
     } else {
         navbar.style.backgroundColor = "transparent";
     }
@@ -490,10 +373,45 @@ function openNotification() {
     notification.style.opacity = "1";
 }
 
-closeNotificationButton.addEventListener("click", () => {
-    closeNotification()
-})
+if(notification != null) {
+    closeNotificationButton.addEventListener("click", () => {
+        closeNotification()
+    });
+    openNotification();
+}
 
-openNotification();
+// Prends un array d'identifiants en parametres, 0 - error container, 1 - error img, 2 - error title ( objet typewriter ), 3 - error text
+function showError(elements, error) {
+    console.log(elements)
 
+    let container = document.getElementById(elements[0]);
+    let image = document.getElementById(elements[1]);
+    let text = document.getElementById(elements[3]);
 
+    // if(type === "missing_input") {
+    //     text.innerHTML = "Vous avez oublié de remplir un champ du formulaire.";
+    // } else if(type === "same_password") {
+    //     text.innerHTML = "Les deux mots de passes ne sont pas identiques. Reessayez.";
+    // } else if(type === "short_password") {
+    //     text.innerHTML = "Le mot de passe est trop court. Choisissez un mot de passe entre 8 et 20 caractères.";
+    // } else if(type === "long_password") {
+    //     text.innerHTML = "Les deux mots de passes ne sont pas identiques. Choisissez un mot de passe entre 8 et 20 caractères.";
+    // } else if(type === "bad_password") {
+    //     text.innerHTML = "Le mot de passe n'est pas assez robuste. Choisissez un mot de passe plus compliqué ( lettres miniscules et majuscules, chiffres, caractères spéciaux ).";
+    // } else if(type === "wrong_login") {
+    //     text.innerHTML = "Cet adresse n'est associée à aucun compte.";
+    // } else if(type === "wrong_password") {
+    //     text.innerHTML = "Le mot de passe que vous avez entré ne correspond pas à ce compte. Reessayez.";
+    // } else {
+    //     text.innerHTML = "Une erreur est survenue. Reessayez plus tard.";
+    // }
+
+    text.innerHTML = error
+    
+    image.src = `${$APP_URL}/assets/images/creators/creator_error.png`;
+    elements[2]
+        .deleteAll(1)
+        .typeString('Oops! Erreur!')
+        .start()
+    container.classList.toggle("tada");
+}

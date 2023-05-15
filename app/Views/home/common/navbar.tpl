@@ -31,6 +31,9 @@
                     <li class="nav-item mb-2 mt-1 my-lg-0 mx-2 mx-lg-3">
                         <a class="nav-link" href="#"><span class="link ubuntu">Administration</span></a>
                     </li>
+                    <li class="nav-item my-1 my-lg-0 mx-2 mx-lg-3">
+                        <a class="nav-link" href="{$APP_URL}/home/test"><span class="link ubuntu">Test</span></a>
+                    </li>
                 </ul>
             </div>
         </div>

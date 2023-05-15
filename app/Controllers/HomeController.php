@@ -109,6 +109,16 @@ class HomeController {
     $smarty->display('home/inscription.tpl');
   }
 
+  public function test(): void
+  {
+    global $smarty;
+
+    $smarty->assign('notification',"Vous avez un nouveau message!");
+
+    $smarty->assign('pagename',"Inscription");
+    $smarty->display('home/changepassword.tpl');
+  }
+
   public function gallerie(): void
   {
     global $smarty;

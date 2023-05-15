@@ -25,4 +25,7 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <!-- TypeWriter -->
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 </head>
