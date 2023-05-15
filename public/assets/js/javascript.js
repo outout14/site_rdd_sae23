@@ -97,8 +97,6 @@ function closeModal(identifier) {
         document.querySelectorAll(".connection-form").forEach(element => {
             element.reset();
         })
-
-        connectionError("disable");
     }
 
 
