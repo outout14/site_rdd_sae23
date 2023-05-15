@@ -1,15 +1,14 @@
-<!-- Header -->
-<header class="fixed-top d-flex justify-content-between align-items-center py-1 px-4 mt-2 mt-lg-3">
+<header class="fixed-top d-flex justify-content-between align-items-center py-2 px-4">
+
+    <div id="header-background-scroll"></div>
 
     <nav class="navbar navbar-expand-lg shadow-0">
         <div class="container-fluid">
-
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
                 id="navbar-toggler">
                 
                 <i class="bi bi-list text-white fa-2x"></i>
-
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
