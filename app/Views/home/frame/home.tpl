@@ -39,10 +39,9 @@
 
                     <!-- Ne doit plus s'afficher lorsqu'on est connectés -->
                     <div class="col-12 d-flex justify-content-center justify-content-lg-start col-lg-3 mt-3 mt-lg-0">
-                        <a href="{$APP_URL}/home/inscription">   
+                        <a href="{$APP_URL}/home/register">   
                             <button class="button rounded-pill bg-transparent border border-3 border-white text-bonewhite py-2 px-3 flex-center">
                                 <span>S'inscrire</span>
-                                <!-- <img class="ms-2" src="{$APP_URL}/assets/images/svg/arrow.svg"></img> -->
                                 <i class="bi bi-person-plus fa-lg ms-2"></i>
                             </button>
                         </a>

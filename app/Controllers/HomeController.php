@@ -78,9 +78,8 @@ function getOrganisation() {
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
-    'organisation' => 'Organisation',
     'register' => 'Inscription',
-    'galerie' => 'Galerie',
+    'gallery' => 'Galerie',
     'livre-or' => 'Livre d\'or',
   ];
   /**
@@ -111,15 +110,16 @@ class HomeController {
   {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
+
     $smarty->display('home/inscription.tpl');
   }
 
 
-  public function gallerie(): void
+  public function gallery(): void
   {
     global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
-    $smarty->assign('pagename',"Gallerie");
     $smarty->display('home/galerie.tpl');
   }
 }
