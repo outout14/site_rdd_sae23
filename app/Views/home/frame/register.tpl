@@ -80,8 +80,8 @@
                                 <p class="text-information fw-bold mb-3" id="error-title-1">
                                     <script>
                                         const error_title_1 = new Typewriter('#error-title-1', {});
-                                        error_title1
-                                            .typeString("Parfait! Continuons.")
+                                        error_title_1
+                                            .typeString("Parfait! Continuos.")
                                             .start()
                                     </script>
                                 </p>
@@ -123,7 +123,7 @@
                                         <object data="{$APP_URL}/assets/images/svg/france.svg" class="pe-1 svg-france"></object>
                                         +33
                                     </span>
-                                    <input type="tel" class="form-control ps-2 py-1 custom-input custom-input-border" placeholder="06 66 77 88 99" pattern="[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="phone_number" id="input-phone_number">
+                                    <input type="tel" class="form-control ps-2 py-1 custom-input custom-input-border" placeholder="06 66 77 88 99" name="phone_number" id="input-phone_number">
                                 </div>                            
                             </div>
 

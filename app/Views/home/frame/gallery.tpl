@@ -7,7 +7,6 @@
             <span class="gallery-title-letter">G</span>
             <span class="gallery-title-letter">a</span>
             <span class="gallery-title-letter">l</span>
-            <span class="gallery-title-letter">l</span>
             <span class="gallery-title-letter">e</span>
             <span class="gallery-title-letter">r</span>
             <span class="gallery-title-letter">i</span>

@@ -120,6 +120,6 @@ class HomeController {
     global $smarty;
 
     $smarty->assign('pagename',"Gallerie");
-    $smarty->display('home/gallerie.tpl');
+    $smarty->display('home/galerie.tpl');
   }
 }

@@ -45,8 +45,8 @@ a {
 }
 
 ::selection {
-    background-color: var(--alternative-blue);
-    color: white;
+    background-color: var(--bonewhite);
+    color: var(--dark);
 }
 
 /* Common styles */

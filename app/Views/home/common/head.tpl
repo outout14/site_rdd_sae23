@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{$pagename}</title>
+    <title>{$currentPage}</title>
     <link rel="icon" href="{$APP_URL}/assets/images/sponsors/generationrt.png">
     
     <!-- Bootstrap 5.3 -->
