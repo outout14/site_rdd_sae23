@@ -80,7 +80,7 @@ class HomeController {
     'home' => 'Accueil',
     'register' => 'Inscription',
     'gallery' => 'Galerie',
-    'livre-or' => 'Livre d\'or',
+    'goldbook' => 'Livre d\'or',
   ];
   /**
    * Display the home page.
@@ -114,6 +114,13 @@ class HomeController {
     $smarty->display('home/inscription.tpl');
   }
 
+  public function golddbook(): void
+  {
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
+
+    $smarty->display('home/inscription.tpl');
+  }
 
   public function gallery(): void
   {
