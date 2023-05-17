@@ -1,12 +1,12 @@
 <section class="window-container background-wave-blue" id="inscription-container">
 
-    <div class="window d-flex justify-content-center">
+    <div class="window d-flex align-items-center flex-column">
         <!-- Header, à ne pas afficher sur la version mobile! -->
         <div class="mt-3 ps-lg-5 ps-3 dot-header">
             <span class="dot bg-danger"></span>
             <span class="dot bg-warning"></span>
             <span class="dot bg-success"></span>
-            <h4 class="text-information fw-bold ms-3">Inscription</h4>
+            <h4 class="text-information fw-bold ms-3">{$currentPage}</h4>
         </div>
 
         <!-- Content -->
