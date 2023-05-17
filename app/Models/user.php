@@ -154,7 +154,7 @@ class User {
     // MAP IT TO user OBJECTS
     $users = [];
     while ($row = $result->fetch_assoc()) {
-      $users[] = new User($row['id'], $row['lastname'], $row['firstname'], $row['email'], $row['password'], $row['phone_number'], $row['city'], $row['family_count'], $row['company'], $row['display_in_list'], $row['display_on_map'], $row['confirmed'], $row['status'], $row['role']);
+      $users[] = new User($row['id'], $row['lastname'], $row['firstname'], $row['email'], $row['password'], $row['phone_number'], $row['city'], $row['family_count'], $row['company'], $row['promotion'], $row['promotion_year'], $row['display_in_list'], $row['display_on_map'], $row['confirmed'], $row['status'], $row['role']);
     }
     return $users;
   }
