@@ -211,7 +211,7 @@ class AuthController
             displayJsonError("Aucun utilisateur n'a été trouvé avec cette adresse email.");
           }
         } else {
-         displayJsonError("Veuillez remplir tous les champs.");
+          displayJsonError("Veuillez remplir tous les champs.");
         }
       }
     }

@@ -200,7 +200,7 @@ class User {
 
   public static function register($lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role): string | User {
     /* CHECK EMAIL & STATUS */
-    if($status == "student" || $status == "teacher"){
+    if($status == "student" or $status == "teacher"){
       $validEmails = [
         "student" => "@gnous.eu",
         "teacher" => "@univ-rennes1.fr",

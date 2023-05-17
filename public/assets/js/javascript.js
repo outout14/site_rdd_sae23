@@ -129,6 +129,10 @@ function connectionScroll(direction) {
 
 // Si on est sur la page de inscription, alors tout ce code est chargé
 if(document.getElementById("inscription-container") != null){
+    // Variables pour le scroll
+    var inscriptionScrollable = document.getElementById("inscription-scrollable");
+    const inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
+
     function firstContinue() {
         let div_email = document.getElementById("change-help-email");
         let div_selectPromotion = document.getElementById("change-select-promotion");
@@ -163,47 +167,8 @@ if(document.getElementById("inscription-container") != null){
         // Permet de scroll
         inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight)
     }
-
-    // Fonction du deuxieme bouton "Continuer" dans le formulaire, permet de s'assurer que tout a été bien rentré ( puis scroll vers
-    // la page suivante ) et sinon affiché une erreur.
+    
     function secondContinue() {
-        // let lastname = document.getElementById("input-lastname")
-        // let firstname = document.getElementById("input-firstname")
-        // let email = document.getElementById("input-email")
-        // let phone_number = document.getElementById("input-phone_number")
-        // let entreprise = document.getElementById("input-entreprise")
-
-        // let errors = []
-        // let setBorderTo = []
-
-        // if(lastname.value == "") {
-        //     errors.push("Vous n'avez pas entré de nom.")
-        //     setBorderTo.push(lastname)
-        // } else if(lastname.value.length > 20) {
-        //     errors.push("Votre nom est trop long")
-        //     setBorderTo.push(lastname)
-        // }
-
-        // if(firstname.value == "") {
-        //     errors.push("Vous n'avez pas entré de prenom.")
-        //     setBorderTo.push(firstname)
-        // } else if(lastname.value.length > 20) {
-        //     errors.push("Votre prenom est trop long")
-        //     setBorderTo.push(firstname)
-        // }
-
-        // if(email.value == "") {
-        //     errors.push("Vous n'avez pas entré d'email.")
-        //     setBorderTo.push(firstname)}
-        // // } else if(statusSelect.value == "student") {
-        // //     // if(email.value.split('@'))
-        // // }
-
-        // setBorderTo.forEach(element => {
-        //     element.classList.add("error-border")
-        // })
-
-        // Permet de scroll
         inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight);
         
         // Si l'eleve n'est pas en alternance, on ne lui propose pas de choisir la ville    
@@ -212,16 +177,6 @@ if(document.getElementById("inscription-container") != null){
         }
     }
 
-    function submit() {
-        let city = document.getElementById("input-city");
-        let password = document.getElementById("input-password");
-        let confirm_password = document.getElementById("input-confirm_password");
-    }
-
-
-    // Variables pour le scroll
-    var inscriptionScrollable = document.getElementById("inscription-scrollable");
-    const inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
 
     // Traitement du premier select ( etudiant / prof / ancien eleve / autre )
 
@@ -379,18 +334,17 @@ if(notification != null) {
 }
 
 // Prends un array d'identifiants en parametres, 0 - error container, 1 - error img, 2 - error title ( objet typewriter ), 3 - error text
-function showError(element, error) {
+function showError(element, error, typeWriterObject) {
+    let container = document.getElementById(element + "_error_container");
+    let image = document.getElementById(element + "_error_image");
+    let text = document.getElementById(element + "_error_text");
 
-    let container = document.getElementById(errorElementId + "-container");
-    let image = document.getElementById(errorElementId + "-image");
-    let text = document.getElementById(errorElementId + "-text");
-
-    text.innerHTML = error
-    
-    image.src = `${$APP_URL}/assets/images/creators/creator_error.png`;
-    // elements[2]
-    //     .deleteAll(1)
-    //     .typeString('Oops! Erreur!')
-    //     .start()
     container.classList.toggle("tada");
+    text.innerHTML = error;
+    image.src = `${$APP_URL}/assets/images/creators/creator_error.png`;
+    
+    typeWriterObject
+        .deleteAll(1)
+        .typeString('Oops! Erreur!')
+        .start()
 }
