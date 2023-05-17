@@ -81,6 +81,7 @@ class HomeController {
     'register' => 'Inscription',
     'gallery' => 'Galerie',
     'goldbook' => 'Livre d\'or',
+    'annuaire' => 'Annuaire',
   ];
   /**
    * Display the home page.
@@ -128,5 +129,13 @@ class HomeController {
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
     $smarty->display('home/galerie.tpl');
+  }
+
+  public function annuaire(): void
+  {
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
+
+    $smarty->display('home/users.tpl');
   }
 }

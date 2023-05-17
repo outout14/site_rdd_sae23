@@ -4,7 +4,7 @@
         <div class="flex-center flex-column" id="startpage-title">
             <p class="startpage-title">GENERATION R&T</p>
             <p class="startpage-title">REMISE DES DIPLÔMES</p>
-            <p class="startpage-title" id="rdd-date">7 juillet 2023. 19h00</p>
+            <p class="startpage-title">7 juillet 2023. 19h00</p>
         </div>
 
         <!-- Compte à rebours -->
@@ -49,12 +49,11 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="flex-center" id="startpage-arrow-box">
-        <a href="#organisation-container">
-            <img class="up-and-down" src="{$APP_URL}/assets/images/svg/downarrow.svg" alt="down-arrow">
-        </a>
+        <div class="flex-center" id="startpage-arrow-box">
+            <a href="#organisation-container">
+                <img class="up-and-down" src="{$APP_URL}/assets/images/svg/downarrow.svg" alt="down-arrow">
+            </a>
+        </div>
     </div>
-    
 </main>

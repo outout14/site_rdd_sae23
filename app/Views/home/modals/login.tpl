@@ -19,18 +19,18 @@
                         <div class="row flex-center mb-5 gap-3" id="error-container">
                             <div class="col-12 flex-center">
                                 <div class="avatar-sm border-white mb-4 mb-lg-0">
-                                    <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img" id="error-img">
+                                    <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img" id="login_error_img">
                                 </div>
                             </div>
 
                             <div class="col-12 flex-center flex-column">
-                                <p class="text-information fw-bold mb-3" id="error-title"></p>
-                                <p class="text-complementary text-justify" id="error-text"></p>
+                                <p class="text-information fw-bold mb-3" id="login_error_title"></p>
+                                <p class="text-complementary text-justify" id="login_error_text"></p>
                             </div>
 
                             <script>
-                                const error_title = new Typewriter('#error-title', {});
-                                error_title
+                                const login_error_title = new Typewriter('#error-title', {});
+                                login_error_title
                                     .typeString('Content de vous revoir!')
                                     .start()
                             </script>
@@ -57,7 +57,7 @@
     
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 my-3">
-                          <button class="button rounded-3 bg-blue text-white fw-bold py-2 px-3">Se connecter</button>
+                            <button class="button rounded-3 bg-blue text-white fw-bold py-2 px-3">Se connecter</button>
                         </div>
     
                         <!-- Renvoi vers inscription -->
@@ -79,26 +79,25 @@
                             <button class="btn btn-close" onclick="closeModal('connection-modal')"></button>
                         </div>
 
-                        <!-- Informations / Erreurs  -->
-                        <div class="row flex-center mt-3 mb-5 gap-3">
-                            <div class="col-12 col-lg-3 flex-center my-2 my-lg-0">
-                                <div class="avatar-sm">
-                                    <img src="{$APP_URL}/assets/images/creators/creator_info.png" alt="creator_info" class="avatar-img">
+                        <!-- Informations / Erreurs   -->
+                        <div class="row flex-center mb-5 gap-3" id="error-container">
+                            <div class="col-12 flex-center">
+                                <div class="avatar-sm border-white mb-4 mb-lg-0">
+                                    <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img" id="forgot_password_error_img">
                                 </div>
                             </div>
-                          <!-- MESSAGE D'ERREUR A CHANGER -->
-                          <div class="col-12 text-center px-0 px-lg-5 d-flex justify-content-center align-items-center flex-column" id="forgot-password-error-container">
-                            <p class="fw-bolder general-info-text my-2" id="forgot-password-typeit"></p>
-                            <p class="fw-bolder general-info-text my-2 text-blue" id="forgot-password-error-typeit"></p>
-                            <p class="fw-bolder form-text" id="forgot-password-error-text"></p>
 
-                          </div>
-                            <div class="col-12 col-lg-6">
-                                <p class="px-3 px-lg-0 text-justify">
-                                    Si un compte est associé à cette adresse mail, vous allez recevoir un mail de recuperation afin de
-                                    réinitialiser votre mot de passe.
-                                </p>
+                            <div class="col-12 flex-center flex-column">
+                                <p class="text-information fw-bold mb-3" id="forgot_password_error_title"></p>
+                                <p class="text-complementary text-justify" id="forgot_password_error_text"></p>
                             </div>
+
+                            <script>
+                                const forgot_password_error_title = new Typewriter('#forgot_password_error_title', {});
+                                forgot_password_error_title
+                                    .typeString('Content de vous revoir!')
+                                    .start()
+                            </script>
                         </div>
 
                         <!-- Login -->
@@ -110,13 +109,12 @@
     
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 mt-3">
-                          <button class="button rounded-3 bg-blue text-white fw-bold py-2 px-3">Envoyer</button>
+                            <button class="button rounded-3 bg-blue text-white fw-bold py-2 px-3" onclick="showError('forgot_password','erreur')">Envoyer</button>
                         </div>
 
                         <div class="row text-center my-5">
                             <p class="form-text text-decoration-underline hover-pointer" onclick="connectionScroll('up')">Revenir en arrière</p>
                         </div>
-
                     </form>
                 </div> 
             </div>

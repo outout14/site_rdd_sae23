@@ -379,37 +379,18 @@ if(notification != null) {
 }
 
 // Prends un array d'identifiants en parametres, 0 - error container, 1 - error img, 2 - error title ( objet typewriter ), 3 - error text
-function showError(elements, error) {
-    console.log(elements)
+function showError(element, error) {
 
-    let container = document.getElementById(elements[0]);
-    let image = document.getElementById(elements[1]);
-    let text = document.getElementById(elements[3]);
-
-    // if(type === "missing_input") {
-    //     text.innerHTML = "Vous avez oublié de remplir un champ du formulaire.";
-    // } else if(type === "same_password") {
-    //     text.innerHTML = "Les deux mots de passes ne sont pas identiques. Reessayez.";
-    // } else if(type === "short_password") {
-    //     text.innerHTML = "Le mot de passe est trop court. Choisissez un mot de passe entre 8 et 20 caractères.";
-    // } else if(type === "long_password") {
-    //     text.innerHTML = "Les deux mots de passes ne sont pas identiques. Choisissez un mot de passe entre 8 et 20 caractères.";
-    // } else if(type === "bad_password") {
-    //     text.innerHTML = "Le mot de passe n'est pas assez robuste. Choisissez un mot de passe plus compliqué ( lettres miniscules et majuscules, chiffres, caractères spéciaux ).";
-    // } else if(type === "wrong_login") {
-    //     text.innerHTML = "Cet adresse n'est associée à aucun compte.";
-    // } else if(type === "wrong_password") {
-    //     text.innerHTML = "Le mot de passe que vous avez entré ne correspond pas à ce compte. Reessayez.";
-    // } else {
-    //     text.innerHTML = "Une erreur est survenue. Reessayez plus tard.";
-    // }
+    let container = document.getElementById(errorElementId + "-container");
+    let image = document.getElementById(errorElementId + "-image");
+    let text = document.getElementById(errorElementId + "-text");
 
     text.innerHTML = error
     
     image.src = `${$APP_URL}/assets/images/creators/creator_error.png`;
-    elements[2]
-        .deleteAll(1)
-        .typeString('Oops! Erreur!')
-        .start()
+    // elements[2]
+    //     .deleteAll(1)
+    //     .typeString('Oops! Erreur!')
+    //     .start()
     container.classList.toggle("tada");
 }
