@@ -1,0 +1,22 @@
+{ 
+    "orange": {
+        "name": "orange",
+        "link": "https://orange.fr"
+    },
+    "generationrt": {
+        "name": "generationrt",
+        "link": "https://orange.fr"
+    },
+    "iutsaintmalo": {
+        "name": "iutsaintmalo",
+        "link": "https://iut-stmalo.univ-rennes.fr"
+    },
+    "univrennes1": {
+        "name": "univrennes1",
+        "link": "https://www.univ-rennes.fr"
+    },
+    "comptoir": {
+        "name": "comptoir",
+        "link": "https://www.lecomptoirvinsbieres.fr"
+    }
+}

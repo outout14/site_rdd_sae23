@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{include file="./frame/head.tpl"}
+{include file="./common/head.tpl"}
 
 <body>
 
     <!-- Modal connexion -->
-    {include file="./forms/signin.tpl"}
+    {include file="./modals/login.tpl"}
 
     <!-- Navbar -->
-    {include file="./frame/navbar.tpl"}
+    {include file="./common/navbar.tpl"}
 
     <!-- Page d'accueil -->
     {include file="./frame/home.tpl"}
 
-    <!-- Questions -->
-    {include file="./frame/questions.tpl"}
+    <!-- Organisation -->
+    {include file="./frame/organisation.tpl"}
 
     <!-- Organisateurs -->
     {include file="./frame/creators.tpl"}
+
+    <!-- Questions -->
+    {include file="./frame/questions.tpl"}
+
+    <!-- Notifications -->
+    {include file="../utils/notifications.tpl"}
 
     <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
 </body>
