@@ -134,107 +134,125 @@ if(document.getElementById("inscription-container") != null){
     const inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
 
     function firstContinue() {
-        let div_email = document.getElementById("change-help-email");
-        let div_selectPromotion = document.getElementById("change-select-promotion");
-        let div_selectOldPromotion = document.getElementById("change-select-oldpromotion");
-        let div_inputEntreprise = document.getElementById("change-input-entreprise");
-        let div_checkFamily = document.getElementById("change-check-family");
-        let div_checkMap = document.getElementById("change-check-map");
-        
-        switch (statusSelect.value) {
-            case "student":            
-                div_selectPromotion.style.display = "block";
-                div_inputEntreprise.style.display = "block";
+        let input_status = document.getElementById("input-status");
+
+        let help_email = document.getElementById("help-email")
+
+        let container_promotion = document.getElementById("container-promotion")
+        let input_promotion = document.getElementById("input-promotion")
+
+        let container_oldpromotion = document.getElementById("container-oldpromotion")
+        let input_oldpromotion = document.getElementById("input-oldpromotion")
+
+        let container_company = document.getElementById("container-company")
+        let input_company = document.getElementById("input-company")
+
+        let container_map = document.getElementById("container-map")
+        let input_checkmap = document.getElementById("input-checkmap")
+        let input_map = document.getElementById("input-map")
+
+        let container_family = document.getElementById("container-family")
+        let input_checkfamily = document.getElementById("input-checkfamily")
+        let input_countfamily = document.getElementById("input-countfamily")
+
+        switch (input_status.value) {
+            case "student":
+                help_email.innerHTML = "Merci d'utiliser votre mail universitaire (@etudiant.univ-rennes1.fr)";
+                
+                container_promotion.classList.toggle("d-none");
+                input_promotion.disabled = false;
+
+                container_company.classList.toggle("d-none");
+                input_promotion.addEventListener("change", () => {
+                    if (input_promotion.value == "2AFI") {
+                        input_company.disabled = true;
+                    } else {
+                        input_company.disabled = false;
+                    }
+                })
+
+                container_map.classList.toggle("d-none");
+                input_checkmap.addEventListener("change", () => {
+                    if (input_checkmap.checked) {
+                        input_map.disabled = false;
+                    } else {
+                        input_map.disabled = true;
+                    }
+                })
+
+                container_family.classList.toggle("d-none");
+                input_checkfamily.addEventListener("change", () => {
+                    if (input_checkfamily.checked) {
+                        input_countfamily.disabled = false;
+                    } else {
+                        input_countfamily.disabled = true;
+                    }
+                })
+
+                if(phone){
+                    let possibleOptions = ["BUT R&T 2 FI", "BUT R&T 2 FA", "LP CART", "LP RIMS", "LP TSSR"];
+                    let options = input_promotion.children;
+            
+                    for(i = 0; i < options.length; i++) {
+                        options[i].text = possibleOptions[i];
+                    }
+                }
                 break;
             case "teacher":
-                div_email.innerText = "Merci d'utiliser votre mail universitaire ( @univ-rennes1.fr )";
-                div_checkFamily.style.display = "none";
-                div_checkMap.style.display = "none";
+                help_email.innerText = "Merci d'utiliser votre mail universitaire ( @univ-rennes1.fr )";
                 break;
             case "oldstudent":
-                div_email.innerText = "Votre email sera utilisé afin de valider votre inscription";
-                div_selectOldPromotion.style.display = "block";
-                div_inputEntreprise.style.display = "block";
-                div_checkFamily.style.display = "none";
+                help_email.innerText = "Votre email sera utilisé pour valider l'inscription";
+                
+                container_oldpromotion.classList.toggle("d-none");
+                input_oldpromotion.disabled = false;
+
+                container_company.classList.toggle("d-none");
+                input_company.disabled = false;
+
+                container_map.classList.toggle("d-none");
+                input_checkmap.addEventListener("change", () => {
+                    if (input_checkmap.checked) {
+                        input_map.disabled = false;
+                    } else {
+                        input_map.disabled = true;
+                    }
+                })
                 break;
             case "other":
-                div_email.innerText = "Votre email sera utilisé afin de valider votre inscription";
-                div_inputEntreprise.style.display = "block";
-                div_checkFamily.style.display = "none";
+                help_email.innerText = "Votre email sera utilisé pour valider l'inscription";
+                
+                container_company.classList.toggle("d-none");
+                input_company.disabled = false;
+
+                container_map.classList.toggle("d-none");
+                input_checkmap.addEventListener("change", () => {
+                    if (input_checkmap.checked) {
+                        input_map.disabled = false;
+                    } else {
+                        input_map.disabled = true;
+                    }
+                })
                 break;
             }
 
+            
         // Permet de scroll
         inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight)
     }
     
     function secondContinue() {
         inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight);
-        
-        // Si l'eleve n'est pas en alternance, on ne lui propose pas de choisir la ville    
-        if(document.getElementById("input-promotion").value == "2AFI") {
-            document.getElementById("change-check-map").style.display = "none";
+
+        if(input_status.value == "student" && document.getElementById("input-promotion").value == "2AFI") {
+            document.getElementById("container-map").classList.toggle("d-none")
+        }
+        if (phone) {
+            document.getElementById("label-ListVisibilityCheck").innerHTML = "Apparaître dans la listes des participants";
+            document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
         }
     }
-
-
-    // Traitement du premier select ( etudiant / prof / ancien eleve / autre )
-
-    // Fonction du premier bouton "Continuer" dans le formulaire, permet de adapter le formulaire selon le statut choisi ( etudiant, prof, etc.. )
-    const statusSelect = document.getElementById("inscription-select");
-
-    // Verification si le checkbox parents est activé. Si oui, le select du nombre de parents s'active
-    // et le texte d'aide apparait.
-    const parentsCheck = document.getElementById("parentsCheck")
-    const parentsSelectCounts = document.getElementById("parentsSelect")
-
-    parentsCheck.addEventListener("change", () => {
-        if (parentsCheck.checked) {
-            parentsSelectCounts.disabled = false;
-        } else {
-            parentsSelectCounts.disabled = true;
-        }
-    })
-
-    // Verification si le checkbox carte est activé. Si oui, le input de ville s'active
-    const MapVisibilityCheck = document.getElementById("MapVisibilityCheck")
-    const MapTownInput = document.getElementById("input-city")
-
-    MapVisibilityCheck.addEventListener("change", () => {
-        if (MapVisibilityCheck.checked) {
-            MapTownInput.disabled = false;
-        } else {
-            MapTownInput.disabled = true;
-        }
-    })
-
-    // Vérificiation si l'élève est en alternance ou pas, sinon le input 'entreprise' est desactivé
-    const promotionSelect = document.getElementById("input-promotion")
-    const inputEntreprise = document.getElementById("input-entreprise")
-
-    promotionSelect.addEventListener("change", () => {
-        if (promotionSelect.value == "2AFI") {
-            inputEntreprise.disabled = true;
-        } else {
-            inputEntreprise.disabled = false;
-        }
-    })
-
-    // Code pour téléphone -> Changement des options du select de promotion
-    // On passe de Licence Professionnelle à LP pour gagner de l'espace
-    // Et changements des labels des checks
-
-    if (phone) {
-        let possibleOptions = ["BUT R&T 2 FI", "BUT R&T 2 FA", "LP CART", "LP RIMS", "LP TSSR"];
-        let options = promotionSelect.children;
-
-        for(i = 0; i < options.length; i++) {
-            options[i].text = possibleOptions[i];
-        }
-
-        document.getElementById("label-ListVisibilityCheck").innerHTML = "Apparaître dans la listes des participants";
-        document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
-    }
+    
 }
 /////////////////////////////////// HEADER //////////////////////////////
 
