@@ -1,115 +1,63 @@
 <section class="window-container background-wave-blue" id="annuaire-container">
 
-    <div class="window mt-5 mb-3 w-75 h-auto" id="annuaire-search-window">
-        <form action="#" method="POST" class="container-fluid">
-
-            <div class="row gap-2">
-
-                <div class="col-lg-4 my-2">
-                    <input class="form-control px-3 py-2 rounded-pill custom-input" type="text" placeholder="Prénom">
-                </div>
-                
-                <div class="col-lg-2 my-2">
-                    <select class="form-select px-3 py-2 rounded-pill custom-input">
-                        <option value="student">Etudiant</option>
-                        <option value="teacher">Professeur</option>
-                        <option value="oldstudent">Ancien élève</option>
-                        <option value="other">Autre</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-2 my-2">
-                    <select class="form-select px-3 py-2 rounded-pill custom-input">
-                        <option value="student">2AFI</option>
-                        <option value="teacher">2AFA</option>
-                        <option value="oldstudent">LP RIMS</option>
-                        <option value="other">LP CART</option>
-                        <option value="other">LP TSSR</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-2 my-2">
-                    <input class="form-control px-3 py-2 rounded-pill custom-input" type="text" placeholder="Entreprise">
-                </div>
-
-            </div>
-                
-        </form>
-    </div>
-
-    <div class="window d-flex align-items-center flex-column">
+    <div class="window d-flex align-items-center flex-column px-1 px-lg-5 pt-5 pt-lg-0">
         <!-- Header, à ne pas afficher sur la version mobile! -->
-        <div class="my-3 ps-lg-5 ps-3 dot-header">
+        <div class="my-3 ps-2 dot-header">
             <span class="dot bg-danger"></span>
             <span class="dot bg-warning"></span>
             <span class="dot bg-success"></span>
             <h4 class="text-information fw-bold ms-3">{$currentPage}</h4>
         </div>
 
-        <table class="table" id="annuaire-table-head">
-            <thead>
-                <tr>
-                    <th class="text-information ps-2 ps-lg-4 py-2">Nom</th>
-                    <th class="text-information ps-2 ps-lg-4 py-2">Prenom</th>
-                    <th class="text-information ps-2 ps-lg-4 py-2">Statut</th>
-                    <th class="text-information ps-2 ps-lg-4 py-2">Promotion</th>
-                    <th class="text-information ps-2 ps-lg-4 py-2">Entreprise</th>
-                </tr>
-            </thead>
-        </table>
+        <form action="#" method="POST" class="w-100 h-auto mb-3 mt-5 mt-lg-2 px-3">
+            <input type="hidden" name="actionType" value="annuaireResearch">
+    
+            <div class="container-fluid">
+                <div class="row gap-1">
+                    <div class="col-12 col-lg-2 my-1">
+                        <select class="form-select px-3 py-2" name="status">
+                            <option value="student">Etudiant</option>
+                            <option value="teacher">Professeur</option>
+                            <option value="oldstudent">Ancien élève</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 col-lg-5 my-1">
+                        <input class="form-control px-3 py-2" type="text" placeholder="Nom ou prénom">
+                    </div>
+                    
+                    <div class="col-12 col-lg d-flex gap-1 justify-content-between my-1">
+                        <select class="form-select px-3 py-2" name="promotion">
+                            <option value="2AFI">2AFI</option>
+                            <option value="2AFA">2AFA</option>
+                            <option value="RIMS">LP RIMS</option>
+                            <option value="CART">LP CART</option>
+                            <option value="TSSR">LP TSSR</option>
+                        </select>
 
-        <div class="mb-5" id="annuaire-table-wrapper">
+                        <input class="form-control px-3 py-2" type="text" placeholder="Entreprise">
+                    </div>
+    
+                    <!-- <div class="col-12 col-lg-2 flex-center my-1">
+                        <input class="button rounded-3 bg-blue text-white fw-bold h-100 w-100 px-3 py-2" type="submit" name="submit" value="Rechercher">
+                    </div> -->
+                </div>
+            </div>
+        </form>
+
+        <div class="mb-0 mb-lg-5" id="annuaire-table-wrapper">
             <table class="table table-striped table-hover" id="annuaire-table">
+                <thead>
+                    <tr>
+                        <th class="text-information ps-2 ps-lg-4 py-2">Nom</th>
+                        <th class="text-information ps-2 ps-lg-4 py-2">Prenom</th>
+                        <th class="text-information ps-2 ps-lg-4 py-2">Statut</th>
+                        <th class="text-information ps-2 ps-lg-4 py-2">Promotion</th>
+                        <th class="text-information ps-2 ps-lg-4 py-2">Entreprise</th>
+                    </tr>
+                </thead>
                 <tbody class="overflow-scroll" id="annuaire-table-body">
-                    <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Teffene</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Alexis</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Etudiant</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">2AFA</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Orange</td>
-                    </tr>
-                    <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Teffene</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Alexis</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Etudiant</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">2AFA</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Orange</td>
-                    </tr>
-                    <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Teffene</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Alexis</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Etudiant</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">2AFA</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Orange</td>
-                    </tr>
-                    <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Teffene</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Alexis</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Etudiant</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">2AFA</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Orange</td>
-                    </tr>
-                    <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Teffene</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Alexis</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Etudiant</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">2AFA</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Orange</td>
-                    </tr>
-                    <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Teffene</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Alexis</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Etudiant</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">2AFA</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Orange</td>
-                    </tr>
-                    <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Teffene</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Alexis</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Etudiant</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">2AFA</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">Orange</td>
-                    </tr>
                     <tr>
                         <td class="ps-0 ps-lg-2 py-3 text-complementary">Teffene</td>
                         <td class="ps-0 ps-lg-2 py-3 text-complementary">Alexis</td>

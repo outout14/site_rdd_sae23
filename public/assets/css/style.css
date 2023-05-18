@@ -925,17 +925,15 @@ header {
     height: fit-content;
 }
 
-#annuaire-table-head {
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    width: 90%;
+#annuaire-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #bec4d3;
 }
 
 #annuaire-table-wrapper {
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
     max-height: 100%;
-    width: 90%;
+    width: 100%;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
