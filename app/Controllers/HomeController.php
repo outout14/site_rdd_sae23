@@ -127,7 +127,13 @@ class HomeController {
   {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
+
+    var_dump($_POST);
     
+    if(isset($_POST["entrer"])){
+      echo($_POST["photo"]);
+      $smarty->assign("photo", $_POST["photo"]);
+    }
     $smarty->display('home/galerie.tpl');
   }
 
