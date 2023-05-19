@@ -1,4 +1,5 @@
 <!-- Connection -->
+
 <section class="modal" id="connection-modal">
 
     <div class="modal-background"></div>
@@ -125,3 +126,5 @@
         </div>
     </div>
 </section>
+
+<script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>

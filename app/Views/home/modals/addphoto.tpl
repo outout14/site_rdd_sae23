@@ -14,8 +14,8 @@
             </div>
 
             <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
-                <form action="ERROR" method="POST" class="d-flex justify-content-center align-items-center flex-column">
-                    <input type="hidden" name="actionType" value="ERROR">
+                <form action="" method="POST" class="d-flex justify-content-center align-items-center flex-column">
+                    <input type="hidden" name="actionType" value="addphotos">
                     <label for="input-file" class="d-flex justify-content-center align-items-center flex-column p-5 mb-3 mt-4 hover-pointer" id="input-file-label">
                         <i class="bi bi-box-arrow-down fa-6x text-secondary mb-4 up-and-down-low"></i>
                         <p class="inscription-info-text mx-3 text-center">Choisissez un fichier à déposer</p>
@@ -24,7 +24,7 @@
                     <input type="file" class="button" name="photo" id="input-file">
 
                     <p class="inscription-info-text my-2 text-center" id="gallery-input-info-text">Chaque photo proposée est soumise à une vérification par les administrateurs avant d'être visible.</p>
-
+                    <input type="submit" value="entrer" name="entrer">
                 </form>
             </div>
 

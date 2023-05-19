@@ -75,12 +75,19 @@ function getOrganisation() {
   return getData(__DIR__ . '/../Data/organisation.json');
 }
 
+function getUsers($users): void
+{
+  header('Content-Type: application/json');
+  echo json_encode($users);
+  exit();
+}
+
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
     'register' => 'Inscription',
     'gallery' => 'Galerie',
-    'livre-or' => 'Livre d\'or',
+    'goldbook' => 'Livre d\'or',
     'annuaire' => 'Annuaire',
   ];
   /**
@@ -115,12 +122,19 @@ class HomeController {
     $smarty->display('home/inscription.tpl');
   }
 
+  public function golddbook(): void
+  {
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
+
+    $smarty->display('home/inscription.tpl');
+  }
 
   public function gallery(): void
   {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
-
+    
     $smarty->display('home/galerie.tpl');
   }
 
