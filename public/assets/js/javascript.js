@@ -383,6 +383,22 @@ annuaire_promotion.addEventListener("change", () => {
 
 annuaire_status.addEventListener("change", () => {
     switch (annuaire_status.value) {
+        case "":
+            annuaire_promotion.disabled = false;
+            annuaire_company.disabled = false;
+
+            for(var i=0;i<=annuaire_promotion.options.length; i++) {
+                annuaire_promotion.remove(0)
+            }
+            ["2AFA","2AFI","LP RIMS","LP CART","LP TSSR"].forEach( option => {
+                annuaire_promotion.add(new Option(option,option),undefined)
+            })
+            for(var i = 1990; i<=2022; i++) {
+                annuaire_promotion.add(new Option(`Promotion ${i}`,i),undefined)
+            }
+            annuaire_promotion.add(new Option("Toutes promotions","", true, true),0)
+            annuaire_promotion.options[0].disabled = true;
+            break;
         case "student":
             annuaire_promotion.disabled = false;
             annuaire_company.disabled = false;
@@ -390,15 +406,14 @@ annuaire_status.addEventListener("change", () => {
             ["2AFA","2AFI","LP RIMS","LP CART","LP TSSR"].forEach( option => {
                 annuaire_promotion.add(new Option(option,option),undefined)
             })
-            for(var i = 1990;i<=2022; i++) {
+            for(var i = 1990;i<=2023; i++) {
                 annuaire_promotion.remove(0)
             }
+            annuaire_promotion.add(new Option("Toutes promotions","", true, true),0)
+            annuaire_promotion.options[0].disabled = true;
             break;
         case "teacher":
-            annuaire_promotion.style.display = "none";
             annuaire_promotion.disabled = true;
-            
-            annuaire_company.style.display = "none";
             annuaire_company.disabled = true;
             break;
         case "oldstudent":
@@ -408,9 +423,11 @@ annuaire_status.addEventListener("change", () => {
             for(var i = 1990; i<=2022; i++) {
                 annuaire_promotion.add(new Option(`Promotion ${i}`,i),undefined)
             }
-            for(var i = 0;i<5; i++) {
+            for(var i = 0;i<6; i++) {
                 annuaire_promotion.remove(0)
             }
+            annuaire_promotion.add(new Option("Toutes promotions","", true, true),0)
+            annuaire_promotion.options[0].disabled = true;
             break;
         case "other":
             annuaire_company.disabled = false;
