@@ -13,7 +13,7 @@
         <!-- Content -->
         <div class="container-fluid h-100 overflow-scroll" id="inscription-scrollable">
             <!-- !!!!!!!!!!!!!!!!!! DEBUT FORMULAIRE !!!!!!!!!!!!!!!!!!!!!! -->
-            <form action="{$APP_URL}/auth/register" method="POST" class="h-100">
+            <form action="{$APP_URL}/auth/register" method="POST" class="h-100" id="register_form">
             <input type="hidden" name="actionType" value="register">
 
                 <!-- Etudiant / Professeur / Ancien eleve / Autre -->
@@ -301,7 +301,7 @@
                         <div class="row mt-3">
                             <div class="col-12 position-relative">
                                 <img src="{$APP_URL}/assets/images/svg/password-hidden.svg" class="password-input-icon">
-                                <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Mot de passe" name="password" id="input-password">
+                                <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Mot de passe" name="password" id="input-password-register">
                             </div>
                             <div class="col-12">
                                 <div class="form-text text-justify px-2">

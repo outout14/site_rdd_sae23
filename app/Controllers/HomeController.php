@@ -98,8 +98,6 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Accueil');
 
-    $smarty->assign('notification',"Vous avez un nouveau message!");
-
     $creators = getCreators();
     $smarty->assign('creators',$creators);
 
@@ -120,6 +118,18 @@ class HomeController {
     Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
 
     $smarty->display('home/inscription.tpl');
+  }
+
+  public function resetPassword($token=""): void
+  {
+    if($token==""){
+      header("Location: " . APP_URL);
+      exit();
+    }
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Mot de passe oublié');
+    $smarty->assign('token', $token);
+    $smarty->display('home/resetPassword.tpl');
   }
 
   public function golddbook(): void

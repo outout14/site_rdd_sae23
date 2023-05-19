@@ -358,6 +358,7 @@ function showError(element, error, typeWriterObject) {
     let text = document.getElementById(element + "_error_text");
 
     container.classList.toggle("tada");
+
     text.innerHTML = error;
     image.src = `${$APP_URL}/assets/images/creators/creator_error.png`;
     
@@ -435,3 +436,52 @@ annuaire_status.addEventListener("change", () => {
             break;
     }
 })
+
+/*
+  NOTIFICATIONS
+  Dynamically create a notification and append it to the DOM
+ */
+function spawnNotification(title, content) {
+  var notificationWrapper = document.createElement('div');
+  notificationWrapper.className = 'py-2 px-2 px-lg-4 gap-lg-3';
+  notificationWrapper.id = 'notification-wrapper';
+
+  var closeButtonDiv = document.createElement('div');
+  closeButtonDiv.className = 'fixed-top d-flex justify-content-end mt-2 mx-3';
+
+  var closeButton = document.createElement('i');
+  closeButton.className = 'bi bi-x-lg hover-pointer';
+  closeButton.id = 'closeNotificationButton';
+
+  closeButton.addEventListener('click', function() {
+    notificationWrapper.remove();
+  });
+
+  closeButtonDiv.appendChild(closeButton);
+  notificationWrapper.appendChild(closeButtonDiv);
+
+  var avatarDiv = document.createElement('div');
+  avatarDiv.className = 'avatar-xs border-lightgrey';
+
+  var avatarImg = document.createElement('img');
+  avatarImg.src = '../assets/images/creators/creator_pc.png';
+  avatarImg.alt = 'creator_message';
+  avatarImg.className = 'avatar-img';
+
+  avatarDiv.appendChild(avatarImg);
+  notificationWrapper.appendChild(avatarDiv);
+
+  var contentDiv = document.createElement('div');
+  contentDiv.className = 'text-complementary';
+  contentDiv.textContent = content;
+
+  notificationWrapper.appendChild(contentDiv);
+
+  // Apply additional styling to make the notification visible
+  notificationWrapper.style.transform = 'translateY(0)';
+  notificationWrapper.style.opacity = '1';
+
+  document.body.appendChild(notificationWrapper);
+}
+
+spawnNotification('Notification Title', 'This is the notification content.');
