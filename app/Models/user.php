@@ -142,6 +142,7 @@ class User {
   public function verifyPassword($password): bool {
     /* VERIFY PASSWORD */
     return password_verify($password, $this->password);
+    exit();
   }
 
   public static function getAll(): array {
@@ -196,15 +197,15 @@ class User {
   public function sendResetPasswordEmail(){
     global $mailManager;
     $resetToken = resetToken::generateToken($this->id);
-    $encryptedEmailURL = "http://" . $_SERVER['SERVER_NAME'] . APP_URL . "/auth/forgotPassword/" . $resetToken;
+    $encryptedEmailURL = "http://" . $_SERVER['SERVER_NAME'] . APP_URL . "/home/resetPassword/" . $resetToken;
     $mailManager->sendMail($this->email, "Réinitialisation de votre mot de passe", "resetPassword.tpl", ["user" => $this, "encryptedEmailURL" => $encryptedEmailURL]);
   }
 
   public static function register($lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role): string | User {
     /* CHECK EMAIL & STATUS */
-    if($status == "student" || $status == "teacher"){
+    if($status == "student" or $status == "teacher"){
       $validEmails = [
-        "student" => "@gnous.eu",
+        "student" => "@gnous.eu", // TODO: Change to @univ-rennes1
         "teacher" => "@univ-rennes1.fr",
       ];
       if(!str_ends_with($email, $validEmails["student"]) && !str_ends_with($email, $validEmails["teacher"])){

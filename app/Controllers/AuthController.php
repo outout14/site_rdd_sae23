@@ -30,7 +30,7 @@ class AuthController
   public function login(): void
   {
     shouldNotBeLoggedIn();
-      if (isset($_POST)) {
+    if (isset($_POST)) {
       if (isset($_POST["actionType"]) && $_POST["actionType"] == "login") {
         if (isset($_POST["email"]) && isset($_POST["password"])) {
           // Validate the email
@@ -38,7 +38,6 @@ class AuthController
           $password = htmlentities($_POST["password"]);
 
           $user = new User();
-
           if ($user->get($email)) {
             if ($user->verifyPassword($password)) {
               if ($user->isConfirmed()) {
@@ -50,7 +49,7 @@ class AuthController
                 displayJsonError('Votre compte n\'a pas encore été confirmé. Veuillez vérifier vos emails.');
               }
             } else {
-              displayJsonError('Identifiants incorrects');
+              displayJsonError('Mot de passe incorrect');
             }
           } else {
             displayJsonError('Identifiants incorrects');
@@ -59,6 +58,8 @@ class AuthController
           displayJsonError('Veuillez remplir tous les champs');
         }
       }
+    } else {
+      displayJsonError('Veuillez remplir tous les champs');
     }
   }
 
@@ -70,7 +71,6 @@ class AuthController
         if ($checkUsr->get($email)) {
           return "L'adresse email est déjà utilisée.";
         } else {
-          $password = password_hash($password, PASSWORD_DEFAULT);
           return User::register($lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, "user"); // No error
         }
       } else {
@@ -89,7 +89,6 @@ class AuthController
     shouldNotBeLoggedIn();
 
     if (isset($_POST["actionType"]) && $_POST["actionType"] == "register") {
-      print_r($_POST);
       if (Utils::CheckForInputs(array("email", "password", "confirmpassword", "firstname", "lastname", "status"))) {
         $firstname = strtolower(htmlspecialchars($_POST["firstname"]));
         $lastname = strtolower(htmlspecialchars($_POST["lastname"]));
@@ -140,7 +139,7 @@ class AuthController
         $user = $this->handleRegistration($lastname, $firstname, $email, $password, $password_confirm, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, false, $status);
         if (gettype($user) == "object") {
           $user->sendConfirmationEmail();
-          header('Location: ' . APP_URL . '/?notification=register_success');
+          displayJsonError("_success");
         } else {
           displayJsonError($user);
         }
@@ -159,83 +158,83 @@ class AuthController
   }
 
   /*
-   * Display the forgot password page.
+   * Handle the forgot password page.
+   * Return a json response.
    */
-  public function forgotPassword($token = "noreset"): void
+  public function forgotPassword(): void
   {
     shouldNotBeLoggedIn();
-    global $smarty;
 
-    if ($token != "noreset") {
+    if (Utils::CheckForInputs(array("token", "password", "password_confirm"))){
       $tokenObj = new resetToken();
-
-      if ($tokenObj->verify($token)) {
-        if (isset($_POST["actionType"]) && $_POST["actionType"] == "resetPassword") {
-          if (isset($_POST["password"]) && isset($_POST["password_confirm"])) {
-            $password = htmlspecialchars($_POST["password"]);
-            $password_confirm = htmlspecialchars($_POST["password_confirm"]);
-            if ($password == $password_confirm) {
-              $user = new User();
-              $user->get($tokenObj->getUserId());
-              $user->updatePassword($password);
-              header('Location: ' . APP_URL . '/auth/login?notification=reset_password_success');
-            } else {
-              $smarty->assign('error', 'Les mots de passe ne correspondent pas.');
-            }
-          } else {
-            $smarty->assign('error', 'Veuillez remplir tous les champs.');
-          }
-        }
-        $smarty->assign('token', $token);
-        $smarty->display('auth/forgotPassword_AFTER_TOKEN.tpl');
-      } else {
-        $smarty->assign('error', 'Lien invalide.');
-        $smarty->display('auth/forgotPassword_BEFORE_TOKEN.tpl');
-      }
-    } else {
-      // If the user has submitted the form
-      if (isset($_POST["actionType"]) && $_POST["actionType"] == "forgotPassword") {
-        if (isset($_POST["email"])) {
-          $email = htmlspecialchars($_POST["email"]);
+      if ($tokenObj->verify($_POST["token"])) {
+        $password = htmlspecialchars($_POST["password"]);
+        $password_confirm = htmlspecialchars($_POST["password_confirm"]);
+        if ($password == $password_confirm) {
           $user = new User();
-          if ($user->get($email)) {
-            // Check if the user has already requested a reset password email
-            $tokenObj = new resetToken();
-            if ($tokenObj->getFromUserID($user->id)) {
-              $tokenObj->delete();
-            }
-
-            $user->sendResetPasswordEmail();
-            displayJsonError("_success"); // No error
-          } else {
-            displayJsonError("Aucun utilisateur n'a été trouvé avec cette adresse email.");
-          }
+          $user->get($tokenObj->getUserId());
+          $user->updatePassword($password);
+          displayJsonError("_success"); // No error
         } else {
-         displayJsonError("Veuillez remplir tous les champs.");
+          displayJsonError("Les mots de passe ne correspondent pas.");
         }
+      } else {
+        displayJsonError("Le token n'est pas valide.");
       }
     }
-    echo json_encode(array("error"=>"Veuillez remplir tous les champs."));
-    exit();
+    else {
+      displayJsonError("Veuillez remplir tous les champs.");
+    }
   }
 
+  /*
+   * Request a reset password email.
+   * Return a json response.
+   */
+  public function askResetPassword(): void{
+    // If the user has submitted the form
+    if (isset($_POST["actionType"]) && $_POST["actionType"] == "forgotPassword") {
+      if (isset($_POST["email"])) {
+        $email = htmlspecialchars($_POST["email"]);
+        $user = new User();
+        if ($user->get($email)) {
+          // Check if the user has already requested a reset password email
+          $tokenObj = new resetToken();
+          if ($tokenObj->getFromUserID($user->id)) {
+            $tokenObj->delete();
+          }
 
+          $user->sendResetPasswordEmail();
+          displayJsonError("_success"); // No error
+        } else {
+          displayJsonError("Aucun utilisateur n'a été trouvé avec cette adresse email.");
+        }
+      } else {
+        displayJsonError("Veuillez remplir tous les champs.");
+      }
+    }
+    displayJsonError("Veuillez remplir tous les champs.");
+  }
 
   /**
    * Link to confirm the email.
    */
-  public function confirmEmail($token): void
+  public function confirmEmail($token=""): void
   {
+    if($token == "") {
+      header('Location: ' . APP_URL . '/?notification=tokenNotFound');
+      exit();
+    }
     global $smarty;
 
-    $email = htmlspecialchars(openssl_decrypt($token, "AES-128-ECB", MAIL_ENCRYPTION_TOKEN));
+    $email = htmlspecialchars(openssl_decrypt(base64_decode($token), "AES-128-ECB", MAIL_ENCRYPTION_TOKEN));
     $user = new User();
     if($user->get($email)) {
       if ($user->isConfirmed()) {
-        header('Location: ' . APP_URL . '/?notification=already_confirmed');
+        header('Location: ' . APP_URL . '/?notification=tokenAlreadyUsed');
       } else {
         $user->confirmEmail();
-        header('Location: ' . APP_URL . '/?notification=confirm_success');
+        header('Location: ' . APP_URL . '/?notification=tokenSuccess');
       }
     } else {
       header('Location: ' . APP_URL . '/?notification=userNotFound');

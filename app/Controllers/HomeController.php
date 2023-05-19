@@ -75,6 +75,13 @@ function getOrganisation() {
   return getData(__DIR__ . '/../Data/organisation.json');
 }
 
+function getUsers($users): void
+{
+  header('Content-Type: application/json');
+  echo json_encode($users);
+  exit();
+}
+
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
@@ -90,8 +97,6 @@ class HomeController {
   {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Accueil');
-
-    $smarty->assign('notification',"Vous avez un nouveau message!");
 
     $creators = getCreators();
     $smarty->assign('creators',$creators);
@@ -113,6 +118,18 @@ class HomeController {
     Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
 
     $smarty->display('home/inscription.tpl');
+  }
+
+  public function resetPassword($token=""): void
+  {
+    if($token==""){
+      header("Location: " . APP_URL);
+      exit();
+    }
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Mot de passe oublié');
+    $smarty->assign('token', $token);
+    $smarty->display('home/resetPassword.tpl');
   }
 
   public function golddbook(): void
@@ -142,44 +159,13 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
-    $smarty->assign('traitement',$_POST);
-    if(isset($_POST["submit"])){
-      $users = User::getAll();
-
-      if($_POST["prenom"]!=""){
-        $prenom = $_POST["prenom"];
-      }
-      if($_POST["statut"]!="Autre"){
-        $statut = $_POST["statut"];
-      }
-      if($_POST["entreprise"]){
-        $entreprise = $_POST["entreprise"];
-      }
-
-      $promo = $_POST["promo"];
-
-      foreach ($users as $user){
-        if(isset($prenom) && $user -> firstname !=$prenom){
-          unset($users[$user -> id]);
-        }
-        if(isset($statut) && $user -> status != $statut){
-          unset($users[$user -> id]);
-        }
-        if(isset($entreprise) && $user -> company != $entreprise){
-          unset($users[$user -> id]);
-        }
-        if(isset($promo) && $user -> promotion != $promo){
-          unset($users[$user -> id]);
-        }
-      }
-
-      $smarty->assign('users', $users);
-    }
-    else{
-      $smarty->assign('users', User::getAll());
-    }
-
     $smarty->display('home/users.tpl');
+  }
+  public function pagenotfound(): void
+  {
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, '404 not found');
 
+    $smarty->display('home/pagenotfound.tpl');
   }
 }
