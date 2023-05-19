@@ -145,4 +145,11 @@ class HomeController {
 
     $smarty->display('home/users.tpl');
   }
+  public function pagenotfound(): void
+  {
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, '404 not found');
+
+    $smarty->display('home/pagenotfound.tpl');
+  }
 }
