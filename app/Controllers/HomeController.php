@@ -127,7 +127,7 @@ class HomeController {
   {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
-
+    
     $smarty->display('home/galerie.tpl');
   }
 

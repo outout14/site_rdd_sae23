@@ -69,8 +69,8 @@
                     {/if}
                     {foreach $users as $user}
                     <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->firstname}</td>
                         <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->lastname}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->firstname}</td>
                         <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->status}</td>
                         <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->promotion}</td>
                         <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->company}</td>
