@@ -370,7 +370,6 @@ function showError(element, error, typeWriterObject) {
 
 if(document.getElementById("annuaire-form") != null) {
     const annuaire_status = document.getElementById("annuaire-status")
-    const annuaire_name = document.getElementById("annuaire-name")
     const annuaire_promotion = document.getElementById("annuaire-promotion")
     const annuaire_company = document.getElementById("annuaire-company")
     
