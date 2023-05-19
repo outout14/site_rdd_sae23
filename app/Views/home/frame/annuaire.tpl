@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <div class="row gap-1">
                     <div class="col-12 col-lg-2 my-1">
-                        <select class="form-select px-3 py-2" name="status">
+                        <select class="form-select px-3 py-2" name="status" id="annuaire-status">
                             <option value="student">Etudiant</option>
                             <option value="teacher">Professeur</option>
                             <option value="oldstudent">Ancien élève</option>
@@ -24,19 +24,19 @@
                     </div>
     
                     <div class="col-12 col-lg-5 my-1">
-                        <input class="form-control px-3 py-2" type="text" placeholder="Nom ou prénom">
+                        <input class="form-control px-3 py-2" type="text" placeholder="Nom ou prénom" id="annuaire-name" name="name">
                     </div>
                     
                     <div class="col-12 col-lg d-flex gap-1 justify-content-between my-1">
-                        <select class="form-select px-3 py-2" name="promotion">
-                            <option value="2AFI">2AFI</option>
+                        <select class="form-select px-3 py-2" id="annuaire-promotion" name="promotion">
                             <option value="2AFA">2AFA</option>
+                            <option value="2AFI">2AFI</option>
                             <option value="RIMS">LP RIMS</option>
                             <option value="CART">LP CART</option>
                             <option value="TSSR">LP TSSR</option>
                         </select>
 
-                        <input class="form-control px-3 py-2" type="text" placeholder="Entreprise">
+                        <input class="form-control px-3 py-2" type="text" placeholder="Entreprise" id="annuaire-company" name="company">
                     </div>
     
                     <!-- <div class="col-12 col-lg-2 flex-center my-1">

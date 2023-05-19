@@ -366,3 +366,55 @@ function showError(element, error, typeWriterObject) {
         .typeString('Oops! Erreur!')
         .start()
 }
+
+
+const annuaire_status = document.getElementById("annuaire-status")
+const annuaire_name = document.getElementById("annuaire-name")
+const annuaire_promotion = document.getElementById("annuaire-promotion")
+const annuaire_company = document.getElementById("annuaire-company")
+
+annuaire_promotion.addEventListener("change", () => {
+    if(annuaire_promotion.value == "2AFI") {
+        annuaire_company.disabled = true;
+    } else {
+        annuaire_company.disabled = false;
+    }
+})
+
+annuaire_status.addEventListener("change", () => {
+    switch (annuaire_status.value) {
+        case "student":
+            annuaire_promotion.disabled = false;
+            annuaire_company.disabled = false;
+
+            ["2AFA","2AFI","LP RIMS","LP CART","LP TSSR"].forEach( option => {
+                annuaire_promotion.add(new Option(option,option),undefined)
+            })
+            for(var i = 1990;i<=2022; i++) {
+                annuaire_promotion.remove(0)
+            }
+            break;
+        case "teacher":
+            annuaire_promotion.style.display = "none";
+            annuaire_promotion.disabled = true;
+            
+            annuaire_company.style.display = "none";
+            annuaire_company.disabled = true;
+            break;
+        case "oldstudent":
+            annuaire_promotion.disabled = false;
+            annuaire_company.disabled = false;
+
+            for(var i = 1990; i<=2022; i++) {
+                annuaire_promotion.add(new Option(`Promotion ${i}`,i),undefined)
+            }
+            for(var i = 0;i<5; i++) {
+                annuaire_promotion.remove(0)
+            }
+            break;
+        case "other":
+            annuaire_company.disabled = false;
+            annuaire_promotion.disabled = true;
+            break;
+    }
+})
