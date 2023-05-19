@@ -159,6 +159,8 @@ class User {
     return $users;
   }
 
+  
+
   function assignSQLdata($response){
     $this->id = $response['id'];
     $this->lastname = $response['lastname'];

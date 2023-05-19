@@ -11,5 +11,18 @@ $mysqlConnection = $mysqlConnector->connect();
 
 class goldbook {
     public int $id;
-    public string $f;
+    public string $title;
+    public string $content;
+    public string $author;
+    public string $date;
+
+
+    public function __construct($id=0, $title = "Titre", $content = "Contenu", $author="auteur", $date=""){
+        $this->id = $id;
+        $this->title = $title;
+        $this->content = $content;
+        $this->author = $author;
+        $this->date = $date;
+    }
+
 }

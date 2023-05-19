@@ -136,6 +136,44 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
+    $smarty->assign('traitement',$_POST);
+    if(isset($_POST["submit"])){
+      $users = User::getAll();
+
+      if($_POST["prenom"]!=""){
+        $prenom = $_POST["prenom"];
+      }
+      if($_POST["statut"]!="Autre"){
+        $statut = $_POST["statut"];
+      }
+      if($_POST["entreprise"]){
+        $entreprise = $_POST["entreprise"];
+      }
+
+      $promo = $_POST["promo"];
+
+      foreach ($users as $user){
+        if(isset($prenom) && $user -> firstname !=$prenom){
+          unset($users[$user -> id]);
+        }
+        if(isset($statut) && $user -> status != $statut){
+          unset($users[$user -> id]);
+        }
+        if(isset($entreprise) && $user -> company != $entreprise){
+          unset($users[$user -> id]);
+        }
+        if(isset($promo) && $user -> promotion != $promo){
+          unset($users[$user -> id]);
+        }
+      }
+
+      $smarty->assign('users', $users);
+    }
+    else{
+      $smarty->assign('users', User::getAll());
+    }
+
     $smarty->display('home/users.tpl');
+
   }
 }
