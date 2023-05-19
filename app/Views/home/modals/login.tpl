@@ -73,7 +73,7 @@
 
             <div class="d-flex flex-column justify-content-center align-items-center h-100">
                 <div class="container-fluid" id="password-reinitialise">
-                    <form action="{$APP_URL}/auth/forgotPassword" method="POST" class="connection-form" id="forgot_password_form">
+                    <form action="{$APP_URL}/auth/askResetPassword" method="POST" class="connection-form" id="forgot_password_form">
                         <input type="hidden" name="actionType" value="forgotPassword">
 
                         <div class="row justify-content-end mt-3 mx-5">    
@@ -126,5 +126,3 @@
         </div>
     </div>
 </section>
-
-<script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>

@@ -358,6 +358,7 @@ function showError(element, error, typeWriterObject) {
     let text = document.getElementById(element + "_error_text");
 
     container.classList.toggle("tada");
+
     text.innerHTML = error;
     image.src = `${$APP_URL}/assets/images/creators/creator_error.png`;
     
