@@ -2,12 +2,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Pour test, à supprimer -->
-    <!-- <meta http-equiv="refresh" content="2" /> -->
 
-    <title>Génération R&T</title>
-    <link rel="icon" href="http://example.com/favicon.png">
+    <title>{$currentPage}</title>
+    <link rel="icon" href="{$APP_URL}/assets/images/sponsors/generationrt.png">
     
     <!-- Bootstrap 5.3 -->
     <link href="{$APP_URL}/assets/css/bootstrap.min.css" rel="stylesheet">  
@@ -29,4 +26,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <!-- TypeWriter -->
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 </head>
