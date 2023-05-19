@@ -1,16 +1,16 @@
 <section class="window-container background-wave-blue" id="inscription-container">
 
-    <div class="window d-flex justify-content-center">
+    <div class="window d-flex align-items-center flex-column">
         <!-- Header, à ne pas afficher sur la version mobile! -->
         <div class="mt-3 ps-lg-5 ps-3 dot-header">
             <span class="dot bg-danger"></span>
             <span class="dot bg-warning"></span>
             <span class="dot bg-success"></span>
-            <h4 class="text-information fw-bold ms-3">Inscription</h4>
+            <h4 class="text-information fw-bold ms-3">{$currentPage}</h4>
         </div>
 
         <!-- Content -->
-        <div class="container-fluid h-100 overflow-hidden" id="inscription-scrollable">
+        <div class="container-fluid h-100 overflow-scroll" id="inscription-scrollable">
             <!-- !!!!!!!!!!!!!!!!!! DEBUT FORMULAIRE !!!!!!!!!!!!!!!!!!!!!! -->
             <form action="{$APP_URL}/auth/register" method="POST" class="h-100">
             <input type="hidden" name="actionType" value="register">
@@ -26,9 +26,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-8">
-                                <p class="fw-bolder title-3 mt-3 mb-2 my-lg-2 inscription-typeit" id="inscription-title">
+                                <p class="fw-bolder title-3 mt-3 mb-2 my-lg-2 inscription-typeit" id="register_title">
                                     <script>
-                                        const title = new Typewriter('#inscription-title', {
+                                        const register_title = new Typewriter('#register_title', {
                                             strings: 'Hello world!',
                                             autoStart: true,
                                             loop: true,
@@ -68,24 +68,23 @@
                     <div class="container-fluid">
                         
                         <!-- Informations / Erreurs   -->
-                        <!-- showError(['error-container-1','error-img-1',error_title_1,'error-text-1'],'missing_input')  -->
-                        <div class="row flex-center" id="error-container-1">
+                        <div class="row flex-center" id="register_1_error_container">
                             <div class="col-lg-4 flex-center avatar-d-none">
                                 <div class="avatar-md border-lightgrey my-2">
-                                    <img src="{$APP_URL}/assets/images/creators/creator_info.png" alt="creator" class="avatar-img" id="error-img-1">
+                                    <img src="{$APP_URL}/assets/images/creators/creator_info.png" alt="creator" class="avatar-img" id="register_1_error_img">
                                 </div>
                             </div>
 
                             <div class="col-lg-8 d-flex align-items-center align-items-lg-start flex-column">
-                                <p class="text-information fw-bold mb-3" id="error-title-1">
+                                <p class="text-information fw-bold mb-3" id="register_1_error_title">
                                     <script>
-                                        const error_title_1 = new Typewriter('#error-title-1', {});
-                                        error_title_1
+                                        const register_1_error_title = new Typewriter('#register_1_error_title', {});
+                                        register_1_error_title
                                             .typeString("Parfait! Continuos.")
                                             .start()
                                     </script>
                                 </p>
-                                <p class="inscription-info-text" id="error-text-1">
+                                <p class="inscription-info-text" id="register_1_error_text">
                                     Il ne vous reste plus qu'à cocher quelques cases et choisir un mot de passe
                                     assez robuste pour que personne puisse vous voler votre place à la cérémonie!
                                 </p>
@@ -209,24 +208,23 @@
                 <div class="row flex-column h-100 justify-content-center align-items-center overflow-hidden px-4">
                     <div class="container-fluid">
                         <!-- Informations / Erreurs   -->
-                        <!-- showError(['error-container-2','error-img-2',error_title_2,'error-text-2'],'missing_input')  -->
-                        <div class="row flex-center" id="error-container-2">
+                        <div class="row flex-center" id="register_2_error_container">
                             <div class="col-lg-4 flex-center avatar-d-none">
                                 <div class="avatar-md border-lightgrey my-2">
-                                    <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img" id="error-img-2">
+                                    <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img" id="register_2_error_image">
                                 </div>
                             </div>
 
                             <div class="col-lg-8 d-flex align-items-center align-items-lg-start flex-column">
-                                <p class="text-information fw-bold mb-3" id="error-title-2">
+                                <p class="text-information fw-bold mb-3" id="register_2_error_title">
                                     <script>
-                                        const error_title_2 = new Typewriter('#error-title-2', {});
-                                        error_title_2
+                                        const register_2_error_title = new Typewriter('#register_2_error_title', {});
+                                        register_2_error_title
                                             .typeString("Une derniere étape!")
                                             .start()
                                     </script>
                                 </p>
-                                <p class="inscription-info-text" id="error-text-2">
+                                <p class="inscription-info-text" id="register_2_error_text">
                                     Il ne vous reste plus qu'à cocher quelques cases et choisir un mot de passe
                                     assez robuste pour que personne puisse vous voler votre place à la cérémonie!
                                 </p>
@@ -316,7 +314,7 @@
                         <div class="row mt-2">
                             <div class="col-12 position-relative">
                                 <img src="{$APP_URL}/assets/images/svg/password-hidden.svg" class="password-input-icon">
-                                <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Confirmation du mot de passe" id="input-confirm_password" onpaste="return false">
+                                <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Confirmation du mot de passe" id="input-confirm_password" onpaste="return false" name="confirmpassword">
                             </div>
                             <div class="col-12">
                                 <div class="form-text text-justify px-2">
@@ -328,7 +326,7 @@
                         <!-- Boutons envoyer / revenir -->
                         <div class="row flex-center flex-column-reverse flex-lg-row mt-4 gap-2 gap-lg-3">
                             <button class="button bg-lightgrey py-2 px-5" type="button" onclick="location.reload()">Revenir</button>
-                            <input type="button" class="button bg-blue py-2 px-5" name="submit" value="S'inscrire">
+                            <input type="submit" class="button bg-blue py-2 px-5" name="submit" value="S'inscrire">
                         </div>
                     </div>
 

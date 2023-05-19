@@ -1,5 +1,5 @@
 // Function to handle form submission via AJAX
-function submitForm(form, errorElementId, successNotification) {
+function submitForm(form, errorElementId, successNotification,typeWriterObject) {
   const formData = new FormData(form);
 
   // Send an AJAX request
@@ -15,7 +15,7 @@ function submitForm(form, errorElementId, successNotification) {
           console.log("Utilisateur connecté");
           window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
         } else {
-          displayError(data.error, errorElementId); // Display the error message
+          showError(errorElementId, data.error, typeWriterObject); // Display the error message
         }
       }
     })
@@ -39,15 +39,15 @@ function displayError(errorMessage, errorElementId) {
 }
 
 // LOGIN PASSWORD FORM
-document.getElementById('login-form').addEventListener('submit', function(event) {
+const login_form = document.getElementById('login_form') 
+login_form.addEventListener('submit', function(event) {
   event.preventDefault();
-  const form = document.getElementById('login-form');
-  submitForm(form, "connection-error", "login_success");
+  submitForm(login_form, "login", "login_success", login_typeWriter);
 });
 
 // FORGOT PASSWORD FORM
-document.getElementById('forgot-password-form').addEventListener('submit', function(event) {
+const forgot_password_form = document.getElementById('forgot_password_form') 
+forgot_password_form.addEventListener('submit', function(event) {
   event.preventDefault();
-  const form = document.getElementById('forgot-password-form');
-  submitForm(form, "forgot-password-error", "password_mail_sent");
+  submitForm(forgot_password_form, "forgot_password", "password_mail_sent", forgot_password_typeWriter);
 });
