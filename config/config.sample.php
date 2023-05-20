@@ -30,3 +30,9 @@ define('SMTP_PORT', 587);
 define('SMTP_USERNAME', 'rdd@enpls.org');
 define('SMTP_PASSWORD', 'rdd123456');
 define('SMTP_ENCRYPTION', 'tls');
+
+define('MAIL_AUTHOR', 'Generation R&T');
+define('MAIL_REPLYTO', 'bde@generation-rt.fr');
+define('MAIL_REPLYTO_NAME', 'BDE R&T');
+
+define('MAIL_ENCRYPTION_TOKEN', 'thisShouldBeALongInt');
