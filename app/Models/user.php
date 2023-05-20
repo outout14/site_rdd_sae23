@@ -190,14 +190,14 @@ class User {
     global $mailManager;
     //Encrypt email to send it as a token
     $encryptedEmailToken = base64_encode(htmlentities(openssl_encrypt($this->email, "AES-128-ECB", MAIL_ENCRYPTION_TOKEN)));
-    $encryptedEmailURL = "http://" . $_SERVER['SERVER_NAME'] . APP_URL . "/auth/confirmEmail/" . $encryptedEmailToken;
+    $encryptedEmailURL = "https://" . $_SERVER['SERVER_NAME'] . APP_URL . "/auth/confirmEmail/" . $encryptedEmailToken;
     $mailManager->sendMail($this->email, "Confirmation de votre compte", "verifyMail.tpl", ["user" => $this, "encryptedEmailURL" => $encryptedEmailURL]);
   }
 
   public function sendResetPasswordEmail(){
     global $mailManager;
     $resetToken = resetToken::generateToken($this->id);
-    $encryptedEmailURL = "http://" . $_SERVER['SERVER_NAME'] . APP_URL . "/home/resetPassword/" . $resetToken;
+    $encryptedEmailURL = "https://" . $_SERVER['SERVER_NAME'] . APP_URL . "/home/resetPassword/" . $resetToken;
     $mailManager->sendMail($this->email, "Réinitialisation de votre mot de passe", "resetPassword.tpl", ["user" => $this, "encryptedEmailURL" => $encryptedEmailURL]);
   }
 
