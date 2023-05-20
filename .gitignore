@@ -6,4 +6,4 @@ config/config.php
 
 app/Views/templates_c/
 
-.htaccess
+public/.htaccess
