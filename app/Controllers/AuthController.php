@@ -1,6 +1,8 @@
 <?php
 
 // Load the bootstrap file
+use JetBrains\PhpStorm\NoReturn;
+
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 
 /*
@@ -8,7 +10,7 @@ require_once(__DIR__ . '/../../Core/app/bootstraper.php');
  * This file is used to handle the authentification.
  */
 
-function displayJsonError($error): void
+#[NoReturn] function displayJsonError($error): void
 {
   header('Content-Type: application/json');
   echo json_encode(array("error" => $error));
@@ -44,7 +46,6 @@ class AuthController
                 $user->clearPasswordField(); // Remove the password from the user object to avoid security issues
                 $_SESSION["user"] = $user;
                 displayJsonError('_success'); // No error
-                exit();
               } else {
                 displayJsonError('Votre compte n\'a pas encore été confirmé. Veuillez vérifier vos emails.');
               }
@@ -84,7 +85,7 @@ class AuthController
   /**
    * Display the register page.
    */
-  public function register(): void
+  #[NoReturn] public function register(): void
   {
     shouldNotBeLoggedIn();
 
@@ -152,7 +153,7 @@ class AuthController
   /**
    * Display the logout page.
    */
-  public function logout(): void
+  #[NoReturn] public function logout(): void
   {
     connexionMiddleware::logout();
   }
@@ -161,7 +162,7 @@ class AuthController
    * Handle the forgot password page.
    * Return a json response.
    */
-  public function forgotPassword(): void
+  #[NoReturn] public function forgotPassword(): void
   {
     shouldNotBeLoggedIn();
 
@@ -191,7 +192,7 @@ class AuthController
    * Request a reset password email.
    * Return a json response.
    */
-  public function askResetPassword(): void{
+  #[NoReturn] public function askResetPassword(): void{
     // If the user has submitted the form
     if (isset($_POST["actionType"]) && $_POST["actionType"] == "forgotPassword") {
       if (isset($_POST["email"])) {
@@ -219,7 +220,7 @@ class AuthController
   /**
    * Link to confirm the email.
    */
-  public function confirmEmail($token=""): void
+  #[NoReturn] public function confirmEmail($token=""): void
   {
     if($token == "") {
       header('Location: ' . APP_URL . '/?notification=tokenNotFound');

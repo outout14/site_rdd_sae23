@@ -1,5 +1,4 @@
 <?php
-
 /*
     Config file for the application.
     This file is loaded by the application and is used to set the configuration

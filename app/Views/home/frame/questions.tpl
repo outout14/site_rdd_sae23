@@ -29,7 +29,7 @@
                                 </div>
 
                                 <div class="col-12 my-2 d-lg-none">
-                                    <input type="submit" class="button rounded-pill bg-bonewhite text-dark fw-bold py-2 px-3 mt-0 mt-lg-3 w-100" name="ERROR" value="Envoyer"></input>
+                                    <input type="submit" class="button rounded-pill bg-bonewhite text-dark fw-bold py-2 px-3 mt-0 mt-lg-3 w-100" name="ERROR" value="Envoyer">
                                 </div>
 
                             </div>

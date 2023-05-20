@@ -1,6 +1,8 @@
 <?php
 
 // Load the bootstrap file
+use JetBrains\PhpStorm\NoReturn;
+
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 require_once(__DIR__ . '/../Models/user.php');
 
@@ -11,7 +13,7 @@ require_once(__DIR__ . '/../Models/user.php');
  */
 
 class ContactController {
-  public function sendMessage(): void
+  #[NoReturn] public function sendMessage(): void
   {
     if(Utils::CheckForInputs(array("actionType", "message", "email"))){
       $actionType = htmlentities($_POST["actionType"]);

@@ -142,7 +142,6 @@ class User {
   public function verifyPassword($password): bool {
     /* VERIFY PASSWORD */
     return password_verify($password, $this->password);
-    exit();
   }
 
   public static function getAll(): array {
@@ -162,7 +161,8 @@ class User {
 
   
 
-  function assignSQLdata($response){
+  function assignSQLdata($response): void
+  {
     $this->id = $response['id'];
     $this->lastname = $response['lastname'];
     $this->firstname = $response['firstname'];
@@ -182,11 +182,13 @@ class User {
     $this->has_paid = $response['has_paid'];
   }
 
-  function clearPasswordField(){
+  function clearPasswordField(): void
+  {
     $this->password = "";
   }
 
-  public function sendConfirmationEmail(){
+  public function sendConfirmationEmail(): void
+  {
     global $mailManager;
     //Encrypt email to send it as a token
     $encryptedEmailToken = base64_encode(htmlentities(openssl_encrypt($this->email, "AES-128-ECB", MAIL_ENCRYPTION_TOKEN)));
@@ -194,7 +196,8 @@ class User {
     $mailManager->sendMail($this->email, "Confirmation de votre compte", "verifyMail.tpl", ["user" => $this, "encryptedEmailURL" => $encryptedEmailURL]);
   }
 
-  public function sendResetPasswordEmail(){
+  public function sendResetPasswordEmail(): void
+  {
     global $mailManager;
     $resetToken = resetToken::generateToken($this->id);
     $encryptedEmailURL = "https://" . $_SERVER['SERVER_NAME'] . APP_URL . "/home/resetPassword/" . $resetToken;

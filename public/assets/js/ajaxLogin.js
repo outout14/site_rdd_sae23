@@ -11,7 +11,7 @@ function submitForm(form, errorElementId, successNotification,typeWriterObject) 
     .then(data => {
       // Check if there is an error in the response
       if (data.error) {
-        if(data.error == "_success") {
+        if(data.error === "_success") {
           console.log("Utilisateur connecté");
           window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
         } else {

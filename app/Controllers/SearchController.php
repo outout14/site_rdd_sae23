@@ -1,6 +1,8 @@
 <?php
 
 // Load the bootstrap file
+use JetBrains\PhpStorm\NoReturn;
+
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 require_once(__DIR__ . '/../Models/user.php');
 
@@ -9,7 +11,7 @@ require_once(__DIR__ . '/../Models/user.php');
  * This file is used to handle the home page.
  */
 
-function sendUsers($users): void
+#[NoReturn] function sendUsers($users): void
 {
     header('Content-Type: application/json');
     echo json_encode($users);
@@ -17,7 +19,7 @@ function sendUsers($users): void
 }
 
 class SearchController {
-    public function searchAnnuaire(): void
+    #[NoReturn] public function searchAnnuaire(): void
     {
         $data_to_send = array();
         
@@ -60,27 +62,27 @@ class SearchController {
             foreach ($users as $user) {
                 // Check status
                 if(isset($status) && $user -> status == $status){
-                    array_push($data_to_send, $user);
+                    $data_to_send[] = $user;
                 }
                 // Check name
                 if(isset($name) && $name != "") {
                     $original_name = strtolower($user->firstname." ".$user->lastname);
                     if(str_contains($original_name, strtolower($name))) {
-                        array_push($data_to_send, $user);
+                        $data_to_send[] = $user;
                     }
                 }
 
                 // Check promotion à revoir
                 if(isset($promotion) && $promotion != "") {
                     if($user -> promotion == $promotion){
-                        array_push($data_to_send, $user);
+                        $data_to_send[] = $user;
                     }
                 }
 
                 // Check company
                 if(isset($company) && $company != "") {
                     if(str_contains(strtolower($user->company), strtolower($company))) {
-                        array_push($data_to_send, $user);
+                        $data_to_send[] = $user;
                     }
                 }
             }
