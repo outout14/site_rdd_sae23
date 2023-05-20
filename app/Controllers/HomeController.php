@@ -123,7 +123,7 @@ class HomeController {
   public function resetPassword($token=""): void
   {
     if($token==""){
-      header("Location: " . APP_URL);
+      header("Location: " . APP_URL . "/home");
       exit();
     }
     global $smarty;
