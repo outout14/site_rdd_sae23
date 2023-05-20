@@ -49,7 +49,6 @@ if(document.getElementById('forgot_password_form')) {
 
 // FORGOT PASSWORD FORM
 if(document.getElementById('register_form')) {
-  console.log("ok");
   const register_form = document.getElementById('register_form')
   register_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -66,3 +65,12 @@ if(document.getElementById('new_password_form')) {
   });
 }
 
+// CONTACT FORM
+if(document.getElementById('contact_form')) {
+  console.log("ok");
+  const new_password_form = document.getElementById('contact_form')
+  new_password_form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    submitForm(new_password_form, null, "contact_sent", null);
+  });
+}

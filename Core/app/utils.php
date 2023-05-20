@@ -34,4 +34,11 @@ class Utils{
         $smarty->assign('currentPage', $currentPage);
         $smarty->assign('sessionUser', connexionMiddleware::getLoginUser());
     }
+
+    public static function DisplayJsonError($error): void
+    {
+      header('Content-Type: application/json');
+      echo json_encode(array("error" => $error));
+      exit();
+    }
 }
