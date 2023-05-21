@@ -20,7 +20,6 @@ class SearchController
 {
     public function searchAnnuaire(): void
     {
-        $data_to_send = array();
 
         $users = User::getAll();
 
@@ -28,7 +27,6 @@ class SearchController
             unset($user->email);
             unset($user->phone_number);
             unset($user->city);
-            unset($user->confirmed);
             unset($user->display_in_list);
             unset($user->display_on_map);
             unset($user->family_count);
@@ -40,6 +38,7 @@ class SearchController
         $name = "";
         $promotion = "";
         $company = "";
+        $confirmed = false;
 
         if (isset($_POST["status"])) {
             $status = $_POST["status"];
@@ -53,6 +52,9 @@ class SearchController
         if (isset($_POST["company"])) {
             $company = $_POST["company"];
         }
+        if (isset($_POST["confirmed"])){
+            $confirmed = $_POST["confirmed"];
+        }
 
         // Si $_POST par défaut, on affiche tous les utilisateurs. Sinon, on fait le traitement.
         if ($status == "" && $name == "" && $promotion == "" && $company == "") {
@@ -61,31 +63,31 @@ class SearchController
             foreach ($users as $user) {
                 // Check status
                 if (isset($status) && $user->status == $status) {
-                    array_push($data_to_send, $user);
+                    unset($users[$user -> id]);
                 }
                 // Check name
                 if (isset($name) && $name != "") {
                     $original_name = strtolower($user->firstname . " " . $user->lastname);
                     if (str_contains($original_name, strtolower($name))) {
-                        array_push($data_to_send, $user);
+                        unset($users[$user -> id]);
                     }
                 }
 
                 // Check promotion à revoir
                 if (isset($promotion) && $promotion != "") {
                     if ($user->promotion == $promotion) {
-                        array_push($data_to_send, $user);
+                        unset($users[$user -> id]);
                     }
                 }
 
                 // Check company
                 if (isset($company) && $company != "") {
                     if (str_contains(strtolower($user->company), strtolower($company))) {
-                        array_push($data_to_send, $user);
+                        unset($users[$user -> id]);
                     }
                 }
             }
-            sendUsers($data_to_send);
+            sendUsers($users);
         }
     }
 }

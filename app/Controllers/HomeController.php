@@ -145,12 +145,33 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
-    var_dump($_POST);
+    /* Verifie si la photo s'est bien télécharger */
+    if (isset($_FILES["photo"]) && $_FILES["photo"]["error"]== UPLOAD_ERR_OK){
+
+      /* Nom de dossier en changer en fonction de la personne connecter */
+      $nom_dossier="test";
+
+      /* On se positionne dans le dossier gallerie */
+      chdir("gallerie");
+
+      /* si le dossier n'est pas créer on le fait */
+      if (!is_dir($nom_dossier)){
+        mkdir($nom_dossier, 0755, true);
+      }
+
+      /* On met la photo dans le bon dossier */
+      $photo = $_FILES["photo"];
+      $nom_photo = $photo["name"];
+      $destination=$nom_dossier."/".$nom_photo;
+
+      move_uploaded_file($photo["tmp_name"], $destination);
+      }
+
     
-    if(isset($_POST["entrer"])){
-      echo($_POST["photo"]);
-      $smarty->assign("photo", $_POST["photo"]);
+    else{
+      echo ("Erreur de téléchargement de la photo");
     }
+      
     $smarty->display('home/galerie.tpl');
   }
 
@@ -158,6 +179,8 @@ class HomeController {
   {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
+
+    var_dump($_POST);
 
     $smarty->display('home/users.tpl');
   }
