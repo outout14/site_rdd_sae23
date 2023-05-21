@@ -153,6 +153,43 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
+    $smarty->assign('traitement',$_POST);
+    if(isset($_POST["submit"])){
+      $users = User::getAll();
+
+      if($_POST["name"]!=""){
+        $name = $_POST["name"];
+      }
+      if($_POST["status"]!="other"){
+        $status = $_POST["status"];
+      }
+      if($_POST["company"]){
+        $company = $_POST["company"];
+      }
+
+      $promotion = $_POST["promotion"];
+
+      foreach ($users as $user){
+        if(isset($name) && $user -> firstname !=$name){
+          unset($users[$user -> id]);
+        }
+        if(isset($status) && $user -> status != $status){
+          unset($users[$user -> id]);
+        }
+        if(isset($company) && $user -> company != $company){
+          unset($users[$user -> id]);
+        }
+        if(isset($promotion) && $user -> promotion != $promotion){
+          unset($users[$user -> id]);
+        }
+      }
+
+      $smarty->assign('users', $users);
+    }
+    else{
+      $smarty->assign('users', User::getAll());
+    }
+
     $smarty->display('home/users.tpl');
   }
   public function pagenotfound(): void
