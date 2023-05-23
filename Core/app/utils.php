@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\NoReturn;
+
 class Utils{
   public static function GenerateMenu($controller, $data): array
   {
@@ -33,5 +35,12 @@ class Utils{
         $smarty->assign('menu', Utils::GenerateMenu($prefix, $menu));
         $smarty->assign('currentPage', $currentPage);
         $smarty->assign('sessionUser', connexionMiddleware::getLoginUser());
+    }
+
+    #[NoReturn] public static function DisplayJsonError($error): void
+    {
+      header('Content-Type: application/json');
+      echo json_encode(array("error" => $error));
+      exit();
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 // Load the bootstrap file
+use JetBrains\PhpStorm\NoReturn;
+
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 
 /*
@@ -8,17 +10,10 @@ require_once(__DIR__ . '/../../Core/app/bootstraper.php');
  * This file is used to handle the authentification.
  */
 
-function displayJsonError($error): void
-{
-  header('Content-Type: application/json');
-  echo json_encode(array("error" => $error));
-  exit();
-}
-
 function shouldNotBeLoggedIn(): void
 {
   if(isset($_SESSION["user"])) {
-    displayJsonError("Vous êtes déjà connecté.");
+    Utils::DisplayJsonError("Vous êtes déjà connecté.");
   }
 }
 
@@ -43,23 +38,22 @@ class AuthController
               if ($user->isConfirmed()) {
                 $user->clearPasswordField(); // Remove the password from the user object to avoid security issues
                 $_SESSION["user"] = $user;
-                displayJsonError('_success'); // No error
-                exit();
+                Utils::DisplayJsonError('_success'); // No error
               } else {
-                displayJsonError('Votre compte n\'a pas encore été confirmé. Veuillez vérifier vos emails.');
+                Utils::DisplayJsonError('Votre compte n\'a pas encore été confirmé. Veuillez vérifier vos emails.');
               }
             } else {
-              displayJsonError('Mot de passe incorrect');
+              Utils::DisplayJsonError('Mot de passe incorrect');
             }
           } else {
-            displayJsonError('Identifiants incorrects');
+            Utils::DisplayJsonError('Identifiants incorrects');
           }
         } else {
-          displayJsonError('Veuillez remplir tous les champs');
+          Utils::DisplayJsonError('Veuillez remplir tous les champs');
         }
       }
     } else {
-      displayJsonError('Veuillez remplir tous les champs');
+      Utils::DisplayJsonError('Veuillez remplir tous les champs');
     }
   }
 
@@ -84,7 +78,7 @@ class AuthController
   /**
    * Display the register page.
    */
-  public function register(): void
+  #[NoReturn] public function register(): void
   {
     shouldNotBeLoggedIn();
 
@@ -101,22 +95,22 @@ class AuthController
           if (isset($_POST["oldpromotion"])) {
             $promotion_year = htmlspecialchars($_POST["oldpromotion"]);
             if (!is_numeric($promotion_year)) {
-              displayJsonError("L'année de promotion doit être un nombre.");
+              Utils::DisplayJsonError("L'année de promotion doit être un nombre.");
             }
           } else {
-            displayJsonError("L'année de promotion doit être renseignée dans le cas où vous êtes un ancien élève.");
+            Utils::DisplayJsonError("L'année de promotion doit être renseignée dans le cas où vous êtes un ancien élève.");
           }
         }
         $promotion = $_POST["promotion"] ?? null;
         if ($promotion == null && $status == "student") {
-          displayJsonError("La promotion doit être renseignée dans le cas où vous êtes un élève.");
+          Utils::DisplayJsonError("La promotion doit être renseignée dans le cas où vous êtes un élève.");
         }
 
         $phone_number = htmlspecialchars($_POST["phone_number"]);
         $email = strtolower(filter_var($_POST["email"], FILTER_SANITIZE_EMAIL));
         $password = htmlspecialchars($_POST["password"]);
         if(strlen($password) < 8) {
-          displayJsonError("Le mot de passe doit contenir au moins 8 caractères.");
+          Utils::DisplayJsonError("Le mot de passe doit contenir au moins 8 caractères.");
         }
         $password_confirm = htmlspecialchars($_POST["confirmpassword"]);
         $display_on_map = isset($_POST["display_on_map"]) ? 1 : 0;
@@ -130,7 +124,7 @@ class AuthController
           $family_count = 0;
         } else {
           if (!is_numeric($family_count)) {
-            displayJsonError("Le nombre de personnes doit être un nombre.");
+            Utils::DisplayJsonError("Le nombre de personnes doit être un nombre.");
           }
         }
 
@@ -139,20 +133,20 @@ class AuthController
         $user = $this->handleRegistration($lastname, $firstname, $email, $password, $password_confirm, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, false, $status);
         if (gettype($user) == "object") {
           $user->sendConfirmationEmail();
-          displayJsonError("_success");
+          Utils::DisplayJsonError("_success");
         } else {
-          displayJsonError($user);
+          Utils::DisplayJsonError($user);
         }
 
       }
     }
-    displayJsonError("Veuillez remplir tous les champs.");
+    Utils::DisplayJsonError("Veuillez remplir tous les champs.");
   }
 
   /**
    * Display the logout page.
    */
-  public function logout(): void
+  #[NoReturn] public function logout(): void
   {
     connexionMiddleware::logout();
   }
@@ -161,7 +155,7 @@ class AuthController
    * Handle the forgot password page.
    * Return a json response.
    */
-  public function forgotPassword(): void
+  #[NoReturn] public function forgotPassword(): void
   {
     shouldNotBeLoggedIn();
 
@@ -174,16 +168,16 @@ class AuthController
           $user = new User();
           $user->get($tokenObj->getUserId());
           $user->updatePassword($password);
-          displayJsonError("_success"); // No error
+          Utils::DisplayJsonError("_success"); // No error
         } else {
-          displayJsonError("Les mots de passe ne correspondent pas.");
+          Utils::DisplayJsonError("Les mots de passe ne correspondent pas.");
         }
       } else {
-        displayJsonError("Le token n'est pas valide.");
+        Utils::DisplayJsonError("Le token n'est pas valide.");
       }
     }
     else {
-      displayJsonError("Veuillez remplir tous les champs.");
+      Utils::DisplayJsonError("Veuillez remplir tous les champs.");
     }
   }
 
@@ -191,7 +185,7 @@ class AuthController
    * Request a reset password email.
    * Return a json response.
    */
-  public function askResetPassword(): void{
+  #[NoReturn] public function askResetPassword(): void{
     // If the user has submitted the form
     if (isset($_POST["actionType"]) && $_POST["actionType"] == "forgotPassword") {
       if (isset($_POST["email"])) {
@@ -205,21 +199,21 @@ class AuthController
           }
 
           $user->sendResetPasswordEmail();
-          displayJsonError("_success"); // No error
+          Utils::DisplayJsonError("_success"); // No error
         } else {
-          displayJsonError("Aucun utilisateur n'a été trouvé avec cette adresse email.");
+          Utils::DisplayJsonError("Aucun utilisateur n'a été trouvé avec cette adresse email.");
         }
       } else {
-        displayJsonError("Veuillez remplir tous les champs.");
+        Utils::DisplayJsonError("Veuillez remplir tous les champs.");
       }
     }
-    displayJsonError("Veuillez remplir tous les champs.");
+    Utils::DisplayJsonError("Veuillez remplir tous les champs.");
   }
 
   /**
    * Link to confirm the email.
    */
-  public function confirmEmail($token=""): void
+  #[NoReturn] public function confirmEmail($token=""): void
   {
     if($token == "") {
       header('Location: ' . APP_URL . '/?notification=tokenNotFound');
