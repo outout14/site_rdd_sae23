@@ -53,8 +53,13 @@ class AdminController
           if(!isset($_POST['status'])) $_POST['status'] = "student";
           if(!isset($_POST['role'])) $_POST['role'] = 'user';
           $user = new User();
-          $user->register( $_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
-          header('Location: ' . APP_URL . '/admin/users?notification=userAdded');
+          if (gettype($user) == "object") {
+            header('Location: ' . APP_URL . '/admin/users?notification=userAdded');
+          } else {
+            header('Location: ' . APP_URL . '/admin/users?notification=error');
+          }
+          $err = $user->register ($_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['family_count'], $_POST['company'], $_POST['promotion'], $_POST['promotion_year'], $_POST['display_in_list'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
+          echo($err);
         }
       }
     }
@@ -99,6 +104,15 @@ class AdminController
     }
   }
 
+  public function goldbook(): void
+{
+    global $smarty;
+    smartyPassDefaultVariables($this->menu, 'Livre d\'Or');
+    // Additional logic for the guestbook page
+    // ...
+    $smarty->display('admin/goldbook.tpl');
+}
+
   public function user_delete($userID): void {
     $user = new User();
     if($user->get($userID) == null) {
@@ -110,3 +124,4 @@ class AdminController
     header('Location: ' . APP_URL . '/admin/users?notification=userDeleted');
   }
 }
+
