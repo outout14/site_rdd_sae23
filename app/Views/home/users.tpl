@@ -12,11 +12,13 @@
     {include file="./common/navbar.tpl"}
 
     <!-- Inscription -->
-    {include file="./frame/register.tpl"}
+    {include file="./frame/annuaire.tpl"}
 
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}
 
+    
+    <script src="{$APP_URL}/assets/js/ajaxResearch.js"></script>
     <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
 </body>
 </html>

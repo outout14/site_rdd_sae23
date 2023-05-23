@@ -4,7 +4,7 @@
         <div class="flex-center flex-column" id="startpage-title">
             <p class="startpage-title">GENERATION R&T</p>
             <p class="startpage-title">REMISE DES DIPLÔMES</p>
-            <p class="startpage-title" id="rdd-date">7 juillet 2023. 19h00</p>
+            <p class="startpage-title">7 juillet 2023. 19h00</p>
         </div>
 
         <!-- Compte à rebours -->
@@ -40,7 +40,7 @@
                     <!-- Ne doit plus s'afficher lorsqu'on est connectés -->
                     <div class="col-12 d-flex justify-content-center justify-content-lg-start col-lg-3 mt-3 mt-lg-0">
                         <a href="{$APP_URL}/home/register">   
-                            <button class="button rounded-pill bg-transparent border border-3 border-white text-bonewhite py-2 px-3 flex-center">
+                            <button class="button rounded-pill border border-3 border-white text-bonewhite py-2 px-3 flex-center">
                                 <span>S'inscrire</span>
                                 <i class="bi bi-person-plus fa-lg ms-2"></i>
                             </button>
@@ -49,12 +49,11 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="flex-center" id="startpage-arrow-box">
-        <a href="#organisation-container">
-            <img class="up-and-down" src="{$APP_URL}/assets/images/svg/downarrow.svg" alt="down-arrow">
-        </a>
+        <div class="flex-center" id="startpage-arrow-box">
+            <a href="#organisation-container">
+                <img class="up-and-down" src="{$APP_URL}/assets/images/svg/downarrow.svg" alt="down-arrow">
+            </a>
+        </div>
     </div>
-    
 </main>

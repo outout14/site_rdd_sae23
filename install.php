@@ -4,34 +4,53 @@ require "config/config.php";
 // Load the bootstrap file
 require_once(__DIR__ . '/Core/app/bootstraper.php');
 
+echo("<p>IF YOU WANTED TO RECREATE TABLES (THERE MIGHT BE AN ERROR) : <a href='install.php?reset'>CLICK HERE</a></p>");
+
+if(isset($_GET["reset"])){
+  global $mysqlConnection;
+  $tables = ["users", "reset_tokens"];
+  foreach ($tables as $table) {
+    $query = "DROP TABLE IF EXISTS $table;";
+    $stmt = $mysqlConnection->prepare($query);
+    $stmt->execute();
+    $stmt->close();
+    echo("DONE : CLEAR TABLE $table<br>");
+  }
+}
 // Create the user table
 
 function migrateUserDB(): void {
   global $mysqlConnection;
-  $query = "CREATE TABLE IF NOT EXISTS users (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    lastname VARCHAR(30) NOT NULL,
-    firstname VARCHAR(30) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(10) NOT NULL,
-    city VARCHAR(30) NOT NULL,
-    display_on_map BOOLEAN NOT NULL DEFAULT false,
-    confirmed BOOLEAN NOT NULL DEFAULT false,
-    status VARCHAR(30) NOT NULL DEFAULT 'student',
-    role VARCHAR(30) NOT NULL DEFAULT 'user',
-    passwordResetToken VARCHAR(255) DEFAULT NULL
-  )";
+  $query = "CREATE TABLE `users` (
+  `id` int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `lastname` varchar(30) NOT NULL,
+  `firstname` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone_number` varchar(10) NOT NULL,
+  `city` varchar(30) NOT NULL,
+  `display_on_map` tinyint(1) NOT NULL DEFAULT 0,
+  `display_in_list` tinyint(1) NOT NULL DEFAULT 0,
+  `has_paid` tinyint(1) NOT NULL DEFAULT 0,
+  `confirmed` tinyint(1) NOT NULL DEFAULT 0,
+  `status` varchar(30) NOT NULL DEFAULT 'student',
+  `role` varchar(30) NOT NULL DEFAULT 'user',
+  `promotion` varchar(4) NOT NULL,
+  `family_count` int(11) NOT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `promotion_year` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
   $stmt = $mysqlConnection->prepare($query);
   $stmt->execute();
   $stmt->close();
 }
 
-//migrateUserDB();
+migrateUserDB();
+echo("<p>DONE : RUN USER DB MIGRATION</p>");
 
 function migrateTokenDB(): void {
   global $mysqlConnection;
-  $query = "CREATE TABLE IF NOT EXISTS reset_tokens (
+  $query = "CREATE TABLE reset_tokens (
       id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       token VARCHAR(64) NOT NULL,
       user_id INT(6) NOT NULL,
@@ -40,3 +59,5 @@ function migrateTokenDB(): void {
   $mysqlConnection->query($query);
 }
 migrateTokenDB();
+echo("<p>DONE : RUN RESET TOKEN DB MIGRATION</p>");
+

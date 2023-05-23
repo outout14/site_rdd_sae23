@@ -129,157 +129,130 @@ function connectionScroll(direction) {
 
 // Si on est sur la page de inscription, alors tout ce code est chargé
 if(document.getElementById("inscription-container") != null){
-    function firstContinue() {
-        let div_email = document.getElementById("change-help-email");
-        let div_selectPromotion = document.getElementById("change-select-promotion");
-        let div_selectOldPromotion = document.getElementById("change-select-oldpromotion");
-        let div_inputEntreprise = document.getElementById("change-input-entreprise");
-        let div_checkFamily = document.getElementById("change-check-family");
-        let div_checkMap = document.getElementById("change-check-map");
-        
-        switch (statusSelect.value) {
-            case "student":            
-                div_selectPromotion.style.display = "block";
-                div_inputEntreprise.style.display = "block";
-                break;
-            case "teacher":
-                div_email.innerText = "Merci d'utiliser votre mail universitaire ( @univ-rennes1.fr )";
-                div_checkFamily.style.display = "none";
-                div_checkMap.style.display = "none";
-                break;
-            case "oldstudent":
-                div_email.innerText = "Votre email sera utilisé afin de valider votre inscription";
-                div_selectOldPromotion.style.display = "block";
-                div_inputEntreprise.style.display = "block";
-                div_checkFamily.style.display = "none";
-                break;
-            case "other":
-                div_email.innerText = "Votre email sera utilisé afin de valider votre inscription";
-                div_inputEntreprise.style.display = "block";
-                div_checkFamily.style.display = "none";
-                break;
-            }
-
-        // Permet de scroll
-        inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight)
-    }
-
-    // Fonction du deuxieme bouton "Continuer" dans le formulaire, permet de s'assurer que tout a été bien rentré ( puis scroll vers
-    // la page suivante ) et sinon affiché une erreur.
-    function secondContinue() {
-        // let lastname = document.getElementById("input-lastname")
-        // let firstname = document.getElementById("input-firstname")
-        // let email = document.getElementById("input-email")
-        // let phone_number = document.getElementById("input-phone_number")
-        // let entreprise = document.getElementById("input-entreprise")
-
-        // let errors = []
-        // let setBorderTo = []
-
-        // if(lastname.value == "") {
-        //     errors.push("Vous n'avez pas entré de nom.")
-        //     setBorderTo.push(lastname)
-        // } else if(lastname.value.length > 20) {
-        //     errors.push("Votre nom est trop long")
-        //     setBorderTo.push(lastname)
-        // }
-
-        // if(firstname.value == "") {
-        //     errors.push("Vous n'avez pas entré de prenom.")
-        //     setBorderTo.push(firstname)
-        // } else if(lastname.value.length > 20) {
-        //     errors.push("Votre prenom est trop long")
-        //     setBorderTo.push(firstname)
-        // }
-
-        // if(email.value == "") {
-        //     errors.push("Vous n'avez pas entré d'email.")
-        //     setBorderTo.push(firstname)}
-        // // } else if(statusSelect.value == "student") {
-        // //     // if(email.value.split('@'))
-        // // }
-
-        // setBorderTo.forEach(element => {
-        //     element.classList.add("error-border")
-        // })
-
-        // Permet de scroll
-        inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight);
-        
-        // Si l'eleve n'est pas en alternance, on ne lui propose pas de choisir la ville    
-        if(document.getElementById("input-promotion").value == "2AFI") {
-            document.getElementById("change-check-map").style.display = "none";
-        }
-    }
-
-    function submit() {
-        let city = document.getElementById("input-city");
-        let password = document.getElementById("input-password");
-        let confirm_password = document.getElementById("input-confirm_password");
-    }
-
-
     // Variables pour le scroll
     var inscriptionScrollable = document.getElementById("inscription-scrollable");
     const inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
 
-    // Traitement du premier select ( etudiant / prof / ancien eleve / autre )
+    function firstContinue() {
+        let input_status = document.getElementById("input-status");
 
-    // Fonction du premier bouton "Continuer" dans le formulaire, permet de adapter le formulaire selon le statut choisi ( etudiant, prof, etc.. )
-    const statusSelect = document.getElementById("inscription-select");
+        let help_email = document.getElementById("help-email")
 
-    // Verification si le checkbox parents est activé. Si oui, le select du nombre de parents s'active
-    // et le texte d'aide apparait.
-    const parentsCheck = document.getElementById("parentsCheck")
-    const parentsSelectCounts = document.getElementById("parentsSelect")
+        let container_promotion = document.getElementById("container-promotion")
+        let input_promotion = document.getElementById("input-promotion")
 
-    parentsCheck.addEventListener("change", () => {
-        if (parentsCheck.checked) {
-            parentsSelectCounts.disabled = false;
-        } else {
-            parentsSelectCounts.disabled = true;
-        }
-    })
+        let container_oldpromotion = document.getElementById("container-oldpromotion")
+        let input_oldpromotion = document.getElementById("input-oldpromotion")
 
-    // Verification si le checkbox carte est activé. Si oui, le input de ville s'active
-    const MapVisibilityCheck = document.getElementById("MapVisibilityCheck")
-    const MapTownInput = document.getElementById("input-city")
+        let container_company = document.getElementById("container-company")
+        let input_company = document.getElementById("input-company")
 
-    MapVisibilityCheck.addEventListener("change", () => {
-        if (MapVisibilityCheck.checked) {
-            MapTownInput.disabled = false;
-        } else {
-            MapTownInput.disabled = true;
-        }
-    })
+        let container_map = document.getElementById("container-map")
+        let input_checkmap = document.getElementById("input-checkmap")
+        let input_map = document.getElementById("input-map")
 
-    // Vérificiation si l'élève est en alternance ou pas, sinon le input 'entreprise' est desactivé
-    const promotionSelect = document.getElementById("input-promotion")
-    const inputEntreprise = document.getElementById("input-entreprise")
+        let container_family = document.getElementById("container-family")
+        let input_checkfamily = document.getElementById("input-checkfamily")
+        let input_countfamily = document.getElementById("input-countfamily")
 
-    promotionSelect.addEventListener("change", () => {
-        if (promotionSelect.value == "2AFI") {
-            inputEntreprise.disabled = true;
-        } else {
-            inputEntreprise.disabled = false;
-        }
-    })
+        switch (input_status.value) {
+            case "student":
+                help_email.innerHTML = "Merci d'utiliser votre mail universitaire (@etudiant.univ-rennes1.fr)";
+                
+                container_promotion.classList.toggle("d-none");
+                input_promotion.disabled = false;
 
-    // Code pour téléphone -> Changement des options du select de promotion
-    // On passe de Licence Professionnelle à LP pour gagner de l'espace
-    // Et changements des labels des checks
+                container_company.classList.toggle("d-none");
+                input_promotion.addEventListener("change", () => {
+                    if (input_promotion.value == "2AFI") {
+                        input_company.disabled = true;
+                    } else {
+                        input_company.disabled = false;
+                    }
+                })
 
-    if (phone) {
-        let possibleOptions = ["BUT R&T 2 FI", "BUT R&T 2 FA", "LP CART", "LP RIMS", "LP TSSR"];
-        let options = promotionSelect.children;
+                container_map.classList.toggle("d-none");
+                input_checkmap.addEventListener("change", () => {
+                    if (input_checkmap.checked) {
+                        input_map.disabled = false;
+                    } else {
+                        input_map.disabled = true;
+                    }
+                })
 
-        for(i = 0; i < options.length; i++) {
-            options[i].text = possibleOptions[i];
-        }
+                container_family.classList.toggle("d-none");
+                input_checkfamily.addEventListener("change", () => {
+                    if (input_checkfamily.checked) {
+                        input_countfamily.disabled = false;
+                    } else {
+                        input_countfamily.disabled = true;
+                    }
+                })
 
-        document.getElementById("label-ListVisibilityCheck").innerHTML = "Apparaître dans la listes des participants";
-        document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
+                if(phone){
+                    let possibleOptions = ["BUT R&T 2 FI", "BUT R&T 2 FA", "LP CART", "LP RIMS", "LP TSSR"];
+                    let options = input_promotion.children;
+            
+                    for(i = 0; i < options.length; i++) {
+                        options[i].text = possibleOptions[i];
+                    }
+                }
+                break;
+            case "teacher":
+                help_email.innerText = "Merci d'utiliser votre mail universitaire ( @univ-rennes1.fr )";
+                break;
+            case "oldstudent":
+                help_email.innerText = "Votre email sera utilisé pour valider l'inscription";
+                
+                container_oldpromotion.classList.toggle("d-none");
+                input_oldpromotion.disabled = false;
+
+                container_company.classList.toggle("d-none");
+                input_company.disabled = false;
+
+                container_map.classList.toggle("d-none");
+                input_checkmap.addEventListener("change", () => {
+                    if (input_checkmap.checked) {
+                        input_map.disabled = false;
+                    } else {
+                        input_map.disabled = true;
+                    }
+                })
+                break;
+            case "other":
+                help_email.innerText = "Votre email sera utilisé pour valider l'inscription";
+                
+                container_company.classList.toggle("d-none");
+                input_company.disabled = false;
+
+                container_map.classList.toggle("d-none");
+                input_checkmap.addEventListener("change", () => {
+                    if (input_checkmap.checked) {
+                        input_map.disabled = false;
+                    } else {
+                        input_map.disabled = true;
+                    }
+                })
+                break;
+            }
+
+            
+        // Permet de scroll
+        inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight)
     }
+    
+    function secondContinue() {
+        inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight);
+
+        if(input_status.value == "student" && document.getElementById("input-promotion").value == "2AFI") {
+            document.getElementById("container-map").classList.toggle("d-none")
+        }
+        if (phone) {
+            document.getElementById("label-ListVisibilityCheck").innerHTML = "Apparaître dans la listes des participants";
+            document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
+        }
+    }
+    
 }
 /////////////////////////////////// HEADER //////////////////////////////
 
@@ -379,37 +352,136 @@ if(notification != null) {
 }
 
 // Prends un array d'identifiants en parametres, 0 - error container, 1 - error img, 2 - error title ( objet typewriter ), 3 - error text
-function showError(elements, error) {
-    console.log(elements)
+function showError(element, error, typeWriterObject) {
+    let container = document.getElementById(element + "_error_container");
+    let image = document.getElementById(element + "_error_image");
+    let text = document.getElementById(element + "_error_text");
 
-    let container = document.getElementById(elements[0]);
-    let image = document.getElementById(elements[1]);
-    let text = document.getElementById(elements[3]);
+    container.classList.toggle("tada");
 
-    // if(type === "missing_input") {
-    //     text.innerHTML = "Vous avez oublié de remplir un champ du formulaire.";
-    // } else if(type === "same_password") {
-    //     text.innerHTML = "Les deux mots de passes ne sont pas identiques. Reessayez.";
-    // } else if(type === "short_password") {
-    //     text.innerHTML = "Le mot de passe est trop court. Choisissez un mot de passe entre 8 et 20 caractères.";
-    // } else if(type === "long_password") {
-    //     text.innerHTML = "Les deux mots de passes ne sont pas identiques. Choisissez un mot de passe entre 8 et 20 caractères.";
-    // } else if(type === "bad_password") {
-    //     text.innerHTML = "Le mot de passe n'est pas assez robuste. Choisissez un mot de passe plus compliqué ( lettres miniscules et majuscules, chiffres, caractères spéciaux ).";
-    // } else if(type === "wrong_login") {
-    //     text.innerHTML = "Cet adresse n'est associée à aucun compte.";
-    // } else if(type === "wrong_password") {
-    //     text.innerHTML = "Le mot de passe que vous avez entré ne correspond pas à ce compte. Reessayez.";
-    // } else {
-    //     text.innerHTML = "Une erreur est survenue. Reessayez plus tard.";
-    // }
-
-    text.innerHTML = error
-    
+    text.innerHTML = error;
     image.src = `${$APP_URL}/assets/images/creators/creator_error.png`;
-    elements[2]
+    
+    typeWriterObject
         .deleteAll(1)
         .typeString('Oops! Erreur!')
         .start()
-    container.classList.toggle("tada");
 }
+
+
+const annuaire_status = document.getElementById("annuaire-status")
+const annuaire_name = document.getElementById("annuaire-name")
+const annuaire_promotion = document.getElementById("annuaire-promotion")
+const annuaire_company = document.getElementById("annuaire-company")
+
+annuaire_promotion.addEventListener("change", () => {
+    if(annuaire_promotion.value == "2AFI") {
+        annuaire_company.disabled = true;
+    } else {
+        annuaire_company.disabled = false;
+    }
+})
+
+annuaire_status.addEventListener("change", () => {
+    switch (annuaire_status.value) {
+        case "":
+            annuaire_promotion.disabled = false;
+            annuaire_company.disabled = false;
+
+            for(var i=0;i<=annuaire_promotion.options.length; i++) {
+                annuaire_promotion.remove(0)
+            }
+            ["2AFA","2AFI","LP RIMS","LP CART","LP TSSR"].forEach( option => {
+                annuaire_promotion.add(new Option(option,option),undefined)
+            })
+            for(var i = 1990; i<=2022; i++) {
+                annuaire_promotion.add(new Option(`Promotion ${i}`,i),undefined)
+            }
+            annuaire_promotion.add(new Option("Toutes promotions","", true, true),0)
+            annuaire_promotion.options[0].disabled = true;
+            break;
+        case "student":
+            annuaire_promotion.disabled = false;
+            annuaire_company.disabled = false;
+
+            ["2AFA","2AFI","LP RIMS","LP CART","LP TSSR"].forEach( option => {
+                annuaire_promotion.add(new Option(option,option),undefined)
+            })
+            for(var i = 1990;i<=2023; i++) {
+                annuaire_promotion.remove(0)
+            }
+            annuaire_promotion.add(new Option("Toutes promotions","", true, true),0)
+            annuaire_promotion.options[0].disabled = true;
+            break;
+        case "teacher":
+            annuaire_promotion.disabled = true;
+            annuaire_company.disabled = true;
+            break;
+        case "oldstudent":
+            annuaire_promotion.disabled = false;
+            annuaire_company.disabled = false;
+
+            for(var i = 1990; i<=2022; i++) {
+                annuaire_promotion.add(new Option(`Promotion ${i}`,i),undefined)
+            }
+            for(var i = 0;i<6; i++) {
+                annuaire_promotion.remove(0)
+            }
+            annuaire_promotion.add(new Option("Toutes promotions","", true, true),0)
+            annuaire_promotion.options[0].disabled = true;
+            break;
+        case "other":
+            annuaire_company.disabled = false;
+            annuaire_promotion.disabled = true;
+            break;
+    }
+})
+
+/*
+  NOTIFICATIONS
+  Dynamically create a notification and append it to the DOM
+ */
+function spawnNotification(title, content) {
+  var notificationWrapper = document.createElement('div');
+  notificationWrapper.className = 'py-2 px-2 px-lg-4 gap-lg-3';
+  notificationWrapper.id = 'notification-wrapper';
+
+  var closeButtonDiv = document.createElement('div');
+  closeButtonDiv.className = 'fixed-top d-flex justify-content-end mt-2 mx-3';
+
+  var closeButton = document.createElement('i');
+  closeButton.className = 'bi bi-x-lg hover-pointer';
+  closeButton.id = 'closeNotificationButton';
+
+  closeButton.addEventListener('click', function() {
+    notificationWrapper.remove();
+  });
+
+  closeButtonDiv.appendChild(closeButton);
+  notificationWrapper.appendChild(closeButtonDiv);
+
+  var avatarDiv = document.createElement('div');
+  avatarDiv.className = 'avatar-xs border-lightgrey';
+
+  var avatarImg = document.createElement('img');
+  avatarImg.src = '../assets/images/creators/creator_pc.png';
+  avatarImg.alt = 'creator_message';
+  avatarImg.className = 'avatar-img';
+
+  avatarDiv.appendChild(avatarImg);
+  notificationWrapper.appendChild(avatarDiv);
+
+  var contentDiv = document.createElement('div');
+  contentDiv.className = 'text-complementary';
+  contentDiv.textContent = content;
+
+  notificationWrapper.appendChild(contentDiv);
+
+  // Apply additional styling to make the notification visible
+  notificationWrapper.style.transform = 'translateY(0)';
+  notificationWrapper.style.opacity = '1';
+
+  document.body.appendChild(notificationWrapper);
+}
+
+spawnNotification('Notification Title', 'This is the notification content.');

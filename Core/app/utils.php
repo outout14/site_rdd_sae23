@@ -11,10 +11,13 @@ class Utils{
     return $result;
   }
 
-  public static function CheckForInputs($inputs): bool
+  public static function CheckForInputs($inputs, $strict=false): bool
   {
     foreach($inputs as $input){
       if(!isset($_POST[$input])){
+        return false;
+      }
+      if($strict && $_POST[$input] == ""){
         return false;
       }
     }

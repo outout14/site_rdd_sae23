@@ -75,14 +75,13 @@
       } else {
         $row = $result->fetch_assoc();
         $this->expiration_date = $row["expiration_date"];
-
+        $this->id = $row["id"];
         // Check if the token has expired (more than 10 minutes)
         if(strtotime($this->expiration_date) < strtotime(date("Y-m-d H:i:s"))){
           $this->delete();
           return false;
         }
 
-        $this->id = $row["id"];
         $this->token = $row["token"];
         $this->user_id = $row["user_id"];
 
