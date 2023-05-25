@@ -397,7 +397,6 @@ if(document.getElementById("annuaire-form") != null) {
                     annuaire_promotion.add(new Option(`Promotion ${i}`,i),undefined)
                 }
                 annuaire_promotion.add(new Option("Toutes promotions","", true, true),0)
-                annuaire_promotion.options[0].disabled = true;
                 break;
             case "student":
                 annuaire_promotion.disabled = false;
@@ -410,7 +409,6 @@ if(document.getElementById("annuaire-form") != null) {
                     annuaire_promotion.add(new Option(option,option),undefined)
                 })
                 annuaire_promotion.add(new Option("Toutes promotions","", true, true),0)
-                annuaire_promotion.options[0].disabled = true;
                 break;
             case "teacher":
                 annuaire_promotion.disabled = true;

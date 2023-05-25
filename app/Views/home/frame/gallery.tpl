@@ -22,37 +22,14 @@
         </nav>
 
         <div id="gallery">
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-            
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
+            {foreach $contenu_dossier as $photo }
+                {if $photo != "." && $photo !=".." }
+                {assign var="source" value=$APP_URL|cat:"/gallerie/"|cat:$photo}
+                <div class="col gallery-image-wrapper">
+                    <img class="gallery-image" src="{$source}" alt="{$photo}">
+                </div>
+                {/if}
+            {/foreach}
         </div>
 
     </div>

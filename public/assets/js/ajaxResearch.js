@@ -39,11 +39,6 @@ const _company = document.getElementById("annuaire-company")
 
 inputs.forEach( input => {
     input.addEventListener("change", () => {
-        let status = _status.value
-        let name = _name.value
-        let promotion = _promotion.value
-        let company = _company.value
-
         // console.log(`Critères de recherche -> Statut: ${status}, Nom : ${name}, Promotion : ${promotion}, Company : ${company}, `)
         ajaxSend(form)
     })
