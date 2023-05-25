@@ -87,7 +87,6 @@ function getOrganisation() {
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
-    'register' => 'Inscription',
     'gallery' => 'Galerie',
     'goldbook' => 'Livre d\'or',
     'annuaire' => 'Annuaire',
