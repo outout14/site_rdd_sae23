@@ -164,20 +164,13 @@ class HomeController {
       $extension = ".".$extension[array_key_last($extension)];
       echo($extension);
       $destination="gallerie/non_valide/".$name.$extension;
+      echo($photo["tmp_name"]);
 
       move_uploaded_file($photo["tmp_name"], $destination);
-    }
-    else{
-      echo ("Erreur de téléchargement de la photo");
     }
 
 
     $contenu_dossier = scandir("gallerie/valide");
-    foreach($contenu_dossier as $photo){
-      if($photo != "." && $photo !=".."){
-        echo("<br>".$photo);
-      }
-    }
 
     $smarty->assign('contenu_dossier', $contenu_dossier);
 

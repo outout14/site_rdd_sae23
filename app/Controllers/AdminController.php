@@ -104,10 +104,18 @@ class AdminController
 }
 public function galery(): void
 {
+  if(isset($_GET["validate"])){
+    rename("gallerie/non_valide/".$_GET["validate"], "gallerie/valide/".$_GET["validate"]);
+  } else if(isset($_GET["nonvalidate"])){
+    unlink("gallerie/non_valide/".$_GET["nonvalidate"]);
+  }
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Photos');
-    // Additional logic for the guestbook page
-    // ...
+    
+    $contenu_dossier = scandir("gallerie/non_valide");
+
+    $smarty->assign('contenu_dossier', $contenu_dossier);
+
     $smarty->display('admin/galery.tpl');
 }
   public function user_delete($userID): void {
