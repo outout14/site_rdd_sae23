@@ -155,7 +155,15 @@ class HomeController {
 
       /* On met la photo dans le bon dossier */
       $photo = $_FILES["photo"];
-      $destination="gallerie"."/".$photo["name"];
+      $name = "";
+      for($i=0; $i<5; $i++){
+        $name=$name.(string)rand();
+      }
+      $extension = explode(".", $photo["name"]);
+      var_dump($extension);
+      $extension = ".".$extension[array_key_last($extension)];
+      echo($extension);
+      $destination="gallerie/non_valide/".$name.$extension;
 
       move_uploaded_file($photo["tmp_name"], $destination);
     }
@@ -164,8 +172,7 @@ class HomeController {
     }
 
 
-    $contenu_dossier = scandir("gallerie");
-    var_dump($contenu_dossier);
+    $contenu_dossier = scandir("gallerie/valide");
     foreach($contenu_dossier as $photo){
       if($photo != "." && $photo !=".."){
         echo("<br>".$photo);

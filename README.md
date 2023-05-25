@@ -27,6 +27,11 @@ Photos:
                    display
 
 Livre d'or:
-           données (contenue, titre, date, auteur)
+           données (id, contenue, date, auteur)
+           méthode:
+                Créer
+                Supprimer (admin)
+                Supprimer (user)
+
 
 Annuaire:

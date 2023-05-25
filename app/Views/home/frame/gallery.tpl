@@ -13,18 +13,10 @@
             <span class="gallery-title-letter">e</span>
         </div>
 
-        <nav class="d-flex justify-content-center align-items-center flex-column flex-lg-row gap-3 mb-5" id="gallery-navigation">
-            <a href="#" class="link gallery-navigation-item link-active">Trombinoscopes</a>
-            <span class="gallery-navigation-item phone-d-none">|</span>
-            <a href="#" class="link gallery-navigation-item">Profeshinal foto by ma elle</a>
-            <span class="gallery-navigation-item phone-d-none">|</span>
-            <a href="#" class="link gallery-navigation-item">Vos photos</a>
-        </nav>
-
-        <div id="gallery">
+        <div class="mt-5" id="gallery">
             {foreach $contenu_dossier as $photo }
                 {if $photo != "." && $photo !=".." }
-                {assign var="source" value=$APP_URL|cat:"/gallerie/"|cat:$photo}
+                {assign var="source" value=$APP_URL|cat:"/gallerie/valide/"|cat:$photo}
                 <div class="col gallery-image-wrapper">
                     <img class="gallery-image" src="{$source}" alt="{$photo}">
                 </div>
