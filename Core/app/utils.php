@@ -43,4 +43,8 @@ class Utils{
       echo json_encode(array("error" => $error));
       exit();
     }
+
+    public static function GetData($path) {
+      return json_decode(file_get_contents($path), true);
+    }
 }
