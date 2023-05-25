@@ -7,6 +7,8 @@
   If not it returns null.
 */
 
+use JetBrains\PhpStorm\NoReturn;
+
 require_once __DIR__ . '/../../app/Models/user.php';
 
 class connexionMiddleware{
@@ -59,7 +61,7 @@ class connexionMiddleware{
     logout() : void
     This method logs out the user.
   */
-  public static function logout(): void
+  #[NoReturn] public static function logout(): void
   {
     session_destroy();
     header('Location: ' . APP_URL . '/?notification=logout_success');
