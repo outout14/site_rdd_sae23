@@ -35,3 +35,17 @@ Livre d'or:
 
 
 Annuaire:
+
+--- 
+lisa : 
+- Design admin
+- Gestion utilisateur 
+    - compte ( supprimer, modifier valider)
+    - recherche d'utilisateur 
+- photo :
+    - validation photo 
+    - affichage avec date, autheur ...
+    - dossiers avec les momens de la journee (participants, photographe, photobooth) 
+- livre d'or :
+    - tout les messages
+    - date, autheur, entreprise ...
