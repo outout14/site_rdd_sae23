@@ -11,7 +11,7 @@
         </div>
 
         <!-- Content -->
-        <div class="container-fluid h-100 overflow-scroll" id="inscription-scrollable">
+        <div class="container-fluid h-100 overflow-hidden" id="inscription-scrollable">
             <!-- !!!!!!!!!!!!!!!!!! DEBUT FORMULAIRE !!!!!!!!!!!!!!!!!!!!!! -->
             <form action="{$APP_URL}/auth/register" method="POST" class="h-100" id="register_form">
             <input type="hidden" name="actionType" value="register">
@@ -305,7 +305,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-text text-justify px-2">
-                                    Entre 8 et 20 characteres ( c mael qui décid )
+                                    Entre 8 et 20 characteres
                                 </div>
                             </div>
                         </div>
@@ -317,7 +317,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-text text-justify px-2">
-                                    Entre 8 et 20 characteres ( c mael qui décid )
+                                    Entre 8 et 20 characteres
                                 </div>
                             </div>
                         </div>
