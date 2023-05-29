@@ -19,10 +19,16 @@
                             {if $item.name == $currentPage}
                                 <a class="nav-link" href="{$item.url}"><span class="link ubuntu">{$item.name}</span></a>
                             {else}
-                                <a class="nav-link" href="{$item.url}"><span class="link ubuntu">{$item.name}</span></a>
+                                <a class="nav-link" href="{$item.url}"><span class="link ubuntu active">{$item.name}</span></a>
                             {/if}
-                        </li>   
+                        </li>
                     {/foreach}
+
+                    {if not $sessionUser}
+                      <li class="nav-item mb-2 mt-1 my-lg-0 mx-2 mx-lg-3">
+                        <a class="nav-link" href="{$APP_URL}/home/register/"><span class="link ubuntu">Inscription</span></a>
+                      </li>
+                    {/if}
 
                     {if $sessionUser and $sessionUser->role == "admin"}
                     <li class="nav-item mb-2 mt-1 my-lg-0 mx-2 mx-lg-3">
