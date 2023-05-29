@@ -27,7 +27,7 @@ class AdminController
     'home' => 'Accueil',
     'users' => 'Utilisateurs',
     'goldbook' => 'Livre d\'Or',
-    'pictures' => 'Photos',
+    'galery' => 'Photos',
   ];
 
   /**
@@ -53,13 +53,12 @@ class AdminController
           if(!isset($_POST['status'])) $_POST['status'] = "student";
           if(!isset($_POST['role'])) $_POST['role'] = 'user';
           $user = new User();
-          if (gettype($user) == "object") {
+          $err = $user->register ($_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['family_count'], $_POST['company'], $_POST['promotion'], $_POST['promotion_year'], $_POST['display_in_list'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
+          if (gettype($err) == "object") {
             header('Location: ' . APP_URL . '/admin/users?notification=userAdded');
           } else {
             header('Location: ' . APP_URL . '/admin/users?notification=error');
           }
-          $err = $user->register ($_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['family_count'], $_POST['company'], $_POST['promotion'], $_POST['promotion_year'], $_POST['display_in_list'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
-          echo($err);
         }
       }
     }
@@ -89,7 +88,7 @@ class AdminController
           if(!isset($_POST['status'])) $_POST['status'] = "student";
           if(!isset($_POST['role'])) $_POST['role'] = 'user';
 
-          $user->update($_POST["id"], $_POST['lastname'], $_POST['firstname'], $_POST['email'],  $_POST['phone_number'], $_POST['city'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
+          $user->update($_POST["id"], $_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['family_count'], $_POST['company'], $_POST['promotion'], $_POST['promotion_year'], $_POST['display_in_list'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
           header('Location: ' . APP_URL . '/admin/users?notification=userEdited');
         }
       }
@@ -112,7 +111,21 @@ class AdminController
     // ...
     $smarty->display('admin/goldbook.tpl');
 }
+public function galery(): void
+{
+  if(isset($_GET["validate"])){
+    rename("gallerie/non_valide/".$_GET["validate"], "gallerie/valide/".$_GET["validate"]);
+  } else if(isset($_GET["nonvalidate"])){
+    unlink("gallerie/non_valide/".$_GET["nonvalidate"]);
+  }
+    global $smarty;
+    smartyPassDefaultVariables($this->menu, 'Photos');
+    
+    $contenu_dossier = scandir("gallerie/non_valide");
 
+    $smarty->assign('contenu_dossier', $contenu_dossier);
+    $smarty->display('admin/galery.tpl');
+}
   public function user_delete($userID): void {
     $user = new User();
     if($user->get($userID) == null) {
