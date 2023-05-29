@@ -11,10 +11,10 @@ if(isset($_GET["path"]) and !empty($_GET["path"])) {
 
 
     $controller = $path[0];
-    $method = isset($path[1]) ? $path[1] : "";
+    $method = $path[1] ?? "";
     if (empty($method)) {
       $method = "home";
-      if (substr($uri, -1) !== '/') {
+      if (!str_ends_with($uri, '/')) {
         // Redirect while keeping GET parameters
         header("Location: " . APP_URL . $uri . "/" . "?". $_SERVER['QUERY_STRING']);
         exit();

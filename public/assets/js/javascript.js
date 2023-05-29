@@ -17,7 +17,7 @@ if(passwordInputIcons != null) {
             // Child of type input
             let input = parent.querySelector("input");
     
-            if (input.type == "text") {
+            if (input.type === "text") {
                 input.type = "password";
                 icon.src = `${$APP_URL}/assets/images/svg/password-hidden.svg`;
             } else {
@@ -164,29 +164,17 @@ if(document.getElementById("inscription-container") != null){
 
                 container_company.classList.toggle("d-none");
                 input_promotion.addEventListener("change", () => {
-                    if (input_promotion.value == "2AFI") {
-                        input_company.disabled = true;
-                    } else {
-                        input_company.disabled = false;
-                    }
+                    input_company.disabled = input_promotion.value == "2AFI";
                 })
 
                 container_map.classList.toggle("d-none");
                 input_checkmap.addEventListener("change", () => {
-                    if (input_checkmap.checked) {
-                        input_map.disabled = false;
-                    } else {
-                        input_map.disabled = true;
-                    }
+                    input_map.disabled = !input_checkmap.checked;
                 })
 
                 container_family.classList.toggle("d-none");
                 input_checkfamily.addEventListener("change", () => {
-                    if (input_checkfamily.checked) {
-                        input_countfamily.disabled = false;
-                    } else {
-                        input_countfamily.disabled = true;
-                    }
+                    input_countfamily.disabled = !input_checkfamily.checked;
                 })
 
                 if(phone){
@@ -212,11 +200,7 @@ if(document.getElementById("inscription-container") != null){
 
                 container_map.classList.toggle("d-none");
                 input_checkmap.addEventListener("change", () => {
-                    if (input_checkmap.checked) {
-                        input_map.disabled = false;
-                    } else {
-                        input_map.disabled = true;
-                    }
+                    input_map.disabled = !input_checkmap.checked;
                 })
                 break;
             case "other":
@@ -227,11 +211,7 @@ if(document.getElementById("inscription-container") != null){
 
                 container_map.classList.toggle("d-none");
                 input_checkmap.addEventListener("change", () => {
-                    if (input_checkmap.checked) {
-                        input_map.disabled = false;
-                    } else {
-                        input_map.disabled = true;
-                    }
+                    input_map.disabled = !input_checkmap.checked;
                 })
                 break;
             }
@@ -244,7 +224,7 @@ if(document.getElementById("inscription-container") != null){
     function secondContinue() {
         inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight);
 
-        if(input_status.value == "student" && document.getElementById("input-promotion").value == "2AFI") {
+        if(input_status.value === "student" && document.getElementById("input-promotion").value === "2AFI") {
             document.getElementById("container-map").classList.toggle("d-none")
         }
         if (phone) {
@@ -300,7 +280,7 @@ function titleAnimation(identifier) {
 const gallery = document.getElementById("gallery")
 
 if(gallery != null) {
-    if(gallery.children.length == 0) {
+    if(gallery.children.length === 0) {
         gallery.innerHTML = "<span class='inscription-info-text text-white'>Une fois la cérémonie passée, les photos apparaitront ici.</span>"
     }
 }

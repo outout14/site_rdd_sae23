@@ -1,7 +1,7 @@
 const annuaire_body = document.getElementById("annuaire-table-body")
 
 function displayUsers(users) {
-    if(users.length == 0) {
+    if(users.length === 0) {
         annuaire_body.innerHTML = "<tr><td class='text-center py-5 bg-transparent' colspan='5'>Aucun utilisateur n'a été trouvé</td></tr>";
         return
     }

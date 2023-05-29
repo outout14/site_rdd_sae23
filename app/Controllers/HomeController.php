@@ -1,6 +1,8 @@
 <?php
 
 // Load the bootstrap file
+use JetBrains\PhpStorm\NoReturn;
+
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 require_once(__DIR__ . '/../Models/user.php');
 
@@ -13,10 +15,11 @@ function getData($path) {
   return json_decode(file_get_contents($path), true);
 }
 
-function addCreator($name, $surname, $role, $link) {
+function addCreator($name, $surname, $role, $link): string
+{
   $path = APP_URL . "/assets/images/creators/creator_" . strtolower($name) . ".png";
 
-  $template = <<<TEMPL
+  return <<<TEMPL
       <div class="organisator-wrapper">
           <div class="avatar-lg">
               <a href="$link">
@@ -31,16 +34,15 @@ function addCreator($name, $surname, $role, $link) {
           </div>
       </div>
       TEMPL;
-
-  return $template;
 }
 
-function getCreators() {
+function getCreators(): string
+{
   $organisators = getData(__DIR__ . '/../Data/organisators.json');
   $result = array();
 
   foreach(array_keys($organisators) as $organisator) {
-      array_push($result, addCreator($organisators[$organisator]["firstname"],$organisators[$organisator]["lastname"],$organisators[$organisator]["task"],$organisators[$organisator]["link"]));
+      $result[] = addCreator($organisators[$organisator]["firstname"], $organisators[$organisator]["lastname"], $organisators[$organisator]["task"], $organisators[$organisator]["link"]);
   }
 
   $result = implode("",$result);
@@ -48,24 +50,24 @@ function getCreators() {
   return $result.$result;
 }
 
-function addSponsor($name, $link) {
+function addSponsor($name, $link): string
+{
   $path = APP_URL . "/assets/images/sponsors/" . strtolower($name) . ".png";
 
-  $template = <<<TEMPL
+  return <<<TEMPL
       <div class="col d-flex justify-content-center align-items-center">
           <a href="$link"><img src="$path" alt="$name" class="sponsor-img"></a>
       </div>
       TEMPL;
-
-  return $template;
 }
 
-function getSponsors() {
+function getSponsors(): string
+{
   $sponsors = getData(__DIR__ . '/../Data/sponsors.json');
   $result = array();
 
   foreach(array_keys($sponsors) as $sponsor) {
-      array_push($result, addSponsor($sponsors[$sponsor]["name"],$sponsors[$sponsor]["link"]));
+      $result[] = addSponsor($sponsors[$sponsor]["name"], $sponsors[$sponsor]["link"]);
   }
 
   return implode("",$result);
@@ -75,7 +77,7 @@ function getOrganisation() {
   return getData(__DIR__ . '/../Data/organisation.json');
 }
 
-function getUsers($users): void
+#[NoReturn] function getUsers($users): void
 {
   header('Content-Type: application/json');
   echo json_encode($users);
@@ -107,7 +109,10 @@ class HomeController {
     $organisation = getOrganisation();
     $smarty->assign('organisation',$organisation);
 
-    $smarty->display('home/index.tpl');
+    try {
+      $smarty->display('home/index.tpl');
+    } catch (SmartyException $e) {
+    }
   }
 
   // Inscription page
@@ -117,19 +122,25 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
 
-    $smarty->display('home/inscription.tpl');
+    try {
+      $smarty->display('home/inscription.tpl');
+    } catch (SmartyException $e) {
+    }
   }
 
   public function resetPassword($token=""): void
   {
     if($token==""){
-      header("Location: " . APP_URL);
+      header("Location: " . APP_URL . "/home");
       exit();
     }
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Mot de passe oublié');
     $smarty->assign('token', $token);
-    $smarty->display('home/resetPassword.tpl');
+    try {
+      $smarty->display('home/resetPassword.tpl');
+    } catch (SmartyException $e) {
+    }
   }
 
   public function golddbook(): void
@@ -137,15 +148,21 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
 
-    $smarty->display('home/inscription.tpl');
+    try {
+      $smarty->display('home/inscription.tpl');
+    } catch (SmartyException $e) {
+    }
   }
 
   public function gallery(): void
   {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
-    
-    $smarty->display('home/galerie.tpl');
+
+    try {
+      $smarty->display('home/galerie.tpl');
+    } catch (SmartyException $e) {
+    }
   }
 
   public function annuaire(): void
@@ -153,44 +170,10 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
-    $smarty->assign('traitement',$_POST);
-    if(isset($_POST["submit"])){
-      $users = User::getAll();
-
-      if($_POST["name"]!=""){
-        $name = $_POST["name"];
-      }
-      if($_POST["status"]!="other"){
-        $status = $_POST["status"];
-      }
-      if($_POST["company"]){
-        $company = $_POST["company"];
-      }
-
-      $promotion = $_POST["promotion"];
-
-      foreach ($users as $user){
-        if(isset($name) && $user -> firstname !=$name){
-          unset($users[$user -> id]);
-        }
-        if(isset($status) && $user -> status != $status){
-          unset($users[$user -> id]);
-        }
-        if(isset($company) && $user -> company != $company){
-          unset($users[$user -> id]);
-        }
-        if(isset($promotion) && $user -> promotion != $promotion){
-          unset($users[$user -> id]);
-        }
-      }
-
-      $smarty->assign('users', $users);
+    try {
+      $smarty->display('home/users.tpl');
+    } catch (SmartyException $e) {
     }
-    else{
-      $smarty->assign('users', User::getAll());
-    }
-
-    $smarty->display('home/users.tpl');
   }
   public function pagenotfound(): void
   {
