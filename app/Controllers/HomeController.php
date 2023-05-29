@@ -82,33 +82,80 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
-    try {
-      $smarty->display('home/galerie.tpl');
-    } catch (SmartyException $e) {
+    /*----------------A faire-------------
+    Vérifier si il y a pas une photo qui a déjà le même nom
+    Donner un nom a sa photo */
+
+
+    /* Verifie si la photo s'est bien télécharger */
+    if (isset($_FILES["photo"]) && $_FILES["photo"]["error"]== UPLOAD_ERR_OK){
+
+      /* On met la photo dans le bon dossier */
+      $photo = $_FILES["photo"];
+      $name = "";
+      for($i=0; $i<5; $i++){
+        $name=$name.(string)rand();
+      }
+      $extension = explode(".", $photo["name"]);
+      var_dump($extension);
+      $extension = ".".$extension[array_key_last($extension)];
+      echo($extension);
+      $destination="gallerie/non_valide/".$name.$extension;
+      echo($photo["tmp_name"]);
+
+      move_uploaded_file($photo["tmp_name"], $destination);
     }
+
+
+    $contenu_dossier = scandir("gallerie/valide");
+
+    $smarty->assign('contenu_dossier', $contenu_dossier);
+
+      
+    $smarty->display('home/galerie.tpl');
+
   }
 
   public function annuaire(): void
   {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
+
+    $users = User::getAll();
+    /* Boucle qui enleve toute les données inutiles */
+    foreach ($users as $user) {
+      unset($user->email);
+      unset($user->phone_number);
+      unset($user->city);
+      unset($user -> family_count);
+      unset($user -> has_paid);
+      unset($user -> role);
+}
+
+/* vérifier si luilisateur est conformé 
+Faire en sorte de filtrer sans le nome entier*/
     $smarty->assign('traitement',$_POST);
     if(isset($_POST["submit"])){
-      $users = User::getAll();
 
-      if($_POST["name"]!=""){
+      if(isset($_POST["name"]) && $_POST["name"]!=""){
         $name = $_POST["name"];
       }
-      if($_POST["status"]!="other"){
+      if(isset($_POST["status"]) && $_POST["status"]!="other"){
         $status = $_POST["status"];
       }
-      if($_POST["company"]){
+      if(isset($_POST["company"]) && $_POST["company"] ){
         $company = $_POST["company"];
       }
+      if (isset($_POST["promotion"]) && $_POST["promotion"] ){
+        $promotion = $_POST["promotion"];
+      }
 
-      $promotion = $_POST["promotion"];
 
       foreach ($users as $user){
+
+        if($user ->display_in_list==0){
+          // unset($users[$user]);
+        }
         if(isset($name) && $user -> firstname !=$name){
           unset($users[$user -> id]);
         }
@@ -128,6 +175,8 @@ class HomeController {
     else{
       $smarty->assign('users', User::getAll());
     }
+
+    var_dump($_POST);
 
     $smarty->display('home/users.tpl');
   }

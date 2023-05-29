@@ -14,8 +14,7 @@
             </div>
 
             <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
-                <form action="" method="POST" class="d-flex justify-content-center align-items-center flex-column">
-                    <input type="hidden" name="actionType" value="addphotos">
+                <form action="{$APP_URL}/home/gallery" method="POST" class="d-flex justify-content-center align-items-center flex-column" enctype="multipart/form-data">
                     <label for="input-file" class="d-flex justify-content-center align-items-center flex-column p-5 mb-3 mt-4 hover-pointer" id="input-file-label">
                         <i class="bi bi-box-arrow-down fa-6x text-secondary mb-4 up-and-down-low"></i>
                         <p class="inscription-info-text mx-3 text-center">Choisissez un fichier à déposer</p>
