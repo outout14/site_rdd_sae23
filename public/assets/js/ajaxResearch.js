@@ -1,7 +1,7 @@
 const annuaire_body = document.getElementById("annuaire-table-body")
 
 function displayUsers(users) {
-    if(users.length == 0) {
+    if(users.length === 0) {
         annuaire_body.innerHTML = "<tr><td class='text-center py-5 bg-transparent' colspan='5'>Aucun utilisateur n'a été trouvé</td></tr>";
         return
     }
@@ -19,7 +19,7 @@ function displayUsers(users) {
     })
 }
 
-function submitForm(form) {
+function ajaxSend(form) {
     fetch(form.action, {
         method: form.method,
         body: new FormData(form)
@@ -38,16 +38,11 @@ const _promotion = document.getElementById("annuaire-promotion")
 const _company = document.getElementById("annuaire-company")
 
 inputs.forEach( input => {
-    input.addEventListener("input", () => {
-        let status = _status.value
-        let name = _name.value
-        let promotion = _promotion.value
-        let company = _company.value
-
-        console.log(`Critères de recherche -> Statut: ${status}, Nom : ${name}, Promotion : ${promotion}, Company : ${company}, `)
-        submitForm(form)
+    input.addEventListener("change", () => {
+        // console.log(`Critères de recherche -> Statut: ${status}, Nom : ${name}, Promotion : ${promotion}, Company : ${company}, `)
+        ajaxSend(form)
     })
 })
 
-submitForm(form)
+ajaxSend(form)
 

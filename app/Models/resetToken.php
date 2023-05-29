@@ -6,7 +6,8 @@
     private int $user_id;
     private string $expiration_date;
 
-    public function __constructor($id = 0, $token = "", $user_id = 0, $expiration_date = "") {
+    public function __constructor($id = 0, $token = "", $user_id = 0, $expiration_date = ""): void
+    {
       $this->id = $id;
       $this->token = $token;
       $this->user_id = $user_id;
@@ -15,7 +16,11 @@
 
     static public function generateToken($user_id): string {
       $resetToken = new resetToken();
-      $resetToken->token = bin2hex(random_bytes(32));
+      try {
+        $resetToken->token = bin2hex(random_bytes(32));
+      } catch (Exception $e) {
+        return "";
+      }
       $resetToken->user_id = $user_id;
       $resetToken->expiration_date = date("Y-m-d H:i:s", strtotime("+10 minutes"));
       $resetToken->create();

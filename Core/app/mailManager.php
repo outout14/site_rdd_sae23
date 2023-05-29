@@ -36,7 +36,7 @@ class mailManager {
       $this->mail->addReplyTo(MAIL_REPLYTO, MAIL_REPLYTO_NAME);
 
       //Content
-      $this->mail->isHTML(true);                                  //Set email format to HTML
+      $this->mail->isHTML();                                  //Set email format to HTML
       $this->mail->Subject = $subject;
       // Load smarty template
       global $smarty;

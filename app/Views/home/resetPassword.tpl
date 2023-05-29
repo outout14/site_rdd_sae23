@@ -5,10 +5,13 @@
 
 <body>
 
+    <!-- Modal connexion -->
+    {include file="./modals/login.tpl"}
+
     <!-- Navbar -->
     {include file="../home/common/navbar.tpl"}
 
-    <section class="window-container background-wave-blue" id="container">
+    <section class="window-container background-wave-blue">
         <div class="window flex-center p-5" id="changepassword-window">
             <form action="{$APP_URL}/auth/forgotPassword" method="post" id="new_password_form">
                 <input type="hidden" name="actionType" value="newPassword"> 

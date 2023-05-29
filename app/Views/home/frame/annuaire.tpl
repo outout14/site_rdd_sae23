@@ -7,7 +7,7 @@
             <span class="dot bg-success"></span>
             <h4 class="text-information fw-bold ms-3">{$currentPage}</h4>
         </div>
-        <form action="{$APP_URL}/search/searchAnnuaire" method="POST" class="w-100 h-auto mb-3 mt-5 mt-lg-2 px-3" id="annuaire-form">
+        <form action="{$APP_URL}/home/annuaire" method="POST" class="w-100 h-auto mb-3 mt-5 mt-lg-2 px-3" id="annuaire-form">
             <input type="hidden" name="actionType" value="search">
     
             <div class="container-fluid">
@@ -74,9 +74,9 @@
                         <input class="form-control px-3 py-2 annuaire-ajax" type="text" placeholder="Entreprise" id="annuaire-company" name="company">
                     </div>
 
-                    <!-- <div class="col-12 col-lg-2 flex-center my-1">
+                    <div class="col-12 col-lg-2 flex-center my-1">
                         <input class="button rounded-3 bg-blue text-white fw-bold h-100 w-100 px-3 py-2" type="submit" name="submit" value="Rechercher">
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </form>
@@ -93,6 +93,18 @@
                     </tr>
                 </thead>
                 <tbody class="overflow-scroll" id="annuaire-table-body">
+                    {if empty($users) }
+                    <p>Aucun utilisateur</p>
+                    {/if}
+                    {foreach $users as $user}
+                    <tr>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->lastname}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->firstname}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->status}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->promotion}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->company}</td>
+                    </tr>
+                    {/foreach}
                 </tbody>
             </table>
         </div>
