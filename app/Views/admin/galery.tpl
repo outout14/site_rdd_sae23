@@ -21,7 +21,6 @@
         </div>
     </div>
 </section>
-
 </div>
 {include file="./frame/footer.tpl"}
 

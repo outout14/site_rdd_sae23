@@ -37,7 +37,10 @@ class AdminController
   {
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Accueil');
-    $smarty->display('admin/index.tpl');
+    try {
+      $smarty->display('admin/index.tpl');
+    } catch (SmartyException $e) {
+    }
   }
 
   public function users(): void
@@ -63,7 +66,10 @@ class AdminController
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Utilisateurs');
     $smarty->assign('users', User::getAll());
-    $smarty->display('admin/users.tpl');
+    try {
+      $smarty->display('admin/users.tpl');
+    } catch (SmartyException $e) {
+    }
   }
 
   public function user_edit($userID): void {
@@ -91,7 +97,10 @@ class AdminController
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Utilisateurs');
     $smarty->assign('user', $user);
-    $smarty->display('admin/user_edit.tpl');
+    try {
+      $smarty->display('admin/user_edit.tpl');
+    } catch (SmartyException $e) {
+    }
   }
 
   public function goldbook(): void
@@ -115,7 +124,6 @@ public function galery(): void
     $contenu_dossier = scandir("gallerie/non_valide");
 
     $smarty->assign('contenu_dossier', $contenu_dossier);
-
     $smarty->display('admin/galery.tpl');
 }
   public function user_delete($userID): void {
@@ -127,10 +135,6 @@ public function galery(): void
 
     $user->delete($userID);
     header('Location: ' . APP_URL . '/admin/users?notification=userDeleted');
-  }
-
-  public function mail(){
-    require_once __DIR__ . '/../../Core/app/mail.php';
   }
 }
 

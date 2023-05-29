@@ -1,51 +1,28 @@
-# site_rdd_sae23
-Groupe 4 - Site RDD 
+# Site Remise Des Diplômes - SAE23
+Réalisation du **Groupe 4** composé de : Maël, Alexis, Nikita et Lisa dans le cadre de la SAE23.
 
-Ce site servira à la remise des diplomes de l'IUT de Saint-Malo  
-Test pour voir si mon truc marche
+Ce site servira à la remise des diplômes de l'IUT de Saint-Malo.
 
-Commande pour utiliser git:
+## Prérequis
 
-git clone [url du github]  #permet de récuperer sur son PC le code sur e github  
-On peut donc désormais coder notre parti en mettant tout le code sur wanp
+- PHP 8 (ou supérieur) ([https://www.php.net/](https://www.php.net/))
+- Composer ([https://getcomposer.org/](https://getcomposer.org/))
+- Git ([https://git-scm.com/](https://git-scm.com/))
+- Serveur Web (Apache, Nginx, etc.)
+- Serveur MySQL (ou MariaDB)
+- Serveur SMTP (pour l'envoi des mails)
 
-git status  #affiche dans quelle branche on est
+## Installation
 
+Pour installer le projet, il faut cloner le dépôt git dans le dossier du serveur Web (Linux : ``/var/www/html/``) avec la commande suivante :
 
-git fetch  #
-git checkout [branche]  #pour se positionner dans la branche
-git add *  
-git commit -m [nom]  
-git push  #les trois lignes permettent d'envoyer le code sur le github  
+  ```bash
+  cd /var/www/html/
+  git clone git@github.com:outout14/site_rdd_sae23.git
+  ```
 
+Il faut ensuite installer les dépendances du projet avec la commande suivante dans le dossier du projet :
 
----Ce que je dois faire----
-Photos:
-        Données (dates, auteurs, nom et valider(bool))
-        méthodes : upload
-                   delete
-                   display
-
-Livre d'or:
-           données (id, contenue, date, auteur)
-           méthode:
-                Créer
-                Supprimer (admin)
-                Supprimer (user)
-
-
-Annuaire:
-
---- 
-lisa : 
-- Design admin
-- Gestion utilisateur 
-    - compte ( supprimer, modifier valider)
-    - recherche d'utilisateur 
-- photo :
-    - validation photo 
-    - affichage avec date, autheur ...
-    - dossiers avec les momens de la journee (participants, photographe, photobooth) 
-- livre d'or :
-    - tout les messages
-    - date, autheur, entreprise ...
+  ```bash
+  composer install
+  ```

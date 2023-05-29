@@ -1,6 +1,8 @@
 <?php
 
 // Load the bootstrap file
+use JetBrains\PhpStorm\NoReturn;
+
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 require_once(__DIR__ . '/../Models/user.php');
 
@@ -9,16 +11,15 @@ require_once(__DIR__ . '/../Models/user.php');
  * This file is used to handle the home page.
  */
 
-function sendUsers($users): void
+#[NoReturn] function sendUsers($users): void
 {
     header('Content-Type: application/json');
     echo json_encode($users);
     exit();
 }
 
-class SearchController
-{
-    public function searchAnnuaire(): void
+class SearchController {
+    #[NoReturn] public function searchAnnuaire(): void
     {
 
         $users = User::getAll();
