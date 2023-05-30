@@ -11,7 +11,7 @@
     <!-- Navbar -->
     {include file="../home/common/navbar.tpl"}
 
-    <section class="window-container background-wave-blue">
+    <section class="window-container>
         <div class="window flex-center p-5" id="changepassword-window">
             <form action="{$APP_URL}/auth/forgotPassword" method="post" id="new_password_form">
                 <input type="hidden" name="actionType" value="newPassword"> 
@@ -75,7 +75,5 @@
             </form>
         </div>
     </section>
-
-    <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
 </body>
 </html>

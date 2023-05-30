@@ -43,5 +43,4 @@
 
     <!-- <img class="wave" src="{$APP_URL}/assets/images/background/wave-creators-bottom.svg" alt="wave"> -->
 
-
 </section>

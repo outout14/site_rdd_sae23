@@ -47,7 +47,8 @@ class HomeController {
 
     try {
       $smarty->display('home/inscription.tpl');
-    } catch (SmartyException $e) {
+    } 
+    catch (SmartyException $e) {
     }
   }
 
@@ -66,13 +67,79 @@ class HomeController {
     }
   }
 
-  public function golddbook(): void
+  public function goldbook(): void
   {
     global $smarty;
-    Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
+    Utils::SmartyGeneralValues("home", $this->menu, 'Livre d\'or');
+
+    $exemple_de_messages = array(
+
+      "message_1" => array(
+        "lastname" => "Ziuzin",
+        "firstname" => "Nikita",
+        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                      Harum, debitis vel enim numquam expedita mollitia minima 
+                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
+                      voluptatem, iusto repellendus id ea!",
+        "date" => "34 février 2021"
+      ),
+
+      "message_2" => array(
+        "lastname" => "Gramain",
+        "firstname" => "Mael",
+        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                      Harum, debitis vel enim numquam expedita mollitia minima 
+                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
+                      voluptatem, iusto repellendus id ea!",
+        "date" => "-3 decembre 2050"
+      ),
+
+      "message_3" => array(
+        "lastname" => "Teffene",
+        "firstname" => "Alexis",
+        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                      Harum, debitis vel enim numquam expedita mollitia minima 
+                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
+                      voluptatem, iusto repellendus id ea!",
+        "date" => "17 juillet 2023"
+      ),
+
+      "message_4" => array(
+        "lastname" => "Cazoulat",
+        "firstname" => "Lisa",
+        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                      Harum, debitis vel enim numquam expedita mollitia minima 
+                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
+                      voluptatem, iusto repellendus id ea!",
+        "date" => "30 septembre 2021"
+      ),
+
+      "message_5" => array(
+        "lastname" => "Dupont",
+        "firstname" => "Jean",
+        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                      Harum, debitis vel enim numquam expedita mollitia minima 
+                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
+                      voluptatem, iusto repellendus id ea!",
+        "date" => "10 mai 2017"
+      ),
+
+      "message_6" => array(
+        "lastname" => "Tran",
+        "firstname" => "Saction",
+        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                      Harum, debitis vel enim numquam expedita mollitia minima 
+                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
+                      voluptatem, iusto repellendus id ea!",
+        "date" => "9 octobre 2013"
+      ),
+
+      );
+
+    $smarty->assign('goldbook',$exemple_de_messages);
 
     try {
-      $smarty->display('home/inscription.tpl');
+      $smarty->display('home/goldbook.tpl');
     } catch (SmartyException $e) {
     }
   }

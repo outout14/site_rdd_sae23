@@ -1,5 +1,5 @@
 
-<section class="window-container background-wave-blue" id="inscription-container">
+<section class="window-container" id="inscription-container">
 
     <div class="window d-flex align-items-center flex-column">
         <!-- Header, à ne pas afficher sur la version mobile! -->

@@ -1,4 +1,4 @@
-<section class="window-container background-wave-blue" id="annuaire-container">
+<section class="window-container" id="annuaire-container">
     <div class="window d-flex align-items-center flex-column px-1 px-lg-5 pt-5 pt-lg-0">
         <!-- Header, à ne pas afficher sur la version mobile! -->
         <div class="my-3 ps-2 dot-header">

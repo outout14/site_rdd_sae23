@@ -26,7 +26,6 @@
 }
 
 body {
-    /* background-image: url('../images/background/main-blurred.png'); */
     background-image: url('../images/background/secondary-blue.svg');
     background-position: center;
     background-repeat: no-repeat;
@@ -195,7 +194,6 @@ a {
     align-items: center;
     width: 100%;
     gap: .5rem;
-
 }
 
 .dot {
@@ -793,9 +791,16 @@ header {
     height: fit-content;
 }
 
+#gallery-window {
+    border-radius: 2vh;
+    box-shadow: none;
+}
+
 #gallery-modal-photo {
     max-height: 80vh;
     max-width: 80vw;
+    min-height: 40vh;
+    min-width: 50vh;
     object-fit: fill;
 }
 
@@ -891,6 +896,97 @@ header {
     font-size: 2vw;
 }
 
+#goldbook-submit {
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%) rotate(-90deg);
+
+    height: 70%;
+    border-radius: 50%;
+    border: none;
+
+    background-color: #4865a8;
+    color: var(--bonewhite);
+
+    transition: background-color 0.5s;
+}
+
+#goldbook-submit:hover {
+    background-color: #0b8af1;
+}
+
+#goldbook-limit {
+    opacity: 0;
+    color: var(--bonewhite);
+    transition: transform 0.5s, opacity 0.5s;
+    transform: translate(0, 100%);
+}
+
+#goldbook-content {
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#goldbook-content::-webkit-scrollbar {
+    display: none !important;
+}
+
+.goldbook-message-wrapper:nth-child(even) {
+    align-self: flex-end;
+    align-items: end;
+}
+
+.goldbook-message-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 45%;
+    position: relative;
+}
+
+.goldbook-message-wrapper .dot {
+    background-color: #dc3545 !important;
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+
+.goldbook-message-wrapper:nth-child(even) .dot {
+    right: unset;
+    left: 0;
+}
+
+.goldbook-name {
+    font-weight: bold;
+    color: var(--bonewhite);
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+}
+
+.goldbook-message {
+    background-color: #0b8af1;
+    border-radius: 2vh;
+    padding: 0.8rem !important;
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1rem;
+    color: var(--bonewhite);
+    width: fit-content;
+}
+
+.goldbook-date {
+    color: var(--bonewhite);
+    font-size: 0.75rem;
+}
+
 .up-and-down {
     animation: up-and-down 3s linear infinite;
 }
@@ -980,6 +1076,9 @@ header {
 }
 
 @media (max-width: 1000px) {
+    .goldbook-message-wrapper {
+        max-width: 70%;
+    }
     .error-title:nth-child(1) {
         font-size: 30vw;
         line-height: 30vw;
