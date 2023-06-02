@@ -2,6 +2,7 @@
 
 // Load the bootstrap file
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
+require_once(__DIR__ . "/../Models/goldbook.php");
 
 connexionMiddleware::shouldBeAdmin();
 
@@ -105,10 +106,20 @@ class AdminController
 
   public function goldbook(): void
 {
+  
+  if(isset($_GET["validate"])){
+    $id = $_GET["validate"];
+    goldbook::validate($id);
+  }else if(isset($_GET["nonvalidate"])){
+    $id = $_GET["nonvalidate"];
+    goldbook::delete($id);
+  }
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Livre d\'Or');
-    // Additional logic for the guestbook page
-    // ...
+
+    $content_db = goldbook::lister(0);
+    $smarty->assign('goldbook',$content_db);
+    
     $smarty->display('admin/goldbook.tpl');
 }
 public function galery(): void

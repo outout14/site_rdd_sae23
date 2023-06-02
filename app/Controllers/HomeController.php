@@ -70,6 +70,7 @@ class HomeController {
 
   public function goldbook(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Livre d\'or');
 
@@ -77,14 +78,16 @@ class HomeController {
 
     if(isset($_POST["submit"])){
       $content = $_POST["message"];
-      $titre = $_POST["titre"];
       $date = date("Y-m-d");
-      $message = new goldbook(0, $titre, $content, connexionMiddleware::getLoginUser(), $date);
+      $message = new goldbook(0, $content, connexionMiddleware::getLoginUser(), $date);
       $message->push();
     }
 
-    $content_db = goldbook::lister(0);
+    $content_db = goldbook::lister(1);
     $smarty->assign('goldbook',$content_db);
+
+    $validate_form = goldbook::verif(connexionMiddleware::getLoginUser()->id);
+    $smarty->assign('already_sent_message',$validate_form);
 
     try {
       $smarty->display('home/goldbook.tpl');
@@ -94,6 +97,7 @@ class HomeController {
 
   public function gallery(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
@@ -133,6 +137,7 @@ class HomeController {
 
   public function annuaire(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
