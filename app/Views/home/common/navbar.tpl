@@ -1,5 +1,5 @@
-<header class="fixed-top d-flex justify-content-between align-items-center py-2 px-4">
 
+<header class="fixed-top d-flex justify-content-between align-items-center py-2 px-4">
     <div id="header-background-scroll"></div>
 
     <nav class="navbar navbar-expand-lg shadow-0">

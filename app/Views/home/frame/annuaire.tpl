@@ -1,5 +1,5 @@
 <section class="window-container" id="annuaire-container">
-    <div class="window d-flex align-items-center flex-column px-1 px-lg-5 pt-5 pt-lg-0">
+    <div class="window d-flex align-items-center flex-column px-1 px-md-3 px-lg-5 pt-5 pt-lg-0">
         <!-- Header, à ne pas afficher sur la version mobile! -->
         <div class="my-3 ps-2 dot-header">
             <span class="dot bg-danger"></span>
@@ -22,11 +22,11 @@
                         </select>
                     </div>
 
-                    <div class="col-12 col-lg-5 my-1">
+                    <div class="col-12 col-lg-4 my-1">
                         <input class="form-control px-3 py-2 annuaire-ajax" type="text" placeholder="Nom ou prénom" id="annuaire-name" name="name">
                     </div>
 
-                    <div class="col-6 col-lg my-1">
+                    <div class="col-12 col-lg my-1">
                         <select class="form-select ps-2 py-2 annuaire-ajax " id="annuaire-promotion" name="promotion">
                             <option value="" selected>Toutes promotions</option>
                             <option value="2AFA">2AFA</option>
@@ -70,12 +70,14 @@
                         </select>
                     </div>
 
-                    <div class="col-6 col-lg my-1">
+                    <div class="col-12 col-lg-2 my-1">
                         <input class="form-control px-3 py-2 annuaire-ajax" type="text" placeholder="Entreprise" id="annuaire-company" name="company">
                     </div>
 
-                    <div class="col-12 col-lg-2 flex-center my-1">
-                        <input class="button rounded-3 bg-blue text-white fw-bold h-100 w-100 px-3 py-2" type="submit" name="submit" value="Rechercher">
+                    <div class="col-12 col-lg-1 flex-center my-1">
+                        <button class="button rounded-3 bg-blue text-white fw-bold h-100 w-100 px-3 py-2" type="submit" name="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
                     </div>
                 </div>
             </div>

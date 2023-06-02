@@ -72,6 +72,8 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Livre d\'or');
 
+    
+
     $exemple_de_messages = array(
 
       "message_1" => array(
@@ -153,7 +155,6 @@ class HomeController {
     Vérifier si il y a pas une photo qui a déjà le même nom
     Donner un nom a sa photo */
 
-
     /* Verifie si la photo s'est bien télécharger */
     if (isset($_FILES["photo"]) && $_FILES["photo"]["error"]== UPLOAD_ERR_OK){
 
@@ -173,14 +174,11 @@ class HomeController {
       move_uploaded_file($photo["tmp_name"], $destination);
     }
 
-
     $contenu_dossier = scandir("gallerie/valide");
 
     $smarty->assign('contenu_dossier', $contenu_dossier);
 
-      
     $smarty->display('home/galerie.tpl');
-
   }
 
   public function annuaire(): void
@@ -242,8 +240,6 @@ Faire en sorte de filtrer sans le nome entier*/
     else{
       $smarty->assign('users', User::getAll());
     }
-
-    var_dump($_POST);
 
     $smarty->display('home/users.tpl');
   }
