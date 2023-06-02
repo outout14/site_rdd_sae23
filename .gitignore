@@ -7,3 +7,5 @@ config/config.php
 app/Views/templates_c/
 
 public/.htaccess
+
+.DS_STORE

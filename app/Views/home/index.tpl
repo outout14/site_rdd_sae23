@@ -25,5 +25,8 @@
 
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}
+
+    <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
+    <script src="https://js.hcaptcha.com/1/api.js?hl=fr" async defer></script>
 </body>
 </html>

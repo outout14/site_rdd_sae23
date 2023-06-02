@@ -130,8 +130,8 @@ function connectionScroll(direction) {
 if(document.getElementById("inscription-container") != null){
     // Variables pour le scroll
     var inscriptionScrollable = document.getElementById("inscription-scrollable");
-    const inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
-
+    window.inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
+    console.log(inscriptionScrollableHeight);
     function firstContinue() {
         let input_status = document.getElementById("input-status");
 
@@ -215,13 +215,13 @@ if(document.getElementById("inscription-container") != null){
                 break;
             }
 
-            
+        console.log("ICI ?");
         // Permet de scroll
-        inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight)
+        inscriptionScrollable.scrollBy(0,window.inscriptionScrollableHeight);
     }
     
     function secondContinue() {
-        inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight);
+        inscriptionScrollable.scrollBy(0,window.inscriptionScrollableHeight);
 
         if(input_status.value === "student" && document.getElementById("input-promotion").value === "2AFI") {
             document.getElementById("container-map").classList.toggle("d-none")

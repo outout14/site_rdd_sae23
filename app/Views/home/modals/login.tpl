@@ -54,7 +54,15 @@
                                 </div>
                             </div>
                         </div>
-    
+
+                        <!-- Captcha -->
+                        <div class="text-center">
+                          <div
+                            class="h-captcha"
+                            data-sitekey="{$HCAPTCHA_SITEKEY}"
+                          ></div>
+                        </div>
+
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 my-3">
                             <button class="button rounded-3 bg-blue text-white fw-bold py-2 px-3">Se connecter</button>
