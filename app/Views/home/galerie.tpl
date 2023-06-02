@@ -3,7 +3,7 @@
 
 {include file="./common/head.tpl"}
 
-<body onload="titleAnimation('gallery-title')">
+<body class="background-wave-blue" onload="titleAnimation('gallery-title')">
 
     <!-- Navbar -->
     {include file="./common/navbar.tpl"}

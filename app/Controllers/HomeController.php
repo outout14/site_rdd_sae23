@@ -5,6 +5,7 @@ use JetBrains\PhpStorm\NoReturn;
 
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 require_once(__DIR__ . '/../Models/user.php');
+require_once(__DIR__ . '/../Models/goldbook.php');
 
 /*
  * HomeController
@@ -47,7 +48,8 @@ class HomeController {
 
     try {
       $smarty->display('home/inscription.tpl');
-    } catch (SmartyException $e) {
+    } 
+    catch (SmartyException $e) {
     }
   }
 
@@ -66,26 +68,42 @@ class HomeController {
     }
   }
 
-  public function golddbook(): void
+  public function goldbook(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
-    Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
+    Utils::SmartyGeneralValues("home", $this->menu, 'Livre d\'or');
+
+    /* Il faut vérifier que l'utilisateur écrit pas plusieurs fois*/
+
+    if(isset($_POST["submit"])){
+      $content = $_POST["message"];
+      $date = date("Y-m-d");
+      $message = new goldbook(0, $content, connexionMiddleware::getLoginUser(), $date);
+      $message->push();
+    }
+
+    $content_db = goldbook::lister(1);
+    $smarty->assign('goldbook',$content_db);
+
+    $validate_form = goldbook::verif(connexionMiddleware::getLoginUser()->id);
+    $smarty->assign('already_sent_message',$validate_form);
 
     try {
-      $smarty->display('home/inscription.tpl');
+      $smarty->display('home/goldbook.tpl');
     } catch (SmartyException $e) {
     }
   }
 
   public function gallery(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
     /*----------------A faire-------------
     Vérifier si il y a pas une photo qui a déjà le même nom
     Donner un nom a sa photo */
-
 
     /* Verifie si la photo s'est bien télécharger */
     if (isset($_FILES["photo"]) && $_FILES["photo"]["error"]== UPLOAD_ERR_OK){
@@ -106,18 +124,17 @@ class HomeController {
       move_uploaded_file($photo["tmp_name"], $destination);
     }
 
-
     $contenu_dossier = scandir("gallerie/valide");
 
     $smarty->assign('contenu_dossier', $contenu_dossier);
 
-      
-    $smarty->display('home/galerie.tpl');
 
+    $smarty->display('home/galerie.tpl');
   }
 
   public function annuaire(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
@@ -175,8 +192,6 @@ Faire en sorte de filtrer sans le nome entier*/
     else{
       $smarty->assign('users', User::getAll());
     }
-
-    var_dump($_POST);
 
     $smarty->display('home/users.tpl');
   }

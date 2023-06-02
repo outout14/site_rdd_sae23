@@ -9,6 +9,7 @@
     <div id="organisator-container">
         <div id="organisator-wrapper-fade"></div>
         <div id="organisator-animation-wrapper">
+          {for $i=0 to 1}
             {foreach from=$creators key=$key item=$creator}
               <div class="organisator-wrapper">
                 <div class="avatar-lg">
@@ -24,6 +25,7 @@
                 </div>
               </div>
             {/foreach}
+          {/for}
         </div>
     </div>
 
@@ -42,6 +44,5 @@
     </div>
 
     <!-- <img class="wave" src="{$APP_URL}/assets/images/background/wave-creators-bottom.svg" alt="wave"> -->
-
 
 </section>

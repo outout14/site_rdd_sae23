@@ -1,4 +1,4 @@
-<section class="window-container background-wave-blue h-100" style="min-height: 100vh;">
+<section class="window-container h-100" style="min-height: 100vh;">
     <div class="fixed-top" id="gallery-fade"></div>
     
     <div class="d-flex align-items-center flex-column my-5" id="gallery-wrapper">

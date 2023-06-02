@@ -5,6 +5,10 @@
 
 <body>
 
+    
+    <!-- Modal connexion -->
+    {include file="./common/debug.tpl"}
+
     <!-- Modal connexion -->
     {include file="./modals/login.tpl"}
 
@@ -16,9 +20,6 @@
 
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}
-
-    
-    <!-- <script src="{$APP_URL}/assets/js/ajaxResearch.js"></script> -->
 
     <script src="{$APP_URL}/assets/js/ajaxResearch.js"></script>
     <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>

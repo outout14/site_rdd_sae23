@@ -1,5 +1,5 @@
 
-<section class="window-container background-wave-blue" id="inscription-container">
+<section class="window-container" id="inscription-container">
 
     <div class="window d-flex align-items-center flex-column">
         <!-- Header, à ne pas afficher sur la version mobile! -->
@@ -93,12 +93,12 @@
                         </div>
 
                         <!-- Nom + Prenom -->
-                        <div class="row justify-content-between mt-4">
-                            <div class="col-12 col-lg-6">
+                        <div class="row justify-content-between mt-4 gap-2">
+                            <div class="col-12 col-lg">
                                 <input autocomplete="given-name" type="text" class="form-control ps-2 py-1 custom-input" placeholder="Nom" name="lastname" id="input-lastname">
                             </div>
 
-                            <div class="col-12 mt-1 col-lg-5 mt-lg-0">
+                            <div class="col-12 mt-1 col-lg mt-lg-0">
                                 <input autocomplete="family-name" type="text" class="form-control ps-2 py-1 custom-input" placeholder="Prenom" name="firstname" id="input-firstname">
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                 </div>                            
                             </div>
 
-                            <div class="col-5 col-lg-12 my-lg-3 d-none" id="container-promotion">
+                            <div class="col-5 col-lg-12 my-lg-2 d-none" id="container-promotion">
                                 <select class="form-select ps-2 py-1" name="promotion" id="input-promotion" disabled>
                                     <option value="2AFI">BUT R&T 2 FI</option>
                                     <option value="2AFA">BUT R&T 2 FA</option>
@@ -138,7 +138,7 @@
 
                         <!-- Selection de la promotion pour les anciens étudiants -->
                         <div class="row d-none" id="container-oldpromotion">
-                            <div class="col-12 mt-lg-3">
+                            <div class="col-12 mt-lg-2">
                                 <select disabled class="form-select ps-2 py-1 custom-input" name="oldpromotion" id="input-oldpromotion" disabled>
                                     <option value="1990">Promotion 1990</option>
                                     <option value="1990">Promotion 1991</option>
@@ -298,27 +298,15 @@
                         </div>
 
                         <!-- Mot de passe + Confirmation du mot de passe -->
-                        <div class="row mt-3">
-                            <div class="col-12 position-relative">
+                        <div class="row mt-3 d-flex justify-content-between gap-2">
+                            <div class="col position-relative">
                                 <img src="{$APP_URL}/assets/images/svg/password-hidden.svg" class="password-input-icon">
                                 <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Mot de passe" name="password" id="input-password-register">
                             </div>
-                            <div class="col-12">
-                                <div class="form-text text-justify px-2">
-                                    Entre 8 et 20 characteres
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="row mt-2">
-                            <div class="col-12 position-relative">
+                            <div class="col position-relative">
                                 <img src="{$APP_URL}/assets/images/svg/password-hidden.svg" class="password-input-icon">
                                 <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Confirmation du mot de passe" id="input-confirm_password" onpaste="return false" name="confirmpassword">
-                            </div>
-                            <div class="col-12">
-                                <div class="form-text text-justify px-2">
-                                    Entre 8 et 20 characteres
-                                </div>
                             </div>
                         </div>
 
