@@ -55,6 +55,16 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Captcha -->
+                        <div class="pt-3 px-3 text-center">
+                          <div
+                            class="h-captcha"
+                            data-sitekey="10000000-ffff-ffff-ffff-000000000001"
+                            data-theme="light"
+                          ></div>
+                        </div>
+
     
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 my-3">

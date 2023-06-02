@@ -28,6 +28,10 @@ class AuthController
     if (isset($_POST)) {
       if (isset($_POST["actionType"]) && $_POST["actionType"] == "login") {
         if (isset($_POST["email"]) && isset($_POST["password"])) {
+          $captcha = Utils::hCaptcha($_POST["h-captcha-response"]);
+          if(!$captcha){
+            Utils::DisplayJsonError("Captcha invalide.");
+          }
           // Validate the email
           $email = htmlentities($_POST["email"]);
           $password = htmlentities($_POST["password"]);

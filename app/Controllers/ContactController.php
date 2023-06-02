@@ -16,6 +16,10 @@ class ContactController {
   #[NoReturn] public function sendMessage(): void
   {
     if(Utils::CheckForInputs(array("actionType", "message", "email"))){
+      $captcha = Utils::hCaptcha($_POST["h-captcha-response"]);
+      if(!$captcha){
+        Utils::DisplayJsonError("Captcha invalide.");
+      }
       $actionType = htmlentities($_POST["actionType"]);
       if($actionType != "sendMessage"){
         Utils::DisplayJsonError("Requête invalide.");
