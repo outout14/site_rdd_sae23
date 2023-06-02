@@ -322,7 +322,15 @@
                             </div>
                         </div>
 
-                        <!-- Boutons envoyer / revenir -->
+                      <!-- Captcha -->
+                      <div>
+                        <div
+                          class="h-captcha"
+                          data-sitekey="{$HCAPTCHA_SITEKEY}"
+                        ></div>
+                      </div>
+
+                      <!-- Boutons envoyer / revenir -->
                         <div class="row flex-center flex-column-reverse flex-lg-row mt-4 gap-2 gap-lg-3">
                             <button class="button bg-lightgrey py-2 px-5" type="button" onclick="location.reload()">Revenir</button>
                             <input type="submit" class="button bg-blue py-2 px-5" name="submit" value="S'inscrire">

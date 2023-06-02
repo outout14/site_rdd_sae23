@@ -88,6 +88,10 @@ class AuthController
 
     if (isset($_POST["actionType"]) && $_POST["actionType"] == "register") {
       if (Utils::CheckForInputs(array("email", "password", "confirmpassword", "firstname", "lastname", "status"))) {
+        $captcha = Utils::hCaptcha($_POST["h-captcha-response"]);
+        if(!$captcha){
+          Utils::DisplayJsonError("Captcha invalide.");
+        }
         $firstname = strtolower(htmlspecialchars($_POST["firstname"]));
         $lastname = strtolower(htmlspecialchars($_POST["lastname"]));
         $status = htmlspecialchars($_POST["status"]);
