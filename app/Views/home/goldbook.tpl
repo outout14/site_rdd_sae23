@@ -16,17 +16,17 @@
         <div class="row flex-center h-100">
             <div class="col-11 col-lg-6 mb-2 mb-lg-5 gap-3" id="goldbook-content">
                 
-                {foreach from=$goldbook key=$key item=$message}
+                {foreach $goldbook as $message}
                 <div class="goldbook-message-wrapper">
 
                     <!-- Bouton supprimer, à afficher seulement si c'est le message de l'utilisateur -->
                     <!-- <div class="dot hover-pointer p-1" style="z-index: 10;"><i class="bi bi-x-lg text-bonewhite"></i></div> -->
 
-                    <div class="goldbook-name mx-lg-4">{$message["lastname"]} {$message["firstname"]}</div>
+                    <div class="goldbook-name mx-lg-4">{$message->author->lastname} {$message->author->firstname}</div>
                     <div class="goldbook-message">
-                        {$message["content"]}
+                        {$message->content}
                     </div>
-                    <div class="goldbook-date mx-lg-2">{$message["date"]}</div>
+                    <div class="goldbook-date mx-lg-2">{$message->date}</div>
                 </div>
                 {/foreach}
 
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <form action="{$APP_URL}/home/goldbook" class="container-fluid d-none" id="goldbook-input-wrapper">
+        <form action="{$APP_URL}/home/goldbook" method="post" class="container-fluid d-none" id="goldbook-input-wrapper">
             <fieldset>
                 <div class="row justify-content-center">
                     <div class="col-11 col-lg-5 d-flex flex-column gap-1">

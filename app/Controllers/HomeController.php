@@ -5,6 +5,7 @@ use JetBrains\PhpStorm\NoReturn;
 
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 require_once(__DIR__ . '/../Models/user.php');
+require_once(__DIR__ . '/../Models/goldbook.php');
 
 /*
  * HomeController
@@ -69,76 +70,24 @@ class HomeController {
 
   public function goldbook(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Livre d\'or');
 
-    
+    /* Il faut vérifier que l'utilisateur écrit pas plusieurs fois*/
 
-    $exemple_de_messages = array(
+    if(isset($_POST["submit"])){
+      $content = $_POST["message"];
+      $date = date("Y-m-d");
+      $message = new goldbook(0, $content, connexionMiddleware::getLoginUser(), $date);
+      $message->push();
+    }
 
-      "message_1" => array(
-        "lastname" => "Ziuzin",
-        "firstname" => "Nikita",
-        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                      Harum, debitis vel enim numquam expedita mollitia minima 
-                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
-                      voluptatem, iusto repellendus id ea!",
-        "date" => "34 février 2021"
-      ),
+    $content_db = goldbook::lister(1);
+    $smarty->assign('goldbook',$content_db);
 
-      "message_2" => array(
-        "lastname" => "Gramain",
-        "firstname" => "Mael",
-        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                      Harum, debitis vel enim numquam expedita mollitia minima 
-                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
-                      voluptatem, iusto repellendus id ea!",
-        "date" => "-3 decembre 2050"
-      ),
-
-      "message_3" => array(
-        "lastname" => "Teffene",
-        "firstname" => "Alexis",
-        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                      Harum, debitis vel enim numquam expedita mollitia minima 
-                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
-                      voluptatem, iusto repellendus id ea!",
-        "date" => "17 juillet 2023"
-      ),
-
-      "message_4" => array(
-        "lastname" => "Cazoulat",
-        "firstname" => "Lisa",
-        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                      Harum, debitis vel enim numquam expedita mollitia minima 
-                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
-                      voluptatem, iusto repellendus id ea!",
-        "date" => "30 septembre 2021"
-      ),
-
-      "message_5" => array(
-        "lastname" => "Dupont",
-        "firstname" => "Jean",
-        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                      Harum, debitis vel enim numquam expedita mollitia minima 
-                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
-                      voluptatem, iusto repellendus id ea!",
-        "date" => "10 mai 2017"
-      ),
-
-      "message_6" => array(
-        "lastname" => "Tran",
-        "firstname" => "Saction",
-        "content" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                      Harum, debitis vel enim numquam expedita mollitia minima 
-                      quisquam sit amet rem? Corrupti aspernatur quos tenetur aliquam 
-                      voluptatem, iusto repellendus id ea!",
-        "date" => "9 octobre 2013"
-      ),
-
-      );
-
-    $smarty->assign('goldbook',$exemple_de_messages);
+    $validate_form = goldbook::verif(connexionMiddleware::getLoginUser()->id);
+    $smarty->assign('already_sent_message',$validate_form);
 
     try {
       $smarty->display('home/goldbook.tpl');
@@ -148,6 +97,7 @@ class HomeController {
 
   public function gallery(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
@@ -178,11 +128,13 @@ class HomeController {
 
     $smarty->assign('contenu_dossier', $contenu_dossier);
 
+
     $smarty->display('home/galerie.tpl');
   }
 
   public function annuaire(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
