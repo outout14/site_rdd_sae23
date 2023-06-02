@@ -25,6 +25,8 @@ $smarty = new Smarty();
 
 // Fix md5 issue with Smarty : https://stackoverflow.com/questions/10000000/smarty-security-error-modifier-md5-is-not-allowed
 $smarty->assign('APP_URL', APP_URL);
+$smarty->assign('HCAPTCHA_SITEKEY', HCAPTCHA_SITEKEY);
+$smarty->assign('HCAPTCHA_KEY', HCAPTCHA_KEY);
 
 // Start the MySQL connection
 // $mysqlConnector = new mysqlConnector();

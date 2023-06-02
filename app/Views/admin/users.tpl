@@ -15,6 +15,18 @@
 
   <div class="card mt-5">
     <h3 class="card-header">Liste des utilisateurs</h3>
+
+    <div class="container">
+  <div class="form-group mt-3">
+    <form action="" method="GET">
+    <input type="text" class="form-control" name="search" placeholder="Rechercher un utilisateur..." value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+
+      <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form>
+  </div>
+</div>
+
+
     <div class="card-body">
       <table class="table table-hover">
         <thead>
@@ -53,7 +65,12 @@
               {/if}</td>
             <td>{$user->status}</td>
             <td>{$user->role}</td>
-            <td><a class="btn btn-primary" href="{$APP_URL}/admin/user_edit/{$user->id}">Modifier</a> <a class="btn btn-danger" href="{$APP_URL}/admin/user_delete/{$user->id}">Supprimer</a></td>
+            <td>
+            <a class="btn btn-primary" href="{$APP_URL}/admin/user_edit/{$user->id}">Modifier</a> 
+            <a class="btn btn-danger" href="{$APP_URL}/admin/user_delete/{$user->id}">Supprimer</a>
+            <a class="btn btn-success" href="{$APP_URL}/admin/user_payer/{$user->id}">Payer</a>
+            
+            </td>
           </tr>
         {/foreach}
         {if $users == null}
@@ -61,6 +78,8 @@
             <td colspan="11" class="text-center text-danger">Aucun utilisateur n'a été trouvé.</td>
           </tr>
         {/if}
+
+        
         </tbody>
       </table>
     </div>
