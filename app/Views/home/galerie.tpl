@@ -17,6 +17,6 @@
     <!-- Gallerie -->
     {include file="./frame/gallery.tpl"}
 
-    <!-- Gallerie <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script> -->
+    <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
 </body>
 </html>
