@@ -12,8 +12,6 @@ if(passwordInputIcons != null) {
             // Parent of the div
             let parent = icon.closest("div");
     
-            console.log("check");
-    
             // Child of type input
             let input = parent.querySelector("input");
     
@@ -131,7 +129,6 @@ if(document.getElementById("inscription-container") != null){
     // Variables pour le scroll
     var inscriptionScrollable = document.getElementById("inscription-scrollable");
     window.inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
-    console.log(inscriptionScrollableHeight);
     function firstContinue() {
         let input_status = document.getElementById("input-status");
 
@@ -166,10 +163,10 @@ if(document.getElementById("inscription-container") != null){
                     input_company.disabled = input_promotion.value == "2AFI";
                 })
 
-                container_map.classList.toggle("d-none");
-                input_checkmap.addEventListener("change", () => {
-                    input_map.disabled = !input_checkmap.checked;
-                })
+                // container_map.classList.toggle("d-none");
+                // input_checkmap.addEventListener("change", () => {
+                    // input_map.disabled = !input_checkmap.checked;
+                // })
 
                 container_family.classList.toggle("d-none");
                 input_checkfamily.addEventListener("change", () => {
@@ -215,7 +212,6 @@ if(document.getElementById("inscription-container") != null){
                 break;
             }
 
-        console.log("ICI ?");
         // Permet de scroll
         inscriptionScrollable.scrollBy(0,window.inscriptionScrollableHeight);
     }
@@ -223,12 +219,12 @@ if(document.getElementById("inscription-container") != null){
     function secondContinue() {
         inscriptionScrollable.scrollBy(0,window.inscriptionScrollableHeight);
 
-        if(input_status.value === "student" && document.getElementById("input-promotion").value === "2AFI") {
-            document.getElementById("container-map").classList.toggle("d-none")
-        }
+        // if(input_status.value === "student" && document.getElementById("input-promotion").value === "2AFI") {
+        //     document.getElementById("container-map").classList.toggle("d-none")
+        // }
         if (phone) {
             document.getElementById("label-ListVisibilityCheck").innerHTML = "Apparaître dans la listes des participants";
-            document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
+            // document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
         }
     }
     

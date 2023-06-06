@@ -231,12 +231,12 @@
                         </div>
 
                         <!-- Checkbox si affiché dans la liste des participants -->
-                        <div class="row mt-4 mb-1 align-items-center">
+                        <div class="row mt-4 align-items-center">
                             <div class="col-lg-12">
                                 <div class="form-check d-flex align-items-center">
                                     <input type="hidden" value=false name="displayed_in_list">
                                     <input class="form-check-input custom-input mx-2" type="checkbox" value=true name="displayed_in_list" id="ListVisibilityCheck">
-                                    <label class="form-check-label ms-2 text-complementary" for="ListVisibilityCheck" id="label-ListVisibilityCheck">
+                                    <label class="form-check-label text-complementary" for="ListVisibilityCheck" id="label-ListVisibilityCheck">
                                         Je souhaite apparaître dans la liste des participants
                                     </label>
                                 </div>
@@ -244,7 +244,7 @@
                         </div>
 
                         <!-- Checkbox si affiché sur la carte, pour les élèves en alternance, les anciens eleves et les "autres" -->
-                        <div class="row mb-1 align-items-center d-none" id="container-map">
+                        <!-- <div class="row mb-1 align-items-center d-none" id="container-map">
                             <div class="col-lg-12">
                                 <div class="form-check d-flex align-items-center">
                                     <input type="hidden" value=false name="displayed_on_map">
@@ -253,10 +253,10 @@
                                         Je souhaite faire apparaître l'endroit où je travaille sur la carte
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
 
                         <!-- Choix de la ville à afficher sur la carte ( alternance ), à desactiver si check d'avant est désactivé -->
-                            <div class="col-lg-12 mt-2">
+                            <!-- <div class="col-lg-12 mt-2">
                                 <div class="input-group">
                                     <span class="input-group-text px-2 py-1 d-flex align-items-center">
                                         <img src="{$APP_URL}/assets/images/svg/pin.svg">
@@ -264,9 +264,9 @@
                                     <input type="text" class="form-control ps-2 py-1 custom-input custom-input-border" placeholder="Rennes" name="city" disabled id="input-map">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="row mt-lg-3 align-items-center d-none" id="container-family">
+                        <div class="row mt-1 align-items-center d-none" id="container-family">
                             <!-- Checkbox si parents viennent ou pas -->
                             <div class="col-lg-9">
                                 <div class="form-check d-flex align-items-center">
@@ -304,21 +304,21 @@
                                 <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Mot de passe" name="password" id="input-password-register">
                             </div>
 
-                            <div class="col position-relative">
+                            <div class="col- position-relative">
                                 <img src="{$APP_URL}/assets/images/svg/password-hidden.svg" class="password-input-icon">
                                 <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Confirmation du mot de passe" id="input-confirm_password" onpaste="return false" name="confirmpassword">
                             </div>
                         </div>
 
-                      <!-- Captcha -->
-                      <div>
-                        <div
-                          class="h-captcha"
-                          data-sitekey="{$HCAPTCHA_SITEKEY}"
-                        ></div>
-                      </div>
+                        <!-- Captcha -->
+                        <div class="flex-center mt-2 mt-lg-4">
+                            <div
+                                class="h-captcha"
+                                data-sitekey="{$HCAPTCHA_SITEKEY}"
+                            ></div>
+                        </div>
 
-                      <!-- Boutons envoyer / revenir -->
+                        <!-- Boutons envoyer / revenir -->
                         <div class="row flex-center flex-column-reverse flex-lg-row mt-4 gap-2 gap-lg-3">
                             <button class="button bg-lightgrey py-2 px-5" type="button" onclick="location.reload()">Revenir</button>
                             <input type="submit" class="button bg-blue py-2 px-5" name="submit" value="S'inscrire">
