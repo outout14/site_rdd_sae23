@@ -109,7 +109,7 @@ class User {
     global $mysqlConnection;
     $query = "UPDATE users SET lastname = ?, firstname = ?, email = ?, password = ?, phone_number = ?, city = ?, family_count = ?, company = ?, promotion = ?, promotion_year = ?, display_in_list = ?, display_on_map = ?, confirmed = ?, status = ?, role = ? WHERE id = ?";
     $stmt = $mysqlConnection->prepare($query);
-    $stmt->bind_param("ssssssisiiiissi", $lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion , $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role, $id);
+    $stmt->bind_param("ssssssisssiiissi", $lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role, $id);
     $stmt->execute();
     $stmt->close();
   }
