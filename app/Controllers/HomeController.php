@@ -107,7 +107,6 @@ class HomeController {
 
     /* Verifie si la photo s'est bien télécharger */
     if (isset($_FILES["photo"]) && $_FILES["photo"]["error"]== UPLOAD_ERR_OK){
-
       /* On met la photo dans le bon dossier */
       $photo = $_FILES["photo"];
       $name = "";
@@ -115,20 +114,27 @@ class HomeController {
         $name=$name.(string)rand();
       }
       $extension = explode(".", $photo["name"]);
-      var_dump($extension);
       $extension = ".".$extension[array_key_last($extension)];
-      echo($extension);
-      $destination="gallerie/non_valide/".$name.$extension;
-      echo($photo["tmp_name"]);
 
-      move_uploaded_file($photo["tmp_name"], $destination);
+      if($extension != ".jpg" && $extension != ".png" && $extension != ".jpeg"){
+        $smarty->assign('error',"Le format de la photo n'est pas bon");
+      }
+      else{
+        $verifyImg = getimagesize($photo["tmp_name"]);
+        if($verifyImg["mime"] != "image/jpeg" && $verifyImg["mime"] != "image/png"){
+          $smarty->assign('error',"Le format de la photo n'est pas bon");
+        }
+        else{
+          // On enleve les caractères spéciaux
+          $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
+          $destination="gallerie/non_valide/".$name.$extension;
+          move_uploaded_file($photo["tmp_name"], $destination);
+        }
+      }
     }
 
     $contenu_dossier = scandir("gallerie/valide");
-
     $smarty->assign('contenu_dossier', $contenu_dossier);
-
-
     $smarty->display('home/galerie.tpl');
   }
 
