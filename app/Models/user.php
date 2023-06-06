@@ -143,6 +143,17 @@ class User {
     $stmt->bind_param("si", $var1, $this->id);
     $stmt->execute();
     $stmt->close();
+    $this->has_paid = 1;
+  }
+
+  public function setDisplayInList($value): void {
+    global $mysqlConnection;
+    $query = "UPDATE users SET display_in_list = ? WHERE id = ?";
+    $stmt = $mysqlConnection->prepare($query);
+    $stmt->bind_param("si", $value, $this->id);
+    $stmt->execute();
+    $stmt->close();
+    $this->display_in_list = $value;
   }
 
   public function isConfirmed(): bool {

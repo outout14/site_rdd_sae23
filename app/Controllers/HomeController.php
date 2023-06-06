@@ -203,8 +203,28 @@ Faire en sorte de filtrer sans le nome entier*/
     $smarty->display('home/pagenotfound.tpl');
   }
 
-  public function personalspace(): void
+  public function personalspace($update = false): void
   {
+    if($update){
+      $user = connexionMiddleware::getLoginUser();
+
+      print_r($_POST);
+      if(isset($_POST["displayed_in_list"]) and $_POST["displayed_in_list"] == "true" and $user->display_in_list == 0){
+        $user->setDisplayInList(1);
+      } else if($user->display_in_list == 1){
+        $user->setDisplayInList(0);
+      }
+
+      if(isset($_POST["password"]) && $_POST["password"]!=""){
+        if($_POST["password"] == $_POST["confirmpassword"]){
+          $user->updatePassword($_POST["password"]);
+        } else {
+          header("Location: " . APP_URL . "/home/personalspace?notification=invalidPassword");
+        }
+      }
+
+      header("Location: " . APP_URL . "/home/personalspace?notification=profilUpdated");
+    }
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Espace Personnel');
 
