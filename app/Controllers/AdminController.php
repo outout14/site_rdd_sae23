@@ -66,7 +66,15 @@ class AdminController
 
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Utilisateurs');
-    $smarty->assign('users', User::getAll());
+
+    if(isset($_GET["search"])){
+      $search = $_GET["search"];
+      $smarty->assign('searchQuery', $search);
+      $smarty->assign('users', User::getByFilter($search));
+    } else {
+      $smarty->assign('searchQuery', "");
+      $smarty->assign('users', User::getAll());
+    }
     try {
       $smarty->display('admin/users.tpl');
     } catch (SmartyException $e) {
@@ -146,6 +154,19 @@ public function galery(): void
 
     $user->delete($userID);
     header('Location: ' . APP_URL . '/admin/users?notification=userDeleted');
+  }
+
+  public function user_paid($userID): void {
+    $user = new User();
+    if($user->get($userID) == null) {
+      header('Location: ' . APP_URL . '/admin/users');
+      exit();
+    }
+    echo $userID;
+
+    $user->confirmPayment($userID);
+
+    header('Location: ' . APP_URL . '/admin/users?notification=userPaid');
   }
 }
 

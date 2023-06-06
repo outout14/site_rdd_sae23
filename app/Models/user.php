@@ -25,12 +25,12 @@ class User {
 
   public int $display_on_map;
   public int $display_in_list;
-  public int $has_paid = 0; // If the user has paid for the event
+  public int $has_paid; // If the user has paid for the event
   public int $confirmed;
   public string $status;
   public string $role;
 
-  public function __construct($id = 0, $lastname = "", $firstname = "", $email = "", $password = "", $phone_number = "", $city = "", $family_count=0, $company="", $promotion="", $promotion_year=0, $display_in_list = 0, $display_on_map = 0, $confirmed = 0, $status = "student", $role = "user") {
+  public function __construct($id = 0, $lastname = "", $firstname = "", $email = "", $password = "", $phone_number = "", $city = "", $family_count=0, $company="", $promotion="", $promotion_year=0, $display_in_list = 0, $display_on_map = 0, $confirmed = 0, $status = "student", $role = "user", $has_paid = 0) {
     $this->id = $id;
     $this->lastname = $lastname;
     $this->firstname = $firstname;
@@ -47,6 +47,7 @@ class User {
     $this->confirmed = $confirmed;
     $this->status = $status;
     $this->role = $role;
+    $this->has_paid = $has_paid;
   }
   private function create(): void{
     /* INSERT INTO DATABASE */
@@ -134,6 +135,16 @@ class User {
     $stmt->close();
   }
 
+  public function confirmPayment(): void {
+    global $mysqlConnection;
+    $query = "UPDATE users SET has_paid = ? WHERE id = ?";
+    $stmt = $mysqlConnection->prepare($query);
+    $var1 = 1;
+    $stmt->bind_param("si", $var1, $this->id);
+    $stmt->execute();
+    $stmt->close();
+  }
+
   public function isConfirmed(): bool {
     /* CHECK IF USER IS CONFIRMED */
     return $this->confirmed == 1;
@@ -154,7 +165,26 @@ class User {
     // MAP IT TO user OBJECTS
     $users = [];
     while ($row = $result->fetch_assoc()) {
-      $users[] = new User($row['id'], $row['lastname'], $row['firstname'], $row['email'], $row['password'], $row['phone_number'], $row['city'], $row['family_count'], $row['company'], $row['promotion'], $row['promotion_year'], $row['display_in_list'], $row['display_on_map'], $row['confirmed'], $row['status'], $row['role']);
+      $users[] = new User($row['id'], $row['lastname'], $row['firstname'], $row['email'], $row['password'], $row['phone_number'], $row['city'], $row['family_count'], $row['company'], $row['promotion'], $row['promotion_year'], $row['display_in_list'], $row['display_on_map'], $row['confirmed'], $row['status'], $row['role'], $row['has_paid']);
+    }
+    return $users;
+  }
+
+  public static function getByFilter($filter): array
+  {
+    // Get users that have $filter in their lastname, firstname or email
+    global $mysqlConnection;
+    $query = "SELECT * FROM users WHERE lastname LIKE ? OR firstname LIKE ? OR email LIKE ?";
+    $stmt = $mysqlConnection->prepare($query);
+    $filter = "%" . $filter . "%";
+    $stmt->bind_param("sss", $filter, $filter, $filter);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    // MAP IT TO user OBJECTS
+    $users = [];
+    while ($row = $result->fetch_assoc()) {
+      $users[] = new User($row['id'], $row['lastname'], $row['firstname'], $row['email'], $row['password'], $row['phone_number'], $row['city'], $row['family_count'], $row['company'], $row['promotion'], $row['promotion_year'], $row['display_in_list'], $row['display_on_map'], $row['confirmed'], $row['status'], $row['role'], $row['has_paid']);
     }
     return $users;
   }
