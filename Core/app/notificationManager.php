@@ -86,6 +86,32 @@ class NotificationManager
         );
         break;
       }
+      case 'email_used':
+        {
+          $notification = array(
+            'type' => 'danger',
+            'message' => 'Cet email est déjà utilisé.'
+          );
+          break;
+        }
+      case 'email_invalid':
+        {
+          $notification = array(
+            'type' => 'danger',
+            'message' => 'L\'email saisi est invalide.'
+          );
+          break;
+        }
+
+      case 'phone_invalid':
+        {
+          $notification = array(
+            'type' => 'danger',
+            'message' => 'Le numéro de téléphone saisi est invalide.'
+          );
+          break;
+        }
+
       case 'password_mail_sent' :
       {
         $notification = array(

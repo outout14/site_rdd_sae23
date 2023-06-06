@@ -10,29 +10,5 @@
         "lastname": "Gramain",
         "task": "Back-end",
         "link": "www.google.com"
-    },
-    "Lisa": {
-        "firstname": "Lisa",
-        "lastname": "Cazoulat",
-        "task": "Design, Front-End",
-        "link": "www.google.com"
-    },
-    "Alexis": {
-        "firstname": "Alexis",
-        "lastname": "Teffene",
-        "task": "Back-end",
-        "link": "www.google.com"
-    },
-    "Manon": {
-        "firstname": "Manon",
-        "lastname": "Favrel",
-        "task": "Recherche de la salle",
-        "link": "www.google.com"
-    },
-    "Hugo": {
-        "firstname": "Hugo",
-        "lastname": "Blot",
-        "task": "jsp frr",
-        "link": "www.google.com"
     }
 }

@@ -28,6 +28,7 @@ class AdminController
     'users' => 'Utilisateurs',
     'goldbook' => 'Livre d\'Or',
     'galery' => 'Photos',
+    'gestionjson' =>'Gestionnaire json'
   ];
 
   /**
@@ -129,5 +130,54 @@ public function galery(): void
     $user->delete($userID);
     header('Location: ' . APP_URL . '/admin/users?notification=userDeleted');
   }
-}
 
+  public function gestionjson(): void
+  {
+    if(isset($_GET["file"])){
+      if(isset($_GET["delete"])){
+        // SUPPRIMER
+        $data = Utils::GetData(__DIR__ . '/../Data/' . $_GET["file"]); 
+        unset($data[$_GET["delete"]]);
+        $data = json_encode($data, JSON_PRETTY_PRINT);
+        fwrite(fopen(__DIR__ . '/../Data/' . $_GET["file"], "w"), $data);
+        header("Location: /admin/gestionjson?notification=entryDeleted");
+      }
+    }
+    global $smarty;
+    smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
+    try {
+      // Récupérer les fichier JSON 
+      $smarty->assign('json_organisators', Utils::GetData(__DIR__ . '/../Data/organisators.json'));
+      $smarty->assign('json_organisation', Utils::GetData(__DIR__ . '/../Data/organisation.json'));
+      $smarty->assign('json_sponsors', Utils::GetData(__DIR__ . '/../Data/sponsors.json'));
+
+
+      $smarty->display('admin/listeJSON.tpl');
+    } catch (SmartyException $e) {
+    }
+  }
+
+  public function modifyjson($file, $id){
+    global $smarty;
+    if(isset($_POST["file"])){
+      print_r($_POST);
+      
+      $data = Utils::GetData(__DIR__ . '/../Data/' . $_POST["file"]); 
+
+      $to_edit = $data[$id]; 
+      for()
+
+      $data = json_encode($data, JSON_PRETTY_PRINT);
+      fwrite(fopen(__DIR__ . '/../Data/' . $_GET["file"], "w"), $data);
+      header("Location: /admin/gestionjson?notification=entryEdited");
+      exit();
+    }
+    smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
+    $smarty->assign('url_id', $id); 
+    $smarty->assign('url_file', $file); 
+
+    $smarty->assign('donnees_json', Utils::GetData(__DIR__ . '/../Data/' . $file)[$id]);
+
+    $smarty->display('admin/json_edit.tpl');
+  }
+}
