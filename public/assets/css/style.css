@@ -230,9 +230,8 @@ a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
-
 .window {
     background: rgba( 255, 255, 255, 0.75 );
     backdrop-filter: blur( 20px );
@@ -527,6 +526,7 @@ a {
 }
 
 .organisator-wrapper:hover > .avatar-lg > a > img {
+    transform: scale(1.5);
     -webkit-transform: scale(1.15); 
 }
 
@@ -1008,6 +1008,11 @@ header {
     font-size: 0.75rem;
 }
 
+#personal-separation {
+    border: none;
+    border-left: 3px solid var(--blue);
+}
+
 .up-and-down {
     animation: up-and-down 3s linear infinite;
 }
@@ -1107,7 +1112,7 @@ header {
         width: 90%;
     }
     
-    #connection-window {
+    #connection-window, #personal-window {
         width: 40vw;
     }
     .avatar-lg {
@@ -1125,6 +1130,12 @@ header {
 }
 
 @media (max-width: 1000px) {
+    .window-container {
+        padding-bottom: 0 !important;
+    }
+    #personal-separation {
+        border: none;
+    }
     .goldbook-message-wrapper {
         max-width: 70%;
     }
@@ -1172,7 +1183,7 @@ header {
     #gallery {
         grid-template-columns: repeat(3, 1fr);
     }
-    #connection-window {
+    #connection-window, #personal-window {
         background-color: white;
         width: 100%;
         height: 100%;
@@ -1312,5 +1323,8 @@ header {
     .general-info-text {
         font-size: 2vh;
         line-height: 2.5vh;
+    }
+    .vh-100-sm {
+        height: 100vh;
     }
 }

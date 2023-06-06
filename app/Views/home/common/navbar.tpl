@@ -51,10 +51,12 @@
                 </button>
 
                 <div id="header-dropdown">
-                    <button class="header-dropdown-element mt-4 mb-1" onclick="console.log('check')">
-                        <span class="text-dark me-0 me-lg-2 phone-d-none">Mon profil</span>
-                        <i class="bi bi-gear text-dark" id="header-dropdown-icon-gear"></i>
-                    </button>
+                    <a href="{$APP_URL}/home/personalspace" class="text-decoration-none text-white">
+                        <button class="header-dropdown-element mt-4 mb-1">
+                            <span class="text-dark me-0 me-lg-2 phone-d-none">Mon profil</span>
+                            <i class="bi bi-gear text-dark" id="header-dropdown-icon-gear"></i>
+                        </button>
+                    </a>
                     <a class="header-dropdown-element mt-3 mb-2" href="{$APP_URL}/auth/logout">
                         <span class="text-dark me-0 me-lg-2 phone-d-none">Déconnexion</span>
                         <i class="bi bi-power text-dark"></i>

@@ -202,4 +202,12 @@ Faire en sorte de filtrer sans le nome entier*/
 
     $smarty->display('home/pagenotfound.tpl');
   }
+
+  public function personalspace(): void
+  {
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Espace Personnel');
+
+    $smarty->display('home/personalspace.tpl');
+  }
 }
