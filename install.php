@@ -45,8 +45,12 @@ function migrateUserDB(): void {
   $stmt->close();
 }
 
-migrateUserDB();
-echo("<p>DONE : RUN USER DB MIGRATION</p>");
+try {
+  migrateUserDB();
+  echo("<p>DONE : RUN USER DB MIGRATION</p>");
+} catch (Exception $e) {
+  echo("<p>ERROR : RUN USER DB MIGRATION</p>");
+}
 
 function migrateTokenDB(): void {
   global $mysqlConnection;
@@ -58,6 +62,30 @@ function migrateTokenDB(): void {
     )";
   $mysqlConnection->query($query);
 }
-migrateTokenDB();
-echo("<p>DONE : RUN RESET TOKEN DB MIGRATION</p>");
 
+try {
+  migrateTokenDB();
+  echo("<p>DONE : RUN TOKEN DB MIGRATION</p>");
+} catch (Exception $e) {
+  echo("<p>ERROR : RUN TOKEN DB MIGRATION</p>");
+}
+
+function migrateGoldbookDB(): void {
+  global $mysqlConnection;
+  $query = "CREATE TABLE `goldbook` (
+  `id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `author` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `is_validate` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+";
+  $mysqlConnection->query($query);
+}
+
+try {
+  migrateGoldbookDB();
+  echo("<p>DONE : RUN GOLDBOOK DB MIGRATION</p>");
+} catch (Exception $e) {
+  echo("<p>ERROR : RUN GOLDBOOK DB MIGRATION</p>");
+}
