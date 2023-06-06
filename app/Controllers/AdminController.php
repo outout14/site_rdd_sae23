@@ -29,6 +29,7 @@ class AdminController
     'users' => 'Utilisateurs',
     'goldbook' => 'Livre d\'Or',
     'galery' => 'Photos',
+    'gestionjson' =>'Gestionnaire json'
   ];
 
   /**
@@ -114,7 +115,7 @@ class AdminController
 
   public function goldbook(): void
 {
-  
+
   if(isset($_GET["validate"])){
     $id = $_GET["validate"];
     goldbook::validate($id);
@@ -127,7 +128,7 @@ class AdminController
 
     $content_db = goldbook::lister(0);
     $smarty->assign('goldbook',$content_db);
-    
+
     $smarty->display('admin/goldbook.tpl');
 }
 public function galery(): void
@@ -139,7 +140,7 @@ public function galery(): void
   }
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Photos');
-    
+
     $contenu_dossier = scandir("gallerie/non_valide");
 
     $smarty->assign('contenu_dossier', $contenu_dossier);
@@ -168,5 +169,58 @@ public function galery(): void
 
     header('Location: ' . APP_URL . '/admin/users?notification=userPaid');
   }
-}
 
+  public function gestionjson(): void
+  {
+    if(isset($_GET["file"])){
+      if(isset($_GET["delete"])){
+        // SUPPRIMER
+        $data = Utils::GetData(__DIR__ . '/../Data/' . $_GET["file"]);
+        unset($data[$_GET["delete"]]);
+        $data = json_encode($data, JSON_PRETTY_PRINT);
+        fwrite(fopen(__DIR__ . '/../Data/' . $_GET["file"], "w"), $data);
+        header("Location:"  . APP_URL . "/admin/gestionjson?notification=entryDeleted");
+      }
+    }
+    global $smarty;
+    smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
+    try {
+      // Récupérer les fichier JSON
+      $smarty->assign('json_organisators', Utils::GetData(__DIR__ . '/../Data/organisators.json'));
+      $smarty->assign('json_organisation', Utils::GetData(__DIR__ . '/../Data/organisation.json'));
+      $smarty->assign('json_sponsors', Utils::GetData(__DIR__ . '/../Data/sponsors.json'));
+
+
+      $smarty->display('admin/listeJSON.tpl');
+    } catch (SmartyException $e) {
+    }
+  }
+
+  public function modifyjson($file, $id){
+    global $smarty;
+    if(isset($_POST["file"])){
+
+      $data = Utils::GetData(__DIR__ . '/../Data/' . $_POST["file"]);
+
+      $to_edit = $data[$id];
+      foreach ($_POST as $key => $value) {
+        if($key != "file"){
+          $to_edit[$key] = $value;
+        }
+      }
+      $data[$id] = $to_edit;
+
+      $data = json_encode($data, JSON_PRETTY_PRINT);
+      fwrite(fopen(__DIR__ . '/../Data/' . $file, "w"), $data);
+      header("Location: "  . APP_URL . "/admin/gestionjson?notification=entryEdited");
+      exit();
+    }
+    smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
+    $smarty->assign('url_id', $id);
+    $smarty->assign('url_file', $file);
+
+    $smarty->assign('donnees_json', Utils::GetData(__DIR__ . '/../Data/' . $file)[$id]);
+
+    $smarty->display('admin/json_edit.tpl');
+  }
+}
