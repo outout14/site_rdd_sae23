@@ -121,7 +121,7 @@
                                         <object data="{$APP_URL}/assets/images/svg/france.svg" class="pe-1 svg-france"></object>
                                         +33
                                     </span>
-                                    <input type="tel" class="form-control ps-2 py-1 custom-input custom-input-border" placeholder="06 66 77 88 99" name="phone_number" id="input-phone_number">
+                                    <input type="tel" class="form-control ps-2 py-1 custom-input custom-input-border" placeholder="0668139057" name="phone_number" id="input-phone_number">
                                 </div>                            
                             </div>
 
@@ -326,8 +326,18 @@
                     </div>
 
                 </div>
+
+                <div class="row flex-column h-100 justify-content-center align-items-center overflow-hidden">
+                    <div class="flex-center flex-column">
+                        <img src="{$APP_URL}/assets/images/svg/check.svg" alt="Check">
+                        <h2 class="fw-bold pt-4 text-center">Votre inscription est presque finie!</h2>
+                        <p class="text-complementary pt-5 px-2 px-lg-5 mx-0 mx-lg-5">
+                            Un email de confirmation a été énvoyé sur l'adresse mail que vous avez renseigné.
+                            Pour finir votre inscription, vous devez le consulter et confirmer votre compte.
+                        </p>
+                    </div>
+                </div>
             </form>
         </div>
-
     </div>
 </section>

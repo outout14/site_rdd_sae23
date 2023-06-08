@@ -129,6 +129,12 @@ if(document.getElementById("inscription-container") != null){
     // Variables pour le scroll
     var inscriptionScrollable = document.getElementById("inscription-scrollable");
     window.inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
+
+    function scrollRegister() {
+        // Permet de scroll
+        inscriptionScrollable.scrollBy(0,window.inscriptionScrollableHeight);
+    }
+
     function firstContinue() {
         let input_status = document.getElementById("input-status");
 
@@ -213,11 +219,11 @@ if(document.getElementById("inscription-container") != null){
             }
 
         // Permet de scroll
-        inscriptionScrollable.scrollBy(0,window.inscriptionScrollableHeight);
+        scrollRegister()
     }
     
     function secondContinue() {
-        inscriptionScrollable.scrollBy(0,window.inscriptionScrollableHeight);
+        scrollRegister()
 
         // if(input_status.value === "student" && document.getElementById("input-promotion").value === "2AFI") {
         //     document.getElementById("container-map").classList.toggle("d-none")
@@ -227,7 +233,6 @@ if(document.getElementById("inscription-container") != null){
             // document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
         }
     }
-    
 }
 /////////////////////////////////// HEADER //////////////////////////////
 
@@ -447,4 +452,10 @@ if (document.getElementById("goldbook-input") != null) {
 function goldbookScroll() {
     let wrapper = document.getElementById("goldbook-content")
     wrapper.scrollTop = wrapper.scrollHeight;
+}
+
+if(!!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)) {
+    document.querySelectorAll(".wave").forEach(wave => {
+        wave.style.display = "none";
+    })
 }

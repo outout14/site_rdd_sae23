@@ -47,7 +47,7 @@ if(document.getElementById('forgot_password_form')) {
   });
 }
 
-// FORGOT PASSWORD FORM
+// REGISTER FORM
 if(document.getElementById('register_form')) {
   const register_form = document.getElementById('register_form')
   register_form.addEventListener('submit', function (event) {

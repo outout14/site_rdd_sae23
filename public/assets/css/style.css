@@ -837,8 +837,9 @@ header {
     background: linear-gradient(var(--blue), transparent 90%);
 }
 .wave {
+    z-index: 1;
     height: fit-content;
-    object-fit: fill;
+    object-fit: cover;
     max-width: 100%;
     min-width: 100%;
 }
@@ -853,14 +854,8 @@ header {
     right: 1vw;
     z-index: 10000;
 
-    /* background: var(--orange-transparent);
-    box-shadow: 0 0 10px 0 var(--orange-transparent); */
-
     background: #5168a0c2;
     box-shadow: 0 0 10px 0 var(--blue-transparent); 
-    
-    /* background: rgba(255, 255, 255, 0.75);
-    box-shadow: 3px 3px 10px #222222bb; */
     
     border: 3px solid rgba( 255, 255, 255, 0.25 );
     border-radius: 25px;
