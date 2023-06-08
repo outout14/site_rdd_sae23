@@ -33,7 +33,7 @@
                               </div>
 
                               <!-- Captcha -->
-                             <div class="pt-3 px-3">
+                             <div class="d-flex justify-content-center pt-4">
                                <div
                                  class="h-captcha"
                                  data-sitekey="{$HCAPTCHA_SITEKEY}"

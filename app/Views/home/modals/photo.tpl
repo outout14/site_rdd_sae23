@@ -6,7 +6,7 @@
         <div class="window overflow-hidden modal-window d-flex flex-column" id="gallery-window">
             
             <!-- Fermer -->
-            <div class="fixed-top d-flex justify-content-end my-4 mx-5"> 
+            <div class="d-flex justify-content-end my-4 mx-5"> 
                 <button class="button bg-transparent hover-pointer" onclick="closeModal('gallery-modal')">
                     <i class="bi bi-x text-white fa-2x"></i>
                 </button>
