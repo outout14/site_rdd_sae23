@@ -1,4 +1,4 @@
-<section class="window-container">
+<section class="window-container" id="personal-container">
 
     <div class="window d-flex align-items-center flex-column h-auto">
         <div class="mt-3 ps-lg-5 ps-3 dot-header">
@@ -50,7 +50,7 @@
                             <input type="submit" class="button bg-blue py-2 px-5" name="submit" value="Appliquer les modifications">
                         </div>
 
-                        <div class="flex-center d-flex d-lg-none pt-3">
+                        <div class="flex-center d-flex d-lg-none pt-3*">
                             <img class="up-and-down" src="{$APP_URL}/assets/images/svg/downarrow.svg" alt="down-arrow">
                         </div>
                     </div>
