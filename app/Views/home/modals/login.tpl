@@ -6,7 +6,7 @@
     <div class="window-container modal-container">
         <div class="window overflow-hidden modal-window" id="connection-window">
 
-            <div class="position-fixed fixed-top d-flex justify-content-end mt-4 mx-5">    
+            <div class="gd-flex justify-content-end mt-4 mx-5">    
                 <button class="btn btn-close" onclick="closeModal('connection-modal')"></button>
             </div>
             

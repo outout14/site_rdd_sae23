@@ -230,7 +230,7 @@ a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
 }
 .window {
     background: rgba( 255, 255, 255, 0.75 );
@@ -1006,6 +1006,11 @@ header {
 .goldbook-date {
     color: var(--bonewhite);
     font-size: 0.75rem;
+}
+
+#personal-container {
+    height: fit-content;
+    min-height: 100vh;
 }
 
 #personal-separation {
