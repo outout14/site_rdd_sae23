@@ -23,6 +23,16 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
             window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
           }
         } else {
+          // Empty fields of the form
+          form.reset();
+
+          // Reset the captchas if there is an error
+          var captchaElements = document.getElementsByClassName('h-captcha');
+          for (var i = 0; i < captchaElements.length; i++) {
+            var captchaElement = captchaElements[i];
+            hcaptcha.reset(captchaElement.getAttribute('data-hcaptcha-widget-id'));
+          }
+
           if (errorElementId != null) {
             showError(errorElementId, data.error, typeWriterObject); // Display the error message
           } else {

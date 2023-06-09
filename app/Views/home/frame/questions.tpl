@@ -38,7 +38,6 @@
                                  class="h-captcha"
                                  data-sitekey="{$HCAPTCHA_SITEKEY}"
                                  data-theme="dark"
-                                 data-error-callback="onError"
                                ></div>
                              </div>
 
