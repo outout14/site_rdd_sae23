@@ -13,7 +13,11 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
       if (data.error) {
         if (data.error === "_success") {
           console.log("Utilisateur connecté");
-          window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
+          if(successNotification === "register_success"){
+            scrollRegister();
+          } else {
+            window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
+          }
         } else {
           if (errorElementId != null) {
             showError(errorElementId, data.error, typeWriterObject); // Display the error message
