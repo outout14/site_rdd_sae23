@@ -199,11 +199,6 @@ if(document.getElementById("inscription-container") != null){
 
                 container_company.classList.toggle("d-none");
                 input_company.disabled = false;
-
-                container_map.classList.toggle("d-none");
-                input_checkmap.addEventListener("change", () => {
-                    input_map.disabled = !input_checkmap.checked;
-                })
                 break;
             case "other":
                 help_email.innerText = "Votre email sera utilisé pour valider l'inscription";
