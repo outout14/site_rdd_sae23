@@ -2,6 +2,9 @@
 function submitForm(form, errorElementId, successNotification, typeWriterObject) {
   const formData = new FormData(form);
 
+  if(form == document.getElementById("register_form")) {
+    openModal("loader-modal")
+  }
   // Send an AJAX request
   fetch(form.action, {
     method: form.method,
@@ -15,6 +18,7 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
           console.log("Utilisateur connecté");
           if(successNotification === "register_success"){
             scrollRegister();
+            closeModal("loader-modal")
           } else {
             window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
           }
@@ -22,6 +26,7 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
           if (errorElementId != null) {
             showError(errorElementId, data.error, typeWriterObject); // Display the error message
           } else {
+            closeModal("loader-modal")
             spawnNotification("error", data.error); // Display the error message
           }
         }
