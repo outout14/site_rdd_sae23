@@ -249,9 +249,10 @@ class User {
     /* CHECK EMAIL & STATUS */
     if($status == "student" or $status == "teacher"){
       $validEmails = [
-        "student" => "@gnous.eu", // TODO: Change to @univ-rennes1
+        "student" => "@etudiant.univ-rennes1.fr",
         "teacher" => "@univ-rennes1.fr",
       ];
+
       if(!str_ends_with($email, $validEmails["student"]) && !str_ends_with($email, $validEmails["teacher"])){
         return "Si vous êtes un étudiant, votre email doit se terminer par " . $validEmails["student"] . ". Si vous êtes un enseignant, votre email doit se terminer par " . $validEmails["teacher"];
       } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
