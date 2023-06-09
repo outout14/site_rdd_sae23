@@ -6,6 +6,9 @@
 <body>
 
     <!-- Modal connexion -->
+    {include file="./modals/loader.tpl"}
+    
+    <!-- Modal connexion -->
     {include file="./modals/login.tpl"}
 
     <!-- Navbar -->

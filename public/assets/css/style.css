@@ -1013,6 +1013,10 @@ header {
     border-left: 3px solid var(--blue);
 }
 
+#loader {
+    transform: scale(5);
+}
+
 .up-and-down {
     animation: up-and-down 3s linear infinite;
 }

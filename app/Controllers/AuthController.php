@@ -86,6 +86,12 @@ class AuthController
   {
     shouldNotBeLoggedIn();
 
+    // Wait 5 seconds to avoid brute force
+
+
+    // sleep(5);
+    // Utils::DisplayJsonError("_success"); // TODO: Remove this line
+
     if (isset($_POST["actionType"]) && $_POST["actionType"] == "register") {
       if (Utils::CheckForInputs(array("email", "password", "confirmpassword", "firstname", "lastname", "status"))) {
         $captcha = Utils::hCaptcha($_POST["h-captcha-response"]);
