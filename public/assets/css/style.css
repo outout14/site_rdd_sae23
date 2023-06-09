@@ -232,7 +232,6 @@ a {
     flex-direction: column;
     height: 100vh;
 }
-
 .window {
     background: rgba( 255, 255, 255, 0.75 );
     backdrop-filter: blur( 20px );
@@ -527,6 +526,7 @@ a {
 }
 
 .organisator-wrapper:hover > .avatar-lg > a > img {
+    transform: scale(1.5);
     -webkit-transform: scale(1.15); 
 }
 
@@ -837,8 +837,9 @@ header {
     background: linear-gradient(var(--blue), transparent 90%);
 }
 .wave {
+    z-index: 1;
     height: fit-content;
-    object-fit: fill;
+    object-fit: cover;
     max-width: 100%;
     min-width: 100%;
 }
@@ -853,14 +854,8 @@ header {
     right: 1vw;
     z-index: 10000;
 
-    /* background: var(--orange-transparent);
-    box-shadow: 0 0 10px 0 var(--orange-transparent); */
-
     background: #5168a0c2;
     box-shadow: 0 0 10px 0 var(--blue-transparent); 
-    
-    /* background: rgba(255, 255, 255, 0.75);
-    box-shadow: 3px 3px 10px #222222bb; */
     
     border: 3px solid rgba( 255, 255, 255, 0.25 );
     border-radius: 25px;
@@ -1008,6 +1003,20 @@ header {
     font-size: 0.75rem;
 }
 
+#personal-container {
+    height: fit-content;
+    min-height: 100vh;
+}
+
+#personal-separation {
+    border: none;
+    border-left: 3px solid var(--blue);
+}
+
+#loader {
+    transform: scale(5);
+}
+
 .up-and-down {
     animation: up-and-down 3s linear infinite;
 }
@@ -1107,7 +1116,7 @@ header {
         width: 90%;
     }
     
-    #connection-window {
+    #connection-window, #personal-window {
         width: 40vw;
     }
     .avatar-lg {
@@ -1125,6 +1134,12 @@ header {
 }
 
 @media (max-width: 1000px) {
+    .window-container {
+        padding-bottom: 0 !important;
+    }
+    #personal-separation {
+        border: none;
+    }
     .goldbook-message-wrapper {
         max-width: 70%;
     }
@@ -1172,7 +1187,7 @@ header {
     #gallery {
         grid-template-columns: repeat(3, 1fr);
     }
-    #connection-window {
+    #connection-window, #personal-window {
         background-color: white;
         width: 100%;
         height: 100%;
@@ -1312,5 +1327,8 @@ header {
     .general-info-text {
         font-size: 2vh;
         line-height: 2.5vh;
+    }
+    .vh-100-sm {
+        height: 100vh;
     }
 }

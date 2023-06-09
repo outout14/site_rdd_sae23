@@ -3,36 +3,36 @@
         "firstname": "Nikita",
         "lastname": "Ziuzin",
         "task": "Design, Front-End",
-        "link": "www.google.com"
+        "link": "www.linkedin.com/in/nikita-ziuzin-9b9736241/"
     },
     "Mael": {
         "firstname": "Mael",
         "lastname": "Gramain",
         "task": "Back-end",
-        "link": "www.google.com"
+        "link": "www.linkedin.com/in/maelgramain/"
     },
     "Lisa": {
         "firstname": "Lisa",
         "lastname": "Cazoulat",
         "task": "Design, Front-End",
-        "link": "www.google.com"
+        "link": "www.linkedin.com/in/lisa-cazoulat-181966243/"
     },
     "Alexis": {
         "firstname": "Alexis",
         "lastname": "Teffene",
         "task": "Back-end",
-        "link": "www.google.com"
+        "link": "www.linkedin.com/in/alexis-teffene-66576523b/"
     },
     "Manon": {
         "firstname": "Manon",
         "lastname": "Favrel",
         "task": "Recherche de la salle",
-        "link": "www.google.com"
+        "link": "www.linkedin.com/in/manon-favrel-320bb623b/"
     },
     "Hugo": {
         "firstname": "Hugo",
         "lastname": "Blot",
-        "task": "jsp frr",
-        "link": "www.google.com"
+        "task": "Gestion Administrative",
+        "link": "www.linkedin.com/in/hugo-blot-047087246/"
     }
 }

@@ -109,7 +109,7 @@ class User {
     global $mysqlConnection;
     $query = "UPDATE users SET lastname = ?, firstname = ?, email = ?, password = ?, phone_number = ?, city = ?, family_count = ?, company = ?, promotion = ?, promotion_year = ?, display_in_list = ?, display_on_map = ?, confirmed = ?, status = ?, role = ? WHERE id = ?";
     $stmt = $mysqlConnection->prepare($query);
-    $stmt->bind_param("ssssssisiiiissi", $lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion , $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role, $id);
+    $stmt->bind_param("ssssssisssiiissi", $lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role, $id);
     $stmt->execute();
     $stmt->close();
   }
@@ -143,6 +143,17 @@ class User {
     $stmt->bind_param("si", $var1, $this->id);
     $stmt->execute();
     $stmt->close();
+    $this->has_paid = 1;
+  }
+
+  public function setDisplayInList($value): void {
+    global $mysqlConnection;
+    $query = "UPDATE users SET display_in_list = ? WHERE id = ?";
+    $stmt = $mysqlConnection->prepare($query);
+    $stmt->bind_param("si", $value, $this->id);
+    $stmt->execute();
+    $stmt->close();
+    $this->display_in_list = $value;
   }
 
   public function isConfirmed(): bool {
@@ -238,9 +249,10 @@ class User {
     /* CHECK EMAIL & STATUS */
     if($status == "student" or $status == "teacher"){
       $validEmails = [
-        "student" => "@gnous.eu", // TODO: Change to @univ-rennes1
+        "student" => "@etudiant.univ-rennes1.fr",
         "teacher" => "@univ-rennes1.fr",
       ];
+
       if(!str_ends_with($email, $validEmails["student"]) && !str_ends_with($email, $validEmails["teacher"])){
         return "Si vous êtes un étudiant, votre email doit se terminer par " . $validEmails["student"] . ". Si vous êtes un enseignant, votre email doit se terminer par " . $validEmails["teacher"];
       } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
