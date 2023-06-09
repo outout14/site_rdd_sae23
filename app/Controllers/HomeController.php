@@ -15,9 +15,9 @@ require_once(__DIR__ . '/../Models/goldbook.php');
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
-    'gallery' => 'Galerie',
-    'goldbook' => 'Livre d\'or',
-    'annuaire' => 'Annuaire',
+    //'gallery' => 'Galerie', TODO : Add gallery
+    //'goldbook' => 'Livre d\'or', TODO : Add goldbook
+    //'annuaire' => 'Annuaire', TODO : Add annuaire
   ];
   /**
    * Display the home page.
@@ -107,7 +107,6 @@ class HomeController {
 
     /* Verifie si la photo s'est bien télécharger */
     if (isset($_FILES["photo"]) && $_FILES["photo"]["error"]== UPLOAD_ERR_OK){
-
       /* On met la photo dans le bon dossier */
       $photo = $_FILES["photo"];
       $name = "";
@@ -115,20 +114,27 @@ class HomeController {
         $name=$name.(string)rand();
       }
       $extension = explode(".", $photo["name"]);
-      var_dump($extension);
       $extension = ".".$extension[array_key_last($extension)];
-      echo($extension);
-      $destination="gallerie/non_valide/".$name.$extension;
-      echo($photo["tmp_name"]);
 
-      move_uploaded_file($photo["tmp_name"], $destination);
+      if($extension != ".jpg" && $extension != ".png" && $extension != ".jpeg"){
+        $smarty->assign('error',"Le format de la photo n'est pas bon");
+      }
+      else{
+        $verifyImg = getimagesize($photo["tmp_name"]);
+        if($verifyImg["mime"] != "image/jpeg" && $verifyImg["mime"] != "image/png"){
+          $smarty->assign('error',"Le format de la photo n'est pas bon");
+        }
+        else{
+          // On enleve les caractères spéciaux
+          $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
+          $destination="gallerie/non_valide/".$name.$extension;
+          move_uploaded_file($photo["tmp_name"], $destination);
+        }
+      }
     }
 
     $contenu_dossier = scandir("gallerie/valide");
-
     $smarty->assign('contenu_dossier', $contenu_dossier);
-
-
     $smarty->display('home/galerie.tpl');
   }
 
@@ -203,8 +209,28 @@ Faire en sorte de filtrer sans le nome entier*/
     $smarty->display('home/pagenotfound.tpl');
   }
 
-  public function personalspace(): void
+  public function personalspace($update = false): void
   {
+    if($update){
+      $user = connexionMiddleware::getLoginUser();
+
+      print_r($_POST);
+      if(isset($_POST["displayed_in_list"]) and $_POST["displayed_in_list"] == "true" and $user->display_in_list == 0){
+        $user->setDisplayInList(1);
+      } else if($user->display_in_list == 1){
+        $user->setDisplayInList(0);
+      }
+
+      if(isset($_POST["password"]) && $_POST["password"]!=""){
+        if($_POST["password"] == $_POST["confirmpassword"]){
+          $user->updatePassword($_POST["password"]);
+        } else {
+          header("Location: " . APP_URL . "/home/personalspace?notification=invalidPassword");
+        }
+      }
+
+      header("Location: " . APP_URL . "/home/personalspace?notification=profilUpdated");
+    }
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Espace Personnel');
 

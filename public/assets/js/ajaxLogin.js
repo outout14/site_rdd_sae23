@@ -1,5 +1,5 @@
 // Function to handle form submission via AJAX
-function submitForm(form, errorElementId, successNotification,typeWriterObject) {
+function submitForm(form, errorElementId, successNotification, typeWriterObject) {
   const formData = new FormData(form);
 
   // Send an AJAX request
@@ -11,11 +11,15 @@ function submitForm(form, errorElementId, successNotification,typeWriterObject) 
     .then(data => {
       // Check if there is an error in the response
       if (data.error) {
-        if(data.error === "_success") {
+        if (data.error === "_success") {
           console.log("Utilisateur connecté");
-          window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
+          if(successNotification === "register_success"){
+            scrollRegister();
+          } else {
+            window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
+          }
         } else {
-          if(errorElementId != null){
+          if (errorElementId != null) {
             showError(errorElementId, data.error, typeWriterObject); // Display the error message
           } else {
             spawnNotification("error", data.error); // Display the error message
@@ -30,7 +34,7 @@ function submitForm(form, errorElementId, successNotification,typeWriterObject) 
 
 // LOGIN PASSWORD FORM
 // check if element exists
-if(document.getElementById('login_form')) {
+if (document.getElementById('login_form')) {
   const login_form = document.getElementById('login_form')
   login_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -39,7 +43,7 @@ if(document.getElementById('login_form')) {
 }
 
 // FORGOT PASSWORD FORM
-if(document.getElementById('forgot_password_form')) {
+if (document.getElementById('forgot_password_form')) {
   const forgot_password_form = document.getElementById('forgot_password_form')
   forgot_password_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -48,7 +52,7 @@ if(document.getElementById('forgot_password_form')) {
 }
 
 // REGISTER FORM
-if(document.getElementById('register_form')) {
+if (document.getElementById('register_form')) {
   const register_form = document.getElementById('register_form')
   register_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -57,7 +61,7 @@ if(document.getElementById('register_form')) {
 }
 
 // FORGOT PASSWORD PAGE FORM (NEW PASSWORD)
-if(document.getElementById('new_password_form')) {
+if (document.getElementById('new_password_form')) {
   const new_password_form = document.getElementById('new_password_form')
   new_password_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -66,12 +70,12 @@ if(document.getElementById('new_password_form')) {
 }
 
 // CONTACT FORM
-if(document.getElementById('contact_form')) {
+if (document.getElementById('contact_form')) {
   console.log("ok");
-  const new_password_form = document.getElementById('contact_form')
-  new_password_form.addEventListener('submit', function (event) {
+  const contact_form = document.getElementById('contact_form')
+  contact_form.addEventListener('submit', function (event) {
     event.preventDefault();
-    submitForm(new_password_form, null, "contact_sent", null);
+    submitForm(contact_form, null, "contact_sent", null);
   });
 }
 
@@ -91,7 +95,7 @@ function spawnNotification(title, content) {
   closeButton.className = 'bi bi-x-lg hover-pointer';
   closeButton.id = 'closeNotificationButton';
 
-  closeButton.addEventListener('click', function() {
+  closeButton.addEventListener('click', function () {
     notificationWrapper.remove();
   });
 

@@ -9,7 +9,7 @@
         </div>
 
         <!-- Content -->
-        <form action="" method="POST" class="h-100 w-100 my-0 my-lg-5">
+      <form action="{$APP_URL}/home/personalspace/update" method="POST" class="h-100 w-100 my-0 my-lg-5">
             <div class="container-fluid h-100 w-100 px-0 px-lg-5">
                 <div class="row justify-content-between pt-2 p-lg-5 h-100">
 
@@ -19,7 +19,7 @@
                                 <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img">
                             </div>
 
-                            <h2 class="fw-bold">Ziuzin Nikita</h2>
+                            <h2 class="fw-bold">{$sessionUser->firstname|capitalize} {$sessionUser->lastname|capitalize} </h2>
                         </div>
 
                         <p class="text-complementary col-11 col-lg-9">
@@ -27,10 +27,10 @@
                             ainsi que changer ton mot de passe ou encore consulter ton ticket pour la RDD!
                         </p>
 
-                        <div class="col-11 col-lg-9 form-check d-flex align-items-center">
-                            <input class="form-check-input custom-input mx-2" type="checkbox" value=true name="displayed_in_list" id="ListVisibilityCheck">
+                      <div class="col-11 col-lg-9 form-check d-flex align-items-center">
+                          <input class="form-check-input custom-input mx-2" type="checkbox" value=true name="displayed_in_list" id="ListVisibilityCheck" {if $sessionUser->display_in_list == 1}checked="on"{/if}>
                             <label class="form-check-label ms-2 text-complementary" for="ListVisibilityCheck" id="label-ListVisibilityCheck">
-                                Je souhaite apparaître dans la liste des participants
+                              Je souhaite apparaître dans la liste des participants
                             </label>
                         </div>
 
@@ -53,11 +53,10 @@
                         <div class="flex-center d-flex d-lg-none pt-3*">
                             <img class="up-and-down" src="{$APP_URL}/assets/images/svg/downarrow.svg" alt="down-arrow">
                         </div>
-
                     </div>
 
                     <div class="col-12 col-lg flex-center flex-column py-2 gap-4 mt-5 mt-lg-0" id="personal-separation">
-
+                        {if $sessionUser->has_paid == 0}
                         <div class="avatar-sm border-lightgrey mb-2">
                             <img src="{$APP_URL}/assets/images/creators/creator_whisper.png" alt="creator_whisper" class="avatar-img">
                         </div>
@@ -80,9 +79,9 @@
                         </p>
 
                         <div class="col-11 flex-center mb-3">
-                            <button type="button" class="button bg-blue py-2 px-5">Passer au règlement</button>
+                            <a href="#" class="button bg-blue py-2 px-5">Passer au règlement</a>
                         </div>
-
+                        {else}
                         <!-- Payé -->
                         <p class="text-complementary col-11 col-lg-9">
                             Merci pour ta participation! Si jamais tu as perdu ton ticket, tu peux cliquer sur le bouton
@@ -91,9 +90,9 @@
                         </p>
 
                         <div class="col-11 flex-center mb-3">
-                            <button type="button" class="button bg-blue py-2 px-5">Envoyer le ticket par e-mail</button>
+                            <button type="button" class="button bg-blue py-2 px-5">Accéder à l'espace HelloAsso</button>
                         </div>
-
+                        {/if}
                     </div>
                 </div>
             </div>  
