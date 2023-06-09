@@ -175,12 +175,6 @@
                                     <option value="2022">Promotion 2022</option>
                                 </select>
                             </div>
-
-                            <div class="col-12">
-                                <div class="form-text text-justify px-2">
-                                    Les anciens élèves des promotions de 2003 et 2013 bénéficient d'une entrée gratuite.
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Input entreprise pour les alternants, anciens eleves, autres  -->
@@ -189,7 +183,7 @@
                                 <input type="text" class="form-control ps-2 py-1 custom-input" placeholder="Entreprise" name="company" id="input-company" disabled>
                             </div>
                             <div class="col-12">
-                                <div class="form-text text-justify px-2">
+                                <div class="form-text text-justify px-2 mt-2">
                                     Votre entreprise sera affiché dans la liste des participants
                                 </div>
                             </div>
