@@ -96,7 +96,7 @@ class AuthController
         $lastname = strtolower(htmlspecialchars($_POST["lastname"]));
         $status = htmlspecialchars($_POST["status"]);
 
-        $status = ($status == "student" || $status == "teacher" || $status == "oldstudent") ? $status : "student";
+        $status = ($status == "student" || $status == "teacher" || $status == "oldstudent" || $status == "other") ? $status : "student";
         $promotion_year = 0;
         // If oldstudent, check if promotion_year and is int
         if ($status == "oldstudent") {
@@ -109,12 +109,12 @@ class AuthController
             Utils::DisplayJsonError("L'année de promotion doit être renseignée dans le cas où vous êtes un ancien élève.");
           }
         }
-        $promotion = $_POST["promotion"] ?? null;
+        $promotion = $_POST["promotion"] ?? "XXXX";
         if ($promotion == null && $status == "student") {
           Utils::DisplayJsonError("La promotion doit être renseignée dans le cas où vous êtes un élève.");
         }
 
-        $phone_number = htmlspecialchars($_POST["phone_number"]);
+        $phone_number = "0123456789";
         $email = strtolower(filter_var($_POST["email"], FILTER_SANITIZE_EMAIL));
         $password = htmlspecialchars($_POST["password"]);
         if(strlen($password) < 8) {
