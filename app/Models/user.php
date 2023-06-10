@@ -260,7 +260,7 @@ class User {
       }
     }
 
-    /* PHONE NUMBER CHECK */
+    /* PHONE NUMBER CHECK - NOT USED ANYMORE
     if(str_starts_with($phone_number, "+33")){
       $phone_number = "0" . substr($phone_number, 3);
     }
@@ -270,6 +270,7 @@ class User {
     if((strlen($phone_number) != 10) or (!is_numeric($phone_number))){
       return "Numéro de téléphone invalide";
     }
+    */
 
     /* FAMILY COUNT CHECK */
     if($family_count < 0){
