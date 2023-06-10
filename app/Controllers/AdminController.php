@@ -55,7 +55,7 @@ class AdminController
           if(!isset($_POST['status'])) $_POST['status'] = "student";
           if(!isset($_POST['role'])) $_POST['role'] = 'user';
           $user = new User();
-          $err = $user->register ($_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['family_count'], $_POST['company'], $_POST['promotion'], $_POST['promotion_year'], $_POST['display_in_list'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
+          $err = $user->register (htmlentities($_POST['lastname']), htmlentities($_POST['firstname']), htmlentities($_POST['email']), htmlentities($_POST['password']), htmlentities($_POST['phone_number']), htmlentities($_POST['city']), htmlentities($_POST['family_count']), htmlentities($_POST['company']), htmlentities($_POST['promotion']), htmlentities($_POST['promotion_year']), htmlentities($_POST['display_in_list']), htmlentities($_POST['display_on_map']), htmlentities($_POST['confirmed']), htmlentities($_POST['status']), htmlentities($_POST['role']));
           if (gettype($err) == "object") {
             header('Location: ' . APP_URL . '/admin/users?notification=userAdded');
           } else {
@@ -69,7 +69,7 @@ class AdminController
     smartyPassDefaultVariables($this->menu, 'Utilisateurs');
 
     if(isset($_GET["search"])){
-      $search = $_GET["search"];
+      $search = htmlentities($_GET["search"]);
       $smarty->assign('searchQuery', $search);
       $smarty->assign('users', User::getByFilter($search));
     } else {
@@ -97,8 +97,7 @@ class AdminController
           $_POST['confirmed'] = isset($_POST['confirmed']) && $_POST['confirmed'] === 'on' ? 1 : 0;
           if(!isset($_POST['status'])) $_POST['status'] = "student";
           if(!isset($_POST['role'])) $_POST['role'] = 'user';
-
-          $user->update($_POST["id"], $_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['password'], $_POST['phone_number'], $_POST['city'], $_POST['family_count'], $_POST['company'], $_POST['promotion'], $_POST['promotion_year'], $_POST['display_in_list'], $_POST['display_on_map'], $_POST['confirmed'], $_POST['status'], $_POST['role']);
+          $user->update(htmlentities($_POST['id']), htmlentities($_POST['lastname']), htmlentities($_POST['firstname']), htmlentities($_POST['email']), htmlentities($_POST['password']), htmlentities($_POST['phone_number']), htmlentities($_POST['city']), htmlentities($_POST['family_count']), htmlentities($_POST['company']), htmlentities($_POST['promotion']), htmlentities($_POST['promotion_year']), htmlentities($_POST['display_in_list']), htmlentities($_POST['display_on_map']), htmlentities($_POST['confirmed']), htmlentities($_POST['status']), htmlentities($_POST['role']));
           header('Location: ' . APP_URL . '/admin/users?notification=userEdited');
         }
       }
@@ -117,10 +116,10 @@ class AdminController
 {
 
   if(isset($_GET["validate"])){
-    $id = $_GET["validate"];
+    $id = htmlentities($_GET["validate"]);
     goldbook::validate($id);
   }else if(isset($_GET["nonvalidate"])){
-    $id = $_GET["nonvalidate"];
+    $id = htmlentities($_GET["nonvalidate"]);
     goldbook::delete($id);
   }
     global $smarty;
@@ -134,8 +133,10 @@ class AdminController
 public function galery(): void
 {
   if(isset($_GET["validate"])){
+    $_GET["validate"] = htmlentities($_GET["validate"]);
     rename("gallerie/non_valide/".$_GET["validate"], "gallerie/valide/".$_GET["validate"]);
   } else if(isset($_GET["nonvalidate"])){
+    $_GET["nonvalidate"] = htmlentities($_GET["nonvalidate"]);
     unlink("gallerie/non_valide/".$_GET["nonvalidate"]);
   }
     global $smarty;
@@ -175,6 +176,7 @@ public function galery(): void
     if(isset($_GET["file"])){
       if(isset($_GET["delete"])){
         // SUPPRIMER
+        $_GET["file"] = htmlentities($_GET["file"]);
         $data = Utils::GetData(__DIR__ . '/../Data/' . $_GET["file"]);
         unset($data[$_GET["delete"]]);
         $data = json_encode($data, JSON_PRETTY_PRINT);
@@ -199,13 +201,13 @@ public function galery(): void
   public function modifyjson($file, $id){
     global $smarty;
     if(isset($_POST["file"])){
-
+      $_POST["file"] = htmlentities($_POST["file"]);
       $data = Utils::GetData(__DIR__ . '/../Data/' . $_POST["file"]);
 
       $to_edit = $data[$id];
       foreach ($_POST as $key => $value) {
         if($key != "file"){
-          $to_edit[$key] = $value;
+          $to_edit[htmlentities($key)] = htmlentities($value);
         }
       }
       $data[$id] = $to_edit;
