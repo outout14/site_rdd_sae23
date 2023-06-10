@@ -121,7 +121,7 @@ function spawnNotification(title, content) {
   avatarDiv.className = 'avatar-xs border-lightgrey';
 
   var avatarImg = document.createElement('img');
-  avatarImg.src = '../assets/images/creators/creator_pc.png';
+  avatarImg.src = '/assets/images/creators/creator_pc.png';
   avatarImg.alt = 'creator_message';
   avatarImg.className = 'avatar-img';
 
