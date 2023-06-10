@@ -66,21 +66,21 @@ class NotificationManager
       case 'tokenNotFound': {
           $notification = array(
             'type' => 'danger',
-            'message' => 'Le token n\'a pas été trouvé.'
+            'message' => 'Ce lien de vérification n\'a pas été trouvé.'
           );
           break;
         }
       case 'tokenAlreadyUsed': {
           $notification = array(
             'type' => 'danger',
-            'message' => 'Le token a déjà été utilisé.'
+            'message' => 'Ce lien de vérification a déjà été utilisé.'
           );
           break;
         }
       case 'tokenSuccess': {
           $notification = array(
             'type' => 'success',
-            'message' => 'Le token a fonctionné.'
+            'message' => 'Votre compte a bien été vérifié.'
           );
           break;
         }
