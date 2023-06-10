@@ -24,7 +24,7 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
           }
         } else {
           // Empty fields of the form
-          form.reset();
+          // form.reset();
 
           // Reset the captchas if there is an error
           var captchaElements = document.getElementsByClassName('h-captcha');
