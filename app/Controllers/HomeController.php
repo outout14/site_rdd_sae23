@@ -211,6 +211,7 @@ Faire en sorte de filtrer sans le nome entier*/
 
   public function personalspace($update = false): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     if($update){
       $user = connexionMiddleware::getLoginUser();
 
