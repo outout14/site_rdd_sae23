@@ -79,7 +79,7 @@
                         </p>
 
                         <div class="col-11 flex-center mb-3">
-                            <a href="https://www.helloasso.com/associations/generation-r-t/evenements/remise-des-diplomes" class="button bg-blue py-2 px-5">Passer au règlement</a>
+                            <a href="c" class="button bg-blue py-2 px-5">Passer au règlement</a>
                         </div>
                         {else}
                         <!-- Payé -->
