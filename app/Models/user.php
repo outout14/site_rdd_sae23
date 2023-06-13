@@ -254,13 +254,23 @@ class User {
       ];
 
       if(!str_ends_with($email, $validEmails["student"]) && !str_ends_with($email, $validEmails["teacher"])){
-        return "Si vous êtes un étudiant, votre email doit se terminer par " . $validEmails["student"] . ". Si vous êtes un enseignant, votre email doit se terminer par " . $validEmails["teacher"];
+        return "Si vous êtes un étudiant, votre email doit se terminer par " . $validEmails["student"] . ". Si vous êtes un enseignant, votre email doit se terminer par " . $validEmails["teacher"] . "(status : " . $status . ")";
       } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return "Email invalide";
       }
     }
 
-    /* PHONE NUMBER CHECK */
+    if($lastname == null or strlen($lastname) < 2){
+      return "Nom invalide";
+    }
+    if($lastname == null or strlen($firstname) < 2){
+      return "Prénom invalide";
+    }
+    if($lastname == null or strlen($password) < 8){
+      return "Mot de passe invalide";
+    }
+
+    /* PHONE NUMBER CHECK - NOT USED ANYMORE
     if(str_starts_with($phone_number, "+33")){
       $phone_number = "0" . substr($phone_number, 3);
     }
@@ -270,6 +280,7 @@ class User {
     if((strlen($phone_number) != 10) or (!is_numeric($phone_number))){
       return "Numéro de téléphone invalide";
     }
+    */
 
     /* FAMILY COUNT CHECK */
     if($family_count < 0){
@@ -277,8 +288,8 @@ class User {
     }
 
     /* PROMOTION CHECK */
-    if(strlen($promotion) != 4) {
-      return "Promotion invalide";
+    if(strlen($promotion) != 4){
+      return "Promotion invalide (" . strlen($promotion) . " caractères au lieu de 4)";
     }
 
     $tmpUsr = new User();

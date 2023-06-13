@@ -22,7 +22,6 @@
     {include file="../utils/notifications.tpl"}
 
     <script src="{$APP_URL}/assets/js/ajaxResearch.js"></script>
-    <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
-    <script src="https://js.hcaptcha.com/1/api.js?hl=fr" async defer></script>
+    {include file="./frame/javascript.tpl"}
 </body>
 </html>
