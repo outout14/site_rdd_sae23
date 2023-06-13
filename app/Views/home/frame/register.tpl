@@ -81,7 +81,7 @@
                                     <script>
                                         const register_1_error_title = new Typewriter('#register_1_error_title', {});
                                         register_1_error_title
-                                            .typeString("Parfait! Continuos.")
+                                            .typeString("Parfait! Continuons.")
                                             .start()
                                     </script>
                                 </p>

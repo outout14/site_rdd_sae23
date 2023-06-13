@@ -1113,7 +1113,7 @@ header {
     }
     .window {
         height: 90%;
-        width: 90%;
+        width: 80%;
     }
     
     #connection-window, #personal-window {
