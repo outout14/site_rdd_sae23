@@ -165,10 +165,10 @@ public function galery(): void
       $data = Utils::GetData(__DIR__ . '/../Data/' . $_POST["file"]); 
 
       $to_edit = $data[$id]; 
-      for()
+      $data[$id]=$to_edit;
 
       $data = json_encode($data, JSON_PRETTY_PRINT);
-      fwrite(fopen(__DIR__ . '/../Data/' . $_GET["file"], "w"), $data);
+      file_put_contents(__DIR__ . '/../Data/' . $_GET["file"], $data);
       header("Location: /admin/gestionjson?notification=entryEdited");
       exit();
     }
