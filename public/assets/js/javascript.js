@@ -12,8 +12,6 @@ if(passwordInputIcons != null) {
             // Parent of the div
             let parent = icon.closest("div");
     
-            console.log("check");
-    
             // Child of type input
             let input = parent.querySelector("input");
     
@@ -79,9 +77,8 @@ function openModal(identifier, source=null) {
     let modal = document.getElementById(identifier);
 
     if(source != null) {
-        console.log(source)
-        let image = document.getElementById("gallery-modal-photo");
-        image.src = source;
+        document.getElementById("gallery-modal-photo").src = source;
+        document.getElementById("gallery-photo-download").href = source;
     }
 
     modal.style.display = "block";
@@ -131,25 +128,29 @@ function connectionScroll(direction) {
 if(document.getElementById("inscription-container") != null){
     // Variables pour le scroll
     var inscriptionScrollable = document.getElementById("inscription-scrollable");
-    const inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
+    window.inscriptionScrollableHeight = inscriptionScrollable.offsetHeight;
+
+    function scrollRegister() {
+        // Permet de scroll
+        inscriptionScrollable.scrollBy(0,window.inscriptionScrollableHeight);
+    }
 
     function firstContinue() {
         let input_status = document.getElementById("input-status");
 
-        let help_email = document.getElementById("help-email")
-
+        if (phone) {
+            document.getElementById("label-ListVisibilityCheck").innerHTML = "Apparaître dans la listes des participants";
+        }
+        
         let container_promotion = document.getElementById("container-promotion")
         let input_promotion = document.getElementById("input-promotion")
-
+        
+        let input_email = document.getElementById("input-email")
         let container_oldpromotion = document.getElementById("container-oldpromotion")
         let input_oldpromotion = document.getElementById("input-oldpromotion")
 
         let container_company = document.getElementById("container-company")
         let input_company = document.getElementById("input-company")
-
-        let container_map = document.getElementById("container-map")
-        let input_checkmap = document.getElementById("input-checkmap")
-        let input_map = document.getElementById("input-map")
 
         let container_family = document.getElementById("container-family")
         let input_checkfamily = document.getElementById("input-checkfamily")
@@ -157,8 +158,6 @@ if(document.getElementById("inscription-container") != null){
 
         switch (input_status.value) {
             case "student":
-                help_email.innerHTML = "Merci d'utiliser votre mail universitaire (@etudiant.univ-rennes1.fr)";
-                
                 container_promotion.classList.toggle("d-none");
                 input_promotion.disabled = false;
 
@@ -167,72 +166,47 @@ if(document.getElementById("inscription-container") != null){
                     input_company.disabled = input_promotion.value == "2AFI";
                 })
 
-                container_map.classList.toggle("d-none");
-                input_checkmap.addEventListener("change", () => {
-                    input_map.disabled = !input_checkmap.checked;
-                })
-
                 container_family.classList.toggle("d-none");
                 input_checkfamily.addEventListener("change", () => {
                     input_countfamily.disabled = !input_checkfamily.checked;
                 })
 
                 if(phone){
+                    input_email.placeholder = "Adresse mail universitaire"
                     let possibleOptions = ["BUT R&T 2 FI", "BUT R&T 2 FA", "LP CART", "LP RIMS", "LP TSSR"];
                     let options = input_promotion.children;
             
                     for(i = 0; i < options.length; i++) {
                         options[i].text = possibleOptions[i];
                     }
+                } else {
+                    input_email.placeholder = "Adresse mail universitaire (@etudiant.univ-rennes1.fr)"
                 }
                 break;
             case "teacher":
-                help_email.innerText = "Merci d'utiliser votre mail universitaire ( @univ-rennes1.fr )";
+                if(phone) {
+                    input_email.placeholder = "Adresse mail universitaire"
+                } else {
+                    input_email.placeholder = "Adresse mail universitaire (@univ-rennes1.fr)"
+                }
+                    
                 break;
-            case "oldstudent":
-                help_email.innerText = "Votre email sera utilisé pour valider l'inscription";
-                
+            case "oldstudent":                
                 container_oldpromotion.classList.toggle("d-none");
                 input_oldpromotion.disabled = false;
 
                 container_company.classList.toggle("d-none");
                 input_company.disabled = false;
-
-                container_map.classList.toggle("d-none");
-                input_checkmap.addEventListener("change", () => {
-                    input_map.disabled = !input_checkmap.checked;
-                })
                 break;
             case "other":
-                help_email.innerText = "Votre email sera utilisé pour valider l'inscription";
-                
                 container_company.classList.toggle("d-none");
                 input_company.disabled = false;
-
-                container_map.classList.toggle("d-none");
-                input_checkmap.addEventListener("change", () => {
-                    input_map.disabled = !input_checkmap.checked;
-                })
                 break;
             }
 
-            
         // Permet de scroll
-        inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight)
+        scrollRegister()
     }
-    
-    function secondContinue() {
-        inscriptionScrollable.scrollBy(0,inscriptionScrollableHeight);
-
-        if(input_status.value === "student" && document.getElementById("input-promotion").value === "2AFI") {
-            document.getElementById("container-map").classList.toggle("d-none")
-        }
-        if (phone) {
-            document.getElementById("label-ListVisibilityCheck").innerHTML = "Apparaître dans la listes des participants";
-            document.getElementById("label-MapVisibilityCheck").innerHTML = "Apparaître sur la carte";
-        }
-    }
-    
 }
 /////////////////////////////////// HEADER //////////////////////////////
 
@@ -283,6 +257,11 @@ if(gallery != null) {
     if(gallery.children.length === 0) {
         gallery.innerHTML = "<span class='inscription-info-text text-white'>Une fois la cérémonie passée, les photos apparaitront ici.</span>"
     }
+
+    // Submit automatique gallerie
+    document.getElementById("input-file").addEventListener("input", () => {
+        document.getElementById("input-file-form").submit();
+    })
 }
 
 const images = document.querySelectorAll(".gallery-image-wrapper")
@@ -412,5 +391,45 @@ if(document.getElementById("annuaire-form") != null) {
                 annuaire_promotion.disabled = true;
                 break;
         }
+    })
+}
+
+
+
+if (document.getElementById("goldbook-input") != null) {
+    let input = document.getElementById("goldbook-input")
+    let limit = document.getElementById("goldbook-limit")
+    
+    input.addEventListener("focus", () => {
+        limit.style.transform = "translate(0, 0)";
+        limit.style.opacity = "1";
+    })
+
+    input.addEventListener("focusout", () => {
+        limit.style.transform = "translate(0, 100%)";
+        limit.style.opacity = "0";
+    })
+
+    input.addEventListener("input", () => {
+        limit.textContent = `${input.value.length}/${input.maxLength}`
+
+        if(input.value.length == 150) {
+            limit.classList.add("tada")
+            limit.style.color = "red";
+        } else {
+            limit.classList.remove("tada")
+            limit.style.color = "var(--bonewhite)";
+        }
+    })
+}
+
+function goldbookScroll() {
+    let wrapper = document.getElementById("goldbook-content")
+    wrapper.scrollTop = wrapper.scrollHeight;
+}
+
+if(!!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)) {
+    document.querySelectorAll(".wave").forEach(wave => {
+        wave.style.display = "none";
     })
 }

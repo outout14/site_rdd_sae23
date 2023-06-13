@@ -13,14 +13,13 @@
     </div>
   </div>
 
-  <div class="card mt-5">
+  <div class="card mt-5" id="quserList">
     <h3 class="card-header">Liste des utilisateurs</h3>
 
     <div class="container">
   <div class="form-group mt-3">
-    <form action="" method="GET">
-    <input type="text" class="form-control" name="search" placeholder="Rechercher un utilisateur..." value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-
+    <form action="#userList" method="GET">
+      <input type="text" class="form-control" name="search" placeholder="Rechercher un utilisateur..." value="{$searchQuery}">
       <button type="submit" class="btn btn-primary">Rechercher</button>
     </form>
   </div>
@@ -36,7 +35,7 @@
           <th scope="col">Nom</th>
           <th scope="col">Email</th>
           <th scope="col">Tél.</th>
-          <th scope="col">Ville</th>
+          <th scope="col">A payé ?</th>
           <th scope="col">Carte ?</th>
           <th scope="col">Confirmé ?</th>
           <th scope="col">Status</th>
@@ -52,7 +51,11 @@
             <td>{$user->lastname}</td>
             <td>{$user->email}</td>
             <td>{$user->phone_number}</td>
-            <td>{$user->city}</td>
+            <td>{if $user->has_paid == 1}
+                <i class="bi bi-check-all text-success table-icon"></i>
+                {else}
+                <i class="bi bi-x text-danger table-icon"></i>
+                {/if}</td>
             <td>{if $user->display_on_map == 1}
                 <i class="bi bi-check-all text-success table-icon"></i>
                 {else}
@@ -68,8 +71,9 @@
             <td>
             <a class="btn btn-primary" href="{$APP_URL}/admin/user_edit/{$user->id}">Modifier</a> 
             <a class="btn btn-danger" href="{$APP_URL}/admin/user_delete/{$user->id}">Supprimer</a>
-            <a class="btn btn-success" href="{$APP_URL}/admin/user_payer/{$user->id}">Payer</a>
-            
+            {if $user->has_paid == 0}
+              <a class="btn btn-success" href="{$APP_URL}/admin/user_paid/{$user->id}">A Payé</a>
+            {/if}
             </td>
           </tr>
         {/foreach}

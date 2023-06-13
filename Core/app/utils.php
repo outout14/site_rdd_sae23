@@ -47,4 +47,35 @@ class Utils{
     public static function GetData($path) {
       return json_decode(file_get_contents($path), true);
     }
+
+
+
+    public static function hCaptcha($response)
+    {
+      if (isset($response) && !empty($response)) {
+        $secret = HCAPTCHA_KEY;
+        $verifyResponse = file_get_contents('https://hcaptcha.com/siteverify?secret=' . $secret . '&response=' . $response . '&remoteip=' . $_SERVER['REMOTE_ADDR']);
+        $responseData = json_decode($verifyResponse);
+        if ($responseData->success) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+
+    public static function displayErrorPage() : void {
+      $menu = [
+        'home' => 'Accueil',
+        'gallery' => 'Galerie',
+        'goldbook' => 'Livre d\'or',
+        'annuaire' => 'Annuaire',
+      ];
+      global $smarty;
+      Utils::SmartyGeneralValues("home", $menu, 'Page introuvable');
+      $smarty->display('home/pagenotfound.tpl');
+    }
+
 }

@@ -5,17 +5,11 @@
 
 <body>
 
-    <!-- Modal connexion -->
-    {include file="./modals/loader.tpl"}
-    
-    <!-- Modal connexion -->
-    {include file="./modals/login.tpl"}
-
     <!-- Navbar -->
     {include file="./common/navbar.tpl"}
 
     <!-- Inscription -->
-    {include file="./frame/register.tpl"}
+    {include file="./frame/personal.tpl"}
 
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}

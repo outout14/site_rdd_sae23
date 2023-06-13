@@ -25,7 +25,7 @@ class connexionMiddleware{
   public static function shouldBeLoggedIn(): void
   {
     if (!isset($_SESSION['user'])) {
-      header('Location: ' . APP_URL . '/auth/login?notification=login_required&redirect=' . urlencode($_SERVER['REQUEST_URI']));
+      header('Location: ' . APP_URL . '/?notification=login_required&redirect=' . urlencode($_SERVER['REQUEST_URI']));
       exit();
     }
   }

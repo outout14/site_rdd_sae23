@@ -5,6 +5,7 @@ use JetBrains\PhpStorm\NoReturn;
 
 require_once(__DIR__ . '/../../Core/app/bootstraper.php');
 require_once(__DIR__ . '/../Models/user.php');
+require_once(__DIR__ . '/../Models/goldbook.php');
 
 /*
  * HomeController
@@ -14,9 +15,9 @@ require_once(__DIR__ . '/../Models/user.php');
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
-    'gallery' => 'Galerie',
-    'goldbook' => 'Livre d\'or',
-    'annuaire' => 'Annuaire',
+    //'gallery' => 'Galerie', TODO : Add gallery
+    //'goldbook' => 'Livre d\'or', TODO : Add goldbook
+    //'annuaire' => 'Annuaire', TODO : Add annuaire
   ];
   /**
    * Display the home page.
@@ -47,7 +48,8 @@ class HomeController {
 
     try {
       $smarty->display('home/inscription.tpl');
-    } catch (SmartyException $e) {
+    } 
+    catch (SmartyException $e) {
     }
   }
 
@@ -66,49 +68,117 @@ class HomeController {
     }
   }
 
-  public function golddbook(): void
+  public function goldbook(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
-    Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
+    Utils::SmartyGeneralValues("home", $this->menu, 'Livre d\'or');
+
+    /* Il faut vérifier que l'utilisateur écrit pas plusieurs fois*/
+
+    if(isset($_POST["submit"])){
+      $content = $_POST["message"];
+      $date = date("Y-m-d");
+      $message = new goldbook(0, $content, connexionMiddleware::getLoginUser(), $date);
+      $message->push();
+    }
+
+    $content_db = goldbook::lister(1);
+    $smarty->assign('goldbook',$content_db);
+
+    $validate_form = goldbook::verif(connexionMiddleware::getLoginUser()->id);
+    $smarty->assign('already_sent_message',$validate_form);
 
     try {
-      $smarty->display('home/inscription.tpl');
+      $smarty->display('home/goldbook.tpl');
     } catch (SmartyException $e) {
     }
   }
 
   public function gallery(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
-    try {
-      $smarty->display('home/galerie.tpl');
-    } catch (SmartyException $e) {
+    /*----------------A faire-------------
+    Vérifier si il y a pas une photo qui a déjà le même nom
+    Donner un nom a sa photo */
+
+    /* Verifie si la photo s'est bien télécharger */
+    if (isset($_FILES["photo"]) && $_FILES["photo"]["error"]== UPLOAD_ERR_OK){
+      /* On met la photo dans le bon dossier */
+      $photo = $_FILES["photo"];
+      $name = "";
+      for($i=0; $i<5; $i++){
+        $name=$name.(string)rand();
+      }
+      $extension = explode(".", $photo["name"]);
+      $extension = ".".$extension[array_key_last($extension)];
+
+      if($extension != ".jpg" && $extension != ".png" && $extension != ".jpeg"){
+        $smarty->assign('error',"Le format de la photo n'est pas bon");
+      }
+      else{
+        $verifyImg = getimagesize($photo["tmp_name"]);
+        if($verifyImg["mime"] != "image/jpeg" && $verifyImg["mime"] != "image/png"){
+          $smarty->assign('error',"Le format de la photo n'est pas bon");
+        }
+        else{
+          // On enleve les caractères spéciaux
+          $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
+          $destination="gallerie/non_valide/".$name.$extension;
+          move_uploaded_file($photo["tmp_name"], $destination);
+        }
+      }
     }
+
+    $contenu_dossier = scandir("gallerie/valide");
+    $smarty->assign('contenu_dossier', $contenu_dossier);
+    $smarty->display('home/galerie.tpl');
   }
 
   public function annuaire(): void
   {
+    connexionMiddleware::shouldBeLoggedIn();
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
+
+    $users = User::getAll();
+    /* Boucle qui enleve toute les données inutiles */
+    foreach ($users as $user) {
+      unset($user->email);
+      unset($user->phone_number);
+      unset($user->city);
+      unset($user -> family_count);
+      unset($user -> has_paid);
+      unset($user -> role);
+}
+
+/* vérifier si luilisateur est conformé 
+Faire en sorte de filtrer sans le nome entier*/
     $smarty->assign('traitement',$_POST);
     if(isset($_POST["submit"])){
-      $users = User::getAll();
 
-      if($_POST["name"]!=""){
+      if(isset($_POST["name"]) && $_POST["name"]!=""){
         $name = $_POST["name"];
       }
-      if($_POST["status"]!="other"){
+      if(isset($_POST["status"]) && $_POST["status"]!="other"){
         $status = $_POST["status"];
       }
-      if($_POST["company"]){
+      if(isset($_POST["company"]) && $_POST["company"] ){
         $company = $_POST["company"];
       }
+      if (isset($_POST["promotion"]) && $_POST["promotion"] ){
+        $promotion = $_POST["promotion"];
+      }
 
-      $promotion = $_POST["promotion"];
 
       foreach ($users as $user){
+
+        if($user ->display_in_list==0){
+          // unset($users[$user]);
+        }
         if(isset($name) && $user -> firstname !=$name){
           unset($users[$user -> id]);
         }
@@ -137,5 +207,34 @@ class HomeController {
     Utils::SmartyGeneralValues("home", $this->menu, '404 not found');
 
     $smarty->display('home/pagenotfound.tpl');
+  }
+
+  public function personalspace($update = false): void
+  {
+    connexionMiddleware::shouldBeLoggedIn();
+    if($update){
+      $user = connexionMiddleware::getLoginUser();
+
+      print_r($_POST);
+      if(isset($_POST["displayed_in_list"]) and $_POST["displayed_in_list"] == "true" and $user->display_in_list == 0){
+        $user->setDisplayInList(1);
+      } else if($user->display_in_list == 1){
+        $user->setDisplayInList(0);
+      }
+
+      if(isset($_POST["password"]) && $_POST["password"]!=""){
+        if($_POST["password"] == $_POST["confirmpassword"]){
+          $user->updatePassword($_POST["password"]);
+        } else {
+          header("Location: " . APP_URL . "/home/personalspace?notification=invalidPassword");
+        }
+      }
+
+      header("Location: " . APP_URL . "/home/personalspace?notification=profilUpdated");
+    }
+    global $smarty;
+    Utils::SmartyGeneralValues("home", $this->menu, 'Espace Personnel');
+
+    $smarty->display('home/personalspace.tpl');
   }
 }

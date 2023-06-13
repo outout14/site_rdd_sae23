@@ -1,7 +1,10 @@
 // Function to handle form submission via AJAX
-function submitForm(form, errorElementId, successNotification,typeWriterObject) {
+function submitForm(form, errorElementId, successNotification, typeWriterObject) {
   const formData = new FormData(form);
 
+  if(form == document.getElementById("register_form")) {
+    openModal("loader-modal")
+  }
   // Send an AJAX request
   fetch(form.action, {
     method: form.method,
@@ -11,13 +14,29 @@ function submitForm(form, errorElementId, successNotification,typeWriterObject) 
     .then(data => {
       // Check if there is an error in the response
       if (data.error) {
-        if(data.error === "_success") {
+        if (data.error === "_success") {
           console.log("Utilisateur connecté");
-          window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
+          if(successNotification === "register_success"){
+            scrollRegister();
+            closeModal("loader-modal")
+          } else {
+            window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
+          }
         } else {
-          if(errorElementId != null){
+          // Empty fields of the form
+          // form.reset();
+
+          // Reset the captchas if there is an error
+          var captchaElements = document.getElementsByClassName('h-captcha');
+          for (var i = 0; i < captchaElements.length; i++) {
+            var captchaElement = captchaElements[i];
+            hcaptcha.reset(captchaElement.getAttribute('data-hcaptcha-widget-id'));
+          }
+
+          if (errorElementId != null) {
             showError(errorElementId, data.error, typeWriterObject); // Display the error message
           } else {
+            closeModal("loader-modal")
             spawnNotification("error", data.error); // Display the error message
           }
         }
@@ -30,7 +49,7 @@ function submitForm(form, errorElementId, successNotification,typeWriterObject) 
 
 // LOGIN PASSWORD FORM
 // check if element exists
-if(document.getElementById('login_form')) {
+if (document.getElementById('login_form')) {
   const login_form = document.getElementById('login_form')
   login_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -39,7 +58,7 @@ if(document.getElementById('login_form')) {
 }
 
 // FORGOT PASSWORD FORM
-if(document.getElementById('forgot_password_form')) {
+if (document.getElementById('forgot_password_form')) {
   const forgot_password_form = document.getElementById('forgot_password_form')
   forgot_password_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -47,8 +66,8 @@ if(document.getElementById('forgot_password_form')) {
   });
 }
 
-// FORGOT PASSWORD FORM
-if(document.getElementById('register_form')) {
+// REGISTER FORM
+if (document.getElementById('register_form')) {
   const register_form = document.getElementById('register_form')
   register_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -57,7 +76,7 @@ if(document.getElementById('register_form')) {
 }
 
 // FORGOT PASSWORD PAGE FORM (NEW PASSWORD)
-if(document.getElementById('new_password_form')) {
+if (document.getElementById('new_password_form')) {
   const new_password_form = document.getElementById('new_password_form')
   new_password_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -66,11 +85,58 @@ if(document.getElementById('new_password_form')) {
 }
 
 // CONTACT FORM
-if(document.getElementById('contact_form')) {
+if (document.getElementById('contact_form')) {
   console.log("ok");
-  const new_password_form = document.getElementById('contact_form')
-  new_password_form.addEventListener('submit', function (event) {
+  const contact_form = document.getElementById('contact_form')
+  contact_form.addEventListener('submit', function (event) {
     event.preventDefault();
-    submitForm(new_password_form, null, "contact_sent", null);
+    submitForm(contact_form, null, "contact_sent", null);
   });
+}
+
+/*
+  NOTIFICATIONS
+  Dynamically create a notification and append it to the DOM
+ */
+function spawnNotification(title, content) {
+  var notificationWrapper = document.createElement('div');
+  notificationWrapper.className = 'py-2 px-2 px-lg-4 gap-lg-3';
+  notificationWrapper.id = 'notification-wrapper';
+
+  var closeButtonDiv = document.createElement('div');
+  closeButtonDiv.className = 'fixed-top d-flex justify-content-end mt-2 mx-3';
+
+  var closeButton = document.createElement('i');
+  closeButton.className = 'bi bi-x-lg hover-pointer';
+  closeButton.id = 'closeNotificationButton';
+
+  closeButton.addEventListener('click', function () {
+    notificationWrapper.remove();
+  });
+
+  closeButtonDiv.appendChild(closeButton);
+  notificationWrapper.appendChild(closeButtonDiv);
+
+  var avatarDiv = document.createElement('div');
+  avatarDiv.className = 'avatar-xs border-lightgrey';
+
+  var avatarImg = document.createElement('img');
+  avatarImg.src = '/assets/images/creators/creator_pc.png';
+  avatarImg.alt = 'creator_message';
+  avatarImg.className = 'avatar-img';
+
+  avatarDiv.appendChild(avatarImg);
+  notificationWrapper.appendChild(avatarDiv);
+
+  var contentDiv = document.createElement('div');
+  contentDiv.className = 'text-complementary';
+  contentDiv.textContent = content;
+
+  notificationWrapper.appendChild(contentDiv);
+
+  // Apply additional styling to make the notification visible
+  notificationWrapper.style.transform = 'translateY(0)';
+  notificationWrapper.style.opacity = '1';
+
+  document.body.appendChild(notificationWrapper);
 }

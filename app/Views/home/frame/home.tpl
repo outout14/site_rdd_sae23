@@ -38,14 +38,34 @@
                     </div>
 
                     <!-- Ne doit plus s'afficher lorsqu'on est connectés -->
-                    <div class="col-12 d-flex justify-content-center justify-content-lg-start col-lg-3 mt-3 mt-lg-0">
+                    {if $sessionUser}
+                    <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-start mt-3 mt-lg-0">
+                        {if $sessionUser->has_paid == 1}
+                          <a href="{$APP_URL}/home/personalspace">
+                            <button class="button rounded-pill border border-3 border-white text-bonewhite py-2 px-3 flex-center">
+                              <span>Mon profil</span>
+                              <i class="bi bi-person-plus fa-lg ms-2"></i>
+                            </button>
+                          </a>
+                        {else}
+                            <a href="{$APP_URL}/home/personalspace">   
+                                <button class="button rounded-pill border border-3 border-white text-bonewhite py-2 px-3 flex-center">
+                                    <span>Tickets</span>
+                                    <i class="bi bi-person-plus fa-lg ms-2"></i>
+                                </button>
+                            </a>
+                        {/if}
+                    </div>
+                    {else}
+                        <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-start mt-3 mt-lg-0">
                         <a href="{$APP_URL}/home/register">   
                             <button class="button rounded-pill border border-3 border-white text-bonewhite py-2 px-3 flex-center">
                                 <span>S'inscrire</span>
                                 <i class="bi bi-person-plus fa-lg ms-2"></i>
                             </button>
                         </a>
-                    </div>
+                        </div>
+                    {/if}
                 </div>
             </div>
         </div>

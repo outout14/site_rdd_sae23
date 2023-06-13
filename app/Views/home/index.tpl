@@ -26,6 +26,6 @@
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}
 
-    <script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
+    {include file="./frame/javascript.tpl"}
 </body>
 </html>

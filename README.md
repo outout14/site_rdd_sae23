@@ -26,5 +26,3 @@ Il faut ensuite installer les dépendances du projet avec la commande suivante d
   ```bash
   composer install
   ```
-
-À partir du modèle de fichier ``config/config.php.dist``, il faut créer le fichier ``config/config.php`` et le remplir avec les informations de connexion à la base de données et au serveur SMTP.

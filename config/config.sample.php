@@ -35,3 +35,6 @@ define('MAIL_REPLYTO', 'bde@generation-rt.fr');
 define('MAIL_REPLYTO_NAME', 'BDE R&T');
 
 define('MAIL_ENCRYPTION_TOKEN', 'thisShouldBeALongInt');
+
+define('HCAPTCHA_SITEKEY', '10000000-ffff-ffff-ffff-000000000001');
+define('HCAPTCHA_KEY', '0x0000000000000000000000000000000000000000');

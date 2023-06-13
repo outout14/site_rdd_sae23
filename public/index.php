@@ -33,12 +33,10 @@ if(file_exists($controllerFile)) {
     include $controllerFile;
     $controller = new $controller();
     if(method_exists($controller, $method)) {
-
         call_user_func_array(array($controller, $method), $params);
     } else {
-        echo "404 - method not found - $method in $controllerFile<br/>";
-        print_r($path);
+        Utils::displayErrorPage();
     }
 } else {
-    echo "404 - controller not found - $controllerFile";
+  Utils::displayErrorPage();
 }

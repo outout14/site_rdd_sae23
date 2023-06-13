@@ -1,4 +1,4 @@
-<section class="window-container background-wave-blue h-100" style="min-height: 100vh;">
+<section class="window-container h-100" style="min-height: 100vh;">
     <div class="fixed-top" id="gallery-fade"></div>
     
     <div class="d-flex align-items-center flex-column my-5" id="gallery-wrapper">
@@ -13,46 +13,15 @@
             <span class="gallery-title-letter">e</span>
         </div>
 
-        <nav class="d-flex justify-content-center align-items-center flex-column flex-lg-row gap-3 mb-5" id="gallery-navigation">
-            <a href="#" class="link gallery-navigation-item link-active">Trombinoscopes</a>
-            <span class="gallery-navigation-item phone-d-none">|</span>
-            <a href="#" class="link gallery-navigation-item">Profeshinal foto by ma elle</a>
-            <span class="gallery-navigation-item phone-d-none">|</span>
-            <a href="#" class="link gallery-navigation-item">Vos photos</a>
-        </nav>
-
-        <div id="gallery">
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-            
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
-
-            <div class="col gallery-image-wrapper">
-                <img class="gallery-image" src="{$APP_URL}/assets/images/gallery/missing.png" alt="">
-            </div>
+        <div class="mt-5" id="gallery">
+            {foreach $contenu_dossier as $photo }
+                {if $photo != "." && $photo !=".." }
+                {assign var="source" value=$APP_URL|cat:"/gallerie/valide/"|cat:$photo}
+                <div class="col gallery-image-wrapper">
+                    <img class="gallery-image" src="{$source}" alt="{$photo}">
+                </div>
+                {/if}
+            {/foreach}
         </div>
 
     </div>

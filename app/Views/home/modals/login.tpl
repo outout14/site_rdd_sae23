@@ -1,5 +1,4 @@
-<!-- Connection -->
-
+<script src="{$APP_URL}/assets/js/ajaxLogin.js"></script>
 <section class="modal" id="connection-modal">
 
     <div class="modal-background"></div>
@@ -7,7 +6,7 @@
     <div class="window-container modal-container">
         <div class="window overflow-hidden modal-window" id="connection-window">
 
-            <div class="fixed-top d-flex justify-content-end mt-4 mx-5">    
+            <div class="d-flex justify-content-end mt-4 mx-5">    
                 <button class="btn btn-close" onclick="closeModal('connection-modal')"></button>
             </div>
             
@@ -55,7 +54,15 @@
                                 </div>
                             </div>
                         </div>
-    
+
+                        <!-- Captcha -->
+                        <div class="text-center">
+                          <div
+                            class="h-captcha"
+                            data-sitekey="{$HCAPTCHA_SITEKEY}"
+                          ></div>
+                        </div>
+
                         <!-- Submit -->
                         <div class="row justify-content-center px-3 px-lg-5 my-3">
                             <button class="button rounded-3 bg-blue text-white fw-bold py-2 px-3">Se connecter</button>
@@ -90,7 +97,7 @@
 
                             <div class="col-12 col-lg-9 flex-center flex-column">
                                 <p class="text-information fw-bold mb-3" id="forgot_password_error_title"></p>
-                                <p class="text-complementary text-justify " id="forgot_password_error_text">
+                                <p class="text-complementary text-justify px-2" id="forgot_password_error_text">
                                     Si un compte est associé à cette adresse mail, vous allez recevoir un mail de 
                                     recuperation afin de réinitialiser votre mot de passe.
                                 </p>
