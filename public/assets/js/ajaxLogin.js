@@ -86,7 +86,6 @@ if (document.getElementById('new_password_form')) {
 
 // CONTACT FORM
 if (document.getElementById('contact_form')) {
-  console.log("ok");
   const contact_form = document.getElementById('contact_form')
   contact_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -139,4 +138,10 @@ function spawnNotification(title, content) {
   notificationWrapper.style.opacity = '1';
 
   document.body.appendChild(notificationWrapper);
+
+  // Clear it after 5 seconds
+  setTimeout(function () {
+    notificationWrapper.remove();
+  }, 5000);
 }
+

@@ -38,8 +38,8 @@
     <section class="position-fixed fixed-bottom mb-3 mb-lg-4">
 
         <div class="flex-center d-none" id="goldbook-alert-wrapper">
-            <div class="goldbook-message">
-                Vous avez déjà envoyé un message dans le livre d'or.
+            <div class="goldbook-message" id="goldbook-alert">
+                
             </div>
         </div>
 
@@ -85,12 +85,26 @@
             </fieldset>
 
             <script>
-                if({$already_sent_message}) {
+                if("{$already_sent_message}" == "notsent") {
+                    // Afficher input
+                    document.getElementById("goldbook-alert-wrapper").classList.add("d-none")
+                    document.getElementById("goldbook-input-wrapper").classList.remove("d-none")
+                } 
+                else if("{$already_sent_message}" == "sent"){
+                    // Afficher alert déjà envoyé message
+                    document.getElementById("goldbook-alert").innerHTML = "Vous avez déjà envoyé un message dans le livre d'or.";
+                    document.getElementById("goldbook-alert-wrapper").classList.remove("d-none")
+                    document.getElementById("goldbook-input-wrapper").classList.add("d-none")
+                }else if("{$already_sent_message}" == "unvalid"){
+                    // Afficher alert déjà envoyé message
+                    document.getElementById("goldbook-alert").innerHTML = "Votre message est en cours de validation";
                     document.getElementById("goldbook-alert-wrapper").classList.remove("d-none")
                     document.getElementById("goldbook-input-wrapper").classList.add("d-none")
                 } else {
-                    document.getElementById("goldbook-alert-wrapper").classList.add("d-none")
-                    document.getElementById("goldbook-input-wrapper").classList.remove("d-none")
+                    // Afficher alert erreur
+                    document.getElementById("goldbook-alert").innerHTML = "Une erreur est survenue.";
+                    document.getElementById("goldbook-alert-wrapper").classList.remove("d-none")
+                    document.getElementById("goldbook-input-wrapper").classList.add("d-none")
                 }
             </script>
         </form>

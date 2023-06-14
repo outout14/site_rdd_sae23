@@ -28,18 +28,18 @@
                                     <textarea required class="px-3 py-2 questions-input" id="input-questions-textarea" name="message" placeholder="Je me demandais si..."></textarea>
                                 </div>
 
-                              <div class="col-12 my-2 d-lg-none">
+                            <div class="col-12 my-2 d-lg-none">
                                 <input type="submit" class="button rounded-pill bg-bonewhite text-dark fw-bold py-2 px-3 mt-0 mt-lg-3 w-100" name="ERROR" value="Envoyer">
-                              </div>
+                            </div>
 
-                              <!-- Captcha -->
-                             <div class="d-flex justify-content-center pt-4">
-                               <div
-                                 class="h-captcha"
-                                 data-sitekey="{$HCAPTCHA_SITEKEY}"
-                                 data-theme="dark"
-                               ></div>
-                             </div>
+                            <!-- Captcha -->
+                            <div class="d-flex justify-content-center pt-4">
+                                <div
+                                    class="h-captcha"
+                                    data-sitekey="{$HCAPTCHA_SITEKEY}"
+                                    data-theme="dark"
+                                ></div>
+                            </div>
 
                             </div>
                         </div>
