@@ -17,7 +17,7 @@
                         <!-- Informations / Erreurs   -->
                         <div class="row flex-center mb-5 gap-3" id="login_error_container">
                             <div class="col-12 flex-center">
-                                <div class="avatar-sm border-white mb-4 mb-lg-0">
+                                <div class="avatar-md border-white mb-4 mb-lg-0">
                                     <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img" id="login_error_image">
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                         </div>
     
                         <!-- Renvoi vers inscription -->
-                        <div class="row flex-center">
+                        <div class="row flex-center mb-2">
                             <p class="text-center">Vous n'avez pas de compte? <a href="{$APP_URL}/home/register" class="text-blue">Inscrivez-vous.</a></p>
                         </div>
                     </form>
@@ -132,3 +132,4 @@
         </div>
     </div>
 </section>
+

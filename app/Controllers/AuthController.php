@@ -97,7 +97,7 @@ class AuthController
         $status = htmlspecialchars($_POST["status"]);
 
         $status = ($status == "student" || $status == "teacher" || $status == "oldstudent" || $status == "other") ? $status : "student";
-        $promotion_year = 0;
+        $promotion_year = 0;  
         // If oldstudent, check if promotion_year and is int
         if ($status == "oldstudent") {
           if (isset($_POST["oldpromotion"])) {
