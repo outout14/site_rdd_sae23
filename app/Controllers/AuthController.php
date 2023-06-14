@@ -116,13 +116,18 @@ class AuthController
 
         $phone_number = "0123456789";
         $email = strtolower(filter_var($_POST["email"], FILTER_SANITIZE_EMAIL));
+        // Regex to check if the email is valid
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          Utils::DisplayJsonError("L'adresse email n'est pas valide.");
+        }
+
         $password = htmlspecialchars($_POST["password"]);
         if(strlen($password) < 8) {
           Utils::DisplayJsonError("Le mot de passe doit contenir au moins 8 caractères.");
         }
         $password_confirm = htmlspecialchars($_POST["confirmpassword"]);
         $display_on_map = isset($_POST["display_on_map"]) ? 1 : 0;
-        $display_in_list = isset($_POST["display_in_list"]) ? 1 : 0;
+        $display_in_list = isset($_POST["displayed_in_list"]) ? 1 : 0;
         $company = isset($_POST["company"]) ? htmlspecialchars($_POST["company"]) : "";
 
         // Check if family family_comes, then family_count = 0, else use family_count value and check for it to be an int
@@ -145,10 +150,12 @@ class AuthController
         } else {
           Utils::DisplayJsonError($user);
         }
-
+      }
+      else {
+        Utils::DisplayJsonError("Veuillez remplir tous les champs...");
       }
     }
-    Utils::DisplayJsonError("Veuillez remplir tous les champs.");
+    Utils::DisplayJsonError("Veuillez remplir tous les champs !");
   }
 
   /**
