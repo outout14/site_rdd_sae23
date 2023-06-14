@@ -6,7 +6,7 @@
         <div class="window overflow-hidden modal-window p-5" id="gallery-upload-window">
             
             <!-- Fermer -->
-            <div class="d-flex justify-content-end my-4 mx-2 mx-lg-5"> 
+            <div class="d-flex justify-content-end my-1 mx-2 mx-lg-5"> 
                 <button class="button hover-pointer bg-transparent" onclick="closeModal('gallery-upload-modal')">
                     <i class="bi bi-x fa-2x text-dark"></i>
                 </button>

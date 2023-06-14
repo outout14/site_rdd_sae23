@@ -1,10 +1,12 @@
-const $APP_URL = "/site_rdd_sae23/public"
 const phone = window.innerWidth < 1000
+var currentPage = document.querySelector("title").innerHTML
+console.log(currentPage)
 ///////////////////////////////////////////// FORMS ///////////////////////////////////////////////////////// 
 
 // Affichage du mot de passe dans le input ( icone d'oeil )
 
 const passwordInputIcons = document.querySelectorAll(".password-input-icon")
+
 
 if(passwordInputIcons != null) {
     passwordInputIcons.forEach(icon => {
@@ -65,15 +67,11 @@ function countdown() {
     setTimeout(countdown, 1000)
 }
 
-if(countdownDay != null) {
-    countdown()
-}
-
 //////////////////////////////////////////////////// CONNECTION ////////////////////////////////////////////////////
 
 // Affichage du formulaire de connexion
 
-function openModal(identifier, source=null) {
+var openModal = function(identifier, source=null) {
     let modal = document.getElementById(identifier)
 
     if(source != null) {
@@ -95,13 +93,15 @@ function closeModal(identifier) {
             element.reset()
         })
     }
-
-
     modal.style.opacity = "0"
     setTimeout(() => {modal.style.display = "none"}, 750)
     document.body.style.overflow = "auto"
 }
 
+
+if(currentPage == "Accueil") {
+    countdown()
+}
 
 // Scroll dans le formulaire de connexion
 

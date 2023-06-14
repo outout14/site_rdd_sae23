@@ -85,7 +85,7 @@
             </fieldset>
 
             <script>
-                if({$already_sent_message}) {
+                if(true) {
                     document.getElementById("goldbook-alert-wrapper").classList.remove("d-none")
                     document.getElementById("goldbook-input-wrapper").classList.add("d-none")
                 } else {

@@ -85,5 +85,4 @@ class goldbook {
         return True;
       }
     }
-
 }

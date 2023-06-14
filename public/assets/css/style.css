@@ -284,7 +284,7 @@ a {
     border-radius: 2.5vh;
     background: var(--blue-transparent);
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    border: 3px solid rgba( 255, 255, 255, 0.25 );
+    border: 10px solid rgba( 255, 255, 255, 0.25 );
 }
 
 .startpage-title, #gallery-title, .error-title {
@@ -397,8 +397,8 @@ a {
 }
 
 .avatar-img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 105%;
+    max-height: 105%;
     pointer-events: none;
 }
 
@@ -804,6 +804,12 @@ header {
     height: fit-content;
 }
 
+#ticket-warning-window {
+    min-width: 30vw;
+    max-width: 30vw;
+    height: fit-content;
+}
+
 #gallery-window {
     border-radius: 2vh;
     box-shadow: none;
@@ -1017,6 +1023,19 @@ header {
     transform: scale(5);
 }
 
+#animation-container {
+    z-index: 10000 !important;
+    transition: all 0.5s ease-in;
+}
+
+#payement_title_wrapper {
+    height: 5rem;
+}
+
+#payement_title {
+    line-height: 2rem;
+}
+
 .up-and-down {
     animation: up-and-down 3s linear infinite;
 }
@@ -1181,6 +1200,10 @@ header {
         max-width: 85vw;
     }
     #gallery-upload-window {
+        width: 90%;
+        border-radius: 25px;
+    }
+    #ticket-warning-window {
         width: 90%;
         border-radius: 25px;
     }

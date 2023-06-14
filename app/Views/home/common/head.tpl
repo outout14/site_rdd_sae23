@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 
     <!-- Styles + Scripts -->
-    <script src="{$APP_URL}/assets/js/javascript.js" defer></script>
     <link rel="stylesheet" href="{$APP_URL}/assets/css/style.css">
 
     <!-- Importation de typeIt -->
