@@ -35,7 +35,10 @@
     {if $sessionUser}
         {if $sessionUser->has_paid == 0}
             <script>
-                setTimeout(openModal("ticket-modal"),3000)
+              // Wait 3s before showing the modal
+              setTimeout(function() {
+                openModal("ticket-modal");
+              }, 1500);
             </script>
         {/if}
     {/if}

@@ -71,7 +71,7 @@ function countdown() {
 
 // Affichage du formulaire de connexion
 
-var openModal = function(identifier, source=null) {
+function openModal(identifier, source=null) {
     let modal = document.getElementById(identifier)
 
     if(source != null) {

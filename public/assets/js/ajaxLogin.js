@@ -138,4 +138,10 @@ function spawnNotification(title, content) {
   notificationWrapper.style.opacity = '1';
 
   document.body.appendChild(notificationWrapper);
+
+  // Clear it after 5 seconds
+  setTimeout(function () {
+    notificationWrapper.remove();
+  }, 5000);
 }
+
