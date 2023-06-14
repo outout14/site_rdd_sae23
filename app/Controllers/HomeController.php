@@ -171,7 +171,7 @@ class HomeController {
 
         //le nom est selectionné
         if($tab_param_form[0]!=0){
-          if($user-> firstname !=$tab_param_form[0] && $user -> lastname !=$tab_param_form[0]){
+          if(strtolower($user-> firstname) !=strtolower($tab_param_form[0]) && strtolower($user -> lastname) != strtolower($tab_param_form[0])){
             unset($users[$cle]);
           }
           else{
@@ -220,7 +220,7 @@ class HomeController {
           //entreprise selectionnee
           if($tab_param_form[2]!=0){
             if(array_key_exists($cle, $users)){
-              if($user -> company !=$tab_param_form[2]){
+              if(strtolower($user -> company) !=strtolower($tab_param_form[2])){
                 unset($users[$cle]);
               }
               else{
