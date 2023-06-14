@@ -181,6 +181,20 @@ class User {
     return $users;
   }
 
+  public static function getUsers_annuaire(): array{
+    global $mysqlConnection;
+    $query = "SELECT * FROM users WHERE display_in_list=1";
+    $stmt = $mysqlConnection->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    $users = [];
+    while ($row = $result->fetch_assoc()) {
+      $users[] = new User($row['id'], $row['lastname'], $row['firstname'], $row['email'], $row['password'], $row['phone_number'], $row['city'], $row['family_count'], $row['company'], $row['promotion'], $row['promotion_year'], $row['display_in_list'], $row['display_on_map'], $row['confirmed'], $row['status'], $row['role'], $row['has_paid']);
+    }
+    return $users;
+  }
+
   public static function getByFilter($filter): array
   {
     // Get users that have $filter in their lastname, firstname or email

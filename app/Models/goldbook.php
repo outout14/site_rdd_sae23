@@ -14,10 +14,10 @@ class goldbook {
     public string $content;
     public User $author;
     public string $date;
-    public string $is_validate;
+    public int $is_validate;
 
 
-    public function __construct($id=0, $content = "Contenu", $author="auteur", $date="", $is_validate=""){
+    public function __construct($id=0, $content = "Contenu", $author="auteur", $date="", $is_validate=0){
         $this->id = $id;
         $this->content = $content;
         $this->author = $author;
@@ -41,14 +41,14 @@ class goldbook {
 
     static function lister($verif): array{
       global $mysqlConnection;
-      $query = "SELECT goldbook.id, users.lastname, users.firstname, goldbook.content, goldbook.date FROM goldbook INNER JOIN users ON goldbook.author = users.id WHERE is_validate=?;";
+      $query = "SELECT goldbook.id, users.lastname, users.firstname, goldbook.content, goldbook.date, goldbook.is_validate FROM goldbook INNER JOIN users ON goldbook.author = users.id WHERE is_validate=?;";
       $stmt = $mysqlConnection->prepare($query);
       $stmt -> bind_param("i", $verif);
       $stmt->execute();
       $result = $stmt->get_result();
       $stmt->close();
       while ($row = $result->fetch_assoc()) {
-        $contenue[] = new goldbook($row["id"], $row["content"], new user(0, $row["lastname"], $row["firstname"]), $row["date"] );
+        $contenue[] = new goldbook($row["id"], $row["content"], new user(0, $row["lastname"], $row["firstname"]), $row["date"], $row["is_validate"] );
       }
       if(!isset($contenue)){
         return array();
@@ -72,17 +72,24 @@ class goldbook {
       $stmt->close();
     }
 
-    static function verif($id): bool{
+    static function verif($id): string{
       global $mysqlConnection;
-      $query = "SELECT * FROM goldbook WHERE id=$id";
+      $query = "SELECT * FROM goldbook WHERE author=$id";
       $stmt = $mysqlConnection->prepare($query);
       $stmt->execute();
       $result = $stmt->get_result();
       $stmt->close();
-      if($result==null){
-        return false;
-      }else{
-        return True;
+      $row = $result->fetch_assoc();
+      if($result->num_rows==0){
+        return "notsent";
+      }
+      else{
+        if($row["is_validate"]==1){
+          return "sent";
+        }
+        else{
+          return "unvalid";
+        }
       }
     }
 }
