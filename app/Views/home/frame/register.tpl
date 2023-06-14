@@ -16,7 +16,7 @@
             <form action="{$APP_URL}/auth/register" method="POST" class="h-100" id="register_form">
             <input type="hidden" name="actionType" value="register">
             <input type="hidden" name="phonenumber" value="0000000000">
-            <input type="hidden" name="promotion" value="-">
+            <!-- <input type="hidden" name="promotion" value="-"> -->
 
                 <!-- Etudiant / Professeur / Ancien eleve / Autre -->
                 <div class="row flex-column h-100 justify-content-center align-items-center overflow-hidden px-4">
@@ -219,7 +219,7 @@
     
                                 <div class="col-12 col-lg mt-2 position-relative">
                                     <img src="{$APP_URL}/assets/images/svg/password-hidden.svg" class="password-input-icon">
-                                    <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Confirmation du mot de passe" id="input-confirm_password">
+                                    <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Confirmation du mot de passe" name="confirmpassword" id="input-confirm_password">
                                 </div>
                             </div>
 
