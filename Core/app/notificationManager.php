@@ -154,6 +154,13 @@ class NotificationManager
           );
           break;
         }
+      case 'password_mail_sent': {
+        $notification = array(
+          'type' => 'success',
+          'message' => 'Un email vous a été envoyé.'
+        );
+        break;
+      }
       default: {
           $notification = array(
             'type' => 'danger',
