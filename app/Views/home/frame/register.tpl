@@ -219,7 +219,7 @@
     
                                 <div class="col-12 col-lg mt-2 position-relative">
                                     <img src="{$APP_URL}/assets/images/svg/password-hidden.svg" class="password-input-icon">
-                                    <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Confirmation du mot de passe" name="confirmpassword" id="input-confirm_password">
+                                    <input type="password" class="form-control ps-2 py-1 password-input custom-input" placeholder="Confirmation du mot de passe" name="confirmpassword" id="input-confirmpassword-register">
                                 </div>
                             </div>
 
@@ -236,7 +236,7 @@
                         <!-- Boutons envoyer / revenir -->
                         <div class="row flex-center flex-column-reverse flex-lg-row gap-2 gap-lg-3 mt-4">
                             <button class="button bg-lightgrey py-2 px-5" type="button" onclick="location.reload()">Revenir</button>
-                            <input type="submit" class="button bg-blue py-2 px-5" name="submit" value="S'inscrire">
+                            <input type="submit" class="button bg-blue py-2 px-5" name="submit" value="S'inscrire" id="register_form_submit">
                         </div>
                     </div>
                 </div>
@@ -244,11 +244,20 @@
                 <div class="row flex-column h-100 justify-content-center align-items-center overflow-hidden">
                     <div class="flex-center flex-column">
                         <img src="{$APP_URL}/assets/images/svg/check.svg" alt="Check">
-                        <h2 class="fw-bold pt-4 text-center">Votre inscription est presque finie!</h2>
-                        <p class="text-complementary pt-5 px-2 px-lg-5 mx-0 mx-lg-5">
+                        <h1 class="fw-bold pt-2 text-center">Votre inscription est presque finie!</h1>
+                        <p class="pt-4 px-2 px-lg-5 mx-0 mx-lg-5 text-information">
                             Un email de confirmation a été énvoyé sur l'adresse mail que vous avez renseigné.
-                            Pour finir votre inscription, vous devez le consulter et confirmer votre compte.
+                            Pour finir votre inscription, vous devez le consulter et confirmer votre compte.<br>
+                            Pensez à vérifier vos spams.
                         </p>
+                        <div class="flex-center mt-5">
+                            <h6 class="text-secondary">
+                                Vous allez être redirigez vers la page d'accueil dans 10 secondes.
+                            </h6>
+                            <div class="spinner-grow spinner-grow-sm text-success ms-2" role="status">
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </form>

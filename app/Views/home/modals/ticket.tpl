@@ -30,11 +30,13 @@
                 <p class="text-complementary px-2 mb-4">
                     Le prix de la participation à la cérémonie de remise des diplômes est de 30€.
                     Afin d'acheter votre ticket, vous pouvez vous rendre dans votre espace personnel,
-                    où vous trouverez le lien qui redirige vers la cagnotte HelloAsso.
+                    où vous trouverez le lien qui redirige vers la cagnotte HelloAsso.<br>
+                    Merci d'utiliser les mêmes nom, prénom et email lors de votre inscription,
+                    pour que les administrateurs puissent vérifier votre inscription.
                 </p>
 
-                <a href="{$APP_URL}/home/personalspace">
-                    <button type="button" class="button rounded-3 bg-blue text-white fw-bold py-2 px-5">Espace personnel</button>
+                <a href="https://www.helloasso.com/associations/generation-r-t/evenements/remise-des-diplomes">
+                    <button type="button" class="button rounded-3 bg-blue text-white fw-bold py-2 px-5">Cagnotte HelloAsso</button>
                 </a>
             </div>
         </div>

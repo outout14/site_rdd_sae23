@@ -1,6 +1,5 @@
 const phone = window.innerWidth < 1000
 var currentPage = document.querySelector("title").innerHTML
-console.log(currentPage)
 ///////////////////////////////////////////// FORMS ///////////////////////////////////////////////////////// 
 
 // Affichage du mot de passe dans le input ( icone d'oeil )
@@ -125,7 +124,7 @@ function connectionScroll(direction) {
 /////////////////////////////// INSCRIPTION /////////////////////////////////////
 
 // Si on est sur la page de inscription, alors tout ce code est chargé
-if(document.getElementById("inscription-container") != null){
+if(currentPage == "Inscription"){
     // Variables pour le scroll
     var inscriptionScrollable = document.getElementById("inscription-scrollable")
     window.inscriptionScrollableHeight = inscriptionScrollable.offsetHeight
@@ -431,3 +430,6 @@ if(!!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)) {
         wave.style.display = "none"
     })
 }
+
+
+
