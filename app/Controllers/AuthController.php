@@ -110,8 +110,14 @@ class AuthController
           }
         }
         $promotion = $_POST["promotion"] ?? "XXXX";
-        if ($promotion == null && $status == "student") {
-          Utils::DisplayJsonError("La promotion doit être renseignée dans le cas où vous êtes un élève.");
+        if($status == "student" && $promotion != "XXXX") {
+          if ($promotion == null) {
+            Utils::DisplayJsonError("La promotion doit être renseignée dans le cas où vous êtes un élève.");
+          }
+          $valid = ["2AFI", "2AFA", "CART", "RIMS", "TSSR"];
+          if(!in_array($promotion, $valid)) {
+            Utils::DisplayJsonError("La promotion n'est pas valide.");
+          }
         }
 
         $phone_number = "0123456789";

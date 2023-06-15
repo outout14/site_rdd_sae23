@@ -34,6 +34,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Tâche</th>
       <th scope="col">Lien</th>
+      <th scope="col">photos</th>
       <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -44,6 +45,7 @@
           <th>{$item['lastname']}</th>
           <th>{$item['task']}</th>
           <th><a href="https://{$item['link']}">{$item['link']}</a></th>
+          <th><img width="50px" src="{$APP_URL}/assets/images/creators/creator_{$item['firstname']}.png"></th>
           <th><a href="{$APP_URL}/admin/modifyjson/organisators.json/{$key}" class="btn btn-primary">Modifier</a> <a href="?delete={$key}&file=organisators.json" class="btn btn-danger">Supprimer</a></th>
         </tr>
       {/foreach}
@@ -60,6 +62,7 @@
       <tr>
         <th scope="col">Nom</th>
         <th scope="col">Lien</th>
+        <th scope="col">photos</th>
         <th scope="col">Actions</th>
       </tr>
       </thead>
@@ -68,6 +71,8 @@
           <tr class="table-active">
             <th>{$item["name"]}</th>
             <th><a href="https://{$item['link']}">{$item['link']}</a></th>
+            <th><img width="50px" src="{$APP_URL}/assets/images/sponsors/{$item['name']}.png"></th>
+           
             <th><a href="{$APP_URL}/admin/modifyjson/sponsors.json/{$key}" class="btn btn-primary">Modifier</a> <a href="?delete={$key}&file=sponsors.json" class="btn btn-danger">Supprimer</a></th>
           </tr>
         {/foreach}

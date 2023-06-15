@@ -30,7 +30,9 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
           // form.reset();
 
           // if the form is the register form, reset the captcha
-          hcaptcha.reset(c);
+          if(form == document.getElementById("register_form")){
+            hcaptcha.reset(c);
+          }
 
           var captchaElements = document.getElementsByClassName('h-captcha-register');
           for (var i = 0; i < captchaElements.length; i++) {

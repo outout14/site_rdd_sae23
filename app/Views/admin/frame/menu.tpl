@@ -17,9 +17,19 @@
                 {/if}
             </li>
           {/foreach}
-        <li class="nav-item">
-          <a class="nav-link" href="{$APP_URL}/auth/logout">Logout</a>
+          <li class="nav-item">
+          <a href="{$APP_URL}/auth/logout" class="nav-link" style="position: absolute; top: 0,5; right: 0;">
+            <button style="background-color: #ff5e00; color: white; border: 2px solid; padding: 8px 16px; border-radius: 4px;">Deconnexion </button>
+          </a>
         </li>
+        <li class="nav-item">
+          <a href="{$APP_URL}/home" class="nav-link" style="position: absolute; top: 0; right: 0;">
+            <button style="background-color: #000dff; color: white; border: 2px solid; padding: 8px 16px; border-radius: 4px;">Home </button>
+          </a>
+        </li>
+        
+
+        
       </ul>
     </div>
   </div>
