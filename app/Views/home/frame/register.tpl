@@ -247,8 +247,8 @@
                         <h1 class="fw-bold pt-2 text-center">Votre inscription est presque finie!</h1>
                         <p class="pt-4 px-2 px-lg-5 mx-0 mx-lg-5 text-information">
                             Un email de confirmation a été énvoyé sur l'adresse mail que vous avez renseigné.
-                            Pour finir votre inscription, vous devez le consulter et confirmer votre compte.<br>
-                            Pensez à vérifier vos spams.
+                            Pour finir votre inscription, vous devez le consulter et confirmer votre compte.
+                            <span class="fw-bold">Pensez à vérifier vos spams.</span>
                         </p>
                         <div class="flex-center mt-5">
                             <h6 class="text-secondary">

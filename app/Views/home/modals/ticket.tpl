@@ -30,7 +30,7 @@
                 <p class="text-complementary px-2 mb-4">
                     Le prix de la participation à la cérémonie de remise des diplômes est de 30€.
                     Afin d'acheter votre ticket, vous pouvez vous rendre dans votre espace personnel,
-                    où vous trouverez le lien qui redirige vers la cagnotte HelloAsso.<br>
+                    où vous trouverez le lien qui redirige vers la cagnotte HelloAsso.<br><br>
                     Merci d'utiliser les mêmes nom, prénom et email lors de votre inscription,
                     pour que les administrateurs puissent vérifier votre inscription.
                 </p>

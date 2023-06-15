@@ -57,3 +57,9 @@
         </div>
     </div>
 </section>
+
+<section class="d-flex justify-content-center align-items-center bg-darker pb-4">
+    <a href="{$APP_URL}/assets/mentionslegales.pdf" class="text-complementary text-bonewhite" download="mentionslegales.pdf">
+        Tous droits réservés © Génération R&T 2023
+    </a>
+</section>

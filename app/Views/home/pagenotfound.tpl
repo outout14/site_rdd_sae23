@@ -11,7 +11,7 @@
     <!-- Navbar -->
     {include file="./common/navbar.tpl"}
 
-    <section class="window-container background-wave-blue flex-center">
+    <section class="background-wave-blue vw-100 vh-100 flex-center">
         <div class="flex-center flex-column tada">
             <p class="error-title">404</p>
             <p class="error-title">Oops... Cette page n'existe pas.</p>
