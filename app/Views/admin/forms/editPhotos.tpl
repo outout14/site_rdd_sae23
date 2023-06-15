@@ -12,8 +12,31 @@
             </div>
 
             <div class="container-fluid h-100">
-                <img src="./images/background/main.png" alt="gallery-modal-photo" id="gallery-modal-photo">
+                <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="./images/background/main.png" alt="gallery-modal-photo">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-danger">Supprimer</button>
+                                <button class="btn btn-success">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ajouter plus de cartes ici -->
+
+                    <div class="card">
+                        <img class="card-img-top" src="{$APP_URL}/assets/images/gallery/missing.png" alt="gallery-modal-photo">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-danger">Supprimer</button>
+                                <button class="btn btn-success">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
             <!-- Navbar ( like et telechargement )-->
             <nav class="fixed-bottom d-flex justify-content-end my-3 mx-5 gap-5">

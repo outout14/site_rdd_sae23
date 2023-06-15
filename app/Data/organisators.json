@@ -3,36 +3,57 @@
         "firstname": "Nikita",
         "lastname": "Ziuzin",
         "task": "Design, Front-End",
-        "link": "www.linkedin.com/in/nikita-ziuzin-9b9736241/"
+        "link": "www.linkedin.com\/in\/nikita-ziuzin-9b9736241\/"
     },
     "Mael": {
         "firstname": "Mael",
         "lastname": "Gramain",
         "task": "Back-end",
-        "link": "www.linkedin.com/in/maelgramain/"
+        "link": "www.linkedin.com\/in\/maelgramain\/"
     },
     "Lisa": {
         "firstname": "Lisa",
         "lastname": "Cazoulat",
         "task": "Design, Front-End",
-        "link": "www.linkedin.com/in/lisa-cazoulat-181966243/"
+        "link": "www.linkedin.com\/in\/lisa-cazoulat-181966243\/"
     },
     "Alexis": {
         "firstname": "Alexis",
         "lastname": "Teffene",
         "task": "Back-end",
-        "link": "www.linkedin.com/in/alexis-teffene-66576523b/"
+        "link": "www.linkedin.com\/in\/alexis-teffene-66576523b\/"
     },
     "Manon": {
         "firstname": "Manon",
         "lastname": "Favrel",
-        "task": "Recherche de la salle",
-        "link": "www.linkedin.com/in/manon-favrel-320bb623b/"
+        "task": "Traiteur\/decoration\/organisation",
+        "link": "www.linkedin.com\/in\/manon-favrel-320bb623b\/"
     },
     "Hugo": {
         "firstname": "Hugo",
         "lastname": "Blot",
         "task": "Gestion Administrative",
-        "link": "www.linkedin.com/in/hugo-blot-047087246/"
+        "link": "www.linkedin.com\/in\/hugo-blot-047087246\/"
+    },
+    "Capucine": {
+        "firstname": "Capucine",
+        "lastname": "Duchatelet",
+        "task": "Gestion Administrative",
+        "link": "www.linkedin.com\/in\/capucine-duchatelet-2ba75724b\/",
+        "photos": [
+            "Capture d\u2019e\u0301cran 2023-06-15 a\u0300 14.40.45.png"
+        ]
+    },
+    "Tatiana": {
+        "firstname": "Tatiana",
+        "lastname": "Martin-Desbois",
+        "task": "Recherche de la salle",
+        "link": "www.linkedin.com\/in\/tatiana-martin-desbois-4b8602252\/"
+    },
+    "Aurelien": {
+        "firstname": "Aurelien",
+        "lastname": "Sauvey",
+        "task": "Relation Anciens",
+        "link": "www.linkedin.com\/in\/aur\u00e9lien-sauvey-3681b624b\/"
     }
 }

@@ -1,15 +1,24 @@
 {
     "orange": {
         "name": "orange",
-        "link": "https:\/\/orange.fr\/"
+        "link": "https:\/\/orange.fr\/",
+        "photos": [
+            "generationrt.png"
+        ]
     },
     "generationrt": {
         "name": "generationrt",
-        "link": "https:\/\/orange.fr"
+        "link": "https:\/\/orange.fr",
+        "photos": [
+            "generationrt.png"
+        ]
     },
     "iutsaintmalo": {
         "name": "iutsaintmalo",
-        "link": "https:\/\/iut-stmalo.univ-rennes.fr"
+        "link": "https:\/\/iut-stmalo.univ-rennes.fr",
+        "photos": [
+            "Unknown.jpeg"
+        ]
     },
     "univrennes1": {
         "name": "univrennes1",

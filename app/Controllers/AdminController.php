@@ -204,25 +204,35 @@ public function galery(): void
       $_POST["file"] = htmlentities($_POST["file"]);
       $data = Utils::GetData(__DIR__ . '/../Data/' . $_POST["file"]);
 
-      $to_edit = $data[$id];
+      $to_edit = $data[htmlentities($id)];
       foreach ($_POST as $key => $value) {
         if($key != "file"){
-          $to_edit[htmlentities($key)] = htmlentities($value);
+          $to_edit[$key] = $value;
         }
       }
       $data[$id] = $to_edit;
 
       $data = json_encode($data, JSON_PRETTY_PRINT);
-      fwrite(fopen(__DIR__ . '/../Data/' . $file, "w"), $data);
-      header("Location: "  . APP_URL . "/admin/gestionjson?notification=entryEdited");
-      exit();
+      $fileopen = fopen(__DIR__ . '/../Data/' . $file, "w");
+      if($fileopen !== false){
+        fwrite($fileopen,$data);
+        fclose($fileopen);
+        header("Location: "  . APP_URL . "/admin/gestionjson?notification=entryEdited");
+        exit();
+      }
+      else {
+        // Handle error when file writing fails
+        // You can add appropriate error handling or log the error message
+        echo "Failed to write the file.";
+        exit();
     }
-    smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
-    $smarty->assign('url_id', $id);
-    $smarty->assign('url_file', $file);
-
-    $smarty->assign('donnees_json', Utils::GetData(__DIR__ . '/../Data/' . $file)[$id]);
-
-    $smarty->display('admin/json_edit.tpl');
-  }
 }
+
+smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
+$smarty->assign('url_id', $id);
+$smarty->assign('url_file', $file);
+
+$smarty->assign('donnees_json', Utils::GetData(__DIR__ . '/../Data/' . $file)[$id]);
+
+$smarty->display('admin/json_edit.tpl');
+}}
