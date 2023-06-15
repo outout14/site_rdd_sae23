@@ -7,7 +7,7 @@
 <!-- Card ajout utilisateur -->
 <div class="container">
   <div class="card">
-    <h3 class="card-header">Modifier l'entrée "{$url_id}"s</h3>
+    <h3 class="card-header">Modifier l'entrée "{$url_id}"</h3>
     <div class="card-body">
       <!-- Formulaire -->
       <form action="#editUser" method="post">
