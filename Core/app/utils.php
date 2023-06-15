@@ -69,9 +69,6 @@ class Utils{
     public static function displayErrorPage() : void {
       $menu = [
         'home' => 'Accueil',
-        'gallery' => 'Galerie',
-        'goldbook' => 'Livre d\'or',
-        'annuaire' => 'Annuaire',
       ];
       global $smarty;
       Utils::SmartyGeneralValues("home", $menu, 'Page introuvable');

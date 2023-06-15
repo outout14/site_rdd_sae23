@@ -18,7 +18,6 @@
                             <option value="student">Etudiant</option>
                             <option value="teacher">Professeur</option>
                             <option value="oldstudent">Ancien élève</option>
-                            <option value="other">Autre</option>
                         </select>
                     </div>
 

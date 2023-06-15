@@ -142,30 +142,19 @@ class HomeController {
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
     $users = User::getUsers_annuaire();
-    /* Boucle qui enleve toute les données inutiles */
-    foreach ($users as $user) {
-      unset($user->email);
-      unset($user->phone_number);
-      unset($user->city);
-      unset($user->family_count);
-      unset($user->has_paid);
-      unset($user->role);
-}
 
-/* vérifier si luilisateur est conformé 
-Faire en sorte de filtrer sans le nome entier*/
+    /* vérifier si luilisateur est conformé 
+    Faire en sorte de filtrer sans le nom entier*/
     $smarty->assign('traitement',$_POST);
-    var_dump($_POST);
+
     $tab_param_form = array(0,0,0,0);
-    var_dump($users);
     if(isset($_POST["submit"])){
 
       if(isset($_POST["name"]) && $_POST["name"]!=null){
         $name = preg_replace("/[^a-zA-Z-]/", "", $_POST["name"]);
-        echo $name;
         $tab_param_form[0]=$name;
       }
-      if(isset($_POST["status"]) && ($_POST["status"]!="other" || $_POST["status"]!=null)){
+      if(isset($_POST["status"]) && $_POST["status"]!="Tous"){
         $tab_param_form[1]=$_POST["status"];
       }
       if(isset($_POST["company"]) && $_POST["company"]!=null){
@@ -176,62 +165,102 @@ Faire en sorte de filtrer sans le nome entier*/
         $tab_param_form[3]=$_POST["promotion"];
       }
 
-      var_dump($tab_param_form);
-      foreach($users as $user){
-        var_dump($user);
-        //le nom est spécifié
+
+      $users_filtre_name=array();
+      foreach($users as $cle => $user){
+
+        //le nom est selectionné
         if($tab_param_form[0]!=0){
-          if($user -> firstname !=$tab_param_form[0] && $user -> lastname !=$tab_param_form[0]){
-            unset($users[$user -> id]);
+          if(strtolower($user-> firstname) !=strtolower($tab_param_form[0]) && strtolower($user -> lastname) != strtolower($tab_param_form[0])){
+            unset($users[$cle]);
+          }
+          else{
+              array_push($users_filtre_name, $users[$cle]);
+              unset($users[$cle]);
           }
         }
-        //le statut est spécifié
-        if($tab_param_form[1]!=0){
-          if($user -> status !=$tab_param_form[1]){
-            if($tab_param_form[1]!="Tous"){
-              echo("ici");
-              unset($users[$user -> id]);
+        else{
+          array_push($users_filtre_name, $users[$cle]);
+          unset($users[$cle]);
+        }
+      }
+
+      $users=$users_filtre_name;
+      $users_filtre_status = array();
+      if(count($users)!=0){
+
+        foreach($users as $cle=>$user){
+
+          //le statut est selectionné
+          if($tab_param_form[1]!=0){
+            if($user -> status !=$tab_param_form[1]){
+              if($tab_param_form[1]!="Tous"){
+                unset($users[$cle]);
+              }
+            }
+            else{
+                array_push($users_filtre_status, $users[$cle]);
+                unset($users[$cle]);
             }
           }
-        }
-        //entreprise spécifiée
-        if($tab_param_form[2]!=0){
-          if($user -> company !=$tab_param_form[2]){
-            echo("la");
-            unset($users[$user -> id]);
-            echo("la");
+          else{
+            array_push($users_filtre_status, $users[$cle]);
+            unset($users[$cle]);
           }
-        }
-        // promotion spécifié
-        if($tab_param_form[3]!=0){
-          if($user -> promotion !=$tab_param_form[3]){
-            unset($users[$user -> id]);
+        }  
+      }
+
+      $users=$users_filtre_status;
+      $users_filtre_company = array();
+
+      if(count($users)!=0){
+
+        foreach($users as $cle=>$user){
+
+          //entreprise selectionnee
+          if($tab_param_form[2]!=0){
+            if(array_key_exists($cle, $users)){
+              if(strtolower($user -> company) !=strtolower($tab_param_form[2])){
+                unset($users[$cle]);
+              }
+              else{
+                array_push($users_filtre_company, $users[$cle]);
+                unset($users[$cle]);
+              }
+            }
+          }
+          else{
+            array_push($users_filtre_company, $users[$cle]);
+            unset($users[$cle]);
+          }
+        }  
+      }
+
+      $users=$users_filtre_company;
+      $users_filtre_promo = array();
+
+      if(count($users)!=0){
+
+        foreach($users as $cle=>$user){
+        
+          //promotion entree
+          if($tab_param_form[3]!=0){
+            if($user -> promotion !=$tab_param_form[3]){
+              unset($users[$cle]);
+            }
+            else{
+              array_push($users_filtre_promo, $users[$cle]);
+              unset($users[$cle]);
+            }
+          }
+          else{
+            array_push($users_filtre_promo, $users[$cle]);
+            unset($users[$cle]);
           }
         }
       }
-      // foreach ($users as $user){
-
-      //   if($user ->display_in_list==0){
-      //     // unset($users[$user]);
-      //   }
-      //   if(isset($name) && $user -> firstname !=$name){
-      //     unset($users[$user -> id]);
-      //   }
-      //   if(isset($name) && $user -> lastname !=$name){
-      //     unset($users[$user -> id]);
-      //   }
-      //   if(isset($status) && $user -> status != $status){
-      //     unset($users[$user -> id]);
-      //   }
-      //   if(isset($company) && $user -> company != $company){
-      //     unset($users[$user -> id]);
-      //   }
-      //   if(isset($promotion) && $user -> promotion != $promotion){
-      //     unset($users[$user -> id]);
-      //   }
-      // }
-      var_dump($users);
-      $smarty->assign('users', $users);
+     
+      $smarty->assign('users', $users_filtre_promo);
     }
     else{
       $smarty->assign('users', User::getUsers_annuaire());
