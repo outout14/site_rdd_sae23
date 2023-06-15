@@ -19,6 +19,9 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
           if(successNotification === "register_success"){
             scrollRegister();
             closeModal("loader-modal")
+            setTimeout( () => {
+              location.href = "../"
+            }, 10000)
           } else {
             window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
           }
@@ -26,8 +29,10 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
           // Empty fields of the form
           // form.reset();
 
-          // Reset the captchas if there is an error
-          var captchaElements = document.getElementsByClassName('h-captcha');
+          // if the form is the register form, reset the captcha
+          hcaptcha.reset(c);
+
+          var captchaElements = document.getElementsByClassName('h-captcha-register');
           for (var i = 0; i < captchaElements.length; i++) {
             var captchaElement = captchaElements[i];
             hcaptcha.reset(captchaElement.getAttribute('data-hcaptcha-widget-id'));
@@ -71,6 +76,20 @@ if (document.getElementById('register_form')) {
   const register_form = document.getElementById('register_form')
   register_form.addEventListener('submit', function (event) {
     event.preventDefault();
+
+    // CHECK IF PASSWORD > 8 CHARS OR EQUAL TO CONFIRM PASSWORD
+    var password = document.getElementById("input-password-register")
+    var confirmpassword = document.getElementById("input-confirmpassword-register")
+
+    if(password.value != confirmpassword.value) {
+        spawnNotification("error", "Les mots de passe ne correspondent pas.")
+        return
+    }
+    if(password.value.length < 8) {
+        spawnNotification("error", "Le mot de passe doit contenir au moins 8 caractères.")
+        return
+    }
+
     submitForm(register_form, null, "register_success", null);
   });
 }
@@ -86,7 +105,6 @@ if (document.getElementById('new_password_form')) {
 
 // CONTACT FORM
 if (document.getElementById('contact_form')) {
-  console.log("ok");
   const contact_form = document.getElementById('contact_form')
   contact_form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -111,7 +129,12 @@ function spawnNotification(title, content) {
   closeButton.id = 'closeNotificationButton';
 
   closeButton.addEventListener('click', function () {
-    notificationWrapper.remove();
+    notificationWrapper.style.transform = "translateY(-50px)"
+    notificationWrapper.style.opacity = "0"
+  
+    setTimeout( () => {
+      notificationWrapper.remove();
+    }, 500)
   });
 
   closeButtonDiv.appendChild(closeButton);
@@ -135,8 +158,21 @@ function spawnNotification(title, content) {
   notificationWrapper.appendChild(contentDiv);
 
   // Apply additional styling to make the notification visible
-  notificationWrapper.style.transform = 'translateY(0)';
-  notificationWrapper.style.opacity = '1';
-
   document.body.appendChild(notificationWrapper);
+
+  setTimeout( () => {
+    notificationWrapper.style.transform = 'translateY(0)';
+    notificationWrapper.style.opacity = '1';
+  }, 1)
+  
+  // Clear it after 5 seconds
+  setTimeout(function () {
+    notificationWrapper.style.transform = "translateY(-50px)"
+    notificationWrapper.style.opacity = "0"
+  
+    setTimeout( () => {
+      notificationWrapper.remove();
+    }, 500)
+  }, 5000);
 }
+

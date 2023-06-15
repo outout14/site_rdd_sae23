@@ -92,16 +92,16 @@ class AuthController
         if(!$captcha){
           Utils::DisplayJsonError("Captcha invalide.");
         }
-        $firstname = strtolower(htmlspecialchars($_POST["firstname"]));
-        $lastname = strtolower(htmlspecialchars($_POST["lastname"]));
-        $status = htmlspecialchars($_POST["status"]);
+        $firstname = strtolower(htmlentities($_POST["firstname"]));
+        $lastname = strtolower(htmlentities($_POST["lastname"]));
+        $status = htmlentities($_POST["status"]);
 
         $status = ($status == "student" || $status == "teacher" || $status == "oldstudent" || $status == "other") ? $status : "student";
-        $promotion_year = 0;
+        $promotion_year = 0;  
         // If oldstudent, check if promotion_year and is int
         if ($status == "oldstudent") {
           if (isset($_POST["oldpromotion"])) {
-            $promotion_year = htmlspecialchars($_POST["oldpromotion"]);
+            $promotion_year = htmlentities($_POST["oldpromotion"]);
             if (!is_numeric($promotion_year)) {
               Utils::DisplayJsonError("L'année de promotion doit être un nombre.");
             }
@@ -116,18 +116,23 @@ class AuthController
 
         $phone_number = "0123456789";
         $email = strtolower(filter_var($_POST["email"], FILTER_SANITIZE_EMAIL));
-        $password = htmlspecialchars($_POST["password"]);
+        // Regex to check if the email is valid
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          Utils::DisplayJsonError("L'adresse email n'est pas valide.");
+        }
+
+        $password = htmlentities($_POST["password"]);
         if(strlen($password) < 8) {
           Utils::DisplayJsonError("Le mot de passe doit contenir au moins 8 caractères.");
         }
-        $password_confirm = htmlspecialchars($_POST["confirmpassword"]);
+        $password_confirm = htmlentities($_POST["confirmpassword"]);
         $display_on_map = isset($_POST["display_on_map"]) ? 1 : 0;
-        $display_in_list = isset($_POST["display_in_list"]) ? 1 : 0;
-        $company = isset($_POST["company"]) ? htmlspecialchars($_POST["company"]) : "";
+        $display_in_list = isset($_POST["displayed_in_list"]) ? 1 : 0;
+        $company = isset($_POST["company"]) ? htmlentities($_POST["company"]) : "";
 
         // Check if family family_comes, then family_count = 0, else use family_count value and check for it to be an int
         $family_comes = isset($_POST["family_comes"]) ? 1 : 0;
-        $family_count = ($family_comes == 1) ? 0 : htmlspecialchars($_POST["family_count"]);
+        $family_count = ($family_comes == 1) ? 0 : htmlentities($_POST["family_count"]);
         if ($family_comes == 1) {
           $family_count = 0;
         } else {
@@ -136,7 +141,7 @@ class AuthController
           }
         }
 
-        $city = isset($_POST["city"]) ? htmlspecialchars($_POST["city"]) : "";
+        $city = isset($_POST["city"]) ? htmlentities($_POST["city"]) : "";
 
         $user = $this->handleRegistration($lastname, $firstname, $email, $password, $password_confirm, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, false, $status);
         if (gettype($user) == "object") {
@@ -145,10 +150,12 @@ class AuthController
         } else {
           Utils::DisplayJsonError($user);
         }
-
+      }
+      else {
+        Utils::DisplayJsonError("Veuillez remplir tous les champs...");
       }
     }
-    Utils::DisplayJsonError("Veuillez remplir tous les champs.");
+    Utils::DisplayJsonError("Veuillez remplir tous les champs !");
   }
 
   /**
@@ -170,8 +177,8 @@ class AuthController
     if (Utils::CheckForInputs(array("token", "password", "password_confirm"))){
       $tokenObj = new resetToken();
       if ($tokenObj->verify($_POST["token"])) {
-        $password = htmlspecialchars($_POST["password"]);
-        $password_confirm = htmlspecialchars($_POST["password_confirm"]);
+        $password = htmlentities($_POST["password"]);
+        $password_confirm = htmlentities($_POST["password_confirm"]);
         if ($password == $password_confirm) {
           $user = new User();
           $user->get($tokenObj->getUserId());
@@ -197,7 +204,7 @@ class AuthController
     // If the user has submitted the form
     if (isset($_POST["actionType"]) && $_POST["actionType"] == "forgotPassword") {
       if (isset($_POST["email"])) {
-        $email = htmlspecialchars($_POST["email"]);
+        $email = htmlentities($_POST["email"]);
         $user = new User();
         if ($user->get($email)) {
           // Check if the user has already requested a reset password email
@@ -229,7 +236,7 @@ class AuthController
     }
     global $smarty;
 
-    $email = htmlspecialchars(openssl_decrypt(base64_decode($token), "AES-128-ECB", MAIL_ENCRYPTION_TOKEN));
+    $email = htmlentities(openssl_decrypt(base64_decode($token), "AES-128-ECB", MAIL_ENCRYPTION_TOKEN));
     $user = new User();
     if($user->get($email)) {
       if ($user->isConfirmed()) {
