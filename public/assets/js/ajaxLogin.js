@@ -19,6 +19,9 @@ function submitForm(form, errorElementId, successNotification, typeWriterObject)
           if(successNotification === "register_success"){
             scrollRegister();
             closeModal("loader-modal")
+            setTimeout( () => {
+              location.href = "../"
+            }, 10000)
           } else {
             window.location.href = "./?notification=" + successNotification; // Redirection vers la page d'accueil
           }
@@ -75,6 +78,20 @@ if (document.getElementById('register_form')) {
   const register_form = document.getElementById('register_form')
   register_form.addEventListener('submit', function (event) {
     event.preventDefault();
+
+    // CHECK IF PASSWORD > 8 CHARS OR EQUAL TO CONFIRM PASSWORD
+    var password = document.getElementById("input-password-register")
+    var confirmpassword = document.getElementById("input-confirmpassword-register")
+
+    if(password.value != confirmpassword.value) {
+        spawnNotification("error", "Les mots de passe ne correspondent pas.")
+        return
+    }
+    if(password.value.length < 8) {
+        spawnNotification("error", "Le mot de passe doit contenir au moins 8 caractères.")
+        return
+    }
+
     submitForm(register_form, null, "register_success", null);
   });
 }
@@ -114,7 +131,12 @@ function spawnNotification(title, content) {
   closeButton.id = 'closeNotificationButton';
 
   closeButton.addEventListener('click', function () {
-    notificationWrapper.remove();
+    notificationWrapper.style.transform = "translateY(-50px)"
+    notificationWrapper.style.opacity = "0"
+  
+    setTimeout( () => {
+      notificationWrapper.remove();
+    }, 500)
   });
 
   closeButtonDiv.appendChild(closeButton);
@@ -138,14 +160,21 @@ function spawnNotification(title, content) {
   notificationWrapper.appendChild(contentDiv);
 
   // Apply additional styling to make the notification visible
-  notificationWrapper.style.transform = 'translateY(0)';
-  notificationWrapper.style.opacity = '1';
-
   document.body.appendChild(notificationWrapper);
 
+  setTimeout( () => {
+    notificationWrapper.style.transform = 'translateY(0)';
+    notificationWrapper.style.opacity = '1';
+  }, 1)
+  
   // Clear it after 5 seconds
   setTimeout(function () {
-    notificationWrapper.remove();
+    notificationWrapper.style.transform = "translateY(-50px)"
+    notificationWrapper.style.opacity = "0"
+  
+    setTimeout( () => {
+      notificationWrapper.remove();
+    }, 500)
   }, 5000);
 }
 
