@@ -133,14 +133,6 @@
       </div>
     </div>
 
-    <div class="col col-3">
-      <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe" value=" ">
-      </div>
-    </div>
-
-
     <div class="col col-12">
       <hr>
     </div>

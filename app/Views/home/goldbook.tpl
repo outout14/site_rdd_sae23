@@ -22,7 +22,7 @@
                     <!-- Bouton supprimer, à afficher seulement si c'est le message de l'utilisateur -->
                     <!-- <div class="dot hover-pointer p-1" style="z-index: 10;"><i class="bi bi-x-lg text-bonewhite"></i></div> -->
 
-                    <div class="goldbook-name mx-lg-4">{$message->author->lastname} {$message->author->firstname}</div>
+                    <div class="goldbook-name mx-lg-4">{$message->author->lastname|upper} {$message->author->firstname|capitalize}</div>
                     <div class="goldbook-message">
                         {$message->content}
                     </div>
