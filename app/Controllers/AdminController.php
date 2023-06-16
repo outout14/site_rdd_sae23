@@ -221,8 +221,6 @@ public function galery(): void
         exit();
       }
       else {
-        // Handle error when file writing fails
-        // You can add appropriate error handling or log the error message
         echo "Failed to write the file.";
         exit();
     }
@@ -235,4 +233,51 @@ $smarty->assign('url_file', $file);
 $smarty->assign('donnees_json', Utils::GetData(__DIR__ . '/../Data/' . $file)[$id]);
 
 $smarty->display('admin/json_edit.tpl');
-}}
+}
+
+public function addOrga($file)
+{
+    global $smarty;
+
+    if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["task"]) && isset($_POST["link"])) {
+        $firstname = htmlentities($_POST["firstname"]);
+        $lastname = htmlentities($_POST["lastname"]);
+        $task = htmlentities($_POST["task"]);
+        $link = htmlentities($_POST["link"]);
+
+        $data = Utils::GetData(__DIR__ . '/../Data/' . $file);
+
+        $newId = uniqid();
+        $newUser = array(
+            "firstname" => $firstname,
+            "lastname" => $lastname,
+            "task" => $task,
+            "link" => $link
+        );
+        $data[$newId] = $newUser;
+
+        $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+
+        $fileOpen = fopen(__DIR__ . '/../Data/' . $file, "w");
+        if ($fileOpen !== false) {
+            fwrite($fileOpen, $jsonData);
+            fclose($fileOpen);
+            header("Location: " . APP_URL . "/admin/gestionjson?notification=entryAdded");
+            exit();
+        } else {
+            echo "Failed to write the file.";
+            exit();
+        }
+    }
+
+    smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
+    $smarty->assign('url_file', $file);
+
+    $smarty->display('admin/json_edit.tpl');
+}
+
+
+
+}
+
+
