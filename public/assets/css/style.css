@@ -1036,6 +1036,10 @@ header {
     line-height: 2rem;
 }
 
+#ticket-window {
+    height: fit-content;
+}
+
 .up-and-down {
     animation: up-and-down 3s linear infinite;
 }
@@ -1153,6 +1157,9 @@ header {
 }
 
 @media (max-width: 1000px) {
+    #ticket-window {
+        height: 100%;
+    }
     .window-container {
         padding-bottom: 0 !important;
     }
