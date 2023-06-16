@@ -9,3 +9,5 @@ app/Views/templates_c/
 public/.htaccess
 
 .DS_STORE
+
+public/gallerie/

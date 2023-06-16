@@ -9,6 +9,11 @@
   </div>
   <div class="text-complementary">
     {$notification.message}
+    {if isset($reason)}
+    <div class="text-sm-center">
+      Raison : {$reason}
+    </div>
+    {/if}
   </div>
 </div>
 {/if}
