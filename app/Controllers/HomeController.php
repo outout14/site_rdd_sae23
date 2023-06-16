@@ -151,18 +151,18 @@ class HomeController {
     if(isset($_POST["submit"])){
 
       if(isset($_POST["name"]) && $_POST["name"]!=null){
-        $name = preg_replace("/[^a-zA-Z-]/", "", $_POST["name"]);
+        $name = htmlentities($_POST["name"]);
         $tab_param_form[0]=$name;
       }
       if(isset($_POST["status"]) && $_POST["status"]!="Tous"){
-        $tab_param_form[1]=$_POST["status"];
+        $tab_param_form[1]=htmlentities($_POST["status"]);
       }
       if(isset($_POST["company"]) && $_POST["company"]!=null){
-        $company = preg_replace("/[^a-zA-Z0-9-]/", "", $_POST["company"]);
+        $company = htmlentities($_POST["company"]);
         $tab_param_form[2]=$company;
       }
       if (isset($_POST["promotion"]) && $_POST["promotion"]!=null){
-        $tab_param_form[3]=$_POST["promotion"];
+        $tab_param_form[3]=htmlentities($_POST["promotion"]);
       }
 
 
@@ -282,7 +282,6 @@ class HomeController {
     if($update){
       $user = connexionMiddleware::getLoginUser();
 
-      print_r($_POST);
       if(isset($_POST["displayed_in_list"]) and $_POST["displayed_in_list"] == "true" and $user->display_in_list == 0){
         $user->setDisplayInList(1);
       } else if($user->display_in_list == 1){
