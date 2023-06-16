@@ -97,7 +97,7 @@ class AdminController
           $_POST['confirmed'] = isset($_POST['confirmed']) && $_POST['confirmed'] === 'on' ? 1 : 0;
           if(!isset($_POST['status'])) $_POST['status'] = "student";
           if(!isset($_POST['role'])) $_POST['role'] = 'user';
-          $user->update(htmlentities($_POST['id']), htmlentities($_POST['lastname']), htmlentities($_POST['firstname']), htmlentities($_POST['email']), htmlentities($_POST['password']), htmlentities($_POST['phone_number']), htmlentities($_POST['city']), htmlentities($_POST['family_count']), htmlentities($_POST['company']), htmlentities($_POST['promotion']), htmlentities($_POST['promotion_year']), htmlentities($_POST['display_in_list']), htmlentities($_POST['display_on_map']), htmlentities($_POST['confirmed']), htmlentities($_POST['status']), htmlentities($_POST['role']));
+          $user->update(htmlentities($_POST['id']), htmlentities($_POST['lastname']), htmlentities($_POST['firstname']), htmlentities($_POST['email']), htmlentities($_POST['phone_number']), htmlentities($_POST['city']), htmlentities($_POST['family_count']), htmlentities($_POST['company']), htmlentities($_POST['promotion']), htmlentities($_POST['promotion_year']), htmlentities($_POST['display_in_list']), htmlentities($_POST['display_on_map']), htmlentities($_POST['confirmed']), htmlentities($_POST['status']), htmlentities($_POST['role']));
           header('Location: ' . APP_URL . '/admin/users?notification=userEdited');
         }
       }

@@ -40,14 +40,6 @@
     </thead>
     <tbody>
       {foreach from=$json_organisators key=$key item=$item}
-      <tr class="table-active">
-        <th>{$item['firstname']}</th>
-        <th>{$item['lastname']}</th>
-        <th>{$item['task']}</th>
-        <th><a href="https://{$item['link']}">{$item['link']}</a></th>
-        <th><img width="50px" src="{$APP_URL}/assets/images/creators/creator_{$item['firstname']}.png"></th>
-        <th><a href="{$APP_URL}/admin/modifyjson/organisators.json/{$key}" class="btn btn-primary">Modifier</a> <a href="?delete={$key}&file=organisators.json" class="btn btn-danger">Supprimer</a></th>
-      </tr>
         <tr class="table-active">
           <th>{$item['firstname']}</th>
           <th>{$item['lastname']}</th>
