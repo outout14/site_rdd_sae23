@@ -6,9 +6,9 @@
         <div class="window overflow-hidden modal-window d-flex flex-column" id="gallery-window">
             
             <!-- Fermer -->
-            <div class="d-flex justify-content-end my-4 mx-5"> 
+            <div class="d-flex justify-content-end my-2 mx-4"> 
                 <button class="button bg-transparent hover-pointer" onclick="closeModal('gallery-modal')">
-                    <i class="bi bi-x text-white fa-2x"></i>
+                    <i class="bi bi-x text-dark fa-2x"></i>
                 </button>
             </div>
 
@@ -16,14 +16,15 @@
                 <img src="" alt="gallery-modal-photo" id="gallery-modal-photo">
             </div>
 
-            <!-- Navbar (telechargement)-->
-            <nav class="fixed-bottom d-flex justify-content-end my-3 mx-5 gap-5">
-                <a href="" download id="gallery-photo-download">
-                    <button class="button bg-transparent hover-pointer">
-                        <i class="bi bi-download fa-2x text-white"></i>
-                    </button>
+            <!-- Telecharger -->
+            <div class="d-flex justify-content-end my-2 mx-4 gap-4"> 
+                <a href="{$APP_URL}/home/#questions-container">
+                    <i class="bi bi-exclamation-triangle fa-2x text-dark"></i>
                 </a>
-            </nav>
+                <a href="" download id="gallery-photo-download">
+                    <i class="bi bi-download fa-2x text-dark"></i>
+                </a>
+            </div>
 
         </div>
     </div>

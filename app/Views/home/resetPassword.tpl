@@ -11,7 +11,7 @@
     <!-- Navbar -->
     {include file="../home/common/navbar.tpl"}
 
-    <section class="window-container>
+    <section class="window-container">
         <div class="window flex-center p-5" id="changepassword-window">
             <form action="{$APP_URL}/auth/forgotPassword" method="post" id="new_password_form">
                 <input type="hidden" name="actionType" value="newPassword"> 
@@ -23,23 +23,23 @@
                     <div class="row flex-center" id="new_password_error_container">
                         <div class="col-lg-4 flex-center">
                             <div class="avatar-sm border-blue mb-4 mb-lg-0">
-                              <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img" id="new_password_error_image">
+                                <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img" id="new_password_error_image">
                             </div>
                         </div>
 
-                      <div class="col-12 flex-center flex-column">
+                    <div class="col-12 flex-center flex-column">
                         <p class="text-information fw-bold mb-3" id="new_password_error_title"></p>
                         <p class="text-complementary text-justify" id="new_password_error_text"></p>
-                      </div>
+                    </div>
 
                         <div class="col-lg-8 d-flex align-items-center align-items-lg-start flex-column">
                             <p class="text-information fw-bold mb-3" id="error-title">
-                              <script>
+                                <script>
                                 const new_password_typeWriter = new Typewriter('#error-title', {});
                                 new_password_typeWriter
-                                  .typeString('Trou de mémoire ?')
-                                  .start()
-                              </script>
+                                    .typeString('Un trou de mémoire ?')
+                                    .start()
+                                </script>
                             </p>
                             <p class="text-complementary text-justify" id="error-text">
                                 Choisissez un nouveau mot de passe pour votre compte.
@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-text text-justify px-2">
-                              Entre 8 et 20 caractères
+                                Entre 8 et 20 caractères
                             </div>
                         </div>
                     </div>

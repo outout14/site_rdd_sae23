@@ -1,24 +1,15 @@
 {
     "orange": {
         "name": "orange",
-        "link": "https:\/\/orange.fr\/",
-        "photos": [
-            "generationrt.png"
-        ]
+        "link": "https:\/\/orange.fr\/"
     },
     "generationrt": {
         "name": "generationrt",
-        "link": "https:\/\/orange.fr",
-        "photos": [
-            "generationrt.png"
-        ]
+        "link": "https:\/\/www.linkedin.com\/in\/g\u00e9n\u00e9ration-rt\/"
     },
     "iutsaintmalo": {
         "name": "iutsaintmalo",
-        "link": "https:\/\/iut-stmalo.univ-rennes.fr",
-        "photos": [
-            "Unknown.jpeg"
-        ]
+        "link": "https:\/\/iut-stmalo.univ-rennes.fr"
     },
     "univrennes1": {
         "name": "univrennes1",
@@ -27,5 +18,9 @@
     "comptoir": {
         "name": "comptoir",
         "link": "https:\/\/www.lecomptoirvinsbieres.fr"
+    },
+    "westnetwork": {
+        "name": "westnetwork",
+        "link": "https:\/\/www.westnetwork.fr"
     }
 }

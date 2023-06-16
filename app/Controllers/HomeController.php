@@ -101,15 +101,12 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Galerie');
 
-    /*----------------A faire-------------
-    Vérifier si il y a pas une photo qui a déjà le même nom
-    Donner un nom a sa photo */
-
     /* Verifie si la photo s'est bien télécharger */
     if (isset($_FILES["photo"]) && $_FILES["photo"]["error"]== UPLOAD_ERR_OK){
       /* On met la photo dans le bon dossier */
       $photo = $_FILES["photo"];
-      $name = "";
+      $date = date("Y_m_Y_H_i_s");
+      $name = $date;
       for($i=0; $i<5; $i++){
         $name=$name.(string)rand();
       }
@@ -144,59 +141,129 @@ class HomeController {
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Annuaire');
 
-    $users = User::getAll();
-    /* Boucle qui enleve toute les données inutiles */
-    foreach ($users as $user) {
-      unset($user->email);
-      unset($user->phone_number);
-      unset($user->city);
-      unset($user -> family_count);
-      unset($user -> has_paid);
-      unset($user -> role);
-}
+    $users = User::getUsers_annuaire();
 
-/* vérifier si luilisateur est conformé 
-Faire en sorte de filtrer sans le nome entier*/
+    /* vérifier si luilisateur est conformé 
+    Faire en sorte de filtrer sans le nom entier*/
     $smarty->assign('traitement',$_POST);
+
+    $tab_param_form = array(0,0,0,0);
     if(isset($_POST["submit"])){
 
-      if(isset($_POST["name"]) && $_POST["name"]!=""){
-        $name = $_POST["name"];
+      if(isset($_POST["name"]) && $_POST["name"]!=null){
+        $name = htmlentities($_POST["name"]);
+        $tab_param_form[0]=$name;
       }
-      if(isset($_POST["status"]) && $_POST["status"]!="other"){
-        $status = $_POST["status"];
+      if(isset($_POST["status"]) && $_POST["status"]!="Tous"){
+        $tab_param_form[1]=htmlentities($_POST["status"]);
       }
-      if(isset($_POST["company"]) && $_POST["company"] ){
-        $company = $_POST["company"];
+      if(isset($_POST["company"]) && $_POST["company"]!=null){
+        $company = htmlentities($_POST["company"]);
+        $tab_param_form[2]=$company;
       }
-      if (isset($_POST["promotion"]) && $_POST["promotion"] ){
-        $promotion = $_POST["promotion"];
-      }
-
-
-      foreach ($users as $user){
-
-        if($user ->display_in_list==0){
-          // unset($users[$user]);
-        }
-        if(isset($name) && $user -> firstname !=$name){
-          unset($users[$user -> id]);
-        }
-        if(isset($status) && $user -> status != $status){
-          unset($users[$user -> id]);
-        }
-        if(isset($company) && $user -> company != $company){
-          unset($users[$user -> id]);
-        }
-        if(isset($promotion) && $user -> promotion != $promotion){
-          unset($users[$user -> id]);
-        }
+      if (isset($_POST["promotion"]) && $_POST["promotion"]!=null){
+        $tab_param_form[3]=htmlentities($_POST["promotion"]);
       }
 
-      $smarty->assign('users', $users);
+
+      $users_filtre_name=array();
+      foreach($users as $cle => $user){
+
+        //le nom est selectionné
+        if($tab_param_form[0]!=0){
+          if(strtolower($user-> firstname) !=strtolower($tab_param_form[0]) && strtolower($user -> lastname) != strtolower($tab_param_form[0])){
+            unset($users[$cle]);
+          }
+          else{
+              array_push($users_filtre_name, $users[$cle]);
+              unset($users[$cle]);
+          }
+        }
+        else{
+          array_push($users_filtre_name, $users[$cle]);
+          unset($users[$cle]);
+        }
+      }
+
+      $users=$users_filtre_name;
+      $users_filtre_status = array();
+      if(count($users)!=0){
+
+        foreach($users as $cle=>$user){
+
+          //le statut est selectionné
+          if($tab_param_form[1]!=0){
+            if($user -> status !=$tab_param_form[1]){
+              if($tab_param_form[1]!="Tous"){
+                unset($users[$cle]);
+              }
+            }
+            else{
+                array_push($users_filtre_status, $users[$cle]);
+                unset($users[$cle]);
+            }
+          }
+          else{
+            array_push($users_filtre_status, $users[$cle]);
+            unset($users[$cle]);
+          }
+        }  
+      }
+
+      $users=$users_filtre_status;
+      $users_filtre_company = array();
+
+      if(count($users)!=0){
+
+        foreach($users as $cle=>$user){
+
+          //entreprise selectionnee
+          if($tab_param_form[2]!=0){
+            if(array_key_exists($cle, $users)){
+              if(strtolower($user -> company) !=strtolower($tab_param_form[2])){
+                unset($users[$cle]);
+              }
+              else{
+                array_push($users_filtre_company, $users[$cle]);
+                unset($users[$cle]);
+              }
+            }
+          }
+          else{
+            array_push($users_filtre_company, $users[$cle]);
+            unset($users[$cle]);
+          }
+        }  
+      }
+
+      $users=$users_filtre_company;
+      $users_filtre_promo = array();
+
+      if(count($users)!=0){
+
+        foreach($users as $cle=>$user){
+        
+          //promotion entree
+          if($tab_param_form[3]!=0){
+            if($user -> promotion !=$tab_param_form[3]){
+              unset($users[$cle]);
+            }
+            else{
+              array_push($users_filtre_promo, $users[$cle]);
+              unset($users[$cle]);
+            }
+          }
+          else{
+            array_push($users_filtre_promo, $users[$cle]);
+            unset($users[$cle]);
+          }
+        }
+      }
+     
+      $smarty->assign('users', $users_filtre_promo);
     }
     else{
-      $smarty->assign('users', User::getAll());
+      $smarty->assign('users', User::getUsers_annuaire());
     }
 
     $smarty->display('home/users.tpl');
@@ -215,7 +282,6 @@ Faire en sorte de filtrer sans le nome entier*/
     if($update){
       $user = connexionMiddleware::getLoginUser();
 
-      print_r($_POST);
       if(isset($_POST["displayed_in_list"]) and $_POST["displayed_in_list"] == "true" and $user->display_in_list == 0){
         $user->setDisplayInList(1);
       } else if($user->display_in_list == 1){

@@ -1,7 +1,5 @@
 <section class="flex-center flex-column bg-bonewhite" id="staff-container">
 
-    <!-- <img class="wave" src="{$APP_URL}/assets/images/background/wave-creators-top.svg" alt="wave"> -->
-
     <!-- Titre -->
     <h1 class="text-title">Organisateurs et sponsors</h1>
 
@@ -13,7 +11,7 @@
             {foreach from=$creators key=$key item=$creator}
               <div class="organisator-wrapper">
                 <div class="avatar-lg">
-                  <a href="https://{$creator["link"]}">
+                  <a href="https://{$creator["link"]}" target="_blank">
                     <img src="{$APP_URL}/assets/images/creators/creator_{$creator["firstname"]|lower}.png" alt="{$creator["firstname"]}" class="avatar-img">
                   </a>
                 </div>
@@ -37,12 +35,10 @@
         <div class="row">
           {foreach from=$sponsors key=$key item=$sponsor}
           <div class="col d-flex justify-content-center align-items-center">
-            <a href="{$sponsor['link']}"><img src="{$APP_URL}/assets/images/sponsors/{$sponsor["name"]|lower}.png" alt="{$sponsor['name']}" class="sponsor-img"></a>
+            <a href="{$sponsor['link']}" target="_blank"><img src="{$APP_URL}/assets/images/sponsors/{$sponsor["name"]|lower}.png" alt="{$sponsor['name']}" class="sponsor-img"></a>
           </div>
           {/foreach}
         </div>
     </div>
-
-    <!-- <img class="wave" src="{$APP_URL}/assets/images/background/wave-creators-bottom.svg" alt="wave"> -->
 
 </section>

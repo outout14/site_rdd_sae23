@@ -5,10 +5,6 @@
 
 <body>
 
-    
-    <!-- Modal connexion -->
-    {include file="./common/debug.tpl"}
-
     <!-- Modal connexion -->
     {include file="./modals/login.tpl"}
 

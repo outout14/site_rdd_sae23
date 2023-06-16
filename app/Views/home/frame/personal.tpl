@@ -90,7 +90,7 @@
                         </p>
 
                         <div class="col-11 flex-center mb-3">
-                            <button type="button" class="button bg-blue py-2 px-5">Accéder à l'espace HelloAsso</button>
+                          <a href="https://www.helloasso.com/utilisateur/historique" class="button bg-blue py-2 px-5">Accéder à l'espace Hello Asso</a>
                         </div>
                         {/if}
                     </div>

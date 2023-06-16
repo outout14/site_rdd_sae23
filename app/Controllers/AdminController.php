@@ -206,10 +206,35 @@ public function galery(): void
 
       $to_edit = $data[htmlentities($id)];
       foreach ($_POST as $key => $value) {
-        if($key != "file"){
+        if($key != "file" && $key != "photos"){
           $to_edit[$key] = $value;
         }
       }
+
+      if(isset($_FILES)){
+        // Check if uploaded $_FILE is png
+        if($_POST["file"] == "organisators.json"){
+          $cheminPhoto = __DIR__ . '/../../public/assets/images/creators/creator_' . strtolower($id) . '.png';
+        } else if ($_POST["file"] == "sponsors.json"){
+          $cheminPhoto = __DIR__ . '/../../public/assets/images/sponsors/' . strtolower($id) . '.png';
+        }
+        $extension = explode(".", $_FILES['photos']['name']);
+        $extension = $extension[count($extension) - 1];
+        if($extension == "png"){
+          if($_FILES['photos']['size'] < 1000000){
+            // Delete old file
+            unlink($cheminPhoto);
+            move_uploaded_file($_FILES['photos']['tmp_name'], $cheminPhoto);
+          } else {
+            header("Location: "  . APP_URL . "/admin/gestionjson?notification=entryNotEdited&reason=photoTooBig");
+            exit();
+          }
+        } else {
+          header("Location: "  . APP_URL . "/admin/gestionjson?notification=entryNotEdited&reason=photoNotPng");
+          exit();
+        }
+      }
+
       $data[$id] = $to_edit;
 
       $data = json_encode($data, JSON_PRETTY_PRINT);
@@ -221,7 +246,7 @@ public function galery(): void
         exit();
       }
       else {
-        echo "Failed to write the file.";
+        header("Location: "  . APP_URL . "/admin/gestionjson?notification=entryNotEdited");
         exit();
     }
 }
