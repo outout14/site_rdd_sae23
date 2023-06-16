@@ -31,10 +31,10 @@
       <div class="form-group">
         <label for="status">Status</label>
         <select name="status" class="form-control" id="status" required>
-          <option name="student">Etudiant</option>
-          <option name="teacher">Enseignant</option>
-          <option name="oldstudent">Ancien élève</option>
-          <option name="other">Autre</option>
+          <option value="student">Etudiant</option>
+          <option value="teacher">Enseignant</option>
+          <option value="oldstudent">Ancien élève</option>
+          <option value="other">Autre</option>
         </select>
       </div>
     </div>
