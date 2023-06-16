@@ -7,7 +7,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse align-items-end" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav ml-auto">
           {foreach from=$menu key=$key item=$item}
             <li class="nav-item">
                 {if $item.name == $currentPage}
@@ -17,20 +17,21 @@
                 {/if}
             </li>
           {/foreach}
-          <li class="nav-item">
-          <a href="{$APP_URL}/auth/logout" class="nav-link" style="position: absolute; top: 0,5; right: 0;">
-            <button style="background-color: #ff5e00; color: white; border: 2px solid; padding: 8px 16px; border-radius: 4px;">Deconnexion </button>
+      </ul>
+      <!-- right -->
+      <ul class="navbar-nav mx-lg-5">
+        <li class="nav-item">
+          <a href="{$APP_URL}/home" class="nav-link">
+            <button class="btn btn-success">Retour au site </button>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{$APP_URL}/home" class="nav-link" style="position: absolute; top: 0; right: 0;">
-            <button style="background-color: #000dff; color: white; border: 2px solid; padding: 8px 16px; border-radius: 4px;">Home </button>
+          <a href="{$APP_URL}/auth/logout" class="nav-link">
+            <button class="btn btn-danger">Deconnexion </button>
           </a>
         </li>
-        
-
-        
       </ul>
+
     </div>
   </div>
 </nav>
