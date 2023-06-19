@@ -115,18 +115,15 @@ class HomeController {
 
       if($extension != ".jpg" && $extension != ".png" && $extension != ".jpeg"){
         $smarty->assign('error',"Le format de la photo n'est pas bon");
+        header("Location: ". APP_URL ."/home/gallery/?notification=format_photo_mauvaise");
+        exit();
       }
       else{
         $verifyImg = getimagesize($photo["tmp_name"]);
-        if($verifyImg["mime"] != "image/jpeg" && $verifyImg["mime"] != "image/png"){
-          $smarty->assign('error',"Le format de la photo n'est pas bon");
-        }
-        else{
-          // On enleve les caractères spéciaux
-          $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
-          $destination="gallerie/non_valide/".$name.$extension;
-          move_uploaded_file($photo["tmp_name"], $destination);
-        }
+        // On enleve les caractères spéciaux
+        $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
+        $destination="gallerie/non_valide/".$name.$extension;
+        move_uploaded_file($photo["tmp_name"], $destination);
       }
     }
 
