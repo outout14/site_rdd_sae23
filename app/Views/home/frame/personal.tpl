@@ -19,7 +19,7 @@
                                 <img src="{$APP_URL}/assets/images/creators/creator_pc.png" alt="creator_pc" class="avatar-img">
                             </div>
 
-                            <h2 class="fw-bold">{$sessionUser->firstname|capitalize} {$sessionUser->lastname|capitalize} </h2>
+                            <h2 class="fw-bold">{$sessionUser->firstname|unescape:"htmlall"|capitalize} {$sessionUser->lastname|unescape:"htmlall"|capitalize} </h2>
                         </div>
 
                         <p class="text-complementary col-11 col-lg-9">
