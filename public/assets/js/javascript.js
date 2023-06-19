@@ -425,11 +425,23 @@ function goldbookScroll() {
     wrapper.scrollTop = wrapper.scrollHeight
 }
 
+
+const goldbookform = document.getElementById("goldbook-input-wrapper")
+
+goldbookform.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    openModal('goldbook-submit-modal')
+
+    document.getElementById("goldbook-pseudo-submit").addEventListener("click", () => {
+        e.submit();
+    })
+})
+
 if(!!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)) {
     document.querySelectorAll(".wave").forEach(wave => {
         wave.style.display = "none"
     })
 }
-
 
 
