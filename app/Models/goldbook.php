@@ -64,14 +64,13 @@ class goldbook {
       $stmt->close();
     }
 
-    static function delete($user): void {
+    static function delete($user): void{
       global $mysqlConnection;
-      $query = "DELETE FROM goldbook WHERE author = ?";
+      $query = "DELETE FROM goldbook INNER JOIN users ON goldbook.author = users.id WHERE goldbook.author=$user";
       $stmt = $mysqlConnection->prepare($query);
-      $stmt->bind_param("i", $user);
       $stmt->execute();
       $stmt->close();
-  }
+    }
     
 
     static function verif($id): string{
