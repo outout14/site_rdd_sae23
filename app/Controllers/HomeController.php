@@ -148,7 +148,7 @@ class HomeController {
 
     $users = User::getUsers_annuaire();
 
-    /* vérifier si luilisateur est conformé 
+    /* vérifier si l'utilisateur est conforme
     Faire en sorte de filtrer sans le nom entier*/
     $smarty->assign('traitement',$_POST);
 
@@ -170,13 +170,12 @@ class HomeController {
         $tab_param_form[3]=htmlentities($_POST["promotion"]);
       }
 
-
       $users_filtre_name=array();
       foreach($users as $cle => $user){
 
         //le nom est selectionné
         if($tab_param_form[0]!=0){
-          if(strtolower($user-> firstname) !=strtolower($tab_param_form[0]) && strtolower($user -> lastname) != strtolower($tab_param_form[0])){
+          if(!str_starts_with(strtolower($user-> firstname), strtolower($tab_param_form[0])) && !str_starts_with(strtolower($user-> lastname), strtolower($tab_param_form[0]))){
             unset($users[$cle]);
           }
           else{
@@ -225,7 +224,7 @@ class HomeController {
           //entreprise selectionnee
           if($tab_param_form[2]!=0){
             if(array_key_exists($cle, $users)){
-              if(strtolower($user -> company) !=strtolower($tab_param_form[2])){
+              if(!str_starts_with(strtolower($user -> company), strtolower($tab_param_form[2]))){
                 unset($users[$cle]);
               }
               else{
