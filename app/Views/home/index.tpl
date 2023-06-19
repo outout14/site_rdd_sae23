@@ -29,9 +29,9 @@
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}
 
-    <!-- JS -->
+    <!-- Javascript -->
     {include file="./frame/javascript.tpl"}
-
+    
     {if $sessionUser}
         {if $sessionUser->has_paid == 0}
             <script>

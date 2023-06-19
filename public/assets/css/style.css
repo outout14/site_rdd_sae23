@@ -507,7 +507,7 @@ a {
     justify-content: center;
     position: relative;
     padding: 2rem 0 !important;
-    animation: loop 25s linear infinite;
+    animation: loop 35s linear infinite;
 }
 
 .organisator-wrapper {
