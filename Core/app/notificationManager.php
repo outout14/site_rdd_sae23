@@ -171,7 +171,14 @@ class NotificationManager
       case 'format_photo_mauvaise':{
         $notification = array(
           'type' => 'danger',
-          'message' => 'Format de l\'image interdit, format accepter (png, jpg, jpeg)'
+          'message' => 'Format de l\'image interdit, formats acceptés (png, jpg, jpeg)'
+        );
+        break;
+      }
+      case 'photo_trop_lourde':{
+        $notification=array(
+          'type' => 'danger',
+          'message' => 'L\'image est trop lourde, + de 10M'
         );
         break;
       }
