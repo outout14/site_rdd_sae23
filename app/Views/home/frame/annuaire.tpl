@@ -15,7 +15,7 @@
                     <div class="col-12 col-lg-2 my-1">
                         <select class="form-select px-3 py-2 annuaire-ajax" name="status" id="annuaire-status">
                             <option value="Tous" selected>Tous</option>
-                            <option value="student">Etudiant</option>
+                            <option value="student">Étudiant</option>
                             <option value="teacher">Professeur</option>
                             <option value="oldstudent">Ancien élève</option>
                         </select>
