@@ -173,6 +173,7 @@ public function galery(): void
 
   public function gestionjson(): void
   {
+
     if(isset($_GET["file"])){
       if(isset($_GET["delete"])){
         // SUPPRIMER
@@ -184,6 +185,7 @@ public function galery(): void
         header("Location:"  . APP_URL . "/admin/gestionjson?notification=entryDeleted");
       }
     }
+
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
     try {
@@ -211,7 +213,7 @@ public function galery(): void
         }
       }
 
-      if(isset($_FILES)){
+      if(isset($_FILES) and $_FILES['photos']['error'] == 0){
         // Check if uploaded $_FILE is png
         if($_POST["file"] == "organisators.json"){
           $cheminPhoto = __DIR__ . '/../../public/assets/images/creators/creator_' . strtolower($id) . '.png';

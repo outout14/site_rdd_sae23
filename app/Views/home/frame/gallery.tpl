@@ -1,7 +1,6 @@
-<section class="window-container h-100" style="min-height: 100vh;">
-    <div class="fixed-top" id="gallery-fade"></div>
+<section class="flex-center">
     
-    <div class="d-flex align-items-center flex-column my-5" id="gallery-wrapper">
+    <div class="d-flex align-items-center flex-column mt-3 my-lg-5" id="gallery-wrapper">
         
         <div class="pt-5 flex-center" id="gallery-title">
             <span class="gallery-title-letter">G</span>

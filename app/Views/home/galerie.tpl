@@ -5,18 +5,23 @@
 
 <body class="background-wave-blue" onload="titleAnimation('gallery-title')">
 
-    <!-- Navbar -->
-    {include file="./common/navbar.tpl"}
-
     <!-- Modal affichage photo -->
     {include file="./modals/photo.tpl"}
 
     <!-- Modal depot photo  -->
     {include file="./modals/addphoto.tpl"}
 
+    <!-- Navbar -->
+    {include file="./common/navbar.tpl"}
+
     <!-- Gallerie -->
     {include file="./frame/gallery.tpl"}
+    
+    <!-- Notifications -->
+    {include file="../utils/notifications.tpl"}
 
+    <!-- JavaScript -->
     {include file="./frame/javascript.tpl"}
+    
 </body>
 </html>

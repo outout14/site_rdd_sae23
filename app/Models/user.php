@@ -183,7 +183,7 @@ class User {
 
   public static function getUsers_annuaire(): array{
     global $mysqlConnection;
-    $query = "SELECT * FROM users WHERE display_in_list=1";
+    $query = "SELECT * FROM users WHERE display_in_list=1 and confirmed=1";
     $stmt = $mysqlConnection->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();
