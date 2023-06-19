@@ -56,7 +56,6 @@
                     </div>
 
                     <div class="col-12 col-lg flex-center flex-column py-2 gap-4 mt-5 mt-lg-0" id="personal-separation">
-                        {if $sessionUser->has_paid == 0}
                         <div class="avatar-sm border-lightgrey mb-2">
                             <img src="{$APP_URL}/assets/images/creators/creator_whisper.png" alt="creator_whisper" class="avatar-img">
                         </div>
@@ -70,6 +69,8 @@
                                 loop: true,                       
                             });
                         </script>
+
+                        {if $sessionUser->has_paid == 0}
 
                         <!-- Non payé -->
                         <p class="text-complementary col-11 col-lg-9">
@@ -85,12 +86,12 @@
                         <!-- Payé -->
                         <p class="text-complementary col-11 col-lg-9">
                             Merci pour ta participation! Si jamais tu as perdu ton ticket, tu peux cliquer sur le bouton
-                            ci-dessous afin qu'on te renvoie le mail avec ton ticket. <br><br>
-                            Au 7 juillet à Langloray-sur-Rance!
+                            ci-dessous pour revenir dans ton espace HelloAsso <br><br>
+                            À très bientôt!
                         </p>
 
                         <div class="col-11 flex-center mb-3">
-                          <a href="https://www.helloasso.com/utilisateur/historique" class="button bg-blue py-2 px-5">Accéder à l'espace Hello Asso</a>
+                            <a href="https://www.helloasso.com/utilisateur/historique" class="button bg-blue py-2 px-5">Accéder à l'espace Hello Asso</a>
                         </div>
                         {/if}
                     </div>
