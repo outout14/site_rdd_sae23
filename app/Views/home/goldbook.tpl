@@ -52,7 +52,7 @@
                         </div>
                         <div class="position-relative w-100">
                             <input class="form-control ps-3 pe-5 py-2 rounded-pill" maxlength="150" type="text" placeholder="Votre message.." name="message" id="goldbook-input">
-                            <input class="me-2" type="button" value="&#x279C;" id="goldbook-submit" onclick="openModal('goldbook-submit-modal')">
+                            <input type="submit" class="me-2" type="button" name="submit" value="&#x279C;" id="goldbook-submit">
                         </div>
                     </div>
                 </div>
@@ -64,8 +64,8 @@
                         <div class="window overflow-hidden modal-window px-4 h-auto">
                             
                             <!-- Fermer -->
-                            <div class="d-flex justify-content-end"> 
-                                <button class="button hover-pointer bg-transparent mt-3 me-2" type="button" onclick="closeModal('goldbook-submit-modal')">
+                            <div class="d-flex justify-content-end align-items-center w-100">
+                                <button class="button hover-pointer bg-transparent w-auto" onclick="closeModal('goldbook-submit-modal')">
                                     <i class="bi bi-x fa-2x text-dark"></i>
                                 </button>
                             </div>
@@ -77,7 +77,7 @@
                                     Chaque message envoyé est soumis à une vérification par les administrateurs avant d'être visible.
                                 </p>
 
-                                <input class="button rounded-3 bg-blue text-white fw-bold h-100 w-auto px-5 py-2" type="submit" name="submit" value="Envoyer">                        
+                                <input type="button" class="button rounded-3 bg-blue text-white fw-bold h-100 w-auto px-5 py-2" value="Envoyer" id="goldbook-pseudo-submit">                        
                             </div>
                         </div>
                     </div>
