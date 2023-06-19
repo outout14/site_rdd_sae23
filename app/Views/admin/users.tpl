@@ -19,8 +19,14 @@
     <div class="container">
   <div class="form-group mt-3">
     <form action="#userList" method="GET">
-      <input type="text" class="form-control" name="search" placeholder="Rechercher un utilisateur..." value="{$searchQuery}">
-      <button type="submit" class="btn btn-primary">Rechercher</button>
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" name="search" placeholder="Rechercher un utilisateur..." value="{$searchQuery}">
+        </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+      </div>
     </form>
   </div>
 </div>
@@ -33,10 +39,9 @@
           <th scope="col">ID</th>
           <th scope="col">Prénom</th>
           <th scope="col">Nom</th>
-          <th scope="col">Email</th>
           <th scope="col">Tél.</th>
           <th scope="col">A payé ?</th>
-          <th scope="col">Carte ?</th>
+          <th scope="col">Listé ?</th>
           <th scope="col">Confirmé ?</th>
           <th scope="col">Status</th>
           <th scope="col">Rôle</th>
@@ -50,13 +55,12 @@
             <td>{$user->firstname}</td>
             <td>{$user->lastname}</td>
             <td>{$user->email}</td>
-            <td>{$user->phone_number}</td>
             <td>{if $user->has_paid == 1}
                 <i class="bi bi-check-all text-success table-icon"></i>
                 {else}
                 <i class="bi bi-x text-danger table-icon"></i>
                 {/if}</td>
-            <td>{if $user->display_on_map == 1}
+            <td>{if $user->display_in_list == 1}
                 <i class="bi bi-check-all text-success table-icon"></i>
                 {else}
                 <i class="bi bi-x text-danger table-icon"></i>
