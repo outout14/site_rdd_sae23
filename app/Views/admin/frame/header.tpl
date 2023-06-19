@@ -16,4 +16,6 @@
 <body>
 {include file="./menu.tpl"}
 
+
 {include file="../../utils/notifications.tpl"}
+

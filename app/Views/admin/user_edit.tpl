@@ -1,7 +1,7 @@
 {include file="./frame/header.tpl"}
 <div class="container mt-5">
   <h1>Gestion des utilisateurs</h1>
-  <p>Vous pouvez gérer les utilisateurs de votre site ici.</p>
+  
 </div>
 
 <!-- Card ajout utilisateur -->

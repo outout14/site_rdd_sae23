@@ -299,6 +299,7 @@ public function addOrga($file)
     $smarty->assign('url_file', $file);
 
     $smarty->display('admin/json_edit.tpl');
+    
 }
 
 
