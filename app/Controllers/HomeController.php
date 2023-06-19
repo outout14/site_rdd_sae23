@@ -82,7 +82,7 @@ class HomeController {
 
     /* Il faut vérifier que l'utilisateur écrit pas plusieurs fois*/
 
-    if(isset($_POST["submit"])){
+    if(isset($_POST["message"])){
       $content = $_POST["message"];
       $date = date("Y-m-d");
       $message = new goldbook(0, $content, connexionMiddleware::getLoginUser(), $date);

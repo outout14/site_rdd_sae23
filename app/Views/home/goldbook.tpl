@@ -22,7 +22,7 @@
                     <!-- Bouton supprimer, à afficher seulement si c'est le message de l'utilisateur -->
                     <!-- <div class="dot hover-pointer p-1" style="z-index: 10;"><i class="bi bi-x-lg text-bonewhite"></i></div> -->
 
-                    <div class="goldbook-name mx-lg-4">{$message->author->lastname|upper} {$message->author->firstname|capitalize}</div>
+                    <div class="goldbook-name mx-lg-4">{$message->author->lastname|unescape:"htmlall"|upper} {$message->author->firstname|unescape:"htmlall"|capitalize}</div>
                     <div class="goldbook-message">
                         {$message->content}
                     </div>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="position-relative w-100">
                             <input class="form-control ps-3 pe-5 py-2 rounded-pill" maxlength="150" type="text" placeholder="Votre message.." name="message" id="goldbook-input">
-                            <input type="submit" class="me-2" type="button" name="submit" value="&#x279C;" id="goldbook-submit">
+                            <input type="submit" class="me-2" type="button" name="sbmt" value="&#x279C;" id="goldbook-submit">
                         </div>
                     </div>
                 </div>
