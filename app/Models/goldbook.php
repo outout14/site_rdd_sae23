@@ -71,6 +71,7 @@ class goldbook {
       $stmt->execute();
       $stmt->close();
     }
+    
 
     static function verif($id): string{
       global $mysqlConnection;
