@@ -10,11 +10,10 @@
 <!-- Card ajout utilisateur -->
 <div class="container">
   <div class="card">
-    <h3 class="card-header">Modifier l'entrée </h3>
+    <h3 class="card-header">Ajouter un utilisateur "{$url_id}"</h3>
     <div class="card-body">
       <!-- Formulaire -->
-      <h3>"{$url_id}"</h3>
-      {include file="./forms/editJSON.tpl"}
+      {include file="./forms/addJSON.tpl"}
     </div>
   </div>
 </div>
