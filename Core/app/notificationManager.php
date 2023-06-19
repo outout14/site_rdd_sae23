@@ -168,6 +168,13 @@ class NotificationManager
         );
         break;
       }
+      case 'format_photo_mauvaise':{
+        $notification = array(
+          'type' => 'danger',
+          'message' => 'Format de l\'image interdit, format accepter (png, jpg, jpeg)'
+        );
+        break;
+      }
       default: {
           $notification = array(
             'type' => 'danger',
