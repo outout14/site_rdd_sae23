@@ -53,6 +53,21 @@ $smarty->setCompileDir(__DIR__ . '/../../app/Views/templates_c/');
 $smarty->setCacheDir(__DIR__ . '/../../app/Views/cache/');
 $smarty->setConfigDir(__DIR__ . '/../../app/Views/configs/');
 
+$smarty->registerPlugin('modifier', 'capitalize', 'fixUTF8capizalize');
+
+// Custom modifier function
+function fixUTF8capizalize($lastname)
+{
+    // Unescape the string
+    $lastname = html_entity_decode($lastname, ENT_QUOTES, 'UTF-8');
+    // Capitalize the string
+    $lastname = mb_convert_case($lastname, MB_CASE_TITLE, "UTF-8");
+    // Escape the string
+    $lastname = htmlentities($lastname, ENT_QUOTES, 'UTF-8');
+    // Return the string
+    return $lastname;
+}
+
 // notificationManager.php is used to manage the notifications.
 require_once __DIR__ . '/notificationManager.php';
 
