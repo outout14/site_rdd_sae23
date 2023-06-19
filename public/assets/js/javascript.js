@@ -434,7 +434,7 @@ goldbookform.addEventListener("submit", (e) => {
     openModal('goldbook-submit-modal')
 
     document.getElementById("goldbook-pseudo-submit").addEventListener("click", () => {
-        e.submit();
+        goldbookform.submit();
     })
 })
 
