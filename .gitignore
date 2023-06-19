@@ -11,3 +11,5 @@ public/.htaccess
 .DS_STORE
 
 public/gallerie/
+
+app/Data/*
