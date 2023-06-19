@@ -113,7 +113,7 @@ class HomeController {
       $extension = explode(".", $photo["name"]);
       $extension = ".".$extension[array_key_last($extension)];
 
-      if($extension != ".jpg" && $extension != ".png" && $extension != ".jpeg"){
+      if($extension != ".jpg" && $extension != ".png" && $extension != ".jpeg" && $extension != ".JPG" && $extension != ".JPEG" && $extension != ".PNG"){
         $smarty->assign('error',"Le format de la photo n'est pas bon");
         header("Location: ". APP_URL ."/home/gallery/?notification=format_photo_mauvaise");
         exit();
@@ -122,13 +122,15 @@ class HomeController {
         if($photo['size']>10000000){
           echo($photo['size']);
           header("Location: ". APP_URL ."/home/gallery/?notification=photo_trop_lourde");
-        exit();
+          exit();
         }
         else{
         // On enleve les caractères spéciaux
         $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
         $destination="gallerie/non_valide/".$name.$extension;
         move_uploaded_file($photo["tmp_name"], $destination);
+        header("Location: ". APP_URL ."/home/gallery/?notification=photo_envoye");
+        exit();
         }
       }
     }

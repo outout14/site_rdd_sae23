@@ -182,6 +182,13 @@ class NotificationManager
         );
         break;
       }
+      case 'photo_envoye':{
+        $notification=array(
+          'type' => 'success',
+          'message' => 'Photo envoyé'
+        );
+        break;
+      }
       default: {
           $notification = array(
             'type' => 'danger',
