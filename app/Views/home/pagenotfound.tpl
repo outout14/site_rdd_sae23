@@ -22,6 +22,8 @@
         </div>
     </section>
 
+    <!-- Javascript -->
     {include file="./frame/javascript.tpl"}
+    
 </body>
 </html>
