@@ -254,7 +254,7 @@ const gallery = document.getElementById("gallery")
 
 if(gallery != null) {
     if(gallery.children.length === 0) {
-        gallery.innerHTML = "<span class='inscription-info-text text-white'>Une fois la cérémonie passée, les photos apparaitront ici.</span>"
+        gallery.innerHTML = "<p class='inscription-info-text text-white text-center'>Une fois la cérémonie passée, les photos apparaitront ici.</p>"
     }
 
     // Submit automatique gallerie
@@ -425,11 +425,23 @@ function goldbookScroll() {
     wrapper.scrollTop = wrapper.scrollHeight
 }
 
+
+const goldbookform = document.getElementById("goldbook-input-wrapper")
+
+goldbookform.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    openModal('goldbook-submit-modal')
+
+    document.getElementById("goldbook-pseudo-submit").addEventListener("click", () => {
+        e.submit();
+    })
+})
+
 if(!!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)) {
     document.querySelectorAll(".wave").forEach(wave => {
         wave.style.display = "none"
     })
 }
-
 
 
