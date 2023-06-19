@@ -70,7 +70,7 @@
                             });
                         </script>
 
-                        {if $sessionUser->has_paid == 1}
+                        {if $sessionUser->has_paid == 0}
 
                         <!-- Non payé -->
                         <p class="text-complementary col-11 col-lg-9">
