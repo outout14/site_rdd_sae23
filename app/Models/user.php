@@ -104,12 +104,12 @@ class User {
     $stmt->close();
   }
 
-  public function update($id, $lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role): void {
+  public function update($id, $lastname, $firstname, $email, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role): void {
     /* UPDATE USER IN DATABASE */
     global $mysqlConnection;
-    $query = "UPDATE users SET lastname = ?, firstname = ?, email = ?, password = ?, phone_number = ?, city = ?, family_count = ?, company = ?, promotion = ?, promotion_year = ?, display_in_list = ?, display_on_map = ?, confirmed = ?, status = ?, role = ? WHERE id = ?";
+    $query = "UPDATE users SET lastname = ?, firstname = ?, email = ?, phone_number = ?, city = ?, family_count = ?, company = ?, promotion = ?, promotion_year = ?, display_in_list = ?, display_on_map = ?, confirmed = ?, status = ?, role = ? WHERE id = ?";
     $stmt = $mysqlConnection->prepare($query);
-    $stmt->bind_param("ssssssisssiiissi", $lastname, $firstname, $email, $password, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role, $id);
+    $stmt->bind_param("sssssisssiiissi", $lastname, $firstname, $email, $phone_number, $city, $family_count, $company, $promotion, $promotion_year, $display_in_list, $display_on_map, $confirmed, $status, $role, $id);
     $stmt->execute();
     $stmt->close();
   }

@@ -18,7 +18,6 @@
                             <option value="student">Etudiant</option>
                             <option value="teacher">Professeur</option>
                             <option value="oldstudent">Ancien élève</option>
-                            <option value="other">Autre</option>
                         </select>
                     </div>
 
@@ -88,7 +87,7 @@
                 <thead>
                     <tr>
                         <th class="text-information ps-2 ps-lg-4 py-2">Nom</th>
-                        <th class="text-information ps-2 ps-lg-4 py-2">Prenom</th>
+                        <th class="text-information ps-2 ps-lg-4 py-2">Prénom</th>
                         <th class="text-information ps-2 ps-lg-4 py-2">Statut</th>
                         <th class="text-information ps-2 ps-lg-4 py-2">Promotion</th>
                         <th class="text-information ps-2 ps-lg-4 py-2">Entreprise</th>
@@ -100,9 +99,17 @@
                     {/if}
                     {foreach $users as $user}
                     <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->lastname}</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->firstname}</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->status}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->lastname|capitalize}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->firstname|capitalize}</td>
+                        {if $user->status == 'student'}
+                          <td class="ps-0 ps-lg-2 py-3 text-complementary">Étudiant</td>
+                        {elseif $user->status == 'teacher'}
+                          <td class="ps-0 ps-lg-2 py-3 text-complementary">Enseignant</td>
+                        {elseif $user->status == 'oldstudent'}
+                          <td class="ps-0 ps-lg-2 py-3 text-complementary">Ancien élève</td>
+                        {else}
+                          <td class="ps-0 ps-lg-2 py-3 text-complementary">Autre</td>
+                        {/if}
                         <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->promotion}</td>
                         <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->company}</td>
                     </tr>

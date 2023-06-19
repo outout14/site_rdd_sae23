@@ -63,6 +63,13 @@ class NotificationManager
           );
           break;
         }
+      case 'entryNotEdited': {
+          $notification = array(
+            'type' => 'danger',
+            'message' => 'L\'entrée n\'a pas été modifiée.'
+          );
+          break;
+        }
       case 'tokenNotFound': {
           $notification = array(
             'type' => 'danger',
@@ -154,6 +161,13 @@ class NotificationManager
           );
           break;
         }
+      case 'password_mail_sent': {
+        $notification = array(
+          'type' => 'success',
+          'message' => 'Un email vous a été envoyé.'
+        );
+        break;
+      }
       default: {
           $notification = array(
             'type' => 'danger',
@@ -164,5 +178,8 @@ class NotificationManager
     }
     global $smarty;
     $smarty->assign('notification', $notification);
+    if(isset($_GET["reason"])){
+      $smarty->assign('reason', htmlentities($_GET["reason"]));
+    }
   }
 }

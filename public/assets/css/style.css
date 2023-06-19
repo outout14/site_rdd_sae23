@@ -499,6 +499,7 @@ a {
     display: flex;
     position: relative;
     overflow: hidden;
+    gap: 4rem !important;
 }
 
 #organisator-animation-wrapper {

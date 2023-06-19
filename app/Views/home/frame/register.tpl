@@ -227,6 +227,7 @@
                             <div class="col flex-center">
                                 <div
                                     class="h-captcha"
+                                    id="h-captcha-register"
                                     data-sitekey="{$HCAPTCHA_SITEKEY}"
                                 ></div>
                             </div>
