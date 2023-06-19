@@ -20,6 +20,8 @@
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}
 
+    <!-- Import JavaScript -->
     {include file="./frame/javascript.tpl"}
+
 </body>
 </html>

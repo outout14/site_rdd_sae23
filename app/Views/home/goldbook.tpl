@@ -110,5 +110,7 @@
         </form>
     </section>
 
+    {include file="./frame/javascript.tpl"}
+
 </body>
 </html>

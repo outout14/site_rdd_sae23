@@ -17,6 +17,7 @@
     <!-- Gallerie -->
     {include file="./frame/gallery.tpl"}
 
+    <!-- Import JavaScript -->
     {include file="./frame/javascript.tpl"}
 </body>
 </html>

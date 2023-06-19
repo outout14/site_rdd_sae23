@@ -76,6 +76,7 @@
         </div>
     </section>
 
+    <!-- Import JavaScript -->
     {include file="./frame/javascript.tpl"}
 </body>
 </html>

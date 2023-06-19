@@ -17,7 +17,7 @@
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}
 
-    <script src="{$APP_URL}/assets/js/ajaxResearch.js"></script>
+    <!-- Import JavaScript -->
     {include file="./frame/javascript.tpl"}
 </body>
 </html>
