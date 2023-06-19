@@ -177,6 +177,7 @@ public function galery(): void
 
   public function gestionjson(): void
   {
+
     if(isset($_GET["file"])){
       if(isset($_GET["delete"])){
         // SUPPRIMER
@@ -188,6 +189,7 @@ public function galery(): void
         header("Location:"  . APP_URL . "/admin/gestionjson?notification=entryDeleted");
       }
     }
+
     global $smarty;
     smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
     try {
