@@ -43,6 +43,12 @@ class HomeController {
 
   public function register(): void
   {
+    // Should not be logged in
+    if(connexionMiddleware::getLoginUser() != null){
+      header("Location: " . APP_URL . "/home");
+      exit();
+    }
+
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
 
