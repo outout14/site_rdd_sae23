@@ -254,7 +254,7 @@ const gallery = document.getElementById("gallery")
 
 if(gallery != null) {
     if(gallery.children.length === 0) {
-        gallery.innerHTML = "<span class='inscription-info-text text-white'>Une fois la cérémonie passée, les photos apparaitront ici.</span>"
+        gallery.innerHTML = "<p class='inscription-info-text text-white text-center'>Une fois la cérémonie passée, les photos apparaitront ici.</p>"
     }
 
     // Submit automatique gallerie
