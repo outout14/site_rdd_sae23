@@ -800,28 +800,21 @@ header {
     box-shadow: 0 0 5px var(--bonewhite);
 }
 
-#gallery-window, #gallery-upload-window {
-    width: fit-content;
-    height: fit-content;
-}
-
-#ticket-warning-window {
-    min-width: 30vw;
-    max-width: 30vw;
-    height: fit-content;
-}
-
 #gallery-window {
     border-radius: 2vh;
     box-shadow: none;
+    height: fit-content;
 }
-
+#photo-container {
+    max-width: 80vw;
+    max-height: 50vh;
+    object-fit: contain;
+}
 #gallery-modal-photo {
     max-height: 80vh;
     max-width: 80vw;
     min-height: 40vh;
     min-width: 50vh;
-    object-fit: fill;
 }
 
 #input-file {
@@ -837,12 +830,6 @@ header {
     max-width: 25vw;
 }
 
-#gallery-fade {
-    height: 15vh;
-    z-index: 100;
-    pointer-events: none;
-    background: linear-gradient(var(--blue), transparent 90%);
-}
 .wave {
     z-index: 1;
     height: fit-content;
@@ -1037,7 +1024,7 @@ header {
     line-height: 2rem;
 }
 
-#ticket-window {
+#ticket-window, #gallery-upload-window {
     height: fit-content;
 }
 
@@ -1158,6 +1145,10 @@ header {
 }
 
 @media (max-width: 1000px) {
+    #gallery-window {
+        border-radius: 0;
+        height: 100vh;
+    }
     #ticket-window {
         height: 100%;
     }
@@ -1208,8 +1199,8 @@ header {
         max-width: 85vw;
     }
     #gallery-upload-window {
-        width: 90%;
-        border-radius: 25px;
+        width: 100%;
+        height: 100vh;
     }
     #ticket-warning-window {
         width: 90%;
