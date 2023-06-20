@@ -806,13 +806,12 @@ header {
 #photo-container {
     max-width: 80vw;
     max-height: 50vh;
-    object-fit: contain;
+    object-fit: fill;
 }
+
 #gallery-modal-photo {
     max-height: 80vh;
     max-width: 80vw;
-    min-height: 40vh;
-    min-width: 50vh;
 }
 
 #input-file {
