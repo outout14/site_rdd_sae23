@@ -1,7 +1,7 @@
 {include file="./frame/header.tpl"}
 <div class="container mt-5">
   <h1>Editeur JSON</h1>
-
+  <hr>
   <!-- Organisation --> 
   <div class="card-body">
   <h3>Fichier <code>organisation.json</code></h3>
@@ -24,7 +24,13 @@
     </tbody>
   </table>
 
-  
+  <div class="row mt-3">
+  <div class="col">
+    <a href="{$APP_URL}/admin/addJSON/organisation.json/{$key}" class="btn btn-success btn-lg btn-block">Ajouter</a>
+  </div>
+</div>
+
+  <hr>
   <div class="card-body">
   <h3>Fichier <code>organisators.json</code></h3>
   <table class="table table-hover">
@@ -51,31 +57,15 @@
       {/foreach}
     </tbody>
   </table>
-
-  <!-- Formulaire pour ajouter un nouvel organisateur -->
-  <h4>Ajouter un nouvel organisateur :</h4>
-  <form action="" method="POST">
-    <div class="form-group">
-      <label for="inputFirstname">Prénom :</label>
-      <input type="text" class="form-control" id="inputFirstname" name="firstname" required>
-    </div>
-    <div class="form-group">
-      <label for="inputLastname">Nom :</label>
-      <input type="text" class="form-control" id="inputLastname" name="lastname" required>
-    </div>
-    <div class="form-group">
-      <label for="inputTask">Tâche :</label>
-      <input type="text" class="form-control" id="inputTask" name="task" required>
-    </div>
-    <div class="form-group">
-      <label for="inputLink">Lien :</label>
-      <input type="text" class="form-control" id="inputLink" name="link" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-  </form>
+<div class="row mt-3">
+  <div class="col">
+    <a href="{$APP_URL}/admin/addJson/organisators.json/{$key}" class="btn btn-success btn-lg btn-block">Ajouter</a>
+  </div>
 </div>
 
+  
 
+<hr>
   <!-- Sponsors -->
     <!-- Organisation --> 
     <div class="card-body">
@@ -101,6 +91,13 @@
         {/foreach}
       </tbody>
     </table>
+
+    <div class="row mt-3">
+    <div class="col">
+      <a href="{$APP_URL}/admin/addJson/sponsor.json/{$key}" class="btn btn-success btn-lg btn-block">Ajouter</a>
+    </div>
+  </div>
+
 </div>
 {include file="./frame/footer.tpl"}
 

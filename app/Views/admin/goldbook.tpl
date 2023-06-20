@@ -1,14 +1,19 @@
 {include file="./frame/header.tpl"}
 <div class="container mt-5">
   <!-- Alert bonjour -->
-  <p>Bienvenue sur la partie livre d'or, vous pouvez ici gérer les entrées du livre d'or.</p>
+  <h1>Livre d'or</h1> 
   <hr>
+
+  <a href="javascript:history.back()" class="btn btn-secondary mt-2">Retour</a>
+  
+  
+  
   <div class="container">
   <div class="form-group mt-3">
-    <form action="#userList" method="GET">
+    <form action="{$APP_URL}/admin/goldbook" method="GET">
       <div class="row">
         <div class="col">
-          <input type="text" class="form-control" name="search" placeholder="Rechercher un utilisateur..." value="{$searchQuery}">
+          <input type="text" class="form-control" name="search" placeholder="Rechercher un commentaire..." value="{$searchQuery1}">
         </div>
         <div class="col">
           <button type="submit" class="btn btn-primary">Rechercher</button>
