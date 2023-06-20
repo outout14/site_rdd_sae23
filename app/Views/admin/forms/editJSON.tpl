@@ -8,7 +8,7 @@
         </div>
       </div>
     {/foreach}
-    {if $smarty.template |strstr:"sponsor.tpl organisator.tpl"}
+    {if $url_file != "organisation.json"}
       <div class="col col-6">
         <div class="input-group mt-2">
           <label for="photos" class="input-group-text">Photo</label>
