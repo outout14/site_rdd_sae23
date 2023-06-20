@@ -209,12 +209,18 @@ public function galery(): void
       $_POST["file"] = htmlentities($_POST["file"]);
       $data = Utils::GetData(__DIR__ . '/../Data/' . $_POST["file"]);
 
-      $to_edit = $data[htmlentities($id)];
+      $to_edit = $data[$id];
       foreach ($_POST as $key => $value) {
-        if($key != "file" && $key != "photos"){
-          $to_edit[$key] = $value;
+          if($key != "file" && $key != "photos"){
+            if($file == "organisation.json"){
+              $to_edit = $value;
+            } else {
+              $to_edit[$key] = $value;
+            }
+          }
         }
-      }
+
+      $data[$id] = $to_edit;
 
       if(isset($_FILES['photos']) && !empty($_FILES['photos']['name'])){
         if($_POST["file"] == "organisators.json"){
@@ -238,8 +244,6 @@ public function galery(): void
           exit();
         }
       }
-
-      $data[$id] = $to_edit;
 
       $data = json_encode($data, JSON_PRETTY_PRINT);
       $fileopen = fopen(__DIR__ . '/../Data/' . $file, "w");
