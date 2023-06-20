@@ -2,6 +2,13 @@
     <div class="container p-5 mt-5">
         <h4 class="card-title">Ajouter un nouvel élément :</h4>
 
+        {if in_array($smarty.template, ['sponsor.tpl', 'organisator.tpl'])}
+        <div class="form-group">
+            <label for="inputName">Nom :</label>
+            <input type="text" class="form-control" id="inputName" name="name" required>
+        </div>
+        {/if}
+
         {if $file == 'organisators.json'}
         <div class="form-group">
             <label for="inputFirstname">Prénom :</label>
@@ -14,11 +21,6 @@
         <div class="form-group">
             <label for="inputTask">Tâche :</label>
             <input type="text" class="form-control" id="inputTask" name="task" required>
-        </div>
-        {elseif $file == 'sponsors.json'}
-        <div class="form-group">
-            <label for="inputName">Nom :</label>
-            <input type="text" class="form-control" id="inputName" name="name" required>
         </div>
         {elseif $file == 'organisation.json'}
         <div class="form-group">

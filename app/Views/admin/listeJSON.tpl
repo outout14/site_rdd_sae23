@@ -26,7 +26,7 @@
 
   <div class="row mt-3">
   <div class="col">
-    <a href="{$APP_URL}/admin/addJSON/organisation.json" class="btn btn-success btn-lg btn-block">Ajouter</a>
+    <a href="{$APP_URL}/admin/addJSON/organisation.json/{$key}" class="btn btn-success btn-lg btn-block">Ajouter</a>
   </div>
 </div>
 
@@ -94,7 +94,7 @@
 
     <div class="row mt-3">
     <div class="col">
-      <a href="{$APP_URL}/admin/addJson" class="btn btn-success btn-lg btn-block">Ajouter</a>
+      <a href="{$APP_URL}/admin/addJson/sponsor.json/{$key}" class="btn btn-success btn-lg btn-block">Ajouter</a>
     </div>
   </div>
 

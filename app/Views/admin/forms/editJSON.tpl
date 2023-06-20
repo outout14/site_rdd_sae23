@@ -8,7 +8,7 @@
         </div>
       </div>
     {/foreach}
-    {if isset($donnees_json.photos)}
+    {if $smarty.template |strstr:"sponsor.tpl organisator.tpl"}
       <div class="col col-6">
         <div class="input-group mt-2">
           <label for="photos" class="input-group-text">Photo</label>

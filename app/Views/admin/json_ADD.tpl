@@ -9,13 +9,13 @@
 
 <!-- Card ajout utilisateur -->
 <div class="container">
-  <div class="card">
-    <h3 class="card-header">Ajouter un utilisateur "{$url_id}"</h3>
+  
+    
     <div class="card-body">
       <!-- Formulaire -->
       {include file="./forms/addJSON.tpl"}
     </div>
-  </div>
+ 
 </div>
 
 {include file="./frame/footer.tpl"}

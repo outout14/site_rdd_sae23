@@ -39,7 +39,7 @@
           <th scope="col">ID</th>
           <th scope="col">Prénom</th>
           <th scope="col">Nom</th>
-          <th scope="col">Tél.</th>
+          <th scope="col">Mail</th>
           <th scope="col">A payé ?</th>
           <th scope="col">Listé ?</th>
           <th scope="col">Confirmé ?</th>
