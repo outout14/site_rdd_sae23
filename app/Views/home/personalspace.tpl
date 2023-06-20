@@ -14,6 +14,8 @@
     <!-- Notifications -->
     {include file="../utils/notifications.tpl"}
 
+    <!-- Javascript -->
     {include file="./frame/javascript.tpl"}
+    
 </body>
 </html>

@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Réinitialisation de votre mot de passe</h1>
-<p>Bonjour <strong>{$args["user"]->firstname|capitalize}</strong>,</p>
+<p>Bonjour <strong>{$args["user"]->firstname|unescape:"htmlall"|capitalize}</strong>,</p>
 <p>Vous avez demandé la réinitialisation de votre mot de passe sur le site de Génération R&T.</p>
 <hr>
 <p>Pour réinitialiser votre mot de passe, cliquez sur le lien suivant.</p>

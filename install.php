@@ -73,7 +73,7 @@ try {
 function migrateGoldbookDB(): void {
   global $mysqlConnection;
   $query = "CREATE TABLE `goldbook` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `content` text NOT NULL,
   `author` int(11) NOT NULL,
   `date` date NOT NULL,

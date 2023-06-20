@@ -15,9 +15,9 @@ require_once(__DIR__ . '/../Models/goldbook.php');
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
-    //'gallery' => 'Galerie', TODO : Add gallery
-    //'goldbook' => 'Livre d\'or', TODO : Add goldbook
-    //'annuaire' => 'Annuaire', TODO : Add annuaire
+    'gallery' => 'Galerie',
+    'goldbook' => 'Livre d\'or',
+    'annuaire' => 'Annuaire',
   ];
   /**
    * Display the home page.
@@ -43,6 +43,12 @@ class HomeController {
 
   public function register(): void
   {
+    // Should not be logged in
+    if(connexionMiddleware::getLoginUser() != null){
+      header("Location: " . APP_URL . "/home");
+      exit();
+    }
+
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
 
@@ -76,7 +82,7 @@ class HomeController {
 
     /* Il faut vérifier que l'utilisateur écrit pas plusieurs fois*/
 
-    if(isset($_POST["submit"])){
+    if(isset($_POST["message"])){
       $content = $_POST["message"];
       $date = date("Y-m-d");
       $message = new goldbook(0, $content, connexionMiddleware::getLoginUser(), $date);
@@ -167,8 +173,18 @@ class HomeController {
         $tab_param_form[2]=$company;
       }
       if (isset($_POST["promotion"]) && $_POST["promotion"]!=null){
-        $tab_param_form[3]=htmlentities($_POST["promotion"]);
+        //$tab_param_form[3]=htmlentities($_POST["promotion"]);
+        if(intval($_POST["promotion"])!=1){
+          $tab_param_form[3]=htmlentities((int)$_POST["promotion"]);
+          echo($tab_param_form[3]);
+        }
+        else{
+          $tab_param_form[3]=htmlentities($_POST["promotion"]);
+          echo($tab_param_form[3]);
+        }
       }
+
+      var_dump($tab_param_form);
 
       $users_filtre_name=array();
       foreach($users as $cle => $user){

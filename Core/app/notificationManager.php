@@ -182,6 +182,13 @@ class NotificationManager
         );
         break;
       }
+      case 'entryAdded': {
+          $notification = array(
+            'type' => 'success',
+            'message' => 'L\'entrée a bien été ajoutée.'
+          );
+          break;
+        }
       case 'photo_envoye':{
         $notification=array(
           'type' => 'success',

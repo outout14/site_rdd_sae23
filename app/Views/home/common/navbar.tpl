@@ -46,7 +46,7 @@
         {if $sessionUser}
             <div id="header-dropdown-wrapper">
                 <button class="button bg-bonewhite text-dark fw-bold p-2 px-lg-3 py-lg-2 d-flex justify-content-center align-items-center" id="header-profile-button">
-                    <span class="me-0 me-lg-2 phone-d-none">{$sessionUser->firstname|capitalize} {$sessionUser->lastname|capitalize}</span>
+                    <span class="me-0 me-lg-2 phone-d-none">{$sessionUser->firstname|unescape:"htmlall"|capitalize} {$sessionUser->lastname|unescape:"htmlall"|capitalize}</span>
                     <i class="bi bi-person-circle text-dark scale"></i>
                 </button>
 

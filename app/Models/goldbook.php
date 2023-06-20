@@ -58,24 +58,28 @@ class goldbook {
 
     static function validate($id): void{
       global $mysqlConnection;
-      $query = "UPDATE goldbook SET is_validate=1 WHERE id=$id";
+      $query = "UPDATE goldbook SET is_validate=1 WHERE id=?";
       $stmt = $mysqlConnection->prepare($query);
+      $stmt -> bind_param("i", $id);
       $stmt->execute();
       $stmt->close();
     }
 
-    static function delete($user): void{
+    static function delete($id): void{
       global $mysqlConnection;
-      $query = "DELETE FROM goldbook INNER JOIN users ON goldbook.author = users.id WHERE goldbook.author=$user";
+      $query = "DELETE FROM goldbook WHERE id=?";
       $stmt = $mysqlConnection->prepare($query);
+      $stmt -> bind_param("i", $id);
       $stmt->execute();
       $stmt->close();
     }
+    
 
     static function verif($id): string{
       global $mysqlConnection;
-      $query = "SELECT * FROM goldbook WHERE author=$id";
+      $query = "SELECT * FROM goldbook WHERE author=?";
       $stmt = $mysqlConnection->prepare($query);
+      $stmt -> bind_param("i", $id);
       $stmt->execute();
       $result = $stmt->get_result();
       $stmt->close();
