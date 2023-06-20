@@ -114,22 +114,26 @@ class AdminController
 
   public function goldbook(): void
 {
-
-  if(isset($_GET["validate"])){
+  if (isset($_GET["validate"])) {
     $id = htmlentities($_GET["validate"]);
     goldbook::validate($id);
-  }else if(isset($_GET["nonvalidate"])){
+  } else if (isset($_GET["nonvalidate"])) {
     $id = htmlentities($_GET["nonvalidate"]);
     goldbook::delete($id);
   }
-    global $smarty;
-    smartyPassDefaultVariables($this->menu, 'Livre d\'Or');
 
-    $content_db = goldbook::lister(0);
-    $smarty->assign('goldbook',$content_db);
+  global $smarty;
+  smartyPassDefaultVariables($this->menu, 'Livre d\'Or');
 
-    $smarty->display('admin/goldbook.tpl');
+  $searchQuery = isset($_GET["search"]) ? htmlentities($_GET["search"]) : "";
+  $content_db = goldbook::lister(0);
+  $smarty->assign('goldbook', $content_db);
+  $smarty->assign('searchQuery1', $searchQuery); 
+  $smarty->display('admin/goldbook.tpl');
 }
+
+
+
 public function galery(): void
 {
   if(isset($_GET["validate"])){
@@ -164,7 +168,6 @@ public function galery(): void
       header('Location: ' . APP_URL . '/admin/users');
       exit();
     }
-    echo $userID;
 
     $user->confirmPayment($userID);
 
@@ -206,15 +209,20 @@ public function galery(): void
       $_POST["file"] = htmlentities($_POST["file"]);
       $data = Utils::GetData(__DIR__ . '/../Data/' . $_POST["file"]);
 
-      $to_edit = $data[htmlentities($id)];
+      $to_edit = $data[$id];
       foreach ($_POST as $key => $value) {
-        if($key != "file" && $key != "photos"){
-          $to_edit[$key] = $value;
+          if($key != "file" && $key != "photos"){
+            if($file == "organisation.json"){
+              $to_edit = $value;
+            } else {
+              $to_edit[$key] = $value;
+            }
+          }
         }
-      }
 
-      if(isset($_FILES) and $_FILES['photos']['error'] == 0){
-        // Check if uploaded $_FILE is png
+      $data[$id] = $to_edit;
+
+      if(isset($_FILES['photos']) && !empty($_FILES['photos']['name'])){
         if($_POST["file"] == "organisators.json"){
           $cheminPhoto = __DIR__ . '/../../public/assets/images/creators/creator_' . strtolower($id) . '.png';
         } else if ($_POST["file"] == "sponsors.json"){
@@ -224,7 +232,7 @@ public function galery(): void
         $extension = $extension[count($extension) - 1];
         if($extension == "png"){
           if($_FILES['photos']['size'] < 1000000){
-            // Delete old file
+
             unlink($cheminPhoto);
             move_uploaded_file($_FILES['photos']['tmp_name'], $cheminPhoto);
           } else {
@@ -237,8 +245,6 @@ public function galery(): void
         }
       }
 
-      $data[$id] = $to_edit;
-
       $data = json_encode($data, JSON_PRETTY_PRINT);
       $fileopen = fopen(__DIR__ . '/../Data/' . $file, "w");
       if($fileopen !== false){
@@ -250,16 +256,103 @@ public function galery(): void
       else {
         header("Location: "  . APP_URL . "/admin/gestionjson?notification=entryNotEdited");
         exit();
+      }
     }
+
+    smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
+    $smarty->assign('url_id', $id);
+    $smarty->assign('url_file', $file);
+
+    $donnees_json = Utils::GetData(__DIR__ . '/../Data/' . $file)[$id];
+    if(is_array($donnees_json) && array_key_exists('photos', $donnees_json)){
+        unset($donnees_json['photos']);
+    }
+    $smarty->assign('donnees_json', $donnees_json);
+
+    $smarty->display('admin/json_edit.tpl');
 }
 
-smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
-$smarty->assign('url_id', $id);
-$smarty->assign('url_file', $file);
+public function addJson($file)
+{
+    global $smarty;
 
-$smarty->assign('donnees_json', Utils::GetData(__DIR__ . '/../Data/' . $file)[$id]);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = Utils::GetData(__DIR__ . '/../Data/' . $file);
 
-$smarty->display('admin/json_edit.tpl');
+        if ($file == 'organisators.json') {
+            $firstname = isset($_POST["firstname"]) ? htmlentities($_POST["firstname"]) : "";
+            $lastname = isset($_POST["lastname"]) ? htmlentities($_POST["lastname"]) : "";
+            $task = isset($_POST["task"]) ? htmlentities($_POST["task"]) : "";
+
+            $newUser = array(
+                "firstname" => $firstname,
+                "lastname" => $lastname,
+                "task" => $task
+            );
+            $newId = $newUser["firstname"];
+        } elseif ($file == 'sponsors.json') {
+            $name = isset($_POST["name"]) ? htmlentities($_POST["name"]) : "";
+
+            $newSponsor = array(
+                "name" => $name
+            );
+            $newId = $newSponsor["name"];
+        } elseif ($file == 'organisation.json') {
+            $key = isset($_POST["key"]) ? htmlentities($_POST["key"]) : "";
+            $value = isset($_POST["value"]) ? htmlentities($_POST["value"]) : "";
+
+            $newId = uniqid();
+            $newData = array(
+                $key => $value
+            );
+        }
+
+        if (isset($_POST["link"])) {
+            $link = htmlentities($_POST["link"]);
+            if ($file == 'organisators.json') {
+                $newUser["link"] = $link;
+            } elseif ($file == 'sponsors.json') {
+                $newSponsor["link"] = $link;
+            }
+        }
+
+        if ($file == 'organisators.json') {
+            $data[$newId] = $newUser;
+            $photoPath = __DIR__ . '/../../public/assets/images/creators/creator_' . strtolower($newId) . '.png';
+        } elseif ($file == 'sponsors.json') {
+            $data[$newId] = $newSponsor;
+            $photoPath = __DIR__ . '/../../public/assets/images/sponsors/' . strtolower($newId) . '.png';
+        } elseif ($file == 'organisation.json') {
+            $data = array_merge($data, $newData);
+        }
+
+        if (isset($_FILES["photo"]) && $_FILES["photo"]["error"] === 0) {
+          $photoTmpName = $_FILES["photo"]["tmp_name"];
+
+          if (move_uploaded_file($photoTmpName, $photoPath)) {
+            // do nothing
+          }
+        }
+
+        $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+
+        $fileOpen = fopen(__DIR__ . '/../Data/' . $file, "w");
+        if ($fileOpen !== false and !empty($jsonData)) {
+            fwrite($fileOpen, $jsonData);
+            fclose($fileOpen);
+            header("Location: " . APP_URL . "/admin/gestionjson?notification=entryAdded");
+            exit();
+        } else {
+            header("Location: " . APP_URL . "/admin/gestionjson?notification=entryNotAdded");
+            exit();
+        }
+    } else {
+      $url_id = isset($_GET['url_id']) ? $_GET['url_id'] : '';
+      $smarty->assign('url_id', $url_id);
+      $smarty->assign('file', $file);
+      smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
+      $smarty->display('admin/json_ADD.tpl');
+  }
 }
 
 public function addOrga($file)
@@ -274,13 +367,13 @@ public function addOrga($file)
 
         $data = Utils::GetData(__DIR__ . '/../Data/' . $file);
 
-        $newId = uniqid();
         $newUser = array(
             "firstname" => $firstname,
             "lastname" => $lastname,
             "task" => $task,
             "link" => $link
         );
+        $newId = $newUser["firstname"];
         $data[$newId] = $newUser;
 
         $jsonData = json_encode($data, JSON_PRETTY_PRINT);
@@ -303,6 +396,7 @@ public function addOrga($file)
     $smarty->display('admin/json_edit.tpl');
     
 }
+
 
 
 

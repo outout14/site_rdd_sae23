@@ -2,6 +2,9 @@
 <div class="container mt-5">
   <!-- Alert bonjour -->
   <h1>Gestion de la GALERIE</h1>
+
+  <a href="javascript:history.back()" class="btn btn-secondary mt-2">Retour</a>
+
   <section class="window-container background-wave-blue h-100" style="min-height: 100vh;">
     <div class="fixed-top" id="gallery-fade"></div>
     
