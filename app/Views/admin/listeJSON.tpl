@@ -94,7 +94,7 @@
 
     <div class="row mt-3">
     <div class="col">
-      <a href="{$APP_URL}/admin/addJson/sponsor.json/{$key}" class="btn btn-success btn-lg btn-block">Ajouter</a>
+      <a href="{$APP_URL}/admin/addJson/sponsors.json/{$key}" class="btn btn-success btn-lg btn-block">Ajouter</a>
     </div>
   </div>
 
