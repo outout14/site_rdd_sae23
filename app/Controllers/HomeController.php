@@ -15,8 +15,8 @@ require_once(__DIR__ . '/../Models/goldbook.php');
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
-    'gallery' => 'Galerie',
-    'goldbook' => 'Livre d\'or',
+    //'gallery' => 'Galerie',
+    //'goldbook' => 'Livre d\'or',
     'annuaire' => 'Annuaire',
   ];
   /**
