@@ -168,7 +168,6 @@ public function galery(): void
       header('Location: ' . APP_URL . '/admin/users');
       exit();
     }
-    echo $userID;
 
     $user->confirmPayment($userID);
 
@@ -218,7 +217,6 @@ public function galery(): void
       }
 
       if(isset($_FILES['photos']) && !empty($_FILES['photos']['name'])){
-        
         if($_POST["file"] == "organisators.json"){
           $cheminPhoto = __DIR__ . '/../../public/assets/images/creators/creator_' . strtolower($id) . '.png';
         } else if ($_POST["file"] == "sponsors.json"){
@@ -282,19 +280,19 @@ public function addJson($file)
             $lastname = isset($_POST["lastname"]) ? htmlentities($_POST["lastname"]) : "";
             $task = isset($_POST["task"]) ? htmlentities($_POST["task"]) : "";
 
-            $newId = uniqid();
             $newUser = array(
                 "firstname" => $firstname,
                 "lastname" => $lastname,
                 "task" => $task
             );
+            $newId = $newUser["firstname"];
         } elseif ($file == 'sponsors.json') {
             $name = isset($_POST["name"]) ? htmlentities($_POST["name"]) : "";
 
-            $newId = uniqid();
             $newSponsor = array(
                 "name" => $name
             );
+            $newId = $newSponsor["name"];
         } elseif ($file == 'organisation.json') {
             $key = isset($_POST["key"]) ? htmlentities($_POST["key"]) : "";
             $value = isset($_POST["value"]) ? htmlentities($_POST["value"]) : "";
@@ -314,32 +312,28 @@ public function addJson($file)
             }
         }
 
-        if (isset($_FILES["photo"]) && $_FILES["photo"]["error"] === 0) {
-            $photoName = $_FILES["photo"]["name"];
-            $photoTmpName = $_FILES["photo"]["tmp_name"];
-            $photoPath = __DIR__ . '/../Data/Photos/' . $photoName;
-
-            if (move_uploaded_file($photoTmpName, $photoPath)) {
-                if ($file == 'organisators.json') {
-                    $newUser["photo"] = $photoName;
-                } elseif ($file == 'sponsors.json') {
-                    $newSponsor["photo"] = $photoName;
-                }
-            }
-        }
-
         if ($file == 'organisators.json') {
             $data[$newId] = $newUser;
+            $photoPath = __DIR__ . '/../../public/assets/images/creators/creator_' . strtolower($newId) . '.png';
         } elseif ($file == 'sponsors.json') {
             $data[$newId] = $newSponsor;
+            $photoPath = __DIR__ . '/../../public/assets/images/sponsors/' . strtolower($newId) . '.png';
         } elseif ($file == 'organisation.json') {
             $data = array_merge($data, $newData);
+        }
+
+        if (isset($_FILES["photo"]) && $_FILES["photo"]["error"] === 0) {
+          $photoTmpName = $_FILES["photo"]["tmp_name"];
+
+          if (move_uploaded_file($photoTmpName, $photoPath)) {
+            // do nothing
+          }
         }
 
         $jsonData = json_encode($data, JSON_PRETTY_PRINT);
 
         $fileOpen = fopen(__DIR__ . '/../Data/' . $file, "w");
-        if ($fileOpen !== false) {
+        if ($fileOpen !== false and !empty($jsonData)) {
             fwrite($fileOpen, $jsonData);
             fclose($fileOpen);
             header("Location: " . APP_URL . "/admin/gestionjson?notification=entryAdded");
@@ -352,6 +346,7 @@ public function addJson($file)
       $url_id = isset($_GET['url_id']) ? $_GET['url_id'] : '';
       $smarty->assign('url_id', $url_id);
       $smarty->assign('file', $file);
+      smartyPassDefaultVariables($this->menu, 'Gestionnaire json');
       $smarty->display('admin/json_ADD.tpl');
   }
 }
@@ -368,13 +363,13 @@ public function addOrga($file)
 
         $data = Utils::GetData(__DIR__ . '/../Data/' . $file);
 
-        $newId = uniqid();
         $newUser = array(
             "firstname" => $firstname,
             "lastname" => $lastname,
             "task" => $task,
             "link" => $link
         );
+        $newId = $newUser["firstname"];
         $data[$newId] = $newUser;
 
         $jsonData = json_encode($data, JSON_PRETTY_PRINT);

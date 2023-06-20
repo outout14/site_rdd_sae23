@@ -2,7 +2,7 @@
     <div class="container p-5 mt-5">
         <h4 class="card-title">Ajouter un nouvel élément :</h4>
 
-        {if in_array($smarty.template, ['sponsor.tpl', 'organisator.tpl'])}
+        {if $file == 'sponsors.json'}
         <div class="form-group">
             <label for="inputName">Nom :</label>
             <input type="text" class="form-control" id="inputName" name="name" required>
