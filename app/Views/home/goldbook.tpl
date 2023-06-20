@@ -107,11 +107,12 @@
                     document.getElementById("goldbook-input-wrapper").classList.add("d-none")
                 }
             </script>
+            
         </form>
     </section>
 
     <!-- Javascript -->
     {include file="./frame/javascript.tpl"}
-
+    
 </body>
 </html>
