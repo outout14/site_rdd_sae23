@@ -143,15 +143,15 @@
                                 <div class="col-12">
                                     <select disabled class="form-select ps-2 py-1 custom-input" name="oldpromotion" id="input-oldpromotion" disabled>
                                         <option value="1990">Promotion 1990</option>
-                                        <option value="1990">Promotion 1991</option>
-                                        <option value="1990">Promotion 1992</option>
-                                        <option value="1990">Promotion 1993</option>
-                                        <option value="1990">Promotion 1994</option>
-                                        <option value="1990">Promotion 1995</option>
-                                        <option value="1990">Promotion 1996</option>
-                                        <option value="1990">Promotion 1997</option>
-                                        <option value="1990">Promotion 1997</option>
-                                        <option value="1990">Promotion 1999</option>
+                                        <option value="1991">Promotion 1991</option>
+                                        <option value="1992">Promotion 1992</option>
+                                        <option value="1993">Promotion 1993</option>
+                                        <option value="1994">Promotion 1994</option>
+                                        <option value="1995">Promotion 1995</option>
+                                        <option value="1996">Promotion 1996</option>
+                                        <option value="1997">Promotion 1997</option>
+                                        <option value="1998">Promotion 1998</option>
+                                        <option value="1999">Promotion 1999</option>
                                         <option value="2000">Promotion 2000</option>
                                         <option value="2001">Promotion 2001</option>
                                         <option value="2002">Promotion 2002</option>
