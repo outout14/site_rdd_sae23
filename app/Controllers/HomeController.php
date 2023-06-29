@@ -15,9 +15,9 @@ require_once(__DIR__ . '/../Models/goldbook.php');
 class HomeController {
   private array $menu = [
     'home' => 'Accueil',
-    //'gallery' => 'Galerie', TODO : Add gallery
-    //'goldbook' => 'Livre d\'or', TODO : Add goldbook
-    //'annuaire' => 'Annuaire', TODO : Add annuaire
+    //'gallery' => 'Galerie',
+    //'goldbook' => 'Livre d\'or',
+    'annuaire' => 'Annuaire',
   ];
   /**
    * Display the home page.
@@ -43,6 +43,12 @@ class HomeController {
 
   public function register(): void
   {
+    // Should not be logged in
+    if(connexionMiddleware::getLoginUser() != null){
+      header("Location: " . APP_URL . "/home");
+      exit();
+    }
+
     global $smarty;
     Utils::SmartyGeneralValues("home", $this->menu, 'Inscription');
 
@@ -76,7 +82,7 @@ class HomeController {
 
     /* Il faut vérifier que l'utilisateur écrit pas plusieurs fois*/
 
-    if(isset($_POST["submit"])){
+    if(isset($_POST["message"])){
       $content = $_POST["message"];
       $date = date("Y-m-d");
       $message = new goldbook(0, $content, connexionMiddleware::getLoginUser(), $date);
@@ -113,19 +119,24 @@ class HomeController {
       $extension = explode(".", $photo["name"]);
       $extension = ".".$extension[array_key_last($extension)];
 
-      if($extension != ".jpg" && $extension != ".png" && $extension != ".jpeg"){
+      if($extension != ".jpg" && $extension != ".png" && $extension != ".jpeg" && $extension != ".JPG" && $extension != ".JPEG" && $extension != ".PNG"){
         $smarty->assign('error',"Le format de la photo n'est pas bon");
+        header("Location: ". APP_URL ."/home/gallery/?notification=format_photo_mauvaise");
+        exit();
       }
       else{
-        $verifyImg = getimagesize($photo["tmp_name"]);
-        if($verifyImg["mime"] != "image/jpeg" && $verifyImg["mime"] != "image/png"){
-          $smarty->assign('error',"Le format de la photo n'est pas bon");
+        if($photo['size']>10000000){
+          echo($photo['size']);
+          header("Location: ". APP_URL ."/home/gallery/?notification=photo_trop_lourde");
+          exit();
         }
         else{
-          // On enleve les caractères spéciaux
-          $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
-          $destination="gallerie/non_valide/".$name.$extension;
-          move_uploaded_file($photo["tmp_name"], $destination);
+        // On enleve les caractères spéciaux
+        $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
+        $destination="gallerie/non_valide/".$name.$extension;
+        move_uploaded_file($photo["tmp_name"], $destination);
+        header("Location: ". APP_URL ."/home/gallery/?notification=photo_envoye");
+        exit();
         }
       }
     }
@@ -143,7 +154,7 @@ class HomeController {
 
     $users = User::getUsers_annuaire();
 
-    /* vérifier si luilisateur est conformé 
+    /* vérifier si l'utilisateur est conforme
     Faire en sorte de filtrer sans le nom entier*/
     $smarty->assign('traitement',$_POST);
 
@@ -165,13 +176,12 @@ class HomeController {
         $tab_param_form[3]=htmlentities($_POST["promotion"]);
       }
 
-
       $users_filtre_name=array();
       foreach($users as $cle => $user){
 
         //le nom est selectionné
         if($tab_param_form[0]!=0){
-          if(strtolower($user-> firstname) !=strtolower($tab_param_form[0]) && strtolower($user -> lastname) != strtolower($tab_param_form[0])){
+          if(!str_starts_with(strtolower($user-> firstname), strtolower($tab_param_form[0])) && !str_starts_with(strtolower($user-> lastname), strtolower($tab_param_form[0]))){
             unset($users[$cle]);
           }
           else{
@@ -220,7 +230,7 @@ class HomeController {
           //entreprise selectionnee
           if($tab_param_form[2]!=0){
             if(array_key_exists($cle, $users)){
-              if(strtolower($user -> company) !=strtolower($tab_param_form[2])){
+              if(!str_starts_with(strtolower($user -> company), strtolower($tab_param_form[2]))){
                 unset($users[$cle]);
               }
               else{

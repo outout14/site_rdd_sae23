@@ -16,6 +16,9 @@
 
     <!-- Gallerie -->
     {include file="./frame/gallery.tpl"}
+    
+    <!-- Notifications -->
+    {include file="../utils/notifications.tpl"}
 
     <!-- JavaScript -->
     {include file="./frame/javascript.tpl"}

@@ -1,7 +1,9 @@
 {include file="./frame/header.tpl"}
 <div class="container mt-5">
   <h1>Gestion des utilisateurs</h1>
-  <p>Vous pouvez gérer les utilisateurs de votre site ici.</p>
+  <a href="javascript:history.back()" class="btn btn-secondary mb-3">Retour</a>
+  <hr>
+  
 </div>
 
 <!-- Card ajout utilisateur -->

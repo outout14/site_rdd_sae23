@@ -15,7 +15,7 @@
                     <div class="col-12 col-lg-2 my-1">
                         <select class="form-select px-3 py-2 annuaire-ajax" name="status" id="annuaire-status">
                             <option value="Tous" selected>Tous</option>
-                            <option value="student">Etudiant</option>
+                            <option value="student">Étudiant</option>
                             <option value="teacher">Professeur</option>
                             <option value="oldstudent">Ancien élève</option>
                         </select>
@@ -66,8 +66,8 @@
                     {/if}
                     {foreach $users as $user}
                     <tr>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->lastname|capitalize}</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->firstname|capitalize}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->lastname|unescape:"htmlall"|capitalize}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->firstname|unescape:"htmlall"|capitalize}</td>
                         {if $user->status == 'student'}
                           <td class="ps-0 ps-lg-2 py-3 text-complementary">Étudiant</td>
                         {elseif $user->status == 'teacher'}
@@ -77,8 +77,13 @@
                         {else}
                           <td class="ps-0 ps-lg-2 py-3 text-complementary">Autre</td>
                         {/if}
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->promotion}</td>
-                        <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->company}</td>
+                        <td class="ps-0 ps-lg-2 py-3 text-complementary">
+                            {if $user->status == 'oldstudent'}
+                            {$user->promotion_year}
+                            {else}
+                            {$user->promotion}
+                            {/if}
+                      <td class="ps-0 ps-lg-2 py-3 text-complementary">{$user->company}</td>
                     </tr>
                     {/foreach}
                 </tbody>
