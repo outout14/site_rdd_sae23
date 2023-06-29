@@ -18,7 +18,6 @@
                 
                 {foreach $goldbook as $message}
                 <div class="goldbook-message-wrapper">
-
                     <!-- Bouton supprimer, à afficher seulement si c'est le message de l'utilisateur -->
                     <!-- <div class="dot hover-pointer p-1" style="z-index: 10;"><i class="bi bi-x-lg text-bonewhite"></i></div> -->
 
@@ -113,6 +112,6 @@
 
     <!-- Javascript -->
     {include file="./frame/javascript.tpl"}
-    
+
 </body>
 </html>

@@ -33,39 +33,6 @@
                             <option value="RIMS">LP RIMS</option>
                             <option value="CART">LP CART</option>
                             <option value="TSSR">LP TSSR</option>
-                            <option value="1990">Promotion 1990</option>
-                            <option value="1990">Promotion 1991</option>
-                            <option value="1990">Promotion 1992</option>
-                            <option value="1990">Promotion 1993</option>
-                            <option value="1990">Promotion 1994</option>
-                            <option value="1990">Promotion 1995</option>
-                            <option value="1990">Promotion 1996</option>
-                            <option value="1990">Promotion 1997</option>
-                            <option value="1990">Promotion 1997</option>
-                            <option value="1990">Promotion 1999</option>
-                            <option value="2000">Promotion 2000</option>
-                            <option value="2001">Promotion 2001</option>
-                            <option value="2002">Promotion 2002</option>
-                            <option value="2003">Promotion 2003</option>
-                            <option value="2004">Promotion 2004</option>
-                            <option value="2005">Promotion 2005</option>
-                            <option value="2006">Promotion 2006</option>
-                            <option value="2007">Promotion 2007</option>
-                            <option value="2008">Promotion 2008</option>
-                            <option value="2009">Promotion 2009</option>
-                            <option value="2010">Promotion 2010</option>
-                            <option value="2011">Promotion 2011</option>
-                            <option value="2012">Promotion 2012</option>
-                            <option value="2013">Promotion 2013</option>
-                            <option value="2014">Promotion 2014</option>
-                            <option value="2015">Promotion 2015</option>
-                            <option value="2016">Promotion 2016</option>
-                            <option value="2017">Promotion 2017</option>
-                            <option value="2018">Promotion 2018</option>
-                            <option value="2019">Promotion 2019</option>
-                            <option value="2020">Promotion 2020</option>
-                            <option value="2021">Promotion 2021</option>
-                            <option value="2022">Promotion 2022</option>
                         </select>
                     </div>
 
